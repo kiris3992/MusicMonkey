@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Entities.Models
 {
-    public class Album
+    public class Album :MusicEntity
     {
         public int Id { get; set; }
         public string Title { get; set; }

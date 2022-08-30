@@ -4,9 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DAL
+namespace Entities.Enums
 {
-    public class Class1
+    public enum Choice
     {
+        Buy =1,
+        Sell =2,
+
     }
 }
