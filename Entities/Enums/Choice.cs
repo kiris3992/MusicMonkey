@@ -4,9 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RepositoryService
+namespace Entities.Enums
 {
-    public class Class1
+    public enum Choice
     {
+        Buy =1,
+        Sell =2,
+
     }
 }
