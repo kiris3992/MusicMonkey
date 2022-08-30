@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace RepositoryService.Persistance
 {
-    internal class GenericRepository<T> : IGenericRepository<T> where T : MusicEntity
+    public class GenericRepository<T> : IGenericRepository<T> where T : MusicEntity
     {
         
         public void Create(T entity)
