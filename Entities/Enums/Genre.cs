@@ -34,6 +34,6 @@ namespace Entities.Enums
         Techno,
         Traditional,
         Trance,
-        Trap
+        Trap,
     }
 }
