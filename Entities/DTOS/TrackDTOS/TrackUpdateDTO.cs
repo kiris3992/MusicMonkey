@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Entities.DTOS.TrackDTOS
 {
-    class TrackUpdateDTO
+    public class TrackUpdateDTO
     {
     }
 }
