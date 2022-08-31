@@ -11,7 +11,7 @@ namespace DAL
 {
     public class ApplicationDbContext : DbContext
     {
-        public ApplicationDbContext() : base("Sindesmos")
+        public ApplicationDbContext() : base("MainDbConnection")
         {
             Database.SetInitializer<ApplicationDbContext>(new MockUpDbInitializer());
             Database.Initialize(false);
