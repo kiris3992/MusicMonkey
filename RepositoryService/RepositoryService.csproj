@@ -69,6 +69,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{5FE3265D-5780-4CDC-B516-68067BF19BEC}</Project>
+      <Name>DAL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Entities\Entities.csproj">
       <Project>{D47D5915-63A3-4BE1-9C65-10FCE7E41955}</Project>
       <Name>Entities</Name>

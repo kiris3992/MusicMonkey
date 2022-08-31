@@ -1,5 +1,7 @@
-﻿using RepositoryService.Core;
+﻿using DAL;
+using RepositoryService.Core;
 using RepositoryService.Core.Repositories;
+using RepositoryService.Persistance.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,20 +12,28 @@ namespace RepositoryService.Persistance
 {
     public class UnitOfWork : IUnitOfWork
     {
-        public IArtistRepository Artists => throw new NotImplementedException();
+        private readonly ApplicationDbContext context;
+        public UnitOfWork(ApplicationDbContext dbContext)
+        {
+            context = dbContext;
+            Artists = new ArtistRepository(context);
+            Albums = new AlbumRepository(context);
+            Tracks = new TrackRepository(context);
+        }
+        public IArtistRepository Artists { get; private set; }
 
-        public IAlbumRepository Albums => throw new NotImplementedException();
+        public IAlbumRepository Albums { get; private set; }
 
-        public ITrackRepository Tracks => throw new NotImplementedException();
+        public ITrackRepository Tracks { get; private set; }
 
         public int Complete()
         {
-            throw new NotImplementedException();
+            return context.SaveChanges();
         }
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            context.Dispose();
         }
     }
 }
