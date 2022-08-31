@@ -73,7 +73,12 @@
     <Compile Include="Validators\ArtistValidator.cs" />
     <Compile Include="Validators\TrackValidator.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="DTOValidators\DTOCreateValidators\" />
+    <Folder Include="DTOValidators\DTODeleteValidators\" />
+    <Folder Include="DTOValidators\DTOReadValidators\" />
+    <Folder Include="DTOValidators\DTOUpdateValidators\" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
