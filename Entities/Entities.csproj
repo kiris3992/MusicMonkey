@@ -50,6 +50,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTOS\AlbumDTOS\AlbumCreateDTO.cs" />
+    <Compile Include="DTOS\AlbumDTOS\AlbumDeleteDTO.cs" />
+    <Compile Include="DTOS\AlbumDTOS\AlbumDTO.cs" />
+    <Compile Include="DTOS\AlbumDTOS\AlbumUpdateDTO.cs" />
+    <Compile Include="DTOS\ArtistDTOS\ArtistCreateDTO.cs" />
+    <Compile Include="DTOS\ArtistDTOS\ArtistDeleteDTO.cs" />
+    <Compile Include="DTOS\ArtistDTOS\ArtistDTO.cs" />
+    <Compile Include="DTOS\ArtistDTOS\ArtistUpdateDTO.cs" />
+    <Compile Include="DTOS\TrackDTOS\TrackCreateDTO.cs" />
+    <Compile Include="DTOS\TrackDTOS\TrackDeleteDTO.cs" />
+    <Compile Include="DTOS\TrackDTOS\TrackDTO.cs" />
+    <Compile Include="DTOS\TrackDTOS\TrackUpdateDTO.cs" />
     <Compile Include="Enums\Genre.cs" />
     <Compile Include="Enums\Country.cs" />
     <Compile Include="Models\Album.cs" />
@@ -62,9 +74,10 @@
     <Compile Include="Validators\TrackValidator.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="DTOS\AlbumDTOS\" />
-    <Folder Include="DTOS\ArtistDTOS\" />
-    <Folder Include="DTOS\TrackDTOS\" />
+    <Folder Include="DTOValidators\DTOCreateValidators\" />
+    <Folder Include="DTOValidators\DTODeleteValidators\" />
+    <Folder Include="DTOValidators\DTOReadValidators\" />
+    <Folder Include="DTOValidators\DTOUpdateValidators\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

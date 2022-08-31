@@ -1,4 +1,5 @@
-﻿using Entities.Models;
+﻿using DAL;
+using Entities.Models;
 using RepositoryService.Core.Repositories;
 using System;
 using System.Collections.Generic;
@@ -10,5 +11,9 @@ namespace RepositoryService.Persistance.Repositories
 {
     public class ArtistRepository: GenericRepository<Artist>, IArtistRepository
     {
+        public ArtistRepository(ApplicationDbContext context):base(context)
+        {
+
+        }
     }
 }
