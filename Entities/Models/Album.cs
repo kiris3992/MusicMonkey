@@ -21,5 +21,15 @@ namespace Entities.Models
             AlbumGenres = new List<Genre>();
             Tracks = new HashSet<Track>();
         }
+
+        public Album(string title, DateTime releaseDate, string coverPhotoUrl, Artist artist)
+        {
+            Title = title;
+            ReleaseDate = releaseDate;
+            CoverPhotoUrl = coverPhotoUrl;
+            Artist = artist;
+            AlbumGenres = new List<Genre>();
+            Tracks = new HashSet<Track>();
+        }
     }
 }

@@ -24,5 +24,15 @@ namespace Entities.Models
             ArtistGenres = new List<Genre>();
             Albums = new HashSet<Album>();
         }
+
+        public Artist(string name, Country country, string photoUrl, DateTime careerStartDate)
+        {
+            Name = name;
+            Country = country;
+            PhotoUrl = photoUrl;
+            CareerStartDate = careerStartDate;
+            ArtistGenres = new List<Genre>();
+            Albums = new HashSet<Album>();
+        }
     }
 }

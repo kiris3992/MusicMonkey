@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Entities.Models;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace DAL.Initializers
     {
         protected override void Seed(ApplicationDbContext context)
         {
+            //Artist a1 = new Artist("AC DC", );
             base.Seed(context);
         }
     }

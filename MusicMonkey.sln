@@ -15,6 +15,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicMonkeyWebApp", "MusicM
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesignPatterns", "DesignPatterns\DesignPatterns.csproj", "{3F4E2069-13E4-4EA8-A63E-0C2E69EA0345}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ArtistDummyData", "ArtistDummyData", "{FC35307B-1EAD-4B8F-8737-A18D38B5D32D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AC DC", "AC DC", "{9FFEF5ED-8024-4DBA-91F9-26651A465A04}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,6 +52,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9FFEF5ED-8024-4DBA-91F9-26651A465A04} = {FC35307B-1EAD-4B8F-8737-A18D38B5D32D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {13DA5F82-0C07-4FA1-80EC-A53A4E95EFAB}
