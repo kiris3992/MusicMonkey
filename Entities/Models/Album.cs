@@ -22,13 +22,13 @@ namespace Entities.Models
             Tracks = new HashSet<Track>();
         }
 
-        public Album(string title, DateTime releaseDate, string coverPhotoUrl, Artist artist)
+        public Album(string title, DateTime releaseDate, string coverPhotoUrl, List<Genre> albumGenres, Artist artist)
         {
             Title = title;
             ReleaseDate = releaseDate;
             CoverPhotoUrl = coverPhotoUrl;
             Artist = artist;
-            AlbumGenres = new List<Genre>();
+            AlbumGenres = albumGenres;
             Tracks = new HashSet<Track>();
         }
     }

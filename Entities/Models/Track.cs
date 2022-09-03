@@ -19,12 +19,12 @@ namespace Entities.Models
             TrackGenres = new List<Genre>();
         }
 
-        public Track(string title, int durationSecs, string audioUrl, Album album)
+        public Track(string title, int durationSecs, string audioUrl, List<Genre> trackGenres, Album album)
         {
             Title = title;
             DurationSecs = durationSecs;
             AudioUrl = audioUrl;
-            TrackGenres = new List<Genre>();
+            TrackGenres = trackGenres;
             Album = album;
         }
     }

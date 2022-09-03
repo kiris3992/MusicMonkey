@@ -35,5 +35,9 @@ namespace Entities.Enums
         Traditional,
         Trance,
         Trap,
+        Hard_Rock,
+        Heavy_Metal,
+        Grunge,
+
     }
 }
