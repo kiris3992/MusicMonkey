@@ -3,15 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Entities.Enums;
 
-
-namespace Experiments
+namespace Entities.Models
 {
-    internal class Program
+    public class MusicEntity
     {
-        static void Main(string[] args)
-        {
-        }
     }
 }

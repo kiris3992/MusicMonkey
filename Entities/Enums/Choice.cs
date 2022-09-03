@@ -3,15 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Entities.Enums;
 
-
-namespace Experiments
+namespace Entities.Enums
 {
-    internal class Program
+    public enum Choice
     {
-        static void Main(string[] args)
-        {
-        }
+        Buy =1,
+        Sell =2,
+
     }
 }

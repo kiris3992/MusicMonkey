@@ -3,15 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Entities.Enums;
 
-
-namespace Experiments
+namespace Entities.DTOS.AlbumDTOS
 {
-    internal class Program
+    public class AlbumDTO
     {
-        static void Main(string[] args)
-        {
-        }
     }
 }

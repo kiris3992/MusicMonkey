@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>d47d5915-63a3-4be1-9c65-10fce7e41955</ProjectGuid>
+    <ProjectGuid>{D47D5915-63A3-4BE1-9C65-10FCE7E41955}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Entities</RootNamespace>
@@ -31,24 +31,59 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System"/>
-    
-    <Reference Include="System.Core"/>
-    <Reference Include="System.Xml.Linq"/>
-    <Reference Include="System.Data.DataSetExtensions"/>
-    
-    
-    <Reference Include="Microsoft.CSharp"/>
-    
-    <Reference Include="System.Data"/>
-    
-    <Reference Include="System.Net.Http"/>
-    
-    <Reference Include="System.Xml"/>
+    <Reference Include="FluentValidation, Version=11.0.0.0, Culture=neutral, PublicKeyToken=7de548da2fbae0f0, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentValidation.11.2.1\lib\netstandard2.0\FluentValidation.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.2\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="DTOS\AlbumDTOS\AlbumCreateDTO.cs" />
+    <Compile Include="DTOS\AlbumDTOS\AlbumDeleteDTO.cs" />
+    <Compile Include="DTOS\AlbumDTOS\AlbumDTO.cs" />
+    <Compile Include="DTOS\AlbumDTOS\AlbumUpdateDTO.cs" />
+    <Compile Include="DTOS\ArtistDTOS\ArtistCreateDTO.cs" />
+    <Compile Include="DTOS\ArtistDTOS\ArtistDeleteDTO.cs" />
+    <Compile Include="DTOS\ArtistDTOS\ArtistDTO.cs" />
+    <Compile Include="DTOS\ArtistDTOS\ArtistUpdateDTO.cs" />
+    <Compile Include="DTOS\TrackDTOS\TrackCreateDTO.cs" />
+    <Compile Include="DTOS\TrackDTOS\TrackDeleteDTO.cs" />
+    <Compile Include="DTOS\TrackDTOS\TrackDTO.cs" />
+    <Compile Include="DTOS\TrackDTOS\TrackUpdateDTO.cs" />
+    <Compile Include="Enums\Genre.cs" />
+    <Compile Include="Enums\Country.cs" />
+    <Compile Include="Models\Album.cs" />
+    <Compile Include="Models\Artist.cs" />
+    <Compile Include="Models\MusicEntity.cs" />
+    <Compile Include="Models\Track.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Validators\AlbumValidator.cs" />
+    <Compile Include="Validators\ArtistValidator.cs" />
+    <Compile Include="Validators\TrackValidator.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DTOValidators\DTOCreateValidators\" />
+    <Folder Include="DTOValidators\DTODeleteValidators\" />
+    <Folder Include="DTOValidators\DTOReadValidators\" />
+    <Folder Include="DTOValidators\DTOUpdateValidators\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
- </Project>
+</Project>

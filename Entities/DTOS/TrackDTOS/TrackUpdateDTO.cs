@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entities
+namespace Entities.DTOS.TrackDTOS
 {
-    public class Class1
+    public class TrackUpdateDTO
     {
     }
 }

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.2.32616.157
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32510.428
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities", "Entities\Entities.csproj", "{D47D5915-63A3-4BE1-9C65-10FCE7E41955}"
 EndProject
@@ -12,6 +12,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{5FE3265D-5780-4CDC-B516-68067BF19BEC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicMonkeyWebApp", "MusicMonkeyWebApp\MusicMonkeyWebApp.csproj", "{CCA5706C-E5C9-46E1-B4D0-B0894BE95B2F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesignPatterns", "DesignPatterns\DesignPatterns.csproj", "{3F4E2069-13E4-4EA8-A63E-0C2E69EA0345}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{CCA5706C-E5C9-46E1-B4D0-B0894BE95B2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CCA5706C-E5C9-46E1-B4D0-B0894BE95B2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CCA5706C-E5C9-46E1-B4D0-B0894BE95B2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F4E2069-13E4-4EA8-A63E-0C2E69EA0345}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F4E2069-13E4-4EA8-A63E-0C2E69EA0345}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F4E2069-13E4-4EA8-A63E-0C2E69EA0345}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F4E2069-13E4-4EA8-A63E-0C2E69EA0345}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -51,12 +51,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Core\IGenericRepository.cs" />
+    <Compile Include="Core\IUnitOfWork.cs" />
+    <Compile Include="Core\Repositories\IAlbumRepository.cs" />
+    <Compile Include="Core\Repositories\IArtistRepository.cs" />
+    <Compile Include="Core\Repositories\ITrackRepository.cs" />
+    <Compile Include="Persistance\GenericRepository.cs" />
+    <Compile Include="Persistance\Repositories\AlbumRepository.cs" />
+    <Compile Include="Persistance\Repositories\ArtistRepository.cs" />
+    <Compile Include="Persistance\Repositories\TrackRepository.cs" />
+    <Compile Include="Persistance\UnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{5FE3265D-5780-4CDC-B516-68067BF19BEC}</Project>
+      <Name>DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Entities\Entities.csproj">
+      <Project>{D47D5915-63A3-4BE1-9C65-10FCE7E41955}</Project>
+      <Name>Entities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

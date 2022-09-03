@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RepositoryService
+namespace Entities.DTOS.ArtistDTOS
 {
-    public class Class1
+    public class ArtistDTO
     {
     }
 }
