@@ -78,6 +78,7 @@
     <Folder Include="DTOValidators\DTODeleteValidators\" />
     <Folder Include="DTOValidators\DTOReadValidators\" />
     <Folder Include="DTOValidators\DTOUpdateValidators\" />
+    <Folder Include="Models\MusicEntitiesDummyData\ACDC\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
