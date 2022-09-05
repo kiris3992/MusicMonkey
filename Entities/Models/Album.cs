@@ -10,7 +10,6 @@ namespace Entities.Models
         public string Title { get; set; }
         public DateTime ReleaseDate { get; set; }
         public string CoverPhotoUrl { get; set; }
-        public List<Genre> AlbumGenres { get; set; }
 
         // Navigation Properies
         public Artist Artist { get; set; }
@@ -18,17 +17,15 @@ namespace Entities.Models
 
         public Album()
         {
-            AlbumGenres = new List<Genre>();
             Tracks = new HashSet<Track>();
         }
 
-        public Album(string title, DateTime releaseDate, string coverPhotoUrl, List<Genre> albumGenres, Artist artist)
+        public Album(string title, DateTime releaseDate, string coverPhotoUrl, Artist artist)
         {
             Title = title;
             ReleaseDate = releaseDate;
             CoverPhotoUrl = coverPhotoUrl;
             Artist = artist;
-            AlbumGenres = albumGenres;
             Tracks = new HashSet<Track>();
         }
     }

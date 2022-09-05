@@ -62,7 +62,6 @@
     <Compile Include="DTOS\TrackDTOS\TrackDeleteDTO.cs" />
     <Compile Include="DTOS\TrackDTOS\TrackDTO.cs" />
     <Compile Include="DTOS\TrackDTOS\TrackUpdateDTO.cs" />
-    <Compile Include="Enums\Genre.cs" />
     <Compile Include="Enums\Country.cs" />
     <Compile Include="Models\Album.cs" />
     <Compile Include="Models\Artist.cs" />
