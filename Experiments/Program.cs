@@ -25,20 +25,9 @@ namespace Experiments
                 Console.WriteLine(artist.Name);
                 foreach (var genre in artist.ArtistGenres)
                 {
-                    Console.WriteLine(genre.Type);
+                    Console.WriteLine($"{genre.Type, 15}");
                 }
             }
-
-            //var genres = db.Genres.ToList();
-
-            //foreach (var genre in genres)
-            //{
-            //    Console.WriteLine(genre.Type);
-            //    foreach (var artist in genre.Artists)
-            //    {
-            //        Console.WriteLine(artist.Name);
-            //    }
-            //}
         }
     }
 }
