@@ -13,7 +13,14 @@ namespace Experiments
     {
         static void Main(string[] args)
         {
-            
+            ApplicationDbContext db = new ApplicationDbContext();
+
+            var artists = db.Artists.ToList();
+
+            foreach (var artist in artists)
+            {
+                Console.WriteLine(artist.Name);
+            }
         }
     }
 }
