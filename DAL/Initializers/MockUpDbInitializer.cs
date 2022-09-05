@@ -138,12 +138,12 @@ namespace DAL.Initializers
             oam5.Tracks.Add(ot30);
             oa2.Albums.Add(oam5);
 
-            Track ot31 = new Track("Educated Fools", 317, "Some audio url", oam5, new HashSet<Genre>() { reggae, rnb, soul, hipHop, rap });
-            Track ot32 = new Track("It Was Written", 367, "Some audio url", oam5, new HashSet<Genre>() { reggae, rnb, soul, hipHop, rap });
-            Track ot33 = new Track("Still Searchin'", 305, "Some audio url", oam5, new HashSet<Genre>() { reggae, rnb, soul, hipHop, rap });
-            Track ot34 = new Track("Mi Blenda", 281, "Some audio url", oam5, new HashSet<Genre>() { reggae, rnb, soul, hipHop, rap });
-            Track ot35 = new Track("More Justice", 215, "Some audio url", oam5, new HashSet<Genre>() { reggae, rnb, soul, hipHop, rap });
-            Track ot36 = new Track("Catch a Fire", 291, "Some audio url", oam5, new HashSet<Genre>() { reggae, rnb, soul, hipHop, rap });
+            Track ot31 = new Track("Educated Fools", 317, "Some audio url", oam6, new HashSet<Genre>() { reggae, rnb, soul, hipHop, rap });
+            Track ot32 = new Track("It Was Written", 367, "Some audio url", oam6, new HashSet<Genre>() { reggae, rnb, soul, hipHop, rap });
+            Track ot33 = new Track("Still Searchin'", 305, "Some audio url", oam6, new HashSet<Genre>() { reggae, rnb, soul, hipHop, rap });
+            Track ot34 = new Track("Mi Blenda", 281, "Some audio url", oam6, new HashSet<Genre>() { reggae, rnb, soul, hipHop, rap });
+            Track ot35 = new Track("More Justice", 215, "Some audio url", oam6, new HashSet<Genre>() { reggae, rnb, soul, hipHop, rap });
+            Track ot36 = new Track("Catch a Fire", 291, "Some audio url", oam6, new HashSet<Genre>() { reggae, rnb, soul, hipHop, rap });
 
             oam6.Tracks.Add(ot31);
             oam6.Tracks.Add(ot32);
@@ -155,13 +155,62 @@ namespace DAL.Initializers
             #endregion
 
             #region Creedence Clearwater Revival
-            Artist oa3 = new Artist("Creedence Clearwater Revival", Country.USA, "Some artist photo url", new DateTime(1967, 1, 1), new HashSet<Genre>() { rock, country, blues});
+            Artist oa3 = new Artist("Creedence Clearwater Revival", Country.USA, "Some artist photo url", new DateTime(1967, 1, 1), new HashSet<Genre>() { rock, country, blues, folk});
+
+            Album oam7 = new Album("Cosmo's Factory", new DateTime(1970, 7, 1), "Some cover photo url", oa3, new HashSet<Genre>() { rock, country, blues, folk});
+            Album oam8 = new Album("Pendulum", new DateTime(1970, 2, 9), "Some cover photo url", oa3, new HashSet<Genre>() { rock, country, blues, folk});
+            Album oam9 = new Album("Mardi Gras", new DateTime(1972, 4, 11), "Some cover photo url", oa3, new HashSet<Genre>() { rock, country, blues, folk});
+
+            Track ot37 = new Track("Ramble Tamble", 432, "Some audio url", oam7, new HashSet<Genre>() { rock, country, blues, folk});
+            Track ot38 = new Track("Travelin Band", 127, "Some audio url", oam7, new HashSet<Genre>() { rock, country, blues, folk});
+            Track ot39 = new Track("Lookin' out My Back Door", 151, "Some audio url", oam7, new HashSet<Genre>() { rock, country, blues, folk});
+            Track ot40 = new Track("Up Around the Bend", 162, "Some audio url", oam7, new HashSet<Genre>() { rock, country, blues, folk});
+            Track ot41 = new Track("Before You Accuse Me", 207, "Some audio url", oam7, new HashSet<Genre>() { rock, country, blues, folk});
+            Track ot42 = new Track("Ooby Dooby", 128, "Some audio url", oam7, new HashSet<Genre>() { rock, country, blues, folk});
+
+            oam7.Tracks.Add(ot37);
+            oam7.Tracks.Add(ot38);
+            oam7.Tracks.Add(ot39);
+            oam7.Tracks.Add(ot40);
+            oam7.Tracks.Add(ot41);
+            oam7.Tracks.Add(ot42);
+            oa3.Albums.Add(oam7);
+
+            Track ot43 = new Track("Pegan Baby", 385, "Some audio url", oam8, new HashSet<Genre>() { rock, country, blues, folk });
+            Track ot44 = new Track("Chameleon", 200, "Some audio url", oam8, new HashSet<Genre>() { rock, country, blues, folk });
+            Track ot45 = new Track("Hey Tonight", 163, "Some audio url", oam8, new HashSet<Genre>() { rock, country, blues, folk });
+            Track ot46 = new Track("Have You Ever Seen The Rain", 160, "Some audio url", oam8, new HashSet<Genre>() { rock, country, blues, folk });
+            Track ot47 = new Track("Born to Move", 341, "Some audio url", oam8, new HashSet<Genre>() { rock, country, blues, folk });
+            Track ot48 = new Track("Sailor's Lament", 228, "Some audio url", oam8, new HashSet<Genre>() { rock, country, blues, folk });
+
+            oam8.Tracks.Add(ot43);
+            oam8.Tracks.Add(ot44);
+            oam8.Tracks.Add(ot45);
+            oam8.Tracks.Add(ot46);
+            oam8.Tracks.Add(ot47);
+            oam8.Tracks.Add(ot48);
+            oa3.Albums.Add(oam8);
+
+            Track ot49 = new Track("Lookin' For A Reason", 205, "Some audio url", oam9, new HashSet<Genre>() { rock, country, blues, folk });
+            Track ot50 = new Track("Need Someone to Hold", 184, "Some audio url", oam9, new HashSet<Genre>() { rock, country, blues, folk });
+            Track ot51 = new Track("Someday Never Comes", 241, "Some audio url", oam9, new HashSet<Genre>() { rock, country, blues, folk });
+            Track ot52 = new Track("Sail Away", 153, "Some audio url", oam9, new HashSet<Genre>() { rock, country, blues, folk });
+            Track ot53 = new Track("Take It Like a Friend", 182, "Some audio url", oam9, new HashSet<Genre>() { rock, country, blues, folk });
+            Track ot54 = new Track("Hello Mary Lou", 135, "Some audio url", oam9, new HashSet<Genre>() { rock, country, blues, folk });
+
+            oam9.Tracks.Add(ot49);
+            oam9.Tracks.Add(ot50);
+            oam9.Tracks.Add(ot51);
+            oam9.Tracks.Add(ot52);
+            oam9.Tracks.Add(ot53);
+            oam9.Tracks.Add(ot54);
+            oa3.Albums.Add(oam9);
             #endregion
 
             context.Genres.AddOrUpdate(blues, chillstep, classical, country, dance, disco, electronic, folk, hipHop, house, instrumental, jazz, kid, latin, metal, opera, pop, progressive, punk, rap, reggae, rnb, rock, soul, techno, traditional, trance, trap, hardRock, heavyMetal, grunge);
             context.Artists.AddOrUpdate(oa1, oa2);
             context.Albums.AddOrUpdate(oam1, oam2, oam2, oam4, oam5, oam6);
-            context.Tracks.AddOrUpdate(ot1, ot2, ot3, ot4, ot5, ot6, ot7, ot8, ot9, ot10, ot11, ot12, ot13, ot14, ot15, ot16, ot17, ot18, ot19, ot20, ot21, ot22, ot23, ot24);
+            context.Tracks.AddOrUpdate(ot1, ot2, ot3, ot4, ot5, ot6, ot7, ot8, ot9, ot10, ot11, ot12, ot13, ot14, ot15, ot16, ot17, ot18, ot19, ot20, ot21, ot22, ot23, ot24, ot25, ot26, ot27, ot28, ot29, ot30, ot31, ot32, ot33, ot34, ot35, ot36);
             context.SaveChanges();
             #endregion
 
