@@ -114,6 +114,44 @@ namespace DAL.Initializers
             Track ot22 = new Track("Pimpa's Paradise", 304, "Some audio url", oam4, new HashSet<Genre>() { reggae, rnb, hipHop, rap });
             Track ot23 = new Track("There for You", 241, "Some audio url", oam4, new HashSet<Genre>() { reggae, rnb, hipHop, rap });
             Track ot24 = new Track("Beautiful", 248, "Some audio url", oam4, new HashSet<Genre>() { reggae, rnb, hipHop, rap });
+
+            oam4.Tracks.Add(ot19);
+            oam4.Tracks.Add(ot20);
+            oam4.Tracks.Add(ot21);
+            oam4.Tracks.Add(ot22);
+            oam4.Tracks.Add(ot23);
+            oam4.Tracks.Add(ot24);
+            oa2.Albums.Add(oam4);
+
+            Track ot25 = new Track("Trouble", 335, "Some audio url", oam5, new HashSet<Genre>() { reggae, rnb, hipHop, rap });
+            Track ot26 = new Track("Party Time", 252, "Some audio url", oam5, new HashSet<Genre>() { reggae, rnb, hipHop, rap });
+            Track ot27 = new Track("Keep on Grooving", 276, "Some audio url", oam5, new HashSet<Genre>() { reggae, rnb, hipHop, rap });
+            Track ot28 = new Track("Love and Unity", 244, "Some audio url", oam5, new HashSet<Genre>() { reggae, rnb, hipHop, rap });
+            Track ot29 = new Track("Old War Chant", 248, "Some audio url", oam5, new HashSet<Genre>() { reggae, rnb, hipHop, rap });
+            Track ot30 = new Track("Kingston 12", 214, "Some audio url", oam5, new HashSet<Genre>() { reggae, rnb, hipHop, rap });
+
+            oam5.Tracks.Add(ot25);
+            oam5.Tracks.Add(ot26);
+            oam5.Tracks.Add(ot27);
+            oam5.Tracks.Add(ot28);
+            oam5.Tracks.Add(ot29);
+            oam5.Tracks.Add(ot30);
+            oa2.Albums.Add(oam5);
+
+            Track ot31 = new Track("Educated Fools", 317, "Some audio url", oam5, new HashSet<Genre>() { reggae, rnb, soul, hipHop, rap });
+            Track ot32 = new Track("It Was Written", 367, "Some audio url", oam5, new HashSet<Genre>() { reggae, rnb, soul, hipHop, rap });
+            Track ot33 = new Track("Still Searchin'", 305, "Some audio url", oam5, new HashSet<Genre>() { reggae, rnb, soul, hipHop, rap });
+            Track ot34 = new Track("Mi Blenda", 281, "Some audio url", oam5, new HashSet<Genre>() { reggae, rnb, soul, hipHop, rap });
+            Track ot35 = new Track("More Justice", 215, "Some audio url", oam5, new HashSet<Genre>() { reggae, rnb, soul, hipHop, rap });
+            Track ot36 = new Track("Catch a Fire", 291, "Some audio url", oam5, new HashSet<Genre>() { reggae, rnb, soul, hipHop, rap });
+
+            oam6.Tracks.Add(ot31);
+            oam6.Tracks.Add(ot32);
+            oam6.Tracks.Add(ot33);
+            oam6.Tracks.Add(ot34);
+            oam6.Tracks.Add(ot35);
+            oam6.Tracks.Add(ot36);
+            oa2.Albums.Add(oam6);
             #endregion
 
             #region Creedence Clearwater Revival
