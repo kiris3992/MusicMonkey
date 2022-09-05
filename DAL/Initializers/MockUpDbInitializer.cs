@@ -108,13 +108,18 @@ namespace DAL.Initializers
             Album oam5 = new Album("Mr.Marley", new DateTime(1996, 9, 9), "Some cover photo url",  oa2, new HashSet<Genre>() { reggae, rnb, hipHop, rap });
             Album oam6 = new Album("Halfway Tree", new DateTime(2001, 9, 11), "Some cover photo url", oa2, new HashSet<Genre>() { reggae, rnb, soul, hipHop, rap });
 
-            Track ot19 = new Track();
+            Track ot19 = new Track("Confrontation", 329, "Some audio url", oam4, new HashSet<Genre>() { reggae, rnb, hipHop, rap });
+            Track ot20 = new Track("Welcome to Jamrock", 214, "Some audio url", oam4, new HashSet<Genre>() { reggae, rnb, hipHop, rap });
+            Track ot21 = new Track("All Night", 210, "Some audio url", oam4, new HashSet<Genre>() { reggae, rnb, hipHop, rap });
+            Track ot22 = new Track("Pimpa's Paradise", 304, "Some audio url", oam4, new HashSet<Genre>() { reggae, rnb, hipHop, rap });
+            Track ot23 = new Track("There for You", 241, "Some audio url", oam4, new HashSet<Genre>() { reggae, rnb, hipHop, rap });
+            Track ot24 = new Track("Beautiful", 248, "Some audio url", oam4, new HashSet<Genre>() { reggae, rnb, hipHop, rap });
             #endregion
 
             context.Genres.AddOrUpdate(blues, chillstep, classical, country, dance, disco, electronic, folk, hipHop, house, instrumental, jazz, kid, latin, metal, opera, pop, progressive, punk, rap, reggae, rnb, rock, soul, techno, traditional, trance, trap, hardRock, heavyMetal, grunge);
-            context.Artists.AddOrUpdate(oa1);
-            context.Albums.AddOrUpdate(oam1, oam2, oam2);
-            context.Tracks.AddOrUpdate(ot1, ot2, ot3, ot4, ot5, ot6, ot7, ot8, ot9, ot10, ot11, ot12, ot13, ot14, ot15, ot16, ot17, ot18);
+            context.Artists.AddOrUpdate(oa1, oa2);
+            context.Albums.AddOrUpdate(oam1, oam2, oam2, oam4, oam5, oam6);
+            context.Tracks.AddOrUpdate(ot1, ot2, ot3, ot4, ot5, ot6, ot7, ot8, ot9, ot10, ot11, ot12, ot13, ot14, ot15, ot16, ot17, ot18, ot19, ot20, ot21, ot22, ot23, ot24);
             context.SaveChanges();
             #endregion
 
