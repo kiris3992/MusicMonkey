@@ -27,6 +27,9 @@ namespace DAL.Initializers
             Artist aa9 = new Artist { Name = "Eminem", Country = Country.USA, CareerStartDate = new DateTime(1988, 1, 1), PhotoUrl = "EminemPhotoUrl.jpg", ArtistGenres = new List<Genre> { Genre.HipHop } };
             Artist aa10 = new Artist { Name = "Ice Cube", Country = Country.USA, CareerStartDate = new DateTime(1986, 1, 1), PhotoUrl = "Ice-CubePhotoUrl.jpg", ArtistGenres = new List<Genre> { Genre.HipHop } };
             Artist aa11 = new Artist { Name = "The Notorious B.I.G.", Country = Country.USA, CareerStartDate = new DateTime(1992, 1, 1), PhotoUrl = "The_Notorious_B.I.GPhotoUrl.jpg", ArtistGenres = new List<Genre> { Genre.HipHop } };
+
+            context.Artists.AddOrUpdate(aa1, aa2, aa3, aa4, aa5, aa6, aa7, aa8, aa9, aa10, aa11);
+            context.SaveChanges();
             #endregion
 
             #region Seeding Albums
@@ -42,6 +45,9 @@ namespace DAL.Initializers
             Album aam10 = new Album { Title = "The Eminem Show", ReleaseDate = new DateTime(2002, 5, 26), CoverPhotoUrl = "The_Eminem_ShowCoverPhotoUrl.jpg", AlbumGenres = new List<Genre> { Genre.HipHop }, Artist = aa9 };
             Album aam11 = new Album { Title = "The Predator", ReleaseDate = new DateTime(1992, 11, 17), CoverPhotoUrl = "The_Predator_CoverPhotoUrl.jpg", AlbumGenres = new List<Genre> { Genre.HipHop }, Artist = aa10 };
             Album aam12 = new Album { Title = "Ready to Die", ReleaseDate = new DateTime(1994, 9, 13), CoverPhotoUrl = "Ready_To_DieCoverPhotoUrl.jpg", AlbumGenres = new List<Genre> { Genre.HipHop }, Artist = aa11 };
+
+            context.Albums.AddOrUpdate(aam1, aam2, aam3, aam4, aam5, aam6, aam7, aam8, aam9, aam10, aam11, aam12);
+            context.SaveChanges();
             #endregion
 
             #region Seeding Tracks
@@ -140,7 +146,7 @@ namespace DAL.Initializers
             Track at83 = new Track { Title = "It Was a Good Day", DurationSecs = 251, AudioUrl = "Ice_Cube__-_It_Was_A_Good_Day_(128kbps).mp3", Album = aam11 };
             Track at84 = new Track { Title = "We Had to Tear This Mothafucka Up", DurationSecs = 254, AudioUrl = "Ice_Cube__-_We_Had_to_Tear_This_Mothafucka_Up_(128kbps).mp3", Album = aam11 };
             Track at85 = new Track { Title = "Dirty Mack", DurationSecs = 260, AudioUrl = "Ice_Cube__-__Dirty_Mack_(128kbps).mp3", Album = aam11 };
-            Track at86 = new Track { Title = "Don't Trust 'Em", DurationSecs = 244  , AudioUrl = "Ice_Cube__-__Don_'t_Trust__'Em_(128kbps).mp3", Album = aam11 };
+            Track at86 = new Track { Title = "Don't Trust 'Em", DurationSecs = 244, AudioUrl = "Ice_Cube__-__Don_'t_Trust__'Em_(128kbps).mp3", Album = aam11 };
             Track at87 = new Track { Title = "Gangsta's Fairytale 2", DurationSecs = 191, AudioUrl = "Ice_Cube__-__Gangsta_'s_Fairytale_2_(128kbps).mp3", Album = aam11 };
 
             Track at88 = new Track { Title = "Things Done Changed", DurationSecs = 215, AudioUrl = "The_Notorious_B.I.G._-_Things_Done_Changed_(128kbps).mp3", Album = aam12 };
@@ -156,7 +162,8 @@ namespace DAL.Initializers
             Track at98 = new Track { Title = "Unbelievable", DurationSecs = 206, AudioUrl = "The_Notorious_B.I.G._-_Unbelievable_(Official_Audio)_(128kbps).mp3", Album = aam12 };
             Track at99 = new Track { Title = "Suicidal Thoughts", DurationSecs = 150, AudioUrl = "The_Notorious_B.I.G._-_Suicidal_Thoughts_(Official_Audio)_(128kbps).mp3", Album = aam12 };
 
-
+            context.Tracks.AddOrUpdate(at1, at2, at3, at4, at5, at6, at7, at8, at9, at10, at11, at12, at13, at14, at15, at16, at17, at18, at19, at20, at21, at22, at23, at24, at25, at26, at27, at28, at29, at30, at31, at32, at33, at34, at35, at36, at37, at38, at39, at40, at41, at42, at43, at44, at45, at46, at47, at48, at49, at50, at51, at52, at53, at54, at55, at56, at57, at58, at59, at60, at61, at62, at63, at64, at65, at66, at67, at68, at69, at70, at71, at72, at73, at74, at75, at76, at77, at78, at79, at80, at81, at82, at83, at84, at85, at86, at87, at88, at89, at90, at91, at92, at93, at94, at95, at96, at97, at98, at99);  
+            context.SaveChanges();
 
 
 
@@ -165,9 +172,6 @@ namespace DAL.Initializers
 
 
             #endregion
-
-
-
 
 
 
