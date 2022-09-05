@@ -15,6 +15,40 @@ namespace DAL.Initializers
         protected override void Seed(ApplicationDbContext context)
         {
             #region Orestis Region
+            #region Seeding Genres
+            Genre blues = new Genre("Blues");
+            Genre chillstep = new Genre("Chillstep");
+            Genre classical = new Genre("Classical");
+            Genre country = new Genre("Country");
+            Genre dance = new Genre("Dance");
+            Genre disco = new Genre("Disco");
+            Genre electronic = new Genre("Electronic");
+            Genre folk = new Genre("Folk");
+            Genre hipHop = new Genre("Hip Hop");
+            Genre house = new Genre("House");
+            Genre instrumental = new Genre("Instrumental");
+            Genre jazz = new Genre("Jazz");
+            Genre kid = new Genre("Kid");
+            Genre latin = new Genre("Latin");
+            Genre metal = new Genre("Metal");
+            Genre opera = new Genre("Opera");
+            Genre pop = new Genre("Pop");
+            Genre progressive = new Genre("Progressive");
+            Genre punk = new Genre("Punk");
+            Genre rap = new Genre("Rap");
+            Genre reggae = new Genre("Reggae");
+            Genre rnb = new Genre("Rnb");
+            Genre rock = new Genre("Rock");
+            Genre soul = new Genre("Soul");
+            Genre techno = new Genre("Techno");
+            Genre traditional = new Genre("Traditional");
+            Genre trance = new Genre("Trance");
+            Genre trap = new Genre("Trap");
+            Genre hardRock = new Genre("Hard Rock");
+            Genre heavyMetal = new Genre("Heavy Metal");
+            Genre grunge = new Genre("Grunge");
+            #endregion
+
             #region ACDC
             #region Seeding Artist
             Artist oa1 = new Artist("AC DC", Country.Australia, "Some artist photo Url", new DateTime(1973, 1, 1));
@@ -73,6 +107,7 @@ namespace DAL.Initializers
             oam3.Tracks.Add(ot18);
             #endregion
             #endregion
+
             #region Damian Marley
             Artist oa2 = new Artist("Damian Marley", Country.Jamaica, "Some artist photo url", new DateTime(1992, 1, 1));
 
@@ -83,6 +118,7 @@ namespace DAL.Initializers
             Track ot19 = new Track();
             #endregion
 
+            context.Genres.AddOrUpdate(blues, chillstep, classical, country, dance, disco, electronic, folk, hipHop, house, instrumental, jazz, kid, latin, metal, opera, pop, progressive, punk, rap, reggae, rnb, rock, soul, techno, traditional, trance, trap, hardRock, heavyMetal, grunge);
             context.Artists.AddOrUpdate(oa1);
             context.Albums.AddOrUpdate(oam1, oam2, oam2);
             context.Tracks.AddOrUpdate(ot1, ot2, ot3, ot4, ot5, ot6, ot7, ot8, ot9, ot10, ot11, ot12, ot13, ot14, ot15, ot16, ot17, ot18);
