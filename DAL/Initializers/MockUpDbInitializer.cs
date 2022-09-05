@@ -99,6 +99,7 @@ namespace DAL.Initializers
             oam3.Tracks.Add(ot16);
             oam3.Tracks.Add(ot17);
             oam3.Tracks.Add(ot18);
+            oa1.Albums.Add(oam3);
             #endregion
 
             #region Damian Marley
