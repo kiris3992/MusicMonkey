@@ -124,9 +124,9 @@ namespace DAL.Initializers
             oa2.Albums.Add(oam4);
             #endregion
 
-            //#region Creedence Clearwater Revival
-            //Artist oa3 = new Artist("Creadence Clearwater Revival", Country.USA, "Some artist photo url", new DateTime(1967, 1, 1), new HashSet<Genre>() {rock, country, blues });
-            //#endregion
+            #region Creedence Clearwater Revival
+            Artist oa3 = new Artist("Creadence Clearwater Revival", Country.USA, "Some artist photo url", new DateTime(1967, 1, 1), new HashSet<Genre>() {rock, country, blues });
+            #endregion
 
             context.Genres.AddOrUpdate(blues, chillstep, classical, country, dance, disco, electronic, folk, hipHop, house, instrumental, jazz, kid, latin, metal, opera, pop, progressive, punk, rap, reggae, rnb, rock, soul, techno, traditional, trance, trap, hardRock, heavyMetal, grunge);
             context.Artists.AddOrUpdate(oa1, oa2);
