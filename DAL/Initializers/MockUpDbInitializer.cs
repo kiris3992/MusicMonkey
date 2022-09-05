@@ -207,11 +207,13 @@ namespace DAL.Initializers
             oa3.Albums.Add(oam9);
             #endregion
 
+            #region Pass Data to DB
             context.Genres.AddOrUpdate(blues, chillstep, classical, country, dance, disco, electronic, folk, hipHop, house, instrumental, jazz, kid, latin, metal, opera, pop, progressive, punk, rap, reggae, rnb, rock, soul, techno, traditional, trance, trap, hardRock, heavyMetal, grunge);
             context.Artists.AddOrUpdate(oa1, oa2);
-            context.Albums.AddOrUpdate(oam1, oam2, oam2, oam4, oam5, oam6);
-            context.Tracks.AddOrUpdate(ot1, ot2, ot3, ot4, ot5, ot6, ot7, ot8, ot9, ot10, ot11, ot12, ot13, ot14, ot15, ot16, ot17, ot18, ot19, ot20, ot21, ot22, ot23, ot24, ot25, ot26, ot27, ot28, ot29, ot30, ot31, ot32, ot33, ot34, ot35, ot36);
+            context.Albums.AddOrUpdate(oam1, oam2, oam2, oam4, oam5, oam6, oam7, oam8, oam9);
+            context.Tracks.AddOrUpdate(ot1, ot2, ot3, ot4, ot5, ot6, ot7, ot8, ot9, ot10, ot11, ot12, ot13, ot14, ot15, ot16, ot17, ot18, ot19, ot20, ot21, ot22, ot23, ot24, ot25, ot26, ot27, ot28, ot29, ot30, ot31, ot32, ot33, ot34, ot35, ot36, ot37, ot38, ot39, ot40, ot41, ot42, ot43, ot44, ot45, ot46, ot47, ot48, ot49, ot50, ot51, ot52, ot53, ot54);
             context.SaveChanges();
+            #endregion
             #endregion
 
             base.Seed(context);
