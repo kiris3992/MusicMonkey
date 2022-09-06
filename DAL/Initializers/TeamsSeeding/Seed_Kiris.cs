@@ -10,11 +10,6 @@ namespace DAL.Initializers.TeamsSeeding
 {
     public class Seed_Kiris : AbsTeamSeeder, ITeamSeeder
     {
-        private Track track(string title, int durationSecs, Genre[] genres, string audioUrl)
-        {
-            return new Track { Title = title, DurationSecs = durationSecs, AudioUrl = audioUrl, TrackGenres = new HashSet<Genre>(genres) };
-        }
-
         public List<Artist> GetArtists()
         {
             var artists = new List<Artist>
