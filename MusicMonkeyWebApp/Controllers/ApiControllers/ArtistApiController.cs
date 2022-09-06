@@ -57,6 +57,7 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
                 }
             );
             return artistDTO;
+            var yolo = "test";
         }
 
 
