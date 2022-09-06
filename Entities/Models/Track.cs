@@ -9,6 +9,7 @@ namespace Entities.Models
         public string Title { get; set; }
         public int DurationSecs { get; set; }
         public string AudioUrl { get; set; }
+        public int Popularity { get; set; }
 
         // Navigation Properies
         public Album Album { get; set; }
@@ -26,6 +27,16 @@ namespace Entities.Models
             AudioUrl = audioUrl;
             Album = album;
             TrackGenres = trackGenres;
+        }
+
+        public Track(string title, int durationSecs, string audioUrl, Album album, ICollection<Genre> trackGenres, int popularity)
+        {
+            Title = title;
+            DurationSecs = durationSecs;
+            AudioUrl = audioUrl;
+            Album = album;
+            TrackGenres = trackGenres;
+            Popularity = popularity;
         }
     }
 }
