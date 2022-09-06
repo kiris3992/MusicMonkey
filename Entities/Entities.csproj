@@ -72,6 +72,7 @@
     <Compile Include="Validators\AlbumValidator.cs" />
     <Compile Include="Validators\ArtistValidator.cs" />
     <Compile Include="Validators\TrackValidator.cs" />
+    <Compile Include="ViewModels\ArtistViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DTOValidators\DTOCreateValidators\" />
