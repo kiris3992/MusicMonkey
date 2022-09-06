@@ -40,15 +40,5 @@ namespace Entities.Models
             Popularity = popularity;
 
         }
-
-        public Track(string title, int durationSecs, string audioUrl, Album album, ICollection<Genre> trackGenres, int popularity)
-        {
-            Title = title;
-            DurationSecs = durationSecs;
-            AudioUrl = audioUrl;
-            Album = album;
-            TrackGenres = trackGenres;
-            Popularity = popularity;
-        }
     }
 }
