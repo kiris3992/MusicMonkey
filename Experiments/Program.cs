@@ -30,6 +30,9 @@ namespace Experiments
                 .Include(x => x.ArtistGenres)
                 .Include(x => x.Albums);
 
+            var albums = db.Albums.ToList();
+
+
             foreach (var artist in artists)
             {
                 Console.ForegroundColor = ConsoleColor.Green;

@@ -53,6 +53,13 @@
   <ItemGroup>
     <Compile Include="ApplicationDbContext.cs" />
     <Compile Include="Initializers\MockUpDbInitializer.cs" />
+    <Compile Include="Initializers\TeamsSeeding\ITeamSeeder.cs" />
+    <Compile Include="Initializers\TeamsSeeding\AbsTeamSeeder.cs" />
+    <Compile Include="Initializers\TeamsSeeding\Seed_Aggelos.cs" />
+    <Compile Include="Initializers\TeamsSeeding\Seed_Kiris.cs" />
+    <Compile Include="Initializers\TeamsSeeding\Seed_Orestis.cs" />
+    <Compile Include="Initializers\TeamsSeeding\Seed_Panos.cs" />
+    <Compile Include="Initializers\TeamsSeeding\Seed_Spyros.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
