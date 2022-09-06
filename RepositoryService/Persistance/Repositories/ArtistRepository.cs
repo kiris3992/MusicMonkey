@@ -19,15 +19,15 @@ namespace RepositoryService.Persistance.Repositories
 
         public IEnumerable<Artist> GetArtistsWithEverything()
         {
-            //db.Tracks
-            //    .Include(x => x.TrackGenres)
-            //    .Include(x => x.Album)
-            //    .ToList();
+            db.Tracks
+                .Include(x => x.TrackGenres)
+                .Include(x => x.Album)
+                .ToList();
 
-            //db.Albums
-            //    .Include(x => x.AlbumGenres)
-            //    .Include(x => x.Tracks)
-            //    .ToList();
+            db.Albums
+                .Include(x => x.AlbumGenres)
+                .Include(x => x.Tracks)
+                .ToList();
 
             return db.Artists
                 .Include(x => x.Albums)

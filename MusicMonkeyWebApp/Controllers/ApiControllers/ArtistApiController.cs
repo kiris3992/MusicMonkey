@@ -14,7 +14,7 @@ using RepositoryService.Persistance;
 
 namespace MusicMonkeyWebApp.Controllers.ApiControllers
 {
-    public class ArtistApiController : ApiController 
+    public class ArtistApiController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
@@ -32,7 +32,6 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
             return MapArtistsToDTO();
         }
 
-
         private IEnumerable<Object> MapArtistsToDTO()
         {
             var artists = unit.Artists.GetArtistsWithEverything();
@@ -45,40 +44,25 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
                     PhotoUrl = x.PhotoUrl,
                     CareerStartDate = x.CareerStartDate,
                     Albums = x.Albums.Select(y =>
-                        new //Albums
-                        {
+                        new
+                        { // Albums 
                             Title = y.Title,
                             ReleaseDate = y.ReleaseDate,
                             CoverPhotoUrl = y.CoverPhotoUrl,
                             Tracks = y.Tracks.Select(i =>
-                                new //Tracks
-                                {
+                                new 
+                                { // Tracks
                                     Title = i.Title,
                                     DurationSecs = i.DurationSecs,
                                     AudioUrl = i.AudioUrl,
                                     Popularity = i.Popularity,
-                                    TrackGenres = i.TrackGenres.Select(p =>
-                                        new //Track Genres
-                                        {
-                                            Type = p.Type
-                                        }
-                                    )
+                                    TrackGenres = i.TrackGenres.SelectMany(p => new string[] { p.Type })
                                 }
                             ),
-                            AlbumGenres = y.AlbumGenres.Select(p =>
-                               new //Album Genres
-                               {
-                                   Type = p.Type
-                               }
-                            )
+                            AlbumGenres = y.AlbumGenres.SelectMany(p => new string[] { p.Type })
                         }
                     ),
-                    ArtistGenres = x.ArtistGenres.Select(p =>
-                       new  //Artist Genres
-                     {
-                           Type = p.Type
-                       }
-                  )
+                    ArtistGenres = x.ArtistGenres.SelectMany(p => new string[] { p.Type })
                 }
             );
             return artistDTO;
