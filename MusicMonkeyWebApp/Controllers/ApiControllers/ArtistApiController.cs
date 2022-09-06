@@ -14,17 +14,8 @@ using RepositoryService.Persistance;
 
 namespace MusicMonkeyWebApp.Controllers.ApiControllers
 {
-    public class ArtistApiController : ApiController
+    public class ArtistApiController : BaseApiController
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
-
-        private UnitOfWork unit;
-
-        public ArtistApiController()
-        {
-            unit = new UnitOfWork(db);
-        }
-
         // GET: api/ArtistApi
         public IEnumerable<Object> GetArtists()
         {
@@ -146,15 +137,6 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
             db.SaveChanges();
 
             return Ok(artist);
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                unit.Dispose();
-            }
-            base.Dispose(disposing);
         }
 
         private bool ArtistExists(int id)
