@@ -20,7 +20,6 @@ namespace Experiments
                 .Include(x => x.ArtistGenres)
                 .ToList();
 
-            var test = "test";
 
             foreach (var artist in artists)
             {
