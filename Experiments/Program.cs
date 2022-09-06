@@ -20,6 +20,9 @@ namespace Experiments
                 .Include(x => x.ArtistGenres)
                 .ToList();
 
+            var albums = db.Albums.ToList();
+
+
             foreach (var artist in artists)
             {
                 Console.WriteLine(artist.Name);
