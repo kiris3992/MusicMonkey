@@ -28,19 +28,14 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
         // GET: api/ArtistApi
         public IEnumerable<Object> GetArtists()
         {
+            //return unit.Artists.GetAll();
             return MapArtistsToDTO();
         }
 
 
-
-
-
-
-
-
         private IEnumerable<Object> MapArtistsToDTO()
         {
-            var artists = unit.Artists.GetAllWithEverything();
+            var artists = unit.Artists.GetArtistsWithEverything();
             var artistDTO = artists.Select(x =>
                 new
                 {
@@ -88,6 +83,7 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
             );
             return artistDTO;
         }
+
 
         // GET: api/ArtistApi/5
         [ResponseType(typeof(Artist))]
