@@ -9,5 +9,6 @@ namespace RepositoryService.Core.Repositories
 {
     public interface IArtistRepository : IGenericRepository<Artist>
     {
+        IEnumerable<Artist> GetArtistsWithEverything();
     }
 }

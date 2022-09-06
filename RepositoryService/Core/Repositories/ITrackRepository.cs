@@ -9,5 +9,6 @@ namespace RepositoryService.Core.Repositories
 {
     public interface ITrackRepository : IGenericRepository<Track>
     {
+        IEnumerable<Track> GetTracksWithEverything();
     }
 }

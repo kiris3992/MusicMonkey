@@ -14,15 +14,25 @@ namespace Entities.Models
         public Country Country { get; set; }
         public string PhotoUrl { get; set; }
         public DateTime CareerStartDate { get; set; }
-        public List<Genre> ArtistGenres { get; set; }
 
         // Navigation Properties
         public ICollection<Album> Albums { get; set; }
+        public ICollection<Genre> ArtistGenres { get; set; }
 
         public Artist()
         {
-            ArtistGenres = new List<Genre>();
             Albums = new HashSet<Album>();
+            ArtistGenres = new HashSet<Genre>();
+        }
+
+        public Artist(string name, Country country, string photoUrl, DateTime careerStartDate, ICollection<Genre> artistGenres)
+        {
+            Name = name;
+            Country = country;
+            PhotoUrl = photoUrl;
+            CareerStartDate = careerStartDate;
+            Albums = new HashSet<Album>();
+            ArtistGenres = artistGenres;
         }
     }
 }

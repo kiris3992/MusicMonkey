@@ -62,10 +62,10 @@
     <Compile Include="DTOS\TrackDTOS\TrackDeleteDTO.cs" />
     <Compile Include="DTOS\TrackDTOS\TrackDTO.cs" />
     <Compile Include="DTOS\TrackDTOS\TrackUpdateDTO.cs" />
-    <Compile Include="Enums\Genre.cs" />
     <Compile Include="Enums\Country.cs" />
     <Compile Include="Models\Album.cs" />
     <Compile Include="Models\Artist.cs" />
+    <Compile Include="Models\Genre.cs" />
     <Compile Include="Models\MusicEntity.cs" />
     <Compile Include="Models\Track.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -84,6 +84,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Models\MusicEntitiesDummyData\ACDC\ACDC Artist Image.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
