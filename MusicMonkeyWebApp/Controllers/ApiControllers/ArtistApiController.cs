@@ -19,58 +19,58 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
         // GET: api/ArtistApi
         public IEnumerable<Object> GetArtists()
         {
-            //return unit.Artists.GetAll();
-            return MapArtistsToDTO();
+            return unit.Artists
+                .GetArtistsWithEverything()
+                .Select(x => ArtistDTOModel(x));
         }
 
-        private IEnumerable<Object> MapArtistsToDTO()
+
+        private Object ArtistDTOModel(Artist artist)
         {
-            var artists = unit.Artists.GetArtistsWithEverything();
-            var artistDTO = artists.Select(x =>
-                new
+            return new
+            {
+                Id = artist.Id,
+                Name = artist.Name,
+                Country = artist.Country,
+                PhotoUrl = artist.PhotoUrl,
+                CareerStartDate = artist.CareerStartDate,
+                Albums = artist.Albums.Select(x => new  //Albums
                 {
-                    Id = x.Id,
-                    Name = x.Name,
-                    Country = x.Country,
-                    PhotoUrl = x.PhotoUrl,
-                    CareerStartDate = x.CareerStartDate,
-                    Albums = x.Albums.Select(y =>
-                        new
-                        { // Albums 
-                            Title = y.Title,
-                            ReleaseDate = y.ReleaseDate,
-                            CoverPhotoUrl = y.CoverPhotoUrl,
-                            Tracks = y.Tracks.Select(i =>
-                                new 
-                                { // Tracks
-                                    Title = i.Title,
-                                    DurationSecs = i.DurationSecs,
-                                    AudioUrl = i.AudioUrl,
-                                    Popularity = i.Popularity,
-                                    TrackGenres = i.TrackGenres.SelectMany(p => new string[] { p.Type })
-                                }
-                            ),
-                            AlbumGenres = y.AlbumGenres.SelectMany(p => new string[] { p.Type })
-                        }
-                    ),
-                    ArtistGenres = x.ArtistGenres.SelectMany(p => new string[] { p.Type })
-                }
-            );
-            return artistDTO;
-        }
+                    Title = x.Title,
+                    ReleaseDate = x.ReleaseDate,
+                    CoverPhotoUrl = x.CoverPhotoUrl,
+                    Tracks = x.Tracks.Select(y => new //Tracks
+                    {
+                        Title = y.Title,
+                        DurationSecs = y.DurationSecs,
+                        AudioUrl = y.AudioUrl,
+                        Popularity = y.Popularity,
+                        TrackGenres = y.TrackGenres.SelectMany(p => new string[] { p.Type })  //Track Genres
+                    }),
+                    AlbumGenres = x.AlbumGenres.SelectMany(p => new string[] { p.Type })  //Album Genres
+                }),
+                ArtistGenres = artist.ArtistGenres.SelectMany(p => new string[] { p.Type })  //Artist Genres
+            };
+        } 
 
 
         // GET: api/ArtistApi/5
         [ResponseType(typeof(Artist))]
-        public IHttpActionResult GetArtist(int id)
+        public Object GetArtist(int? id)
         {
+            if (id is null)
+            {
+                return BadRequest();
+            }
+
             Artist artist = unit.Artists.GetById(id);
             if (artist == null)
             {
                 return NotFound();
             }
 
-            return Ok(artist);
+            return ArtistDTOModel(artist);
+            //return Ok(artist);
         }
 
         // PUT: api/ArtistApi/5
