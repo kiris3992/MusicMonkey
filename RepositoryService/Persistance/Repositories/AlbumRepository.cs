@@ -15,5 +15,14 @@ namespace RepositoryService.Persistance.Repositories
         {
 
         }
+
+        public IEnumerable<Album> GetAlbumsWithEverything()
+        {
+            return db.Albums
+                .Include("AlbumGenres")
+                .Include("Tracks.TrackGenres")
+                .Include("Artist.ArtistGenres")
+                .ToList();
+        }
     }
 }

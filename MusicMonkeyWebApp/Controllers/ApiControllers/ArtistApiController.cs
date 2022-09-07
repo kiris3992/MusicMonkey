@@ -25,35 +25,6 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
         }
 
 
-        private Object ArtistDTOModel(Artist artist)
-        {
-            return new
-            {
-                Id = artist.Id,
-                Name = artist.Name,
-                Country = artist.Country,
-                PhotoUrl = artist.PhotoUrl,
-                CareerStartDate = artist.CareerStartDate,
-                Albums = artist.Albums.Select(x => new  //Albums
-                {
-                    Title = x.Title,
-                    ReleaseDate = x.ReleaseDate,
-                    CoverPhotoUrl = x.CoverPhotoUrl,
-                    Tracks = x.Tracks.Select(y => new //Tracks
-                    {
-                        Title = y.Title,
-                        DurationSecs = y.DurationSecs,
-                        AudioUrl = y.AudioUrl,
-                        Popularity = y.Popularity,
-                        TrackGenres = y.TrackGenres.SelectMany(p => new string[] { p.Type })  //Track Genres
-                    }),
-                    AlbumGenres = x.AlbumGenres.SelectMany(p => new string[] { p.Type })  //Album Genres
-                }),
-                ArtistGenres = artist.ArtistGenres.SelectMany(p => new string[] { p.Type })  //Artist Genres
-            };
-        } 
-
-
         // GET: api/ArtistApi/5
         [ResponseType(typeof(Artist))]
         public Object GetArtist(int? id)
@@ -81,7 +52,7 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
                 return BadRequest(ModelState);
             }
 
-            if (id != artist.Id)
+            if (id != artist.Id) //Here
             {
                 return BadRequest();
             }
@@ -116,8 +87,9 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
                 return BadRequest(ModelState);
             }
 
-            db.Artists.Add(artist);
+            unit.Artists.Create(artist);
             db.SaveChanges();
+            //return Ok(artist);
 
             return CreatedAtRoute("DefaultApi", new { id = artist.Id }, artist);
         }
@@ -126,16 +98,70 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
         [ResponseType(typeof(Artist))]
         public IHttpActionResult DeleteArtist(int id)
         {
-            Artist artist = db.Artists.Find(id);
+            Artist artist = unit.Artists.GetArtistByIdWithEverything(id);
             if (artist == null)
             {
                 return NotFound();
             }
 
-            db.Artists.Remove(artist);
-            db.SaveChanges();
+            DeleteAllAlbumsAndTracksOfArtist(artist);
+
+            unit.Artists.DeleteById(id);
+            unit.Artists.Save();
 
             return Ok(artist);
+        }
+
+
+        //Custom Service Methods
+        private Object ArtistDTOModel(Artist artist)
+        {
+            return new
+            {
+                Id = artist.Id,
+                Name = artist.Name,
+                Country = artist.Country,
+                PhotoUrl = artist.PhotoUrl,
+                CareerStartDate = artist.CareerStartDate,
+                Albums = artist.Albums.Select(x => new  //Albums
+                {
+                    Title = x.Title,
+                    ReleaseDate = x.ReleaseDate,
+                    CoverPhotoUrl = x.CoverPhotoUrl,
+                    Tracks = x.Tracks.Select(y => new //Tracks
+                    {
+                        Title = y.Title,
+                        DurationSecs = y.DurationSecs,
+                        AudioUrl = y.AudioUrl,
+                        Popularity = y.Popularity,
+                        TrackGenres = y.TrackGenres.SelectMany(p => new string[] { p.Type })  //Track Genres
+                    }),
+                    AlbumGenres = x.AlbumGenres.SelectMany(p => new string[] { p.Type })  //Album Genres
+                }),
+                ArtistGenres = artist.ArtistGenres.SelectMany(p => new string[] { p.Type })  //Artist Genres
+            };
+        }
+        private void DeleteAllAlbumsAndTracksOfArtist(Artist artist)
+        {
+            var albums = unit.Albums
+                .GetAlbumsWithEverything()
+                .Where(x => x.Artist == artist)
+                .ToList();
+
+            if (albums.Count >= 1)
+            {
+                foreach (var album in albums)
+                {
+                    var tracks = unit.Tracks
+                        .GetAll()
+                        .Where(x => x.Album == album)
+                        .ToList();
+
+                    unit.Tracks.DeleteRange(tracks);
+                }
+
+                unit.Albums.DeleteRange(albums);
+            }
         }
 
         private bool ArtistExists(int id)

@@ -29,6 +29,10 @@ namespace RepositoryService.Persistance
 
         public void DeleteById(object id) => table.Remove(GetById(id));
 
+        public void DeleteRange(IEnumerable<T> entities)
+        {
+            table.RemoveRange(entities);
+        }
 
         public IEnumerable<T> GetAll() => table.ToList();
        
