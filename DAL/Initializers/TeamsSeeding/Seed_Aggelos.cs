@@ -45,7 +45,10 @@ namespace DAL.Initializers.TeamsSeeding
 
             aa1.Albums.Add(aam1);
             aa2.Albums.Add(aam2);
-            aa3.Albums = new HashSet<Album> { aam3, aam4 };
+            //aa3.Albums = new HashSet<Album> { aam3, aam4 };
+            aa3.Albums.Add(aam3);
+            aa3.Albums.Add(aam4);
+
             aa4.Albums.Add(aam5);
             aa5.Albums.Add(aam6);
             aa6.Albums.Add(aam7);
@@ -150,7 +153,7 @@ namespace DAL.Initializers.TeamsSeeding
             Track at80 = new Track { Title = "Wicked", DurationSecs = 213, AudioUrl = "Ice_Cube__-Wicked_(128kbps).mp3", Album = aam11, Popularity = 3 };
             Track at81 = new Track { Title = "Now I Gotta Wet 'Cha", DurationSecs = 242, AudioUrl = "Ice_Cube__-Now_I_Gotta_Wet_Cha_(128kbps).mp3", Album = aam11, Popularity = 3 };
             Track at82 = new Track { Title = "The Predator", DurationSecs = 242, AudioUrl = "Ice_Cube__-The_Predator_(128kbps).mp3", Album = aam11, Popularity = 5 };
-            Track at83 = new Track { Title = "It Was a Good Day", DurationSecs = 251, AudioUrl = "Ice_Cube__-_It_Was_A_Good_Day_(128kbps).mp3", Album = aam1, Popularity = 5 };
+            Track at83 = new Track { Title = "It Was a Good Day", DurationSecs = 251, AudioUrl = "Ice_Cube__-_It_Was_A_Good_Day_(128kbps).mp3", Album = aam11, Popularity = 5 };
             Track at84 = new Track { Title = "We Had to Tear This Mothafucka Up", DurationSecs = 254, AudioUrl = "Ice_Cube__-_We_Had_to_Tear_This_Mothafucka_Up_(128kbps).mp3", Album = aam11, Popularity = 2 };
             Track at85 = new Track { Title = "Dirty Mack", DurationSecs = 260, AudioUrl = "Ice_Cube__-__Dirty_Mack_(128kbps).mp3", Album = aam11, Popularity = 3 };
             Track at86 = new Track { Title = "Don't Trust 'Em", DurationSecs = 244, AudioUrl = "Ice_Cube__-__Don_'t_Trust__'Em_(128kbps).mp3", Album = aam11, Popularity = 2 };

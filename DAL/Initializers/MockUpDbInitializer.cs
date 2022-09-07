@@ -54,7 +54,7 @@ namespace DAL.Initializers
             {
                 var artists = seeder.GetArtists();
 
-                if(artists != null)
+                if (artists != null)
                 {
                     context.Artists.AddOrUpdate(artists.ToArray());
                 }
