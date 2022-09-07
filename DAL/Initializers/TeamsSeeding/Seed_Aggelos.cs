@@ -150,7 +150,7 @@ namespace DAL.Initializers.TeamsSeeding
             Track at80 = new Track { Title = "Wicked", DurationSecs = 213, AudioUrl = "Ice_Cube__-Wicked_(128kbps).mp3", Album = aam11, Popularity = 3 };
             Track at81 = new Track { Title = "Now I Gotta Wet 'Cha", DurationSecs = 242, AudioUrl = "Ice_Cube__-Now_I_Gotta_Wet_Cha_(128kbps).mp3", Album = aam11, Popularity = 3 };
             Track at82 = new Track { Title = "The Predator", DurationSecs = 242, AudioUrl = "Ice_Cube__-The_Predator_(128kbps).mp3", Album = aam11, Popularity = 5 };
-            Track at83 = new Track { Title = "It Was a Good Day", DurationSecs = 251, AudioUrl = "Ice_Cube__-_It_Was_A_Good_Day_(128kbps).mp3", Album = aam1, Popularity = 5 };
+            Track at83 = new Track { Title = "It Was a Good Day", DurationSecs = 251, AudioUrl = "Ice_Cube__-_It_Was_A_Good_Day_(128kbps).mp3", Album = aam11, Popularity = 5 };
             Track at84 = new Track { Title = "We Had to Tear This Mothafucka Up", DurationSecs = 254, AudioUrl = "Ice_Cube__-_We_Had_to_Tear_This_Mothafucka_Up_(128kbps).mp3", Album = aam11, Popularity = 2 };
             Track at85 = new Track { Title = "Dirty Mack", DurationSecs = 260, AudioUrl = "Ice_Cube__-__Dirty_Mack_(128kbps).mp3", Album = aam11, Popularity = 3 };
             Track at86 = new Track { Title = "Don't Trust 'Em", DurationSecs = 244, AudioUrl = "Ice_Cube__-__Don_'t_Trust__'Em_(128kbps).mp3", Album = aam11, Popularity = 2 };
@@ -180,7 +180,7 @@ namespace DAL.Initializers.TeamsSeeding
             aam8.Tracks = new HashSet<Track> { at50, at51, at52, at53 };
             aam9.Tracks = new HashSet<Track> { at54, at55, at56, at57, at58, at59, at60, at61, at62, at63 };
             aam10.Tracks = new HashSet<Track> { at64, at65, at66, at67, at68, at69, at70, at71, at72, at73, at74, at75, at76, at77, at78 };
-            aam11.Tracks = new HashSet<Track> { at79, at80, at81, at82, at83, at84, at85 };
+            aam11.Tracks = new HashSet<Track> { at79, at80, at81, at82, at83, at84, at85,at86,at87 };
             aam12.Tracks = new HashSet<Track> { at88, at89, at90, at91, at92, at93, at94, at95, at96, at97, at98, at99 };
 
 
