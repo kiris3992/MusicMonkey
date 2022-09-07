@@ -90,9 +90,9 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
             unit.Artists.Create(artist);
             db.SaveChanges();
 
-            return Ok(artist);
+            //return Ok();
 
-            //return CreatedAtRoute("DefaultApi", new { id = artist.Id }, artist);
+            return CreatedAtRoute("DefaultApi", new { id = artist.Id }, artist);
         }
 
         // DELETE: api/ArtistApi/5
