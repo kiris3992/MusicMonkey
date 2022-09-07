@@ -45,10 +45,7 @@ namespace DAL.Initializers.TeamsSeeding
 
             aa1.Albums.Add(aam1);
             aa2.Albums.Add(aam2);
-            //aa3.Albums = new HashSet<Album> { aam3, aam4 };
-            aa3.Albums.Add(aam3);
-            aa3.Albums.Add(aam4);
-
+            aa3.Albums = new HashSet<Album> { aam3, aam4 };
             aa4.Albums.Add(aam5);
             aa5.Albums.Add(aam6);
             aa6.Albums.Add(aam7);
@@ -68,7 +65,7 @@ namespace DAL.Initializers.TeamsSeeding
             Track at5 = new Track { Title = "Shit, Damn, Motherfacker", DurationSecs = 308, AudioUrl = "D_'Angelo_-_Shit,_Damn,_Motherfucker_(128kbps).mp3", Album = aam1, Popularity = 5 };
             Track at6 = new Track { Title = "Smooth", DurationSecs = 251, AudioUrl = "D_'Angelo_-_Smooth_(128kbps).mp3", Album = aam1, Popularity = 2 };
             Track at7 = new Track { Title = "Cruisin", DurationSecs = 374, AudioUrl = "D_'Angelo_-_Cruisin_'_(128kbps).mp3", Album = aam1, Popularity = 1 };
-            Track at8 = new Track { Title = "When We Get By", DurationSecs = 326, AudioUrl = "D_'Angelo_-_When_We_Get_By_(128kbps).mp3", Album = aam1 , Popularity = 2 };
+            Track at8 = new Track { Title = "When We Get By", DurationSecs = 326, AudioUrl = "D_'Angelo_-_When_We_Get_By_(128kbps).mp3", Album = aam1, Popularity = 2 };
             Track at9 = new Track { Title = "Lady", DurationSecs = 328, AudioUrl = "D_'Angelo_-_Lady_(128kbps).mp3", Album = aam1, Popularity = 3 };
             Track at10 = new Track { Title = "Higher", DurationSecs = 319, AudioUrl = "D_'Angelo_-_HIGHER_(128kbps).mp3", Album = aam1, Popularity = 4 };
 
@@ -141,7 +138,7 @@ namespace DAL.Initializers.TeamsSeeding
             Track at69 = new Track { Title = "Say Goodbye Hollywood", DurationSecs = 259, AudioUrl = "Say_Goodbye_Hollywood_(128kbps).mp3", Album = aam10, Popularity = 3 };
             Track at70 = new Track { Title = "Drips", DurationSecs = 267, AudioUrl = "Drips_(128kbps).mp3", Album = aam10, Popularity = 3 };
             Track at71 = new Track { Title = "Without Me", DurationSecs = 270, AudioUrl = "Without_Me_(128kbps).mp3", Album = aam10, Popularity = 4 };
-            Track at72 = new Track { Title = "Sing for the Moment", DurationSecs = 323, AudioUrl = "Sing_For_The_Moment_(128kbps).mp3", Album = aam10, Popularity = 5};
+            Track at72 = new Track { Title = "Sing for the Moment", DurationSecs = 323, AudioUrl = "Sing_For_The_Moment_(128kbps).mp3", Album = aam10, Popularity = 5 };
             Track at73 = new Track { Title = "Superman", DurationSecs = 330, AudioUrl = "Superman_(128kbps).mp3", Album = aam10, Popularity = 2 };
             Track at74 = new Track { Title = "Hailie's Song", DurationSecs = 312, AudioUrl = "Hailie_'s_Song_(128kbps).mp3", Album = aam10, Popularity = 1 };
             Track at75 = new Track { Title = "When the Music Stops", DurationSecs = 257, AudioUrl = "When_The_Music_Stops_(128kbps).mp3", Album = aam10, Popularity = 2 };
@@ -157,7 +154,7 @@ namespace DAL.Initializers.TeamsSeeding
             Track at84 = new Track { Title = "We Had to Tear This Mothafucka Up", DurationSecs = 254, AudioUrl = "Ice_Cube__-_We_Had_to_Tear_This_Mothafucka_Up_(128kbps).mp3", Album = aam11, Popularity = 2 };
             Track at85 = new Track { Title = "Dirty Mack", DurationSecs = 260, AudioUrl = "Ice_Cube__-__Dirty_Mack_(128kbps).mp3", Album = aam11, Popularity = 3 };
             Track at86 = new Track { Title = "Don't Trust 'Em", DurationSecs = 244, AudioUrl = "Ice_Cube__-__Don_'t_Trust__'Em_(128kbps).mp3", Album = aam11, Popularity = 2 };
-            Track at87 = new Track { Title = "Gangsta's Fairytale 2", DurationSecs = 191, AudioUrl = "Ice_Cube__-__Gangsta_'s_Fairytale_2_(128kbps).mp3", Album = aam11, Popularity = 1};
+            Track at87 = new Track { Title = "Gangsta's Fairytale 2", DurationSecs = 191, AudioUrl = "Ice_Cube__-__Gangsta_'s_Fairytale_2_(128kbps).mp3", Album = aam11, Popularity = 1 };
 
             Track at88 = new Track { Title = "Things Done Changed", DurationSecs = 215, AudioUrl = "The_Notorious_B.I.G._-_Things_Done_Changed_(128kbps).mp3", Album = aam12, Popularity = 3 };
             Track at89 = new Track { Title = "Gimme the Loot", DurationSecs = 302, AudioUrl = "The_Notorious_B.I.G._-_Gimme_the_Loot_(Official_Audio)_(128kbps).mp3", Album = aam12, Popularity = 3 };
@@ -165,7 +162,7 @@ namespace DAL.Initializers.TeamsSeeding
             Track at91 = new Track { Title = "Ready to Die", DurationSecs = 254, AudioUrl = "The_Notorious_B.I.G._-_Ready_to_Die_(Official_Audio)_(128kbps).mp3", Album = aam12, Popularity = 4 };
             Track at92 = new Track { Title = "Juicy", DurationSecs = 301, AudioUrl = "The_Notorious_B.I.G.-Juicy_(128kbps).mp3", Album = aam12, Popularity = 4 };
             Track at93 = new Track { Title = "Everyday Struggle", DurationSecs = 311, AudioUrl = "The_Notorious_B.I.G._-_Everyday_Struggle_(Official_Audio)_(128kbps).mp3", Album = aam12, Popularity = 3 };
-            Track at94 = new Track { Title = "Me & My Bitch", DurationSecs = 240, AudioUrl = "The_Notorious_B.I.G._-_Me_&_My_Bitch_(Official_Audio)_(128kbps).mp3", Album = aam12, Popularity = 1};
+            Track at94 = new Track { Title = "Me & My Bitch", DurationSecs = 240, AudioUrl = "The_Notorious_B.I.G._-_Me_&_My_Bitch_(Official_Audio)_(128kbps).mp3", Album = aam12, Popularity = 1 };
             Track at95 = new Track { Title = "Big Poppa", DurationSecs = 248, AudioUrl = "The_Notorious_B.I.G._-_Big_Poppa_(128kbps).mp3", Album = aam12, Popularity = 5 };
             Track at96 = new Track { Title = "Respect", DurationSecs = 313, AudioUrl = "The_Notorious_B.I.G._-_Respect_(Official_Audio)_(128kbps).mp3", Album = aam12, Popularity = 2 };
             Track at97 = new Track { Title = "Friend of Mine", DurationSecs = 197, AudioUrl = "The_Notorious_B.I.G._-_Friend_of_Mine_(Official_Audio)_(128kbps).mp3", Album = aam12, Popularity = 3 };
@@ -183,7 +180,7 @@ namespace DAL.Initializers.TeamsSeeding
             aam8.Tracks = new HashSet<Track> { at50, at51, at52, at53 };
             aam9.Tracks = new HashSet<Track> { at54, at55, at56, at57, at58, at59, at60, at61, at62, at63 };
             aam10.Tracks = new HashSet<Track> { at64, at65, at66, at67, at68, at69, at70, at71, at72, at73, at74, at75, at76, at77, at78 };
-            aam11.Tracks = new HashSet<Track> { at79, at80, at81, at82, at83, at84, at85 };
+            aam11.Tracks = new HashSet<Track> { at79, at80, at81, at82, at83, at84, at85, at86, at87 };
             aam12.Tracks = new HashSet<Track> { at88, at89, at90, at91, at92, at93, at94, at95, at96, at97, at98, at99 };
 
 
