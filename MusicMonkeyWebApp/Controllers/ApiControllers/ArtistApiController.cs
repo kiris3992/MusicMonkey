@@ -63,14 +63,13 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
                 return BadRequest();
             }
 
-            Artist artist = unit.Artists.GetById(id);
+            Artist artist = unit.Artists.GetArtistByIdWithEverything(id);
             if (artist == null)
             {
                 return NotFound();
             }
 
             return ArtistDTOModel(artist);
-            //return Ok(artist);
         }
 
         // PUT: api/ArtistApi/5
