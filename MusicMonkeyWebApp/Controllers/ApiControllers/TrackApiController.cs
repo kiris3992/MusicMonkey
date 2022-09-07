@@ -99,7 +99,7 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
             db.Tracks.Add(track);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = track.Id }, track);
+            return Ok();
         }
 
         // DELETE: api/Track/5
