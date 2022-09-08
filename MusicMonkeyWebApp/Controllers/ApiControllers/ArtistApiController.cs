@@ -10,6 +10,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using DAL;
 using Entities.Models;
+using Newtonsoft.Json;
 using RepositoryService.Persistance;
 
 namespace MusicMonkeyWebApp.Controllers.ApiControllers
@@ -26,7 +27,7 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
 
 
         // GET: api/ArtistApi/5
-        [ResponseType(typeof(Artist))]
+        [ResponseType(typeof(Object))]
         public Object GetArtist(int? id)
         {
             if (id is null)
@@ -47,6 +48,7 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
         [ResponseType(typeof(void))]
         public IHttpActionResult PutArtist(int id, Artist artist)
         {
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -57,26 +59,20 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
                 return BadRequest();
             }
 
-            db.Entry(artist).State = EntityState.Modified;
+            Artist mapedArtist = unit.Artists.GetArtistByIdWithEverything(id);
 
-            try
+            if (!(mapedArtist is null))
             {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ArtistExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                MapArtist(artist, mapedArtist);
             }
 
-            return StatusCode(HttpStatusCode.NoContent);
+            unit.Artists.Update(mapedArtist);
+            unit.Artists.Save();
+
+            return Ok();
         }
+
+
 
         // POST: api/ArtistApi
         [ResponseType(typeof(Artist))]
@@ -88,17 +84,20 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
             }
 
             unit.Artists.Create(artist);
-            db.SaveChanges();
+            unit.Artists.Save();
 
-            //return Ok();
-
-            return CreatedAtRoute("DefaultApi", new { id = artist.Id }, artist);
+            return Ok();
         }
 
         // DELETE: api/ArtistApi/5
         [ResponseType(typeof(Artist))]
-        public IHttpActionResult DeleteArtist(int id)
+        public IHttpActionResult DeleteArtist(int? id)
         {
+            if (id is null)
+            {
+                return BadRequest();
+            }
+
             Artist artist = unit.Artists.GetArtistByIdWithEverything(id);
             if (artist == null)
             {
@@ -110,7 +109,7 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
             unit.Artists.DeleteById(id);
             unit.Artists.Save();
 
-            return Ok(artist);
+            return Ok();
         }
 
 
@@ -163,6 +162,15 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
 
                 unit.Albums.DeleteRange(albums);
             }
+        }
+        private void MapArtist(Artist incomingArtist, Artist mapedArtist)
+        {
+            mapedArtist.Name = incomingArtist.Name;
+            mapedArtist.Country = incomingArtist.Country;
+            mapedArtist.PhotoUrl = incomingArtist.PhotoUrl;
+            mapedArtist.CareerStartDate = incomingArtist.CareerStartDate;
+            mapedArtist.Albums = incomingArtist.Albums;
+            mapedArtist.ArtistGenres = incomingArtist.ArtistGenres;
         }
 
         private bool ArtistExists(int id)

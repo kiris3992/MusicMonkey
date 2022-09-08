@@ -48,6 +48,7 @@ namespace DAL.Initializers
             Genre heavyMetal = new Genre("Heavy Metal");
             Genre grunge = new Genre("Grunge");
 
+
             context.Genres.AddOrUpdate(x => x.Type, blues, chillstep, classical, country, dance, disco, electronic, folk, hipHop, house, instrumental, jazz, kid, latin, metal, opera, pop, progressive, punk, rap, reggae, rnb, rock, soul, techno, traditional, trance, trap, hardRock, heavyMetal, grunge);
 
 
