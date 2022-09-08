@@ -17,7 +17,7 @@ namespace Entities.Models
         public ICollection<Album> Albums { get; set; }
         public ICollection<Track> Tracks { get; set; }
 
-        public Genre() 
+        public Genre()
         {
             Artists = new HashSet<Artist>();
             Albums = new HashSet<Album>();
