@@ -105,7 +105,6 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
             }
 
             DeleteAllAlbumsAndTracksOfArtist(artist);
-
             unit.Artists.DeleteById(id);
             unit.Complete();
 

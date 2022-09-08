@@ -16,7 +16,7 @@ namespace Experiments
         static void Main(string[] args)
         {
             ApplicationDbContext db = new ApplicationDbContext();
-            GetAllGenres(db);
+            GetAllArtists(db);
         }
 
         private static void GetAllArtists(ApplicationDbContext context)
@@ -81,19 +81,19 @@ namespace Experiments
             }
         }
 
-        private static void GetAllGenres(ApplicationDbContext context)
-        {
-            var genres = context.Genres
-                .Include(x => x.Albums)
-                .Include(x => x.Artists)
-                .Include(x => x.Tracks)
-                .ToList();
+        //private static void GetAllGenres(ApplicationDbContext context)
+        //{
+        //    var genres = context.Genres
+        //        .Include(x => x.Albums)
+        //        .Include(x => x.Artists)
+        //        .Include(x => x.Tracks)
+        //        .ToList();
 
-            foreach (var genre in genres)
-            {
-                Console.WriteLine($"Genre: {genre.Type}");
-            }
-            Console.WriteLine(genres.Count);
-        }
+        //    foreach (var genre in genres)
+        //    {
+        //        Console.WriteLine($"Genre: {genre.Type}");
+        //    }
+        //    Console.WriteLine(genres.Count);
+        //}
     }
 }

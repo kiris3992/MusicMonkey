@@ -10,5 +10,6 @@ namespace RepositoryService.Core.Repositories
     public interface IAlbumRepository : IGenericRepository<Album>
     {
         IEnumerable<Album> GetAlbumsWithEverything();
+        Album GetAlbumByIdWithEverything(int? id);
     }
 }

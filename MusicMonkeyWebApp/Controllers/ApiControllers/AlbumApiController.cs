@@ -26,15 +26,20 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
 
         // GET: api/AlbumApi/5
         [ResponseType(typeof(Album))]
-        public IHttpActionResult GetAlbum(int id)
+        public Object GetAlbum(int? id)
         {
-            Album album = db.Albums.Find(id);
+            if (id is null)
+            {
+                return BadRequest();
+            }
+
+            Album album = unit.Albums.GetAlbumByIdWithEverything(id);
             if (album == null)
             {
                 return NotFound();
             }
 
-            return Ok(album);
+            return AlbumDTOModel(album);
         }
 
         // PUT: api/AlbumApi/5
@@ -89,27 +94,19 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
 
         // DELETE: api/AlbumApi/5
         [ResponseType(typeof(Album))]
-        public IHttpActionResult DeleteAlbum(int id)
+        public IHttpActionResult DeleteAlbum(int? id)
         {
-            Album album = db.Albums.Find(id);
+            Album album = unit.Albums.GetAlbumByIdWithEverything(id);
             if (album == null)
             {
                 return NotFound();
             }
 
-            db.Albums.Remove(album);
-            db.SaveChanges();
+            DeleteAllTracksOfAlbum(album);
+            unit.Albums.DeleteById(id);
+            unit.Complete();
 
-            return Ok(album);
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
+            return Ok();
         }
 
 
@@ -133,7 +130,7 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
                 },
                 Tracks = album.Tracks.Select(x => new  //Tracks
                 {
-                    Id = x.Title,
+                    Id = x.Id,
                     Title = x.Title,
                     DurationSecs = x.DurationSecs,
                     AudioUrl = x.AudioUrl,
@@ -143,7 +140,18 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
                 AlbumGenres = album.AlbumGenres.SelectMany(p => new string[] { p.Type})  //Album Genres
             };
         }
+        private void DeleteAllTracksOfAlbum(Album album)
+        {
+            var tracks = unit.Tracks
+                .GetAll()
+                .Where(x => x.Album == album)
+                .ToList();
 
+            if (tracks.Count >= 1)
+            {
+                unit.Tracks.DeleteRange(tracks);
+            }
+        }
 
         private bool AlbumExists(int id)
         {
