@@ -8,40 +8,40 @@ using System.Threading.Tasks;
 
 namespace DAL.Initializers.TeamsSeeding
 {
-    public class Seed_Aggelos : AbsTeamSeeder, ITeamSeeder
+    public class Seed_Aggelos : ITeamSeeder
     {
-        public List<Artist> GetArtists()
+        public List<Artist> GetArtists(TeamGenres g)
         {
             #region Aggelos Seeding
             #region Seeding Artists
-            Artist aa1 = new Artist { Name = "D'Angelo", Country = Country.USA, CareerStartDate = new DateTime(1991, 1, 1), PhotoUrl = "DANGELOPhotoUrl.jpg", ArtistGenres = new List<Genre> { rnb, pop } };
-            Artist aa2 = new Artist { Name = "Above & Beyond", Country = Country.United_Kingdom, CareerStartDate = new DateTime(2000, 1, 1), PhotoUrl = "Above&BeyondPhotoUrl.jpg", ArtistGenres = new List<Genre> { trance, house } };
-            Artist aa3 = new Artist { Name = "Migos", Country = Country.USA, CareerStartDate = new DateTime(2008, 1, 1), PhotoUrl = "MigosPhotoUrl.jpg", ArtistGenres = new List<Genre> { hipHop, trap } };
+            Artist aa1 = new Artist { Name = "D'Angelo", Country = Country.USA, CareerStartDate = new DateTime(1991, 1, 1), PhotoUrl = "DANGELOPhotoUrl.jpg", ArtistGenres = new List<Genre> { g.rnb, g.pop } };
+            Artist aa2 = new Artist { Name = "Above & Beyond", Country = Country.United_Kingdom, CareerStartDate = new DateTime(2000, 1, 1), PhotoUrl = "Above&BeyondPhotoUrl.jpg", ArtistGenres = new List<Genre> { g.trance, g.house } };
+            Artist aa3 = new Artist { Name = "Migos", Country = Country.USA, CareerStartDate = new DateTime(2008, 1, 1), PhotoUrl = "MigosPhotoUrl.jpg", ArtistGenres = new List<Genre> { g.hipHop, g.trap } };
             Artist aa4 = new Artist { Name = "Unknown Artist", CareerStartDate = new DateTime(1901, 1, 1), PhotoUrl = "UnknownPhotoUrl.jpg" };
-            Artist aa5 = new Artist { Name = "Axel Willner", Country = Country.Sweden, CareerStartDate = new DateTime(1996, 1, 1), PhotoUrl = "AxelWillnerPhotoUrl.jpg", ArtistGenres = new List<Genre> { techno, electronic } };
-            Artist aa6 = new Artist { Name = "Marvin Gaye", Country = Country.USA, CareerStartDate = new DateTime(1957, 1, 1), PhotoUrl = "Marvin_GayePhotoUrl.jpg", ArtistGenres = new List<Genre> { soul } };
-            Artist aa7 = new Artist { Name = "Michael Jackson", Country = Country.USA, CareerStartDate = new DateTime(1964, 1, 1), PhotoUrl = "Michael_JacksonPhotoUrl.jpg", ArtistGenres = new List<Genre> { pop, rnb, soul, disco } };
-            Artist aa8 = new Artist { Name = "Future", Country = Country.USA, CareerStartDate = new DateTime(2005, 1, 1), PhotoUrl = "FuturePhotoUrl.jpg", ArtistGenres = new List<Genre> { hipHop, trap } };
-            Artist aa9 = new Artist { Name = "Eminem", Country = Country.USA, CareerStartDate = new DateTime(1988, 1, 1), PhotoUrl = "EminemPhotoUrl.jpg", ArtistGenres = new List<Genre> { hipHop } };
-            Artist aa10 = new Artist { Name = "Ice Cube", Country = Country.USA, CareerStartDate = new DateTime(1986, 1, 1), PhotoUrl = "Ice-CubePhotoUrl.jpg", ArtistGenres = new List<Genre> { hipHop } };
-            Artist aa11 = new Artist { Name = "The Notorious B.I.G.", Country = Country.USA, CareerStartDate = new DateTime(1992, 1, 1), PhotoUrl = "The_Notorious_B.I.GPhotoUrl.jpg", ArtistGenres = new List<Genre> { hipHop } };
+            Artist aa5 = new Artist { Name = "Axel Willner", Country = Country.Sweden, CareerStartDate = new DateTime(1996, 1, 1), PhotoUrl = "AxelWillnerPhotoUrl.jpg", ArtistGenres = new List<Genre> { g.techno, g.electronic } };
+            Artist aa6 = new Artist { Name = "Marvin Gaye", Country = Country.USA, CareerStartDate = new DateTime(1957, 1, 1), PhotoUrl = "Marvin_GayePhotoUrl.jpg", ArtistGenres = new List<Genre> { g.soul } };
+            Artist aa7 = new Artist { Name = "Michael Jackson", Country = Country.USA, CareerStartDate = new DateTime(1964, 1, 1), PhotoUrl = "Michael_JacksonPhotoUrl.jpg", ArtistGenres = new List<Genre> { g.pop, g.rnb, g.soul, g.disco } };
+            Artist aa8 = new Artist { Name = "Future", Country = Country.USA, CareerStartDate = new DateTime(2005, 1, 1), PhotoUrl = "FuturePhotoUrl.jpg", ArtistGenres = new List<Genre> { g.hipHop, g.trap } };
+            Artist aa9 = new Artist { Name = "Eminem", Country = Country.USA, CareerStartDate = new DateTime(1988, 1, 1), PhotoUrl = "EminemPhotoUrl.jpg", ArtistGenres = new List<Genre> { g.hipHop } };
+            Artist aa10 = new Artist { Name = "Ice Cube", Country = Country.USA, CareerStartDate = new DateTime(1986, 1, 1), PhotoUrl = "Ice-CubePhotoUrl.jpg", ArtistGenres = new List<Genre> { g.hipHop } };
+            Artist aa11 = new Artist { Name = "The Notorious B.I.G.", Country = Country.USA, CareerStartDate = new DateTime(1992, 1, 1), PhotoUrl = "The_Notorious_B.I.GPhotoUrl.jpg", ArtistGenres = new List<Genre> { g.hipHop } };
 
 
             #endregion
 
             #region Seeding Albums
-            Album aam1 = new Album { Title = "Brown Sugar", ReleaseDate = new DateTime(1995, 6, 13), CoverPhotoUrl = "BrownSugarCoverPhotoUrl.jpg", AlbumGenres = new List<Genre> { rnb }, Artist = aa1 };
-            Album aam2 = new Album { Title = "Sirens of the Sea", ReleaseDate = new DateTime(2008, 4, 21), CoverPhotoUrl = "DANGELOCoverPhotoUrl.jpg", AlbumGenres = new List<Genre> { trance, house }, Artist = aa2 };
-            Album aam3 = new Album { Title = "Culture II", ReleaseDate = new DateTime(2018, 1, 26), CoverPhotoUrl = "Culture_IICoverPhotoUrl.jpg", AlbumGenres = new List<Genre> { hipHop, trap }, Artist = aa3 };
-            Album aam4 = new Album { Title = "No Label II", ReleaseDate = new DateTime(2014, 2, 25), CoverPhotoUrl = "Migos_No_Label_2CoverPhotoUrl.jpg", AlbumGenres = new List<Genre> { hipHop, trap }, Artist = aa3 };
-            Album aam5 = new Album { Title = "Unknown Album", ReleaseDate = new DateTime(1901, 1, 1), CoverPhotoUrl = "UnknownCoverPhotoUrl.jpg", AlbumGenres = new List<Genre> { traditional }, Artist = aa4 };
-            Album aam6 = new Album { Title = "Cupid's Head", ReleaseDate = new DateTime(2013, 9, 30), CoverPhotoUrl = "Cupids_HeadCoverPhotoUrl.jpg", AlbumGenres = new List<Genre> { techno, electronic }, Artist = aa5 };
-            Album aam7 = new Album { Title = "What's Going On", ReleaseDate = new DateTime(1971, 5, 21), CoverPhotoUrl = "WhatsGoingOnCoverPhotoUrl.jpg", AlbumGenres = new List<Genre> { soul }, Artist = aa6 };
-            Album aam8 = new Album { Title = "Thriller ", ReleaseDate = new DateTime(1982, 11, 30), CoverPhotoUrl = "Michael_Jackson_-_ThrillerCoverPhotoUrl.jpg", AlbumGenres = new List<Genre> { rnb, pop, disco }, Artist = aa7 };
-            Album aam9 = new Album { Title = "High Off Life ", ReleaseDate = new DateTime(2020, 5, 15), CoverPhotoUrl = "High_Off_LifeCoverPhotoUrl.jpg", AlbumGenres = new List<Genre> { hipHop }, Artist = aa8 };
-            Album aam10 = new Album { Title = "The Eminem Show", ReleaseDate = new DateTime(2002, 5, 26), CoverPhotoUrl = "The_Eminem_ShowCoverPhotoUrl.jpg", AlbumGenres = new List<Genre> { hipHop }, Artist = aa9 };
-            Album aam11 = new Album { Title = "The Predator", ReleaseDate = new DateTime(1992, 11, 17), CoverPhotoUrl = "The_Predator_CoverPhotoUrl.jpg", AlbumGenres = new List<Genre> { hipHop }, Artist = aa10 };
-            Album aam12 = new Album { Title = "Ready to Die", ReleaseDate = new DateTime(1994, 9, 13), CoverPhotoUrl = "Ready_To_DieCoverPhotoUrl.jpg", AlbumGenres = new List<Genre> { hipHop }, Artist = aa11 };
+            Album aam1 = new Album { Title = "Brown Sugar", ReleaseDate = new DateTime(1995, 6, 13), CoverPhotoUrl = "BrownSugarCoverPhotoUrl.jpg", AlbumGenres = new List<Genre> { g.rnb }, Artist = aa1 };
+            Album aam2 = new Album { Title = "Sirens of the Sea", ReleaseDate = new DateTime(2008, 4, 21), CoverPhotoUrl = "DANGELOCoverPhotoUrl.jpg", AlbumGenres = new List<Genre> { g.trance, g.house }, Artist = aa2 };
+            Album aam3 = new Album { Title = "Culture II", ReleaseDate = new DateTime(2018, 1, 26), CoverPhotoUrl = "Culture_IICoverPhotoUrl.jpg", AlbumGenres = new List<Genre> { g.hipHop, g.trap }, Artist = aa3 };
+            Album aam4 = new Album { Title = "No Label II", ReleaseDate = new DateTime(2014, 2, 25), CoverPhotoUrl = "Migos_No_Label_2CoverPhotoUrl.jpg", AlbumGenres = new List<Genre> { g.hipHop, g.trap }, Artist = aa3 };
+            Album aam5 = new Album { Title = "Unknown Album", ReleaseDate = new DateTime(1901, 1, 1), CoverPhotoUrl = "UnknownCoverPhotoUrl.jpg", AlbumGenres = new List<Genre> { g.traditional }, Artist = aa4 };
+            Album aam6 = new Album { Title = "Cupid's Head", ReleaseDate = new DateTime(2013, 9, 30), CoverPhotoUrl = "Cupids_HeadCoverPhotoUrl.jpg", AlbumGenres = new List<Genre> { g.techno, g.electronic }, Artist = aa5 };
+            Album aam7 = new Album { Title = "What's Going On", ReleaseDate = new DateTime(1971, 5, 21), CoverPhotoUrl = "WhatsGoingOnCoverPhotoUrl.jpg", AlbumGenres = new List<Genre> { g.soul }, Artist = aa6 };
+            Album aam8 = new Album { Title = "Thriller ", ReleaseDate = new DateTime(1982, 11, 30), CoverPhotoUrl = "Michael_Jackson_-_ThrillerCoverPhotoUrl.jpg", AlbumGenres = new List<Genre> { g.rnb, g.pop, g.disco }, Artist = aa7 };
+            Album aam9 = new Album { Title = "High Off Life ", ReleaseDate = new DateTime(2020, 5, 15), CoverPhotoUrl = "High_Off_LifeCoverPhotoUrl.jpg", AlbumGenres = new List<Genre> { g.hipHop }, Artist = aa8 };
+            Album aam10 = new Album { Title = "The Eminem Show", ReleaseDate = new DateTime(2002, 5, 26), CoverPhotoUrl = "The_Eminem_ShowCoverPhotoUrl.jpg", AlbumGenres = new List<Genre> { g.hipHop }, Artist = aa9 };
+            Album aam11 = new Album { Title = "The Predator", ReleaseDate = new DateTime(1992, 11, 17), CoverPhotoUrl = "The_Predator_CoverPhotoUrl.jpg", AlbumGenres = new List<Genre> { g.hipHop }, Artist = aa10 };
+            Album aam12 = new Album { Title = "Ready to Die", ReleaseDate = new DateTime(1994, 9, 13), CoverPhotoUrl = "Ready_To_DieCoverPhotoUrl.jpg", AlbumGenres = new List<Genre> { g.hipHop }, Artist = aa11 };
 
             aa1.Albums.Add(aam1);
             aa2.Albums.Add(aam2);
@@ -189,9 +189,8 @@ namespace DAL.Initializers.TeamsSeeding
 
 
             #endregion
-
-
             return new List<Artist> { aa1, aa2, aa3, aa4, aa5, aa6, aa7, aa8, aa9, aa10, aa11 };
+
         }
     }
 }

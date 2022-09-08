@@ -1,5 +1,8 @@
 ﻿using DAL.Initializers.TeamsSeeding;
+using Entities.Enums;
+using Entities.Models;
 using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Diagnostics;
@@ -10,16 +13,17 @@ namespace DAL.Initializers
     {
         protected override void Seed(ApplicationDbContext context)
         {
-            var teamSeeder = new TeamSeeder().GetSeed();
+            TeamGenres Genres = new TeamGenres();
+            var (seeders, genres) = new TeamSeeder().Initialize(Genres);
 
-            context.Genres.AddOrUpdate(teamSeeder.genres.ToArray());
-            foreach(var seeder in teamSeeder.seeders)
+            context.Genres.AddOrUpdate(o => o.Type, genres.ToArray());
+            foreach (var seeder in seeders)
             {
                 try
                 {
-                    context.Artists.AddOrUpdate(seeder.GetArtists().ToArray());
+                    context.Artists.AddOrUpdate(seeder.GetArtists(Genres).ToArray());
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     Debug.WriteLine($"{seeder.GetType().Name} : {ex.Message}");
                 }

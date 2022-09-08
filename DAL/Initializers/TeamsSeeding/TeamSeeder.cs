@@ -10,15 +10,15 @@ namespace DAL.Initializers.TeamsSeeding
 {
     public class TeamSeeder
     {
-        public (List<ITeamSeeder> seeders, List<Genre> genres) GetSeed()
+        public (List<ITeamSeeder> seeders, List<Genre> genres) Initialize(TeamGenres genres)
         {
             List<ITeamSeeder> teamSeeders = new List<ITeamSeeder> { new Seed_Aggelos(), new Seed_Kiris(), new Seed_Orestis(), new Seed_Panos(), new Seed_Spyros() };
 
             var bindingFlags = BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public;
-            var fieldValues = teamSeeders[0].GetType()
+            var fieldValues = genres.GetType()
                                  .GetFields(bindingFlags)
                                  .Where(field => field.FieldType.Name == "Genre")
-                                 .Select(o => (Genre)o.GetValue(teamSeeders[0]))
+                                 .Select(o => (Genre)o.GetValue(genres))
                                  .ToList();
 
             return (teamSeeders, fieldValues);
