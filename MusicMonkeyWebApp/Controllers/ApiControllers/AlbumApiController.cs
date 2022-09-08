@@ -17,9 +17,11 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
     {
 
         // GET: api/AlbumApi
-        public IQueryable<Album> GetAlbums()
+        public IEnumerable<Object> GetAlbums()
         {
-            return db.Albums;
+            return unit.Albums
+                .GetAlbumsWithEverything()
+                .Select(x => AlbumDTOModel(x));
         }
 
         // GET: api/AlbumApi/5
@@ -109,6 +111,39 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
             }
             base.Dispose(disposing);
         }
+
+
+        //Custom Service Methods
+        private Object AlbumDTOModel(Album album)
+        {
+            return new
+            {
+                Id = album.Id,
+                Title = album.Title,
+                ReleaseDate = album.ReleaseDate,
+                CoverPhotoUrl = album.CoverPhotoUrl,
+                Artist = new  //Artists
+                {
+                    Id = album.Artist.Id,
+                    Name = album.Artist.Name,
+                    Country = album.Artist.Country,
+                    PhotoUrl = album.Artist.PhotoUrl,
+                    CareerStartDate = album.Artist.CareerStartDate,
+                    ArtistGenres = album.Artist.ArtistGenres.SelectMany(p => new string[] { p.Type})  //Artist Genres
+                },
+                Tracks = album.Tracks.Select(x => new  //Tracks
+                {
+                    Id = x.Title,
+                    Title = x.Title,
+                    DurationSecs = x.DurationSecs,
+                    AudioUrl = x.AudioUrl,
+                    Popularity = x.Popularity,
+                    TrackGenres = x.TrackGenres.SelectMany(p => new string[] { p.Type })  //Track Genres
+                }),
+                AlbumGenres = album.AlbumGenres.SelectMany(p => new string[] { p.Type})  //Album Genres
+            };
+        }
+
 
         private bool AlbumExists(int id)
         {

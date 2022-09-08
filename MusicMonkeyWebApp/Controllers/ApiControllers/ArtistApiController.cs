@@ -67,7 +67,7 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
             }
 
             unit.Artists.Update(mapedArtist);
-            unit.Artists.Save();
+            unit.Complete();
 
             return Ok();
         }
@@ -84,7 +84,7 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
             }
 
             unit.Artists.Create(artist);
-            unit.Artists.Save();
+            unit.Complete();
 
             return Ok();
         }
@@ -107,7 +107,7 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
             DeleteAllAlbumsAndTracksOfArtist(artist);
 
             unit.Artists.DeleteById(id);
-            unit.Artists.Save();
+            unit.Complete();
 
             return Ok();
         }
@@ -125,11 +125,13 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
                 CareerStartDate = artist.CareerStartDate,
                 Albums = artist.Albums.Select(x => new  //Albums
                 {
+                    Id = x.Id,
                     Title = x.Title,
                     ReleaseDate = x.ReleaseDate,
                     CoverPhotoUrl = x.CoverPhotoUrl,
                     Tracks = x.Tracks.Select(y => new //Tracks
                     {
+                        Id = x.Title,
                         Title = y.Title,
                         DurationSecs = y.DurationSecs,
                         AudioUrl = y.AudioUrl,
