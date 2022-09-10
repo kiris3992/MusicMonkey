@@ -56,25 +56,17 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
                 return BadRequest();
             }
 
-            db.Entry(album).State = EntityState.Modified;
+            Album mapedAlbum = unit.Albums.GetAlbumByIdWithEverything(id);
 
-            try
+            if (!(mapedAlbum is null))
             {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!AlbumExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                MapAlbum(mapedAlbum, album);
             }
 
-            return StatusCode(HttpStatusCode.NoContent);
+            unit.Albums.Update(mapedAlbum);
+            unit.Complete();
+
+            return Ok();
         }
 
         // POST: api/AlbumApi
@@ -86,10 +78,10 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
                 return BadRequest(ModelState);
             }
 
-            db.Albums.Add(album);
-            db.SaveChanges();
+            unit.Albums.Create(album);
+            unit.Complete();
 
-            return CreatedAtRoute("DefaultApi", new { id = album.Id }, album);
+            return Ok();
         }
 
         // DELETE: api/AlbumApi/5
@@ -151,6 +143,15 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
             {
                 unit.Tracks.DeleteRange(tracks);
             }
+        }
+        private void MapAlbum(Album mapedAlbum, Album incomingAlbum)
+        {
+            mapedAlbum.Title = incomingAlbum.Title;
+            mapedAlbum.ReleaseDate = incomingAlbum.ReleaseDate;
+            mapedAlbum.CoverPhotoUrl = incomingAlbum.CoverPhotoUrl;
+            mapedAlbum.Artist = incomingAlbum.Artist;
+            mapedAlbum.Tracks = incomingAlbum.Tracks;
+            mapedAlbum.AlbumGenres = incomingAlbum.AlbumGenres;
         }
 
         private bool AlbumExists(int id)
