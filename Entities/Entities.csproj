@@ -71,6 +71,15 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Validators\AlbumValidator.cs" />
     <Compile Include="Validators\ArtistValidator.cs" />
+    <Compile Include="Validators\Facade\FacadeAlbumChecks\AlbumChecks.cs" />
+    <Compile Include="Validators\Facade\FacadeAlbumChecks\MinMaxNumberOfTracks.cs" />
+    <Compile Include="Validators\Facade\FacadeAlbumChecks\MinMaxReleaseYear.cs" />
+    <Compile Include="Validators\Facade\FacadeAlbumChecks\MinMaxTitleCharacters.cs" />
+    <Compile Include="Validators\Facade\FacadeArtistChecks\ArtistChecks.cs" />
+    <Compile Include="Validators\Facade\FacadeArtistChecks\MinMaxArtistCarrerStart.cs" />
+    <Compile Include="Validators\Facade\FacadeArtistChecks\MinMaxNumberOfNameChars.cs" />
+    <Compile Include="Validators\Facade\FacadeMusicValidators.cs" />
+    <Compile Include="Validators\Facade\FacadeTrackChecks\TrackChecks.cs" />
     <Compile Include="Validators\TrackValidator.cs" />
   </ItemGroup>
   <ItemGroup>
