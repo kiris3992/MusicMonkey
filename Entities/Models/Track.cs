@@ -12,6 +12,7 @@ namespace Entities.Models
         public int Popularity { get; set; }
 
         // Navigation Properies
+        public int? AlbumId { get; set; }
         public Album Album { get; set; }
         public ICollection<Genre> TrackGenres { get; set; }
 

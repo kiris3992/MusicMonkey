@@ -21,7 +21,7 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
         {
             return unit.Albums
                 .GetAlbumsWithEverything()
-                .Select(x => AlbumDTOModel(x));
+                .Select(x => PartialAlbumDTOModel(x));
         }
 
         // GET: api/AlbumApi/5
@@ -39,7 +39,7 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
                 return NotFound();
             }
 
-            return AlbumDTOModel(album);
+            return PartialAlbumDTOModel(album);
         }
 
         // PUT: api/AlbumApi/5
@@ -103,7 +103,7 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
 
 
         //Custom Service Methods
-        private Object AlbumDTOModel(Album album)
+        private Object FullAlbumDTOModel(Album album)
         {
             return new
             {
@@ -130,6 +130,19 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
                     TrackGenres = x.TrackGenres.SelectMany(p => new string[] { p.Type })  //Track Genres
                 }),
                 AlbumGenres = album.AlbumGenres.SelectMany(p => new string[] { p.Type})  //Album Genres
+            };
+        }
+        private Object PartialAlbumDTOModel(Album album)
+        {
+            return new
+            {
+                Id = album.Id,
+                Title = album.Title,
+                ReleaseDate = album.ReleaseDate,
+                CoverPhotoUrl = album.CoverPhotoUrl,
+                ArtistName = album.Artist != null ? album.Artist.Name : null,
+                TrackTitles = album.Tracks.Select(p => new string[] { p.Title}),
+                AlbumGenres = album.AlbumGenres.Select(p => new string[] { p.Type})
             };
         }
         private void DeleteAllTracksOfAlbum(Album album)

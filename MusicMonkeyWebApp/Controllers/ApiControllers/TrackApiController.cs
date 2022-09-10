@@ -20,7 +20,7 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
         {
              return unit.Tracks
                 .GetTracksWithEverything()
-                .Select(x => CustomTrackDTOModel(x));
+                .Select(x => PartialTrackDTOModel(x));
         }
 
         // GET: api/TrackApi/5
@@ -39,7 +39,7 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
                 return NotFound();
             }
 
-            return CustomTrackDTOModel(track);
+            return PartialTrackDTOModel(track);
         }
 
         // PUT: api/TrackApi/5
@@ -135,7 +135,7 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
                 TrackGenres = track.TrackGenres.Select(p => new string[] { p.Type })  //track Genres
             };
         }
-        private Object CustomTrackDTOModel(Track track)
+        private Object PartialTrackDTOModel(Track track)
         {
             return new
             {
@@ -145,7 +145,8 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
                 AudioUrl = track.AudioUrl,
                 Popularity = track.Popularity,
                 AlbumTitle = track.Album != null ? track.Album.Title : null,
-                ArtistName = track.Album != null ? track.Album.Artist.Name : null
+                ArtistName = track.Album != null ? track.Album.Artist.Name : null,
+                TrackGenres = track.TrackGenres.Select(p => new string[] { p.Type})
             };
         }
         private void MapTrack(Track mapedTrack, Track incomingTrack)
