@@ -33,13 +33,13 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
                 return BadRequest();
             }
 
-            Track track = db.Tracks.Find(id);
+            Track track = unit.Tracks.GetTrackByIdWithEverything(id);
             if (track == null)
             {
                 return NotFound();
             }
 
-            return Ok(track);
+            return CustomTrackDTOModel(track);
         }
 
         // PUT: api/TrackApi/5
@@ -56,25 +56,17 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
                 return BadRequest();
             }
 
-            db.Entry(track).State = EntityState.Modified;
-            
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!TrackExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            Track mapedTrack = unit.Tracks.GetTrackByIdWithEverything(id);
 
-            return StatusCode(HttpStatusCode.NoContent);
+            mapedTrack.Title = track.Title;
+            mapedTrack.DurationSecs = track.DurationSecs;
+            mapedTrack.AudioUrl = track.AudioUrl;
+            mapedTrack.Popularity = track.Popularity;
+
+            unit.Tracks.Update(mapedTrack);
+            unit.Complete();
+
+            return Ok();
         }
 
         // POST: api/TrackApi
@@ -86,26 +78,31 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
                 return BadRequest(ModelState);
             }
 
-            db.Tracks.Add(track);
-            db.SaveChanges();
+            unit.Tracks.Create(track);
+            unit.Complete();
 
-            return CreatedAtRoute("DefaultApi", new { id = track.Id }, track);
+            return Ok();
         }
 
         // DELETE: api/TrackApi/5
         [ResponseType(typeof(Track))]
-        public IHttpActionResult DeleteTrack(int id)
+        public IHttpActionResult DeleteTrack(int? id)
         {
-            Track track = db.Tracks.Find(id);
+            if (id is null)
+            {
+                return BadRequest();
+            }
+
+            Track track = unit.Tracks.GetTrackByIdWithEverything(id);
             if (track == null)
             {
                 return NotFound();
             }
 
-            db.Tracks.Remove(track);
-            db.SaveChanges();
+            unit.Tracks.DeleteById(id);
+            unit.Complete();
 
-            return Ok(track);
+            return Ok();
         }
 
         protected override void Dispose(bool disposing)
@@ -161,8 +158,8 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
                 DurationSecs = track.DurationSecs,
                 AudioUrl = track.AudioUrl,
                 Popularity = track.Popularity,
-                AlbumTitle = track.Album.Title,
-                ArtistName = track.Album.Artist.Name
+                AlbumTitle = track.Album != null ? track.Album.Title : null,
+                ArtistName = track.Album != null ? track.Album.Artist.Name : null
             };
         }
 
