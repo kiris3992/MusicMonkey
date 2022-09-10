@@ -16,15 +16,23 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
     public class TrackApiController : BaseApiController
     {
         // GET: api/TrackApi
-        public IQueryable<Track> GetTracks()
+        public IEnumerable<Object> GetTracks()
         {
-            return db.Tracks;
+             return unit.Tracks
+                .GetTracksWithEverything()
+                .Select(x => CustomTrackDTOModel(x));
         }
 
         // GET: api/TrackApi/5
         [ResponseType(typeof(Track))]
-        public IHttpActionResult GetTrack(int id)
+        public Object GetTrack(int? id)
         {
+
+            if (id is null)
+            {
+                return BadRequest();
+            }
+
             Track track = db.Tracks.Find(id);
             if (track == null)
             {
@@ -107,6 +115,55 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        //Custom Service Methods
+        private Object FullTrackDTOModel(Track track)
+        {
+            return new  //Tracks
+            {
+                Id = track.Id,
+                Title = track.Title,
+                DurationSecs = track.DurationSecs,
+                AudioUrl = track.AudioUrl,
+                Popularity = track.Popularity,
+                Album = new  //Album
+                {
+                    Id = track.Album.Id,
+                    Title = track.Album.Title,
+                    ReleaseDate = track.Album.ReleaseDate,
+                    CoverPhotoUrl = track.Album.CoverPhotoUrl,
+                    Artist = new  //Artist
+                    {
+                        Name = track.Album.Artist.Name,
+                        Country = track.Album.Artist.Country,
+                        PhotoUrl = track.Album.Artist.PhotoUrl,
+                        CareerStartDate = track.Album.Artist.CareerStartDate,
+                        ArtistGenres = track.Album
+                                .Artist
+                                .ArtistGenres
+                                .Select(p => new string[] { p.Type })  //Artist Genres
+                    },
+                    AlbumGenres = track
+                            .Album
+                            .AlbumGenres
+                            .Select(p => new string[] { p.Type })  //Album Genres
+                },
+                TrackGenres = track.TrackGenres.Select(p => new string[] { p.Type })  //track Genres
+            };
+        }
+        private Object CustomTrackDTOModel(Track track)
+        {
+            return new
+            {
+                Id = track.Id,
+                Title = track.Title,
+                DurationSecs = track.DurationSecs,
+                AudioUrl = track.AudioUrl,
+                Popularity = track.Popularity,
+                AlbumTitle = track.Album.Title,
+                ArtistName = track.Album.Artist.Name
+            };
         }
 
         private bool TrackExists(int id)

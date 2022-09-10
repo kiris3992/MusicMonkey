@@ -17,11 +17,21 @@ namespace RepositoryService.Persistance.Repositories
 
         }
 
+        public Track GetTrackByIdWithEverything(int? id)
+        {
+            return db.Tracks
+                .Include("TrackGenres")
+                .Include("Album.AlbumGenres")
+                .Include("Album.Artist.ArtistGenres")
+                .FirstOrDefault(x => x.Id == id);
+        }
+
         public IEnumerable<Track> GetTracksWithEverything()
         {
             return db.Tracks
-                .Include(x => x.TrackGenres)
-                .Include(x => x.Album)
+                .Include("TrackGenres")
+                .Include("Album.AlbumGenres")
+                .Include("Album.Artist.ArtistGenres")
                 .ToList();
         }
     }
