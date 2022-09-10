@@ -57,12 +57,7 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
             }
 
             Track mapedTrack = unit.Tracks.GetTrackByIdWithEverything(id);
-
-            mapedTrack.Title = track.Title;
-            mapedTrack.DurationSecs = track.DurationSecs;
-            mapedTrack.AudioUrl = track.AudioUrl;
-            mapedTrack.Popularity = track.Popularity;
-
+            MapTrack(mapedTrack, track);
             unit.Tracks.Update(mapedTrack);
             unit.Complete();
 
@@ -103,15 +98,6 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
             unit.Complete();
 
             return Ok();
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
         }
 
         //Custom Service Methods
@@ -161,6 +147,13 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
                 AlbumTitle = track.Album != null ? track.Album.Title : null,
                 ArtistName = track.Album != null ? track.Album.Artist.Name : null
             };
+        }
+        private void MapTrack(Track mapedTrack, Track incomingTrack)
+        {
+            mapedTrack.Title = incomingTrack.Title;
+            mapedTrack.DurationSecs = incomingTrack.DurationSecs;
+            mapedTrack.AudioUrl = incomingTrack.AudioUrl;
+            mapedTrack.Popularity = incomingTrack.Popularity;
         }
 
         private bool TrackExists(int id)
