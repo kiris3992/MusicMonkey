@@ -6,59 +6,25 @@
 
 <script>
     $(document).ready(function () {
-        let builder = {
-            build: function (albums) {
-                setTimeout(() => {
-                    $('#albums-container').html(albums.map((a, i) =>
-                        `<div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="discography__item">
-                                <div class="discography__item__pic">
-                                    <object data="${a.CoverPhotoUrl == '' ? '_' : a.CoverPhotoUrl}" type="image/png">
-                                        <img src="/Content/Assets/img/discography/no-photo.png" alt="${a.Title}">
-                                    </object>
+        SiteHelper.AjaxHelper.contentLoader(
+            'albums-container',
+            (album, i) => `<div class="col-lg-4 col-md-6 col-sm-6">
+                                <div class="discography__item">
+                                    <div class="discography__item__pic">
+                                        <object data="${album.CoverPhotoUrl == '' ? '_' : album.CoverPhotoUrl}" type="image/png">
+                                            <img src="/Content/Assets/img/discography/no-photo.png" alt="${album.Title}">
+                                        </object>
+                                    </div>
+                                    <div class="discography__item__text">
+                                        <span>${album.Title}</span>
+                                        <h4>Relase date : ${album.ReleaseDate.split('T')[0]}</h4>
+                                        <h4>Tracks : ${album.Tracks.length}</h4>
+                                        <h6>Genres : ${album.AlbumGenres.join(', ')}</h6>
+                                    </div>
                                 </div>
-                                <div class="discography__item__text">
-                                    <span>${a.Title}</span>
-                                    <h4>Relase date : ${a.ReleaseDate.split('T')[0]}</h4>
-                                    <h4>Tracks : ${a.Tracks.length}</h4>
-                                    <h6>Genres : ${a.AlbumGenres.join(', ')}</h6>
-                                </div>
-                            </div>
-                        </div>`
-                    ));
-                }, 1400);
-            },
-            load: function () {
-                $('#albums-container').html(
-                    `<div class='spinnerContainer'>
-                        <div class="spinner-grow" style="width: 5rem; height: 5rem;" role="status">
-                            <span class="sr-only">Loading...</span>
-                        </div>
-                    <div>`
-                );
-            },
-            error: function () {
-                $('#albums-container').html(
-                    `<div class="errorContainer">
-                        <div class="single_player_container">
-                            <h4>No data found</h4>
-                            <h6>Please refresh the page</h6>
-                        </div>
-                    </div>`
-                );
-            }
-        };
-
-        builder.load();
-
-        $.ajax({
-            type: 'GET',
-            url: '/api/AlbumApi?type=full',
-            dataType: 'json',
-            contentType: 'application/json',
-            success: function (data) { builder.build(data); },
-            error: function () { builder.error(); }
-        });
+                            </div>`,
+            null,
+            new SiteHelper.AjaxHelper.ajaxObject('/api/AlbumApi?type=full')).start();
     });
 </script>
 
