@@ -673,6 +673,7 @@
     <Content Include="Content\Assets\Web.config" />
     <Content Include="Content\Assets\js\Web.config" />
     <Content Include="Views\Home\Album.cshtml" />
+    <Content Include="Views\Chart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
