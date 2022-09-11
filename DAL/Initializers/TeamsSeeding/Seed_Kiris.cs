@@ -12,13 +12,13 @@ namespace DAL.Initializers.TeamsSeeding
     {
         public List<Artist> GetArtists(TeamGenres g)
         {
-            var artists = new List<Artist>
+            return new List<Artist>
             {
                 new Artist { // Nirvana
                     Name = "Nirvana", Country = Country.USA, CareerStartDate = new DateTime(1987, 12, 1), PhotoUrl = "", ArtistGenres = { g.rock },
                     Albums = new List<Album> {
                         new Album {
-                            Title = "Nevermind", ReleaseDate = new DateTime(1991, 9, 4), CoverPhotoUrl = "https://lastfm.freetls.fastly.net/i/u/ar0/570021b68d3d9d2db08bc99a473303b0.jpg",
+                            Title = "Nevermind", ReleaseDate = new DateTime(1991, 9, 4), AlbumGenres = { g.grunge, g.rock }, CoverPhotoUrl = "https://lastfm.freetls.fastly.net/i/u/ar0/570021b68d3d9d2db08bc99a473303b0.jpg",
                             Tracks = new List<Track> {
                                 new Track { Title = "Smells Like Teen Spirit", DurationSecs = 301, TrackGenres = { g.grunge, g.rock }, Popularity = 5, AudioUrl = "Nirvana_-_Nevermind_-_1_-_Smells_Like_Teen_Spirit_(Official_Music_Video)_(320kbps).mp3" },
                                 new Track { Title = "In Bloom", DurationSecs = 255, TrackGenres = { g.grunge, g.rock }, Popularity = 4, AudioUrl = "Nirvana_-_Nevermind_-_2_-_In_Bloom_(Official_Music_Video)_(320kbps).mp3" },
@@ -40,7 +40,7 @@ namespace DAL.Initializers.TeamsSeeding
                     Name = "Prodigy", Country = Country.United_Kingdom, CareerStartDate = new DateTime(1990, 1, 1), PhotoUrl = "", ArtistGenres = { g.electronic, g.rock },
                     Albums = new List<Album> {
                         new Album {
-                            Title = "The Fat of the Land", ReleaseDate = new DateTime(1997, 1, 1), CoverPhotoUrl = "https://upload.wikimedia.org/wikipedia/en/3/3b/TheProdigy-TheFatOfTheLand.jpg?20171231004557",
+                            Title = "The Fat of the Land", ReleaseDate = new DateTime(1997, 1, 1), AlbumGenres = { g.electronic, g.rock }, CoverPhotoUrl = "https://upload.wikimedia.org/wikipedia/en/3/3b/TheProdigy-TheFatOfTheLand.jpg?20171231004557",
                             Tracks = new List<Track> {
                                 new Track { Title = "Smack My Bitch Up", DurationSecs = 342, TrackGenres = { g.electronic, g.rock }, Popularity = 5, AudioUrl = "Prodigy_-_The_Fat_of_the_Land_-_1_-_Smack_My_Bitch_Up_(320kbps).mp3" },
                                 new Track { Title = "Breathe", DurationSecs = 239, TrackGenres = { g.electronic, g.rock }, Popularity = 5, AudioUrl = "Prodigy_-_The_Fat_of_the_Land_-_2_-_Breathe_(Official_Video)_(320kbps).mp3" },
@@ -55,7 +55,7 @@ namespace DAL.Initializers.TeamsSeeding
                             }
                         },
                         new Album {
-                            Title = "The Added Fat EP", ReleaseDate = new DateTime (2012, 12, 3), CoverPhotoUrl = "https://is3-ssl.mzstatic.com/image/thumb/Music112/v4/06/a9/00/06a900da-0006-a3d3-8616-ceba0dd08b60/634904059064.png/1200x1200bf-60.jpg",
+                            Title = "The Added Fat EP", ReleaseDate = new DateTime (2012, 12, 3), AlbumGenres = { g.electronic, g.rock }, CoverPhotoUrl = "https://is3-ssl.mzstatic.com/image/thumb/Music112/v4/06/a9/00/06a900da-0006-a3d3-8616-ceba0dd08b60/634904059064.png/1200x1200bf-60.jpg",
                             Tracks = new List<Track> {
                                 new Track { Title = "Smack My Bitch Up (Noisia Remix)", DurationSecs = 354, TrackGenres = { g.electronic, g.rock }, Popularity = 5, AudioUrl = "Audio_Url" },
                                 new Track { Title = "Firestarter (Alvin Risk Remix)", DurationSecs = 199, TrackGenres = { g.electronic, g.rock }, Popularity = 5, AudioUrl = "Audio_Url" },
@@ -66,7 +66,7 @@ namespace DAL.Initializers.TeamsSeeding
                             }
                         },
                         new Album {
-                            Title = "Music for the Jilted Generation", ReleaseDate = new DateTime(1994, 7, 1), CoverPhotoUrl = "https://upload.wikimedia.org/wikipedia/en/8/86/TheProdigy-MusicForTheJiltedGeneration.jpg",
+                            Title = "Music for the Jilted Generation", ReleaseDate = new DateTime(1994, 7, 1), AlbumGenres = { g.electronic, g.rock }, CoverPhotoUrl = "https://upload.wikimedia.org/wikipedia/en/8/86/TheProdigy-MusicForTheJiltedGeneration.jpg",
                             Tracks = new List<Track> {
                                 new Track { Title = "Intro", DurationSecs = 46, TrackGenres = { g.electronic, g.rock }, Popularity = 3, AudioUrl = "Audio_Url" },
                                 new Track { Title = "Break & Enter", DurationSecs = 504, TrackGenres = { g.electronic, g.rock }, Popularity = 4, AudioUrl = "Audio_Url" },
@@ -89,7 +89,7 @@ namespace DAL.Initializers.TeamsSeeding
                     Name = "Τρύπες", Country = Country.Greece, CareerStartDate = new DateTime (1983, 1, 1), PhotoUrl = "https://upload.wikimedia.org/wikipedia/el/thumb/a/aa/Tripes1.jpg/230px-Tripes1.jpg", ArtistGenres = { g.rock },
                     Albums = new List<Album> {
                         new Album {
-                            Title = "Εννιά πληρωμένα τραγούδια", ReleaseDate = new DateTime (1993, 3, 1), CoverPhotoUrl = "https://upload.wikimedia.org/wikipedia/el/thumb/1/1f/Trypes_ennia_plhrwmena_tragoudia.jpg/1200px-Trypes_ennia_plhrwmena_tragoudia.jpg",
+                            Title = "Εννιά πληρωμένα τραγούδια", ReleaseDate = new DateTime (1993, 3, 1), AlbumGenres = { g.rock }, CoverPhotoUrl = "https://upload.wikimedia.org/wikipedia/el/thumb/1/1f/Trypes_ennia_plhrwmena_tragoudia.jpg/1200px-Trypes_ennia_plhrwmena_tragoudia.jpg",
                             Tracks = new List<Track> {
                                 new Track { Title = "Δε χωράς πουθενά", DurationSecs = 266, TrackGenres = { g.rock }, Popularity = 5, AudioUrl = "Audio_Url" },
                                 new Track { Title = "Η μάσκα που κρύβεις", DurationSecs = 213, TrackGenres = { g.rock }, Popularity = 5, AudioUrl = "Audio_Url" },
@@ -106,8 +106,6 @@ namespace DAL.Initializers.TeamsSeeding
                     }
                 },
             };
-
-            return artists;
         }
     }
 }

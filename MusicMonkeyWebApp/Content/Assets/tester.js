@@ -1,0 +1,1 @@
+﻿var Tester2 = new {};
