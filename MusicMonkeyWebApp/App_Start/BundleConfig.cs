@@ -22,9 +22,35 @@ namespace MusicMonkeyWebApp
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/homeJs_Header").Include(
+                      "~/Content/Assets/js/jquery-3.3.1.min.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/homeJs_BodyEnd").Include(
+                      "~/Content/Assets/js/bootstrap.min.js",
+                      "~/Content/Assets/js/jquery.magnific-popup.min.js",
+                      "~/Content/Assets/js/jquery.nicescroll.min.js",
+                      "~/Content/Assets/js/jquery.barfiller.js",
+                      "~/Content/Assets/js/jquery.countdown.min.js",
+                      "~/Content/Assets/js/jquery.slicknav.js",
+                      "~/Content/Assets/js/owl.carousel.min.js",
+                      "~/Content/Assets/js/main.js",
+                      "~/Content/Assets/js/jquery.jplayer.min.js",
+                      "~/Content/Assets/js/jplayerInit.js"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new StyleBundle("~/bundles/homeCss").Include(
+                      "~/Content/Assets/css/bootstrap.min.css",
+                      "~/Content/Assets/css/font-awesome.min.css",
+                      "~/Content/Assets/css/barfiller.css",
+                      "~/Content/Assets/css/nowfont.css",
+                      "~/Content/Assets/css/rockville.css",
+                      "~/Content/Assets/css/magnific-popup.css",
+                      "~/Content/Assets/css/owl.carousel.min.css",
+                      "~/Content/Assets/css/slicknav.min.css",
+                      "~/Content/Assets/css/style.css"));
         }
     }
 }

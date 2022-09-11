@@ -8,40 +8,40 @@ using System.Threading.Tasks;
 
 namespace DAL.Initializers.TeamsSeeding
 {
-    public class Seed_Aggelos : AbsTeamSeeder, ITeamSeeder
+    public class Seed_Aggelos : ITeamSeeder
     {
-        public List<Artist> GetArtists()
+        public List<Artist> GetArtists(TeamGenres g)
         {
             #region Aggelos Seeding
             #region Seeding Artists
-            Artist aa1 = new Artist { Name = "D'Angelo", Country = Country.USA, CareerStartDate = new DateTime(1991, 1, 1), PhotoUrl = "DANGELOPhotoUrl.jpg", ArtistGenres = new List<Genre> { rnb, pop } };
-            Artist aa2 = new Artist { Name = "Above & Beyond", Country = Country.United_Kingdom, CareerStartDate = new DateTime(2000, 1, 1), PhotoUrl = "Above&BeyondPhotoUrl.jpg", ArtistGenres = new List<Genre> { trance, house } };
-            Artist aa3 = new Artist { Name = "Migos", Country = Country.USA, CareerStartDate = new DateTime(2008, 1, 1), PhotoUrl = "MigosPhotoUrl.jpg", ArtistGenres = new List<Genre> { hipHop, trap } };
+            Artist aa1 = new Artist { Name = "D'Angelo", Country = Country.USA, CareerStartDate = new DateTime(1991, 1, 1), PhotoUrl = "DANGELOPhotoUrl.jpg", ArtistGenres = new List<Genre> { g.rnb, g.pop } };
+            Artist aa2 = new Artist { Name = "Above & Beyond", Country = Country.United_Kingdom, CareerStartDate = new DateTime(2000, 1, 1), PhotoUrl = "Above&BeyondPhotoUrl.jpg", ArtistGenres = new List<Genre> { g.trance, g.house } };
+            Artist aa3 = new Artist { Name = "Migos", Country = Country.USA, CareerStartDate = new DateTime(2008, 1, 1), PhotoUrl = "MigosPhotoUrl.jpg", ArtistGenres = new List<Genre> { g.hipHop, g.trap } };
             Artist aa4 = new Artist { Name = "Unknown Artist", CareerStartDate = new DateTime(1901, 1, 1), PhotoUrl = "UnknownPhotoUrl.jpg" };
-            Artist aa5 = new Artist { Name = "Axel Willner", Country = Country.Sweden, CareerStartDate = new DateTime(1996, 1, 1), PhotoUrl = "AxelWillnerPhotoUrl.jpg", ArtistGenres = new List<Genre> { techno, electronic } };
-            Artist aa6 = new Artist { Name = "Marvin Gaye", Country = Country.USA, CareerStartDate = new DateTime(1957, 1, 1), PhotoUrl = "Marvin_GayePhotoUrl.jpg", ArtistGenres = new List<Genre> { soul } };
-            Artist aa7 = new Artist { Name = "Michael Jackson", Country = Country.USA, CareerStartDate = new DateTime(1964, 1, 1), PhotoUrl = "Michael_JacksonPhotoUrl.jpg", ArtistGenres = new List<Genre> { pop, rnb, soul, disco } };
-            Artist aa8 = new Artist { Name = "Future", Country = Country.USA, CareerStartDate = new DateTime(2005, 1, 1), PhotoUrl = "FuturePhotoUrl.jpg", ArtistGenres = new List<Genre> { hipHop, trap } };
-            Artist aa9 = new Artist { Name = "Eminem", Country = Country.USA, CareerStartDate = new DateTime(1988, 1, 1), PhotoUrl = "EminemPhotoUrl.jpg", ArtistGenres = new List<Genre> { hipHop } };
-            Artist aa10 = new Artist { Name = "Ice Cube", Country = Country.USA, CareerStartDate = new DateTime(1986, 1, 1), PhotoUrl = "Ice-CubePhotoUrl.jpg", ArtistGenres = new List<Genre> { hipHop } };
-            Artist aa11 = new Artist { Name = "The Notorious B.I.G.", Country = Country.USA, CareerStartDate = new DateTime(1992, 1, 1), PhotoUrl = "The_Notorious_B.I.GPhotoUrl.jpg", ArtistGenres = new List<Genre> { hipHop } };
+            Artist aa5 = new Artist { Name = "Axel Willner", Country = Country.Sweden, CareerStartDate = new DateTime(1996, 1, 1), PhotoUrl = "AxelWillnerPhotoUrl.jpg", ArtistGenres = new List<Genre> { g.techno, g.electronic } };
+            Artist aa6 = new Artist { Name = "Marvin Gaye", Country = Country.USA, CareerStartDate = new DateTime(1957, 1, 1), PhotoUrl = "Marvin_GayePhotoUrl.jpg", ArtistGenres = new List<Genre> { g.soul } };
+            Artist aa7 = new Artist { Name = "Michael Jackson", Country = Country.USA, CareerStartDate = new DateTime(1964, 1, 1), PhotoUrl = "Michael_JacksonPhotoUrl.jpg", ArtistGenres = new List<Genre> { g.pop, g.rnb, g.soul, g.disco } };
+            Artist aa8 = new Artist { Name = "Future", Country = Country.USA, CareerStartDate = new DateTime(2005, 1, 1), PhotoUrl = "FuturePhotoUrl.jpg", ArtistGenres = new List<Genre> { g.hipHop, g.trap } };
+            Artist aa9 = new Artist { Name = "Eminem", Country = Country.USA, CareerStartDate = new DateTime(1988, 1, 1), PhotoUrl = "EminemPhotoUrl.jpg", ArtistGenres = new List<Genre> { g.hipHop } };
+            Artist aa10 = new Artist { Name = "Ice Cube", Country = Country.USA, CareerStartDate = new DateTime(1986, 1, 1), PhotoUrl = "Ice-CubePhotoUrl.jpg", ArtistGenres = new List<Genre> { g.hipHop } };
+            Artist aa11 = new Artist { Name = "The Notorious B.I.G.", Country = Country.USA, CareerStartDate = new DateTime(1992, 1, 1), PhotoUrl = "The_Notorious_B.I.GPhotoUrl.jpg", ArtistGenres = new List<Genre> { g.hipHop } };
 
 
             #endregion
 
             #region Seeding Albums
-            Album aam1 = new Album { Title = "Brown Sugar", ReleaseDate = new DateTime(1995, 6, 13), CoverPhotoUrl = "BrownSugarCoverPhotoUrl.jpg", AlbumGenres = new List<Genre> { rnb }, Artist = aa1 };
-            Album aam2 = new Album { Title = "Sirens of the Sea", ReleaseDate = new DateTime(2008, 4, 21), CoverPhotoUrl = "DANGELOCoverPhotoUrl.jpg", AlbumGenres = new List<Genre> { trance, house }, Artist = aa2 };
-            Album aam3 = new Album { Title = "Culture II", ReleaseDate = new DateTime(2018, 1, 26), CoverPhotoUrl = "Culture_IICoverPhotoUrl.jpg", AlbumGenres = new List<Genre> { hipHop, trap }, Artist = aa3 };
-            Album aam4 = new Album { Title = "No Label II", ReleaseDate = new DateTime(2014, 2, 25), CoverPhotoUrl = "Migos_No_Label_2CoverPhotoUrl.jpg", AlbumGenres = new List<Genre> { hipHop, trap }, Artist = aa3 };
-            Album aam5 = new Album { Title = "Unknown Album", ReleaseDate = new DateTime(1901, 1, 1), CoverPhotoUrl = "UnknownCoverPhotoUrl.jpg", AlbumGenres = new List<Genre> { traditional }, Artist = aa4 };
-            Album aam6 = new Album { Title = "Cupid's Head", ReleaseDate = new DateTime(2013, 9, 30), CoverPhotoUrl = "Cupids_HeadCoverPhotoUrl.jpg", AlbumGenres = new List<Genre> { techno, electronic }, Artist = aa5 };
-            Album aam7 = new Album { Title = "What's Going On", ReleaseDate = new DateTime(1971, 5, 21), CoverPhotoUrl = "WhatsGoingOnCoverPhotoUrl.jpg", AlbumGenres = new List<Genre> { soul }, Artist = aa6 };
-            Album aam8 = new Album { Title = "Thriller ", ReleaseDate = new DateTime(1982, 11, 30), CoverPhotoUrl = "Michael_Jackson_-_ThrillerCoverPhotoUrl.jpg", AlbumGenres = new List<Genre> { rnb, pop, disco }, Artist = aa7 };
-            Album aam9 = new Album { Title = "High Off Life ", ReleaseDate = new DateTime(2020, 5, 15), CoverPhotoUrl = "High_Off_LifeCoverPhotoUrl.jpg", AlbumGenres = new List<Genre> { hipHop }, Artist = aa8 };
-            Album aam10 = new Album { Title = "The Eminem Show", ReleaseDate = new DateTime(2002, 5, 26), CoverPhotoUrl = "The_Eminem_ShowCoverPhotoUrl.jpg", AlbumGenres = new List<Genre> { hipHop }, Artist = aa9 };
-            Album aam11 = new Album { Title = "The Predator", ReleaseDate = new DateTime(1992, 11, 17), CoverPhotoUrl = "The_Predator_CoverPhotoUrl.jpg", AlbumGenres = new List<Genre> { hipHop }, Artist = aa10 };
-            Album aam12 = new Album { Title = "Ready to Die", ReleaseDate = new DateTime(1994, 9, 13), CoverPhotoUrl = "Ready_To_DieCoverPhotoUrl.jpg", AlbumGenres = new List<Genre> { hipHop }, Artist = aa11 };
+            Album aam1 = new Album { Title = "Brown Sugar", ReleaseDate = new DateTime(1995, 6, 13), CoverPhotoUrl = "BrownSugarCoverPhotoUrl.jpg", AlbumGenres = new List<Genre> { g.rnb }, Artist = aa1 };
+            Album aam2 = new Album { Title = "Sirens of the Sea", ReleaseDate = new DateTime(2008, 4, 21), CoverPhotoUrl = "DANGELOCoverPhotoUrl.jpg", AlbumGenres = new List<Genre> { g.trance, g.house }, Artist = aa2 };
+            Album aam3 = new Album { Title = "Culture II", ReleaseDate = new DateTime(2018, 1, 26), CoverPhotoUrl = "Culture_IICoverPhotoUrl.jpg", AlbumGenres = new List<Genre> { g.hipHop, g.trap }, Artist = aa3 };
+            Album aam4 = new Album { Title = "No Label II", ReleaseDate = new DateTime(2014, 2, 25), CoverPhotoUrl = "Migos_No_Label_2CoverPhotoUrl.jpg", AlbumGenres = new List<Genre> { g.hipHop, g.trap }, Artist = aa3 };
+            Album aam5 = new Album { Title = "Unknown Album", ReleaseDate = new DateTime(1901, 1, 1), CoverPhotoUrl = "UnknownCoverPhotoUrl.jpg", AlbumGenres = new List<Genre> { g.traditional }, Artist = aa4 };
+            Album aam6 = new Album { Title = "Cupid's Head", ReleaseDate = new DateTime(2013, 9, 30), CoverPhotoUrl = "Cupids_HeadCoverPhotoUrl.jpg", AlbumGenres = new List<Genre> { g.techno, g.electronic }, Artist = aa5 };
+            Album aam7 = new Album { Title = "What's Going On", ReleaseDate = new DateTime(1971, 5, 21), CoverPhotoUrl = "WhatsGoingOnCoverPhotoUrl.jpg", AlbumGenres = new List<Genre> { g.soul }, Artist = aa6 };
+            Album aam8 = new Album { Title = "Thriller ", ReleaseDate = new DateTime(1982, 11, 30), CoverPhotoUrl = "Michael_Jackson_-_ThrillerCoverPhotoUrl.jpg", AlbumGenres = new List<Genre> { g.rnb, g.pop, g.disco }, Artist = aa7 };
+            Album aam9 = new Album { Title = "High Off Life ", ReleaseDate = new DateTime(2020, 5, 15), CoverPhotoUrl = "High_Off_LifeCoverPhotoUrl.jpg", AlbumGenres = new List<Genre> { g.hipHop }, Artist = aa8 };
+            Album aam10 = new Album { Title = "The Eminem Show", ReleaseDate = new DateTime(2002, 5, 26), CoverPhotoUrl = "The_Eminem_ShowCoverPhotoUrl.jpg", AlbumGenres = new List<Genre> { g.hipHop }, Artist = aa9 };
+            Album aam11 = new Album { Title = "The Predator", ReleaseDate = new DateTime(1992, 11, 17), CoverPhotoUrl = "The_Predator_CoverPhotoUrl.jpg", AlbumGenres = new List<Genre> { g.hipHop }, Artist = aa10 };
+            Album aam12 = new Album { Title = "Ready to Die", ReleaseDate = new DateTime(1994, 9, 13), CoverPhotoUrl = "Ready_To_DieCoverPhotoUrl.jpg", AlbumGenres = new List<Genre> { g.hipHop }, Artist = aa11 };
 
             aa1.Albums.Add(aam1);
             aa2.Albums.Add(aam2);
@@ -65,7 +65,7 @@ namespace DAL.Initializers.TeamsSeeding
             Track at5 = new Track { Title = "Shit, Damn, Motherfacker", DurationSecs = 308, AudioUrl = "D_'Angelo_-_Shit,_Damn,_Motherfucker_(128kbps).mp3", Album = aam1, Popularity = 5 };
             Track at6 = new Track { Title = "Smooth", DurationSecs = 251, AudioUrl = "D_'Angelo_-_Smooth_(128kbps).mp3", Album = aam1, Popularity = 2 };
             Track at7 = new Track { Title = "Cruisin", DurationSecs = 374, AudioUrl = "D_'Angelo_-_Cruisin_'_(128kbps).mp3", Album = aam1, Popularity = 1 };
-            Track at8 = new Track { Title = "When We Get By", DurationSecs = 326, AudioUrl = "D_'Angelo_-_When_We_Get_By_(128kbps).mp3", Album = aam1 , Popularity = 2 };
+            Track at8 = new Track { Title = "When We Get By", DurationSecs = 326, AudioUrl = "D_'Angelo_-_When_We_Get_By_(128kbps).mp3", Album = aam1, Popularity = 2 };
             Track at9 = new Track { Title = "Lady", DurationSecs = 328, AudioUrl = "D_'Angelo_-_Lady_(128kbps).mp3", Album = aam1, Popularity = 3 };
             Track at10 = new Track { Title = "Higher", DurationSecs = 319, AudioUrl = "D_'Angelo_-_HIGHER_(128kbps).mp3", Album = aam1, Popularity = 4 };
 
@@ -138,7 +138,7 @@ namespace DAL.Initializers.TeamsSeeding
             Track at69 = new Track { Title = "Say Goodbye Hollywood", DurationSecs = 259, AudioUrl = "Say_Goodbye_Hollywood_(128kbps).mp3", Album = aam10, Popularity = 3 };
             Track at70 = new Track { Title = "Drips", DurationSecs = 267, AudioUrl = "Drips_(128kbps).mp3", Album = aam10, Popularity = 3 };
             Track at71 = new Track { Title = "Without Me", DurationSecs = 270, AudioUrl = "Without_Me_(128kbps).mp3", Album = aam10, Popularity = 4 };
-            Track at72 = new Track { Title = "Sing for the Moment", DurationSecs = 323, AudioUrl = "Sing_For_The_Moment_(128kbps).mp3", Album = aam10, Popularity = 5};
+            Track at72 = new Track { Title = "Sing for the Moment", DurationSecs = 323, AudioUrl = "Sing_For_The_Moment_(128kbps).mp3", Album = aam10, Popularity = 5 };
             Track at73 = new Track { Title = "Superman", DurationSecs = 330, AudioUrl = "Superman_(128kbps).mp3", Album = aam10, Popularity = 2 };
             Track at74 = new Track { Title = "Hailie's Song", DurationSecs = 312, AudioUrl = "Hailie_'s_Song_(128kbps).mp3", Album = aam10, Popularity = 1 };
             Track at75 = new Track { Title = "When the Music Stops", DurationSecs = 257, AudioUrl = "When_The_Music_Stops_(128kbps).mp3", Album = aam10, Popularity = 2 };
@@ -154,7 +154,7 @@ namespace DAL.Initializers.TeamsSeeding
             Track at84 = new Track { Title = "We Had to Tear This Mothafucka Up", DurationSecs = 254, AudioUrl = "Ice_Cube__-_We_Had_to_Tear_This_Mothafucka_Up_(128kbps).mp3", Album = aam11, Popularity = 2 };
             Track at85 = new Track { Title = "Dirty Mack", DurationSecs = 260, AudioUrl = "Ice_Cube__-__Dirty_Mack_(128kbps).mp3", Album = aam11, Popularity = 3 };
             Track at86 = new Track { Title = "Don't Trust 'Em", DurationSecs = 244, AudioUrl = "Ice_Cube__-__Don_'t_Trust__'Em_(128kbps).mp3", Album = aam11, Popularity = 2 };
-            Track at87 = new Track { Title = "Gangsta's Fairytale 2", DurationSecs = 191, AudioUrl = "Ice_Cube__-__Gangsta_'s_Fairytale_2_(128kbps).mp3", Album = aam11, Popularity = 1};
+            Track at87 = new Track { Title = "Gangsta's Fairytale 2", DurationSecs = 191, AudioUrl = "Ice_Cube__-__Gangsta_'s_Fairytale_2_(128kbps).mp3", Album = aam11, Popularity = 1 };
 
             Track at88 = new Track { Title = "Things Done Changed", DurationSecs = 215, AudioUrl = "The_Notorious_B.I.G._-_Things_Done_Changed_(128kbps).mp3", Album = aam12, Popularity = 3 };
             Track at89 = new Track { Title = "Gimme the Loot", DurationSecs = 302, AudioUrl = "The_Notorious_B.I.G._-_Gimme_the_Loot_(Official_Audio)_(128kbps).mp3", Album = aam12, Popularity = 3 };
@@ -162,7 +162,7 @@ namespace DAL.Initializers.TeamsSeeding
             Track at91 = new Track { Title = "Ready to Die", DurationSecs = 254, AudioUrl = "The_Notorious_B.I.G._-_Ready_to_Die_(Official_Audio)_(128kbps).mp3", Album = aam12, Popularity = 4 };
             Track at92 = new Track { Title = "Juicy", DurationSecs = 301, AudioUrl = "The_Notorious_B.I.G.-Juicy_(128kbps).mp3", Album = aam12, Popularity = 4 };
             Track at93 = new Track { Title = "Everyday Struggle", DurationSecs = 311, AudioUrl = "The_Notorious_B.I.G._-_Everyday_Struggle_(Official_Audio)_(128kbps).mp3", Album = aam12, Popularity = 3 };
-            Track at94 = new Track { Title = "Me & My Bitch", DurationSecs = 240, AudioUrl = "The_Notorious_B.I.G._-_Me_&_My_Bitch_(Official_Audio)_(128kbps).mp3", Album = aam12, Popularity = 1};
+            Track at94 = new Track { Title = "Me & My Bitch", DurationSecs = 240, AudioUrl = "The_Notorious_B.I.G._-_Me_&_My_Bitch_(Official_Audio)_(128kbps).mp3", Album = aam12, Popularity = 1 };
             Track at95 = new Track { Title = "Big Poppa", DurationSecs = 248, AudioUrl = "The_Notorious_B.I.G._-_Big_Poppa_(128kbps).mp3", Album = aam12, Popularity = 5 };
             Track at96 = new Track { Title = "Respect", DurationSecs = 313, AudioUrl = "The_Notorious_B.I.G._-_Respect_(Official_Audio)_(128kbps).mp3", Album = aam12, Popularity = 2 };
             Track at97 = new Track { Title = "Friend of Mine", DurationSecs = 197, AudioUrl = "The_Notorious_B.I.G._-_Friend_of_Mine_(Official_Audio)_(128kbps).mp3", Album = aam12, Popularity = 3 };
@@ -180,7 +180,7 @@ namespace DAL.Initializers.TeamsSeeding
             aam8.Tracks = new HashSet<Track> { at50, at51, at52, at53 };
             aam9.Tracks = new HashSet<Track> { at54, at55, at56, at57, at58, at59, at60, at61, at62, at63 };
             aam10.Tracks = new HashSet<Track> { at64, at65, at66, at67, at68, at69, at70, at71, at72, at73, at74, at75, at76, at77, at78 };
-            aam11.Tracks = new HashSet<Track> { at79, at80, at81, at82, at83, at84, at85,at86,at87 };
+            aam11.Tracks = new HashSet<Track> { at79, at80, at81, at82, at83, at84, at85, at86, at87 };
             aam12.Tracks = new HashSet<Track> { at88, at89, at90, at91, at92, at93, at94, at95, at96, at97, at98, at99 };
 
 
@@ -189,9 +189,8 @@ namespace DAL.Initializers.TeamsSeeding
 
 
             #endregion
-
-
             return new List<Artist> { aa1, aa2, aa3, aa4, aa5, aa6, aa7, aa8, aa9, aa10, aa11 };
+
         }
     }
 }
