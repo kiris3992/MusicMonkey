@@ -9,6 +9,6 @@ namespace DAL.Initializers.TeamsSeeding
 {
     public interface ITeamSeeder
     {
-        List<Artist> GetArtists(); 
+        List<Artist> GetArtists(TeamGenres g); 
     }
 }

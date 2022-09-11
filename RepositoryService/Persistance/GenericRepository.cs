@@ -19,7 +19,6 @@ namespace RepositoryService.Persistance
         {
             db = context;
             table = db.Set<T>();
-
         }
         public void Create(T entity) => db.Entry(entity).State = EntityState.Added;
         
