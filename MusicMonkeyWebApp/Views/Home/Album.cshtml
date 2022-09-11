@@ -26,7 +26,7 @@
                             </div>
                         </div>`
                     ));
-                }, 1600);
+                }, 1400);
             },
             load: function () {
                 $('#albums-container').html(
@@ -53,7 +53,7 @@
 
         $.ajax({
             type: 'GET',
-            url: '/api/AlbumApi',
+            url: '/api/AlbumApi?type=full',
             dataType: 'json',
             contentType: 'application/json',
             success: function (data) { builder.build(data); },

@@ -16,11 +16,25 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
     public class TrackApiController : BaseApiController
     {
         // GET: api/TrackApi
-        public IEnumerable<Object> GetTracks()
+        public IEnumerable<Object> GetTracks(string type = "")
         {
-             return unit.Tracks
-                .GetTracksWithEverything()
-                .Select(x => PartialTrackDTOModel(x));
+            IEnumerable<object> tracks = new List<object>();
+
+            switch (type)
+            {
+                case "full":
+                    tracks = unit.Tracks
+                            .GetTracksWithEverything()
+                            .Select(x => FullTrackDTOModel(x));
+                    break;
+                default:
+                    tracks = unit.Tracks
+                            .GetTracksWithEverything()
+                            .Select(x => PartialTrackDTOModel(x));
+                    break;
+            }
+
+            return tracks;
         }
 
         // GET: api/TrackApi/5
@@ -125,14 +139,14 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
                         ArtistGenres = track.Album
                                 .Artist
                                 .ArtistGenres
-                                .Select(p => new string[] { p.Type })  //Artist Genres
+                                .SelectMany(p => new string[] { p.Type })  //Artist Genres
                     },
                     AlbumGenres = track
                             .Album
                             .AlbumGenres
-                            .Select(p => new string[] { p.Type })  //Album Genres
+                            .SelectMany(p => new string[] { p.Type })  //Album Genres
                 },
-                TrackGenres = track.TrackGenres.Select(p => new string[] { p.Type })  //track Genres
+                TrackGenres = track.TrackGenres.SelectMany(p => new string[] { p.Type })  //track Genres
             };
         }
         private Object PartialTrackDTOModel(Track track)
@@ -146,7 +160,7 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
                 Popularity = track.Popularity,
                 AlbumTitle = track.Album != null ? track.Album.Title : null,
                 ArtistName = track.Album != null ? track.Album.Artist.Name : null,
-                TrackGenres = track.TrackGenres.Select(p => new string[] { p.Type})
+                TrackGenres = track.TrackGenres.SelectMany(p => new string[] { p.Type})
             };
         }
         private void MapTrack(Track mapedTrack, Track incomingTrack)
