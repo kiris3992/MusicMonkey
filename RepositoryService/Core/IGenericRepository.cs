@@ -15,6 +15,7 @@ namespace RepositoryService.Core
         void Update(T entity);
         void DeleteById(object id);
         void DeleteAll();
+        void DeleteRange(IEnumerable<T> entities);
         void Save();
     }
 }

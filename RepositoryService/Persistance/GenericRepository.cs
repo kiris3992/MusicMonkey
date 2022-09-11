@@ -21,7 +21,7 @@ namespace RepositoryService.Persistance
             table = db.Set<T>();
 
         }
-        public void Create(T entity) => table.Add(entity);
+        public void Create(T entity) => db.Entry(entity).State = EntityState.Added;
         
 
         public void DeleteAll() => table.RemoveRange(GetAll());
@@ -29,6 +29,7 @@ namespace RepositoryService.Persistance
 
         public void DeleteById(object id) => table.Remove(GetById(id));
 
+        public void DeleteRange(IEnumerable<T> entities) => table.RemoveRange(entities);
 
         public IEnumerable<T> GetAll() => table.ToList();
        
