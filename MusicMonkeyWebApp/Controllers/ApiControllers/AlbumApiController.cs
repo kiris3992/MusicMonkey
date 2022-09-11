@@ -141,8 +141,8 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
                 ReleaseDate = album.ReleaseDate,
                 CoverPhotoUrl = album.CoverPhotoUrl,
                 ArtistName = album.Artist != null ? album.Artist.Name : null,
-                TrackTitles = album.Tracks.Select(p => new string[] { p.Title}),
-                AlbumGenres = album.AlbumGenres.Select(p => new string[] { p.Type})
+                TrackTitles = album.Tracks.SelectMany(p => new string[] { p.Title}),
+                AlbumGenres = album.AlbumGenres.SelectMany(p => new string[] { p.Type})
             };
         }
         private void DeleteAllTracksOfAlbum(Album album)
