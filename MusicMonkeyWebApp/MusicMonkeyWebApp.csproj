@@ -309,6 +309,7 @@
     <Content Include="Areas\Public\Assets\Source\photo credits.txt" />
     <Content Include="Areas\Public\Assets\tours.html" />
     <Content Include="Areas\Public\Assets\videos.html" />
+    <Content Include="Content\Assets\img\discography\no-photo.png" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
