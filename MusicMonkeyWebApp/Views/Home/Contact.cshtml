@@ -3,6 +3,7 @@
     ViewBag.Title = "Contact";
 }
 
+
 <script>
     $(document).ready(() => {
         shuffleContacts();
@@ -20,11 +21,11 @@
         contacts = contacts.sort(() => Math.random() - 0.5);
 
         $('#contacts').html(contacts.map(o =>
-            `<div class="row">
-                <div class="col-lg-12">
-                    <div class="contact__address">
-                        <div class="section-title"><h2>${o.name}</h2></div>
-                        <ul>
+            `<div class="row" style="text-align:center;">
+                <div class="col-lg-12 ">
+                    <div class="contact__address ">
+                        <div class="section-title" style="padding:10px;"><h2>${o.name}</h2></div>
+                        <ul style="justify-content: center;">
                             <li><i class="fa fa-map-marker"></i><h5>Address</h5><p>${o.address}</p></li>
                             <li><i class="fa fa-phone"></i><h5>Mobile</h5><p><a href="tel:${o.phone.replace(/ /g, "")}">${o.phone}</a></p></li>
                             <li><i class="fa fa-envelope"></i><h5>Email</h5><p><a href="mailto:${o.mail}">${o.mail}</a></p></li>
@@ -37,15 +38,66 @@
     };
 </script>
 
-<section class="contact spad">
+<div style="text-align:center;">
+    <section class="contact spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h1 onclick="shuffleContacts();"><span class="linkTitle">Contact Metasharps</span></h1>
+                </div>
+            </div>
+            <hr />
+        </div>
+
+        <div id="contacts" class="container"></div>
+    </section>
+    <!-- Contact Area Start  -->
+
     <div class="container">
         <div class="row">
-            <div class="col-12 text-center">
-                <h1 onclick="shuffleContacts();"><span class="linkTitle">Contact Metasharps</span></h1>
+            <div class="col-12">
+                <div>
+                    <p>See what’s new</p>
+                    <h2>Get In Touch</h2>
+                </div>
             </div>
         </div>
-        <hr />
+
+        <div class="row">
+            <div class="col-12">
+                <!-- Contact Form Area -->
+                <div>
+                    <form action="#" method="post">
+                        <div class="row">
+                            <div class="col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Name">
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <input type="email" class="form-control" placeholder="E-mail">
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Subject">
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group " data-wow-delay="400ms">
+                                    <textarea name="message" class="form-control" id="message" cols="30" rows="10" placeholder="Message"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-12 text-center">
+                                <button class="primary-btn border-btn" type="submit">Send <i class="fa fa-angle-double-right"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div id="contacts" class="container"></div>
-</section>
+    <!-- Contact Area End  -->
+</div>

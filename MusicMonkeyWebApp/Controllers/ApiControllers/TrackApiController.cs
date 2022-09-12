@@ -36,9 +36,6 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
 
             return tracks;
         }
-                );
-            return tracksDTO;
-        }
 
         // GET: api/TrackApi/5
         [ResponseType(typeof(Track))]
@@ -80,17 +77,6 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
 
             return Ok();
         }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!TrackExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
 
         // POST: api/TrackApi
         [ResponseType(typeof(Track))]
@@ -174,7 +160,7 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
                 Popularity = track.Popularity,
                 AlbumTitle = track.Album != null ? track.Album.Title : null,
                 ArtistName = track.Album != null ? track.Album.Artist.Name : null,
-                TrackGenres = track.TrackGenres.SelectMany(p => new string[] { p.Type})
+                TrackGenres = track.TrackGenres.SelectMany(p => new string[] { p.Type })
             };
         }
         private void MapTrack(Track mapedTrack, Track incomingTrack)

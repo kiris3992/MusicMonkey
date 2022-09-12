@@ -96,11 +96,11 @@ namespace DAL.Initializers.TeamsSeeding
             #endregion
 
             #region Lady Gaga
-            Artist pa3 = new Artist("Lady Gaga", Country.USA, "photo", new DateTime(2007, 1, 1), new HashSet<Genre> { g.pop });
+            Artist pa3 = new Artist("Lady Gaga", Country.USA, "https://www.lifo.gr/sites/default/files/styles/aspect_1_1_xxl_360x360/public/articles/2022-08-10/Screenshot%202022-08-10%20at%203.21.08%20PM.png?h=545f1a9f&itok=a6fSfypo", new DateTime(2007, 1, 1), new HashSet<Genre> { g.pop });
 
-            Album pa3album1 = new Album("The Fame", new DateTime(2008, 08, 19), "photo", pa3, new HashSet<Genre>() { g.pop });
-            Album pa3album2 = new Album("Born this way", new DateTime(2011, 05, 23), "photo", pa3, new HashSet<Genre>() { g.pop });
-            Album pa3album3 = new Album("Joanne", new DateTime(2016, 10, 21), "photo", pa3, new HashSet<Genre>() { g.pop, g.rock, g.country });
+            Album pa3album1 = new Album("The Fame", new DateTime(2008, 08, 19), "https://angartwork.akamaized.net/?id=151848569&size=640", pa3, new HashSet<Genre>() { g.pop });
+            Album pa3album2 = new Album("Born this way", new DateTime(2011, 05, 23), "https://3.bp.blogspot.com/-3jppF2KC2F0/WSfsRtxjgaI/AAAAAAAADQ0/wexDIQJYBEMcdSxUTrJE2pzUmUJSJerJQCLcB/s1600/Born%2BThis%2BWay%2BSingle%2Bby%2BFran.png", pa3, new HashSet<Genre>() { g.pop });
+            Album pa3album3 = new Album("Joanne", new DateTime(2016, 10, 21), "https://theartsdesk.com/sites/default/files/styles/mast_image_landscape/public/mastimages/gagajoanne.jpg?itok=lFRi7qYz", pa3, new HashSet<Genre>() { g.pop, g.rock, g.country });
 
             Track pa3al1t1 = new Track("Just Dance", 242, "audio", pa3album1, new HashSet<Genre>() { g.pop }, 4);
             Track pa3al1t2 = new Track("LoveGame", 216, "audio", pa3album1, new HashSet<Genre>() { g.pop }, 3);
@@ -164,11 +164,11 @@ namespace DAL.Initializers.TeamsSeeding
 
             #region The Wiggles
 
-            Artist pa4 = new Artist("The Wiggles", Country.Australia, "photo", new DateTime(1991, 1, 1), new HashSet<Genre> { g.kid });
+            Artist pa4 = new Artist("The Wiggles", Country.Australia, "https://static.wikia.nocookie.net/pbs-kids-sprout-tv/images/2/24/IconforTheWiggles%27Page%28New%29.jpg", new DateTime(1991, 1, 1), new HashSet<Genre> { g.kid });
 
-            Album pa4album1 = new Album("The Wiggles", new DateTime(1991, 08, 1), "photo", pa4, new HashSet<Genre>() { g.kid });
-            Album pa4album2 = new Album("Big Red Car", new DateTime(1995, 1, 1), "photo", pa4, new HashSet<Genre>() { g.kid });
-            Album pa4album3 = new Album("Serfer Jeff", new DateTime(2012, 5, 3), "photo", pa4, new HashSet<Genre>() { g.kid });
+            Album pa4album1 = new Album("The Wiggles", new DateTime(1991, 08, 1), "https://static.wikia.nocookie.net/wiggles/images/4/48/TheWigglesAlbum.jpg/revision/latest?cb=20210712145102", pa4, new HashSet<Genre>() { g.kid });
+            Album pa4album2 = new Album("Big Red Car", new DateTime(1995, 1, 1), "https://i.scdn.co/image/ab67616d0000b27369aebdef4e5f8746866d36a8", pa4, new HashSet<Genre>() { g.kid });
+            Album pa4album3 = new Album("Serfer Jeff", new DateTime(2012, 5, 3), "https://m.media-amazon.com/images/I/51gH5DEQ9YL.jpg", pa4, new HashSet<Genre>() { g.kid });
 
             Track pa4al1t1 = new Track("Get Ready to Wiggle", 117, "audio", pa4album1, new HashSet<Genre>() { g.kid }, 4);
             Track pa4al1t2 = new Track("Lavender's Blue", 92, "audio", pa4album1, new HashSet<Genre>() { g.kid }, 3);
@@ -219,9 +219,9 @@ namespace DAL.Initializers.TeamsSeeding
 
             #region Maria Callas
 
-            Artist pa5 = new Artist("Maria Callas", Country.USA, "photo", new DateTime(1940, 1, 1), new HashSet<Genre> { g.classical });
+            Artist pa5 = new Artist("Maria Callas", Country.USA, "https://dimartblog.files.wordpress.com/2013/09/maria-callas-latraviata-wikimecc81dia-commons-660x457.jpg?w=660", new DateTime(1940, 1, 1), new HashSet<Genre> { g.classical });
 
-            Album pa5album = new Album("Pure Maria Callas", new DateTime(1991, 8, 1), "photo", pa5, new HashSet<Genre>() { g.classical });
+            Album pa5album = new Album("Pure Maria Callas", new DateTime(1991, 8, 1), "https://m.media-amazon.com/images/I/51KAzT+NM4L.jpg", pa5, new HashSet<Genre>() { g.classical });
 
             Track pa5alt1 = new Track("Norma", 433, "audio", pa5album, new HashSet<Genre>() { g.classical }, 3);
             Track pa5alt2 = new Track("Carmen", 261, "audio", pa5album, new HashSet<Genre>() { g.classical }, 4);
