@@ -29,17 +29,18 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
 
-        //var settings = {
-        //    "url": "https://localhost:44314/api/TrackApi",
-        //    "method": "GET",
-        //    "timeout": 0,
-        //};
+        var settings = {
+            "url": "https://localhost:44314/api/TrackApi",
+            "method": "GET",
+            "timeout": 0,
+        };
 
-        //$.ajax(settings).done(function (tracks) {
-        //    console.log(tracks);
-        //});
+        $.ajax(settings).done(function (tracks) {
+            console.log(tracks);
+            const popularity = tracks.map(x => x.popularity);
+        });
 
-        //const popularity = track.map(x => x.popularity);
+       
 
         //async function fetchData() {
         //    const url = 'https://localhost:44314/api/TrackApi';
