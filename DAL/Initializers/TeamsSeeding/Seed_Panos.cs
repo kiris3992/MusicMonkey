@@ -14,11 +14,11 @@ namespace DAL.Initializers.TeamsSeeding
         {
             #region Panos Seeding
             #region Bob Dylan
-            Artist pa1 = new Artist("Bob Dylan", Country.USA, "photo", new DateTime(1959, 1, 1), new HashSet<Genre> { g.folk, g.blues });
+            Artist pa1 = new Artist("Bob Dylan", Country.USA, "https://gaffa.blob.core.windows.net/gaffa-media/media/a0021812-2abd-4c08-a399-42072485911f/BobDylanOsloSpektrum-default.webp", new DateTime(1959, 1, 1), new HashSet<Genre> { g.folk, g.blues });
 
-            Album pa1album1 = new Album("Bringing It All Back Home", new DateTime(1965, 3, 22), "photo", pa1, new HashSet<Genre>() { g.folk, g.blues });
-            Album pa1album2 = new Album("Planet Waves", new DateTime(1974, 1, 17), "photo", pa1, new HashSet<Genre>() { g.folk, g.rock, g.blues });
-            Album pa1album3 = new Album("Dylan & the Dead", new DateTime(1989, 2, 6), "photo", pa1, new HashSet<Genre>() { g.folk, g.rock });
+            Album pa1album1 = new Album("Bringing It All Back Home", new DateTime(1965, 3, 22), "https://cdn.shopify.com/s/files/1/0573/8332/1796/products/71Dhi4I0AdL._SL1500_1100x.jpg?v=1652043599", pa1, new HashSet<Genre>() { g.folk, g.blues });
+            Album pa1album2 = new Album("Planet Waves", new DateTime(1974, 1, 17), "https://i.pinimg.com/originals/e7/6e/83/e76e838a488190d6780ccfd15b26d8cc.jpg", pa1, new HashSet<Genre>() { g.folk, g.rock, g.blues });
+            Album pa1album3 = new Album("Dylan & the Dead", new DateTime(1989, 2, 6), "https://m.media-amazon.com/images/I/81E7rE8qt9L._SL1500_.jpg", pa1, new HashSet<Genre>() { g.folk, g.rock });
 
             Track pa1al1t1 = new Track("Mr. Tambourine Man", 320, "audio", pa1album1, new HashSet<Genre>() { g.folk }, 4);
             Track pa1al1t2 = new Track("Gates of Eden", 324, "audio", pa1album1, new HashSet<Genre>() { g.folk, g.blues }, 2);
@@ -68,9 +68,9 @@ namespace DAL.Initializers.TeamsSeeding
 
             #region Beethoven
 
-            Artist pa2 = new Artist("Ludwig van Beethoven", Country.Germany, "photo", new DateTime(1790, 1, 1), new HashSet<Genre> { g.classical });
+            Artist pa2 = new Artist("Ludwig van Beethoven", Country.Germany, "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Beethoven.jpg/640px-Beethoven.jpg", new DateTime(1790, 1, 1), new HashSet<Genre> { g.classical });
 
-            Album pa2album = new Album("Beethoven Symfonies", new DateTime(1795, 1, 1), "photo", pa2, new HashSet<Genre>() { g.classical });
+            Album pa2album = new Album("Beethoven Symfonies", new DateTime(1795, 1, 1), "https://www.musicaloffering.gr/wp-content/uploads/2022/07/xs6fkcq9wr5ckudzwqek.jpg", pa2, new HashSet<Genre>() { g.classical });
 
             Track pa2t1 = new Track("Symphony No.1, C", 1669, "audio", pa2album, new HashSet<Genre> { g.classical }, 2);
             Track pa2t2 = new Track("Symphony No.2,D", 1809, "audio", pa2album, new HashSet<Genre> { g.classical }, 1);
