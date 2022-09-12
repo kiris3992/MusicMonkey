@@ -17,21 +17,21 @@ namespace RepositoryService.Persistance.Repositories
 
         }
 
+        public Artist GetArtistByIdWithEverything(int? id)
+        {
+            return db.Artists
+                .Include("ArtistGenres")
+                .Include("Albums.AlbumGenres")
+                .Include("Albums.Tracks.TrackGenres")
+                .FirstOrDefault(x => x.Id == id);
+        }
+
         public IEnumerable<Artist> GetArtistsWithEverything()
         {
-            db.Tracks
-                .Include(x => x.TrackGenres)
-                .Include(x => x.Album)
-                .ToList();
-
-            db.Albums
-                .Include(x => x.AlbumGenres)
-                .Include(x => x.Tracks)
-                .ToList();
-
             return db.Artists
-                .Include(x => x.Albums)
-                .Include(x => x.ArtistGenres)
+                .Include("ArtistGenres")
+                .Include("Albums.AlbumGenres")
+                .Include("Albums.Tracks.TrackGenres")
                 .ToList();
         }
     }

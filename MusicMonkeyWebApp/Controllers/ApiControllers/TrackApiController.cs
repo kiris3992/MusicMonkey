@@ -15,44 +15,51 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
 {
     public class TrackApiController : BaseApiController
     {
-        
-
-        // GET: api/Track
-        public IEnumerable<Object> GetTracks()
+        // GET: api/TrackApi
+        public IEnumerable<Object> GetTracks(string type = "")
         {
-            return MapTracksToDTO();
+            IEnumerable<object> tracks = new List<object>();
+
+            switch (type)
+            {
+                case "full":
+                    tracks = unit.Tracks
+                            .GetTracksWithEverything()
+                            .Select(x => FullTrackDTOModel(x));
+                    break;
+                default:
+                    tracks = unit.Tracks
+                            .GetTracksWithEverything()
+                            .Select(x => PartialTrackDTOModel(x));
+                    break;
+            }
+
+            return tracks;
         }
-
-        private IEnumerable<Object> MapTracksToDTO()
-        {
-            var tracks = unit.Tracks.GetTracksWithEverything();
-            var tracksDTO = tracks.Select(i =>
-                 new
-                 { // Tracks
-                     Title = i.Title,
-                     DurationSecs = i.DurationSecs,
-                     AudioUrl = i.AudioUrl,
-                     Popularity = i.Popularity,
-                     TrackGenres = i.TrackGenres.SelectMany(p => new string[] { p.Type })
-                 }
                 );
             return tracksDTO;
         }
 
-        // GET: api/Track/5
+        // GET: api/TrackApi/5
         [ResponseType(typeof(Track))]
-        public IHttpActionResult GetTrack(int id)
+        public Object GetTrack(int? id)
         {
-            Track track = db.Tracks.Find(id);
+
+            if (id is null)
+            {
+                return BadRequest();
+            }
+
+            Track track = unit.Tracks.GetTrackByIdWithEverything(id);
             if (track == null)
             {
                 return NotFound();
             }
 
-            return Ok(track);
+            return PartialTrackDTOModel(track);
         }
 
-        // PUT: api/Track/5
+        // PUT: api/TrackApi/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutTrack(int id, Track track)
         {
@@ -66,12 +73,13 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
                 return BadRequest();
             }
 
-            db.Entry(track).State = EntityState.Modified;
+            Track mapedTrack = unit.Tracks.GetTrackByIdWithEverything(id);
+            MapTrack(mapedTrack, track);
+            unit.Tracks.Update(mapedTrack);
+            unit.Complete();
 
-            try
-            {
-                db.SaveChanges();
-            }
+            return Ok();
+        }
             catch (DbUpdateConcurrencyException)
             {
                 if (!TrackExists(id))
@@ -84,10 +92,7 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
                 }
             }
 
-            return StatusCode(HttpStatusCode.NoContent);
-        }
-
-        // POST: api/Track
+        // POST: api/TrackApi
         [ResponseType(typeof(Track))]
         public IHttpActionResult PostTrack(Track track)
         {
@@ -96,29 +101,89 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
                 return BadRequest(ModelState);
             }
 
-            db.Tracks.Add(track);
-            db.SaveChanges();
+            unit.Tracks.Create(track);
+            unit.Complete();
 
             return Ok();
         }
 
-        // DELETE: api/Track/5
+        // DELETE: api/TrackApi/5
         [ResponseType(typeof(Track))]
-        public IHttpActionResult DeleteTrack(int id)
+        public IHttpActionResult DeleteTrack(int? id)
         {
-            Track track = db.Tracks.Find(id);
+            if (id is null)
+            {
+                return BadRequest();
+            }
+
+            Track track = unit.Tracks.GetTrackByIdWithEverything(id);
             if (track == null)
             {
                 return NotFound();
             }
 
-            db.Tracks.Remove(track);
-            db.SaveChanges();
+            unit.Tracks.DeleteById(id);
+            unit.Complete();
 
-            return Ok(track);
+            return Ok();
         }
 
-      
+        //Custom Service Methods
+        private Object FullTrackDTOModel(Track track)
+        {
+            return new  //Tracks
+            {
+                Id = track.Id,
+                Title = track.Title,
+                DurationSecs = track.DurationSecs,
+                AudioUrl = track.AudioUrl,
+                Popularity = track.Popularity,
+                Album = new  //Album
+                {
+                    Id = track.Album.Id,
+                    Title = track.Album.Title,
+                    ReleaseDate = track.Album.ReleaseDate,
+                    CoverPhotoUrl = track.Album.CoverPhotoUrl,
+                    Artist = new  //Artist
+                    {
+                        Name = track.Album.Artist.Name,
+                        Country = track.Album.Artist.Country,
+                        PhotoUrl = track.Album.Artist.PhotoUrl,
+                        CareerStartDate = track.Album.Artist.CareerStartDate,
+                        ArtistGenres = track.Album
+                                .Artist
+                                .ArtistGenres
+                                .SelectMany(p => new string[] { p.Type })  //Artist Genres
+                    },
+                    AlbumGenres = track
+                            .Album
+                            .AlbumGenres
+                            .SelectMany(p => new string[] { p.Type })  //Album Genres
+                },
+                TrackGenres = track.TrackGenres.SelectMany(p => new string[] { p.Type })  //track Genres
+            };
+        }
+        private Object PartialTrackDTOModel(Track track)
+        {
+            return new
+            {
+                Id = track.Id,
+                Title = track.Title,
+                DurationSecs = track.DurationSecs,
+                AudioUrl = track.AudioUrl,
+                Popularity = track.Popularity,
+                AlbumTitle = track.Album != null ? track.Album.Title : null,
+                ArtistName = track.Album != null ? track.Album.Artist.Name : null,
+                TrackGenres = track.TrackGenres.SelectMany(p => new string[] { p.Type})
+            };
+        }
+        private void MapTrack(Track mapedTrack, Track incomingTrack)
+        {
+            mapedTrack.Title = incomingTrack.Title;
+            mapedTrack.DurationSecs = incomingTrack.DurationSecs;
+            mapedTrack.AudioUrl = incomingTrack.AudioUrl;
+            mapedTrack.Popularity = incomingTrack.Popularity;
+        }
 
         private bool TrackExists(int id)
         {

@@ -12,6 +12,7 @@ namespace Entities.Models
         public string CoverPhotoUrl { get; set; }
 
         // Navigation Properies
+        public int ArtistId { get; set; }
         public Artist Artist { get; set; }
         public ICollection<Track> Tracks { get; set; }
         public ICollection<Genre> AlbumGenres { get; set; }
