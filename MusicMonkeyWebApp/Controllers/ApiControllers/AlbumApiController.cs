@@ -144,33 +144,6 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
                 }),
                 AlbumGenres = album.AlbumGenres.SelectMany(p => new string[] { p.Type })  //Album Genres
             };
-
-            return new
-            {
-                Id = album.Id,
-                Title = album.Title,
-                ReleaseDate = album.ReleaseDate,
-                CoverPhotoUrl = album.CoverPhotoUrl,
-                Artist = new  //Artists
-                {
-                    Id = album.Artist.Id,
-                    Name = album.Artist.Name,
-                    Country = album.Artist.Country,
-                    PhotoUrl = album.Artist.PhotoUrl,
-                    CareerStartDate = album.Artist.CareerStartDate,
-                    ArtistGenres = album.Artist.ArtistGenres.SelectMany(p => new string[] { p.Type})  //Artist Genres
-                },
-                Tracks = album.Tracks.Select(x => new  //Tracks
-                {
-                    Id = x.Id,
-                    Title = x.Title,
-                    DurationSecs = x.DurationSecs,
-                    AudioUrl = x.AudioUrl,
-                    Popularity = x.Popularity,
-                    TrackGenres = x.TrackGenres.SelectMany(p => new string[] { p.Type })  //Track Genres
-                }),
-                AlbumGenres = album.AlbumGenres.SelectMany(p => new string[] { p.Type})  //Album Genres
-            };
         }
         private Object PartialAlbumDTOModel(Album album)
         {
