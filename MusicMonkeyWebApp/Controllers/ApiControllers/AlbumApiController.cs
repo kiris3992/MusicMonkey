@@ -15,13 +15,26 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
 {
     public class AlbumApiController : BaseApiController
     {
-
         // GET: api/AlbumApi
-        public IEnumerable<Object> GetAlbums()
+        public IEnumerable<Object> GetAlbums(string type = "")
         {
-            return unit.Albums
-                .GetAlbumsWithEverything()
-                .Select(x => PartialAlbumDTOModel(x));
+            IEnumerable<object> albums = new List<object>();
+
+            switch (type)
+            {
+                case "full":
+                    albums = unit.Albums
+                            .GetAlbumsWithEverything()
+                            .Select(x => FullAlbumDTOModel(x));
+                    break;
+                default:
+                    albums = unit.Albums
+                            .GetAlbumsWithEverything()
+                            .Select(x => PartialAlbumDTOModel(x));
+                    break;
+            }
+
+            return albums;
         }
 
         // GET: api/AlbumApi/5
@@ -105,6 +118,33 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
         //Custom Service Methods
         private Object FullAlbumDTOModel(Album album)
         {
+            return new
+            {
+                Id = album.Id,
+                Title = album.Title,
+                ReleaseDate = album.ReleaseDate,
+                CoverPhotoUrl = album.CoverPhotoUrl,
+                Artist = new  //Artists
+                {
+                    Id = album.Artist.Id,
+                    Name = album.Artist.Name,
+                    Country = album.Artist.Country,
+                    PhotoUrl = album.Artist.PhotoUrl,
+                    CareerStartDate = album.Artist.CareerStartDate,
+                    ArtistGenres = album.Artist.ArtistGenres.SelectMany(p => new string[] { p.Type })  //Artist Genres
+                },
+                Tracks = album.Tracks.Select(x => new  //Tracks
+                {
+                    Id = x.Id,
+                    Title = x.Title,
+                    DurationSecs = x.DurationSecs,
+                    AudioUrl = x.AudioUrl,
+                    Popularity = x.Popularity,
+                    TrackGenres = x.TrackGenres.SelectMany(p => new string[] { p.Type })  //Track Genres
+                }),
+                AlbumGenres = album.AlbumGenres.SelectMany(p => new string[] { p.Type })  //Album Genres
+            };
+
             return new
             {
                 Id = album.Id,
