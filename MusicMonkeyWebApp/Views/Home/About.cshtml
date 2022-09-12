@@ -3,13 +3,105 @@
     ViewBag.Title = "About";
 }
 
-<div style="margin:20px auto; width: 600px; text-align:center;">
-    <h1>Metasharps</h1>
-    <hr />
-    <p style="text-align:justify;">
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-    </p>
-    <p style="text-align:justify;">
-        Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
-    </p>
-</div>
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+
+    <div class="container">
+
+        <div class="col-12 text-center">
+            <h3>Track Popularity</h3>
+            <hr />
+            <div>
+                <canvas id="myChart" width="200" height="100"></canvas>
+                @*<button onclick="fetchData()">Fetch now </button>*@
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+
+        //var settings = {
+        //    "url": "https://localhost:44314/api/TrackApi",
+        //    "method": "GET",
+        //    "timeout": 0,
+        //};
+
+        //$.ajax(settings).done(function (tracks) {
+        //    console.log(tracks);
+        //});
+
+        //const popularity = track.map(x => x.popularity);
+
+        //async function fetchData() {
+        //    const url = 'https://localhost:44314/api/TrackApi';
+        //    const response = await fetch(url);
+        //    const datapoints = await response.json();
+        //    console.log(datapoints);
+        //    return datapoints;
+        //}
+
+        const labels = ['Eminem',
+            'Shakira',
+            '2pac',
+            'Linking Park',
+            'AC/DC',
+            'METALICA',
+        ];
+
+        const data = {
+            labels: labels,
+            datasets: [{
+                label: 'Track Popularity',
+                backgroundColor: 'rgb(150, 200, 12)',
+                borderColor: 'rgb(150, 99, 132)',
+                data: [0, 1, 2, 3, 4, 5],
+            }]
+        };
+
+        const config = {
+            type: 'bar',
+            data: data,
+            options: {
+                indexAxis: 'y',
+            }
+        };
+
+        const myChart = new Chart(
+            document.getElementById('myChart'),
+            config
+        );
+    </script>
+
+</body>
+</html>
+
+@*[HttpGet]
+
+public ActionResult GetAllTracksChart(int count, string sortOrder)
+{
+    var tracks = unit.Tracks
+                .GetTracksWithEverything()
+                .Select(x => new Track { Id = x.Id, Title = x.Title, DurationSecs = x.DurationSecs, Popularity = x.Popularity})
+                .Take(count);
+
+    switch (sortOrder)
+    {
+        case "ASC": Tracks = Tracks.OrderBy(x => Popularity).ToList(); break;
+        case "DESC": Tracks = Tracks.OrderByDescending(x => Popularity).ToList(); break;
+        default : Tracks = Tracks.OrderBy(x => Popularity).ToList(); break;
+
+
+    }
+
+        return Tracks
+
+}*@
