@@ -51,6 +51,14 @@ namespace MusicMonkeyWebApp
                       "~/Content/Assets/css/owl.carousel.min.css",
                       "~/Content/Assets/css/slicknav.min.css",
                       "~/Content/Assets/css/style.css"));
+
+            bundles.Add(new StyleBundle("~/bundles/adminCss").Include(
+                "~/Areas/Admin/Assets_Admin/css/bootstrap-reboot.min.css",
+                "~/Areas/Admin/Assets_Admin/css/bootstrap-grid.min.css",
+                "~/Areas/Admin/Assets_Admin/css/magnific-popup.css",
+                "~/Areas/Admin/Assets_Admin/css/select2.min.css",
+                "~/Areas/Admin/Assets_Admin/css/admin.css"
+                ));
         }
     }
 }
