@@ -309,6 +309,15 @@
     <Content Include="Areas\Public\Assets\Source\photo credits.txt" />
     <Content Include="Areas\Public\Assets\tours.html" />
     <Content Include="Areas\Public\Assets\videos.html" />
+    <Content Include="Content\Assets\entity-files\Above and Beyond\Above&amp;BeyondPhotoUrl.jpg" />
+    <Content Include="Content\Assets\entity-files\Above and Beyond\Sirens of the Sea\Above_&amp;_Beyond_pres._Oceanlab-on_a_good_day_%28128kbps%29.mp3" />
+    <Content Include="Content\Assets\entity-files\Above and Beyond\Sirens of the Sea\Above_&amp;_Beyond_pres._Oceanlab_-_Breaking_Ties_%28128kbps%29.mp3" />
+    <Content Include="Content\Assets\entity-files\Above and Beyond\Sirens of the Sea\Above_&amp;_Beyond_pres._OceanLab_-_Come_Home_%28128kbps%29.mp3" />
+    <Content Include="Content\Assets\entity-files\Above and Beyond\Sirens of the Sea\Above_&amp;_Beyond_pres._OceanLab_-_If_I_Could_Fly_%28128kbps%29.mp3" />
+    <Content Include="Content\Assets\entity-files\Above and Beyond\Sirens of the Sea\Above_&amp;_Beyond_pres._OceanLab_-_Miracle_%28128kbps%29.mp3" />
+    <Content Include="Content\Assets\entity-files\Above and Beyond\Sirens of the Sea\Above_&amp;_Beyond_pres._Sirens_Of_The_Sea_-_OceanLab_%28128kbps%29.mp3" />
+    <Content Include="Content\Assets\entity-files\Above and Beyond\Sirens of the Sea\Above_feat_Beyond_presents_Oceanlab_-_Just_Listen_%28128kbps%29.mp3" />
+    <Content Include="Content\Assets\entity-files\Above and Beyond\Sirens of the Sea\SirenOfTheSeeCoverPhotoUrl.jpg" />
     <Content Include="Content\Assets\entity-files\ACDC\artist_cover.jpg" />
     <Content Include="Content\Assets\entity-files\ACDC\BackInBlack\1_GivinTheDogABone.mp3" />
     <Content Include="Content\Assets\entity-files\ACDC\BackInBlack\2_YouShoockMeAllNightLong.mp3" />
@@ -807,7 +816,6 @@
     <Folder Include="Areas\Admin\Controllers\" />
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Admin\Views\Shared\" />
-    <Folder Include="Content\Assets\entity-files\Above and Beyond\Sirens of the Sea\" />
     <Folder Include="Content\Assets\entity-files\Axel Willner\Cupid%27s Head\" />
     <Folder Include="Content\Assets\entity-files\D%27 Angelo\Brown Sugar\" />
     <Folder Include="Content\Assets\entity-files\Eminem\The Eminem Show\" />
