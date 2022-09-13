@@ -8,18 +8,31 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title></title>
+    <title>Charts</title>
+    <style>
+        .chartBox {
+            padding: 20px;
+            border-radius: 15px;
+            border: solid 3px rgba(1, 26, 104, 5);
+            background: white;
+        }
+    </style>
 </head>
 <body>
 
     <div class="container">
 
         <div class="col-12 text-center">
-            <h3>Track Popularity</h3>
             <hr />
-            <div>
+            <h3>Most Popular Artists</h3>
+            <hr />
+            <div class="chartBox">
                 <canvas id="myChart" width="200" height="100"></canvas>
-                @*<button onclick="fetchData()">Fetch now </button>*@
+                <hr />
+                <div class="text-lg-left">
+                    <button style="color:red; border-color:mediumpurple; font-size:small;">Previous Chart</button>
+                    <button style="color: green; border-color: mediumpurple; font-size: small;">Next Chart</button>
+                </div>
             </div>
         </div>
     </div>
@@ -29,26 +42,18 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
 
-        var settings = {
-            "url": "https://localhost:44314/api/TrackApi",
-            "method": "GET",
-            "timeout": 0,
-        };
+        //var settings = {
+        //    "url": "https://localhost:44314/api/TrackApi",
+        //    "method": "GET",
+        //    "timeout": 0,
+        //};
 
-        $.ajax(settings).done(function (tracks) {
-            console.log(tracks);
-            const popularity = tracks.map(x => x.popularity);
-        });
+        //$.ajax(settings).done(function (tracks) {
+        //    console.log(tracks);
+        //    const popularity = Artist.map(x => x.Popularity);
 
-       
 
-        //async function fetchData() {
-        //    const url = 'https://localhost:44314/api/TrackApi';
-        //    const response = await fetch(url);
-        //    const datapoints = await response.json();
-        //    console.log(datapoints);
-        //    return datapoints;
-        //}
+        // ARTIST BY POPULARITY BAR CHART
 
         const labels = ['Eminem',
             'Shakira',
@@ -61,17 +66,94 @@
         const data = {
             labels: labels,
             datasets: [{
-                label: 'Track Popularity',
-                backgroundColor: 'rgb(150, 200, 12)',
-                borderColor: 'rgb(150, 99, 132)',
-                data: [0, 1, 2, 3, 4, 5],
+                label: 'Most Popular Artists',
+                backgroundColor: [
+                    'rgba(153, 102, 255, 0.4)',
+                    'rgba(54, 162, 235, 0.4)',
+                    'rgba(255, 206, 86, 0.4)',
+                    'rgba(75, 192, 192, 0.4)',
+                    'rgba(255, 99, 132, 0.4)',
+                    'rgba(255, 159, 64, 0.4)'
+                ],
+                borderColor: [
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1,
+
+                hoverBorderRadius: 50,
+                hoverBorderWidth: 2.5,
+                hoverBackgroundColor: [
+                    'rgba(153, 102, 255, 0.9)',
+                    'rgba(54, 162, 235, 0.9)',
+                    'rgba(255, 206, 86, 0.9)',
+                    'rgba(75, 192, 192, 0.9)',
+                    'rgba(255, 99, 132, 0.9)',
+                    'rgba(255, 159, 64, 0.9)'
+                ],
+
+                data: [5, 4, 3, 2, 1, 0.7],
             }]
+        };
+
+        const tooltip = {
+            backgroundColor: 'lightgray',
+            titleColor: 'black',
+            borderColor: 'black',
+            borderWidth: 0.425,
+            callbacks: {
+                label: function (context) {
+                },
+
+            }
         };
 
         const config = {
             type: 'bar',
             data: data,
-            options: {
+            options:
+            {
+                plugins: {
+                    tooltip,
+
+
+                    legend: {
+                        onClick: (evt, legendItem, legend) => {
+                            const index = legend.chart.data.labels.indexOf(legendItem.text);
+                            legend.chart.toggleDataVisibility(index);
+                            legend.chart.getDataVisibility(index);
+                            legend.chart.update();
+                        },
+
+                        labels: {
+                            generateLabels: (chart) => {
+                                let visibility = [];
+                                for (let i = 0; i < chart.data.labels.length; i++) {
+                                    if (chart.getDataVisibility(i) == true) {
+                                        visibility.push(false)
+                                    }
+                                    else {
+                                        visibility.push(true)
+                                    }
+                                };
+
+                                return chart.data.labels.map(
+                                    (label, index) => ({
+                                        text: label,
+                                        strokeStyle: chart.data.datasets[0].borderColor[index],
+                                        fillStyle: chart.data.datasets[0].backgroundColor[index],
+                                        hidden: visibility[index]
+                                    })
+                                )
+                            }
+                        }
+                    },
+
+                },
                 indexAxis: 'y',
             }
         };
@@ -80,6 +162,9 @@
             document.getElementById('myChart'),
             config
         );
+        // 1ST CHART ENDING
+
+        /*   });*/
     </script>
 
 </body>
@@ -87,22 +172,22 @@
 
 @*[HttpGet]
 
-public ActionResult GetAllTracksChart(int count, string sortOrder)
-{
-    var tracks = unit.Tracks
-                .GetTracksWithEverything()
-                .Select(x => new Track { Id = x.Id, Title = x.Title, DurationSecs = x.DurationSecs, Popularity = x.Popularity})
-                .Take(count);
-
-    switch (sortOrder)
+    public ActionResult GetAllTracksChart(int count, string sortOrder)
     {
-        case "ASC": Tracks = Tracks.OrderBy(x => Popularity).ToList(); break;
-        case "DESC": Tracks = Tracks.OrderByDescending(x => Popularity).ToList(); break;
-        default : Tracks = Tracks.OrderBy(x => Popularity).ToList(); break;
+        var tracks = unit.Tracks
+                    .GetTracksWithEverything()
+                    .Select(x => new Track { Id = x.Id, Title = x.Title, DurationSecs = x.DurationSecs, Popularity = x.Popularity})
+                    .Take(count);
+
+        switch (sortOrder)
+        {
+            case "ASC": Tracks = Tracks.OrderBy(x => Popularity).ToList(); break;
+            case "DESC": Tracks = Tracks.OrderByDescending(x => Popularity).ToList(); break;
+            default : Tracks = Tracks.OrderBy(x => Popularity).ToList(); break;
 
 
-    }
+        }
 
-        return Tracks
+            return Tracks
 
-}*@
+    }*@
