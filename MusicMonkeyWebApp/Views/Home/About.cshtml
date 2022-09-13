@@ -30,17 +30,26 @@
                 <canvas id="myChart" width="200" height="100"></canvas>
                 <hr />
                 <div class="text-lg-left">
-                    <button style="color:red; border-color:mediumpurple; font-size:small;">Previous Chart</button>
-                    <button style="color: green; border-color: mediumpurple; font-size: small;">Next Chart</button>
+                    <button id="prevBtn" style="color:red; border-color:mediumpurple; font-size:small;">Previous Chart</button>
+                    <button id="nextBtn" style="color: green; border-color: mediumpurple; font-size: small;">Next Chart</button>
                 </div>
             </div>
         </div>
     </div>
 
+    
 
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
+
+        const btnNext = document.getElementById("nextBtn");
+        const btnPrev = document.getElementById("prevBtn");
+
+        btnNext.addEventListener('click', nextChart);
+        btnPrev.addEventListener('click', prevChart);
+
+       
 
         //var settings = {
         //    "url": "https://localhost:44314/api/TrackApi",
@@ -162,9 +171,22 @@
             document.getElementById('myChart'),
             config
         );
-        // 1ST CHART ENDING
+                    // 1ST CHART ENDING
 
         /*   });*/
+
+
+        function nextChart() {
+            const updatetype = 'bar';
+            myChart.config.type = updatetype;
+            myChart.update();
+        }
+        function prevChart() {
+            const updatetype = 'polarArea';
+            myChart.config.type = updatetype;
+            myChart.update();
+        }
+
     </script>
 
 </body>
