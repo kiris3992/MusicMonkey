@@ -23,18 +23,19 @@
                             }*@
 
                             @foreach(var link in Model.Links) {
-                                <li class="@(link.IsActive ? "active" : "")">
+                                <li @(link.IsActive ? "class=active" : "")>
                                     @if (link.SubLinks != null) { 
                                         <span>@link.Title</span>
                                             if (link.SubLinks.Count > 0) {
-                                            <ul class="dropdown">
-                                                @foreach (var subLink in link.SubLinks) { <li><a href="@subLink.Url">@subLink.Title</a></li> }
-                                            </ul>
-                                        }
+                                                <ul class="dropdown">
+                                                    @foreach (var subLink in link.SubLinks) 
+                                                    { 
+                                                        <li @(subLink.IsActive ? "class=active" : "")><a href="@subLink.Url">@subLink.Title</a></li> 
+                                                    }
+                                                </ul>
+                                            }
                                     }
-                                    else { 
-                                        <a href="@link.Url">@link.Title</a>
-                                    }
+                                    else { <a href="@link.Url">@link.Title</a> }
                                 </li>
                             }
                         </ul>

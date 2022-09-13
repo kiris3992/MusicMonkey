@@ -11,7 +11,8 @@ namespace MusicMonkeyWebApp.Controllers
     {
         public HeaderViewModel CreateHeader()
         {
-            var model = new HeaderViewModel {
+            var model = new HeaderViewModel
+            {
                 CurrentAction = Request.RequestContext.RouteData.Values["action"].ToString(),
                 Links = new List<HeaderLink> {
                     new HeaderLink { Action = "Index", Title = "Home", Url = "/" },
@@ -28,8 +29,15 @@ namespace MusicMonkeyWebApp.Controllers
                 }
             };
 
-            model.Links.ForEach(l => l.IsActive = l.Action == model.CurrentAction);
-            
+            foreach (var link in model.Links)
+            {
+                link.IsActive = link.Action == model.CurrentAction;
+                if (link.SubLinks != null)
+                {
+                    foreach (var subLink in link.SubLinks) if (subLink.Action == model.CurrentAction) subLink.IsActive = link.IsActive = true;
+                }
+            }
+
             return model;
         }
 

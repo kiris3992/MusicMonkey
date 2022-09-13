@@ -30,11 +30,11 @@
             };
 
             this.build = function (data) {
-                if (data.length > 30) data.length = 30; // Prosoxh gia debug edo perno mono 30 items; kanonika prepei na fugei auth h grammh.
+                if (data.length > 50) data.length = 50; // Prosoxh gia debug edo perno mono 50 items; kanonika prepei na fugei auth h grammh.
                 setTimeout(() => {
                     $(`#${dataContainerId}`).html(data.map((o, i) => this.dataTemplate(o, i)));
                     if (this.onSuccessFinallyFunc) this.onSuccessFinallyFunc();
-                }, 1600);
+                }, 800);
             };
             this.load = function () {
                 $(`#${dataContainerId}`).html(
@@ -77,9 +77,40 @@
         });
 
         return f;
-    }
+    };
 
-    return { AjaxHelper, Converter };
+    var Window = {};
+
+    Window.getQueryString = function () {
+        let href = window.location.href;
+
+        if (!href.includes('?') || (href.split('?')[1].trim() == '')) return null;
+
+        let vars = [], hash;
+        let hashes = href.slice(href.indexOf('?') + 1).split('&');
+
+
+
+        //for (let hash = hash.split('=') of hashes) {
+
+
+
+        //    vars[hash[0]] = hash[1];
+        //}
+
+        for (let i = 0; i < hashes.length; i++) {
+            hash = hashes[i].split('=');
+            //vars.push({ key:hash[0], value:hash[1] });
+
+            vars[hash[0]] = hash[1];
+
+            //vars.push(hash[0]);
+            //vars[hash[0]] = hash[1];
+        }
+        return vars;
+    };
+
+    return { AjaxHelper, Converter, Window };
 })();
 
 

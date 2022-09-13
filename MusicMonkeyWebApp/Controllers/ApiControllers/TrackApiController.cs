@@ -19,7 +19,7 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
         public IEnumerable<Object> GetTracks(string type = "")
         {
             IEnumerable<object> tracks = new List<object>();
-
+            
             switch (type)
             {
                 case "full":
