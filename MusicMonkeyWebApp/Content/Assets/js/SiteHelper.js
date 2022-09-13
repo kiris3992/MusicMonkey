@@ -59,7 +59,27 @@
         return new sectionBuilder(dataContainerId, dataTemplate, onSuccessFinallyFunc, ajaxObject);
     };
 
-    return { AjaxHelper };
+    var Converter = {};
+
+    Converter.csDateStrToJsDateStr = function (cSharpDateStr, format = 'dd/mm/yyyy') {
+        let f = format.toLowerCase();
+        let date = new Date(Date.parse(cSharpDateStr));
+        let ar = [{ n: 'y', v: -1 }, { n: 'm', v: -1 }, { n: 'd', v: -1 }].sort((a, b) => f.indexOf(a.n) - f.indexOf(b.n));
+
+        ar.forEach(o => {
+            o.v = f.split(o.n).length - 1;
+            if (o.v < 1) return;
+            switch (o.n) {
+                case 'y': f = f.replace(o.n.repeat(o.v), o.v == 2 ? date.getFullYear().toString().slice(2) : date.getFullYear().toString()); break;
+                case 'm': f = f.replace(o.n.repeat(o.v), o.v == 1 ? (date.getMonth() + 1).toString() : `0${date.getMonth() + 1}`.slice(-2)); break;
+                case 'd': f = f.replace(o.n.repeat(o.v), o.v == 1 ? date.getDate().toString() : `0${date.getDate()}`.slice(-2)); break;
+            }
+        });
+
+        return f;
+    }
+
+    return { AjaxHelper, Converter };
 })();
 
 
