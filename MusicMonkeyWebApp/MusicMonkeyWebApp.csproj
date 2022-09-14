@@ -551,6 +551,7 @@
     <Content Include="Areas\Admin\Assets_Admin\css\bootstrap-grid.min.css.map" />
     <Content Include="Areas\Admin\Assets_Admin\css\bootstrap-reboot.min.css.map" />
     <Content Include="Areas\Admin\Assets_Admin\js\bootstrap.bundle.min.js.map" />
+    <Content Include="Areas\Admin\Views\Layout\AdminMetaHead.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
