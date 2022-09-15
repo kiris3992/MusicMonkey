@@ -18,13 +18,13 @@ namespace MusicMonkeyWebApp.Controllers
                     new HeaderLink { Action = "About", Title = "About", Url = "/Home/About" },
                     new HeaderLink { Action = "Music", Title = "Music", Url = "",
                         SubLinks = new List<HeaderLink> {
-                            new HeaderLink { Title = "Artists", Url = "" },
-                            new HeaderLink { Action = "Album", Title = "Albums", Url = "/Home/Album" },
-                            new HeaderLink { Title = "Tracks", Url = "", },
+                            new HeaderLink { Title = "Artists", Url = ""},
+                            new HeaderLink { Action = "Album", Title = "Albums", Url = "/Home/Album"},
+                            new HeaderLink { Title = "Tracks", Url = ""},
                         }
                     },
                     new HeaderLink { Action = "Plans", Title = "Pricing Plans", Url = "" },
-                    new HeaderLink { Action = "Contact", Title = "Contact", Url = "/Home/Contact", Roles = new List<string>(){ "Admin", "Silver" } },
+                    new HeaderLink { Action = "Contact", Title = "Contact", Url = "/Home/Contact" },
                     new HeaderLink { Action = "Register", Title = "Register", Url = "/Account/Register" },
                     new HeaderLink { Action = "Log In", Title = "Log In", Url = "/Account/Login" }
                 }
@@ -50,18 +50,17 @@ namespace MusicMonkeyWebApp.Controllers
             return View();
         }
 
-        [Authorize(Roles = "Admin, Silver")]
         public ActionResult About()
         {
             return View();
         }
 
-        [Authorize(Roles = "Admin")]
         public ActionResult Contact()
         {
             return View();
         }
 
+        [Authorize(Roles = "Admin, Gold")]
         public ActionResult Album()
         {
             return View();
