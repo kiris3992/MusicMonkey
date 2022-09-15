@@ -9,30 +9,30 @@
 
 
         SiteHelper.AjaxHelper.contentLoader(
-            'load-artists',
-            (artist, i) => ` <tr>
+            'load-albums',
+            (album, i) => ` <tr>
                                     <td>
-                                        <div class="main__table-text">${artist.Id}</div>
+                                        <div class="main__table-text">${album.Id}</div>
                                     </td>
                                     <td>
-                                        <div class="main__table-text"><a href="#">${artist.Name}</a></div>
+                                        <div class="main__table-text"><a href="#">${album.Title}</a></div>
                                     </td>
                                     <td>
-                                        <div class="main__table-text">${artist.Country}</div>
+                                        <div class="main__table-text">${album.ArtistName}</div>
                                     </td>
                                     <td>
-                                        <div class="main__table-text">${artist.CareerStartDate}</div>
+                                        <div class="main__table-text">${album.ReleaseDate}</div>
                                     </td>
                                     <td>
-                                        <div style="padding: 20px 20px 20px 100px;" class="main__table-text">${artist.ArtistGenres.length ? artist.ArtistGenres.join(', ') : 'N/K'} </div>
+                                        <div style="padding: 20px 20px 20px 100px;" class="main__table-text">${album.AlbumGenres.length ? album.AlbumGenres.join(', ') : 'N/K'} </div>
                                     </td>
                                     <td>
-                                        <div class="main__table-text main__table-text--green">${artist.Albums.length}</div>
+                                        <div class="main__table-text main__table-text--green">${album.TrackTitles.length}</div>
                                     </td>
 
                                     <td>
                                         <div class="main__table-btns">
-                                            <a href="~/Admin/Artist/Details" class="main__table-btn main__table-btn--view">
+                                            <a href="#modal-view" class="main__table-btn main__table-btn--view">
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.92,11.6C19.9,6.91,16.1,4,12,4S4.1,6.91,2.08,11.6a1,1,0,0,0,0,.8C4.1,17.09,7.9,20,12,20s7.9-2.91,9.92-7.6A1,1,0,0,0,21.92,11.6ZM12,18c-3.17,0-6.17-2.29-7.9-6C5.83,8.29,8.83,6,12,6s6.17,2.29,7.9,6C18.17,15.71,15.17,18,12,18ZM12,8a4,4,0,1,0,4,4A4,4,0,0,0,12,8Zm0,6a2,2,0,1,1,2-2A2,2,0,0,1,12,14Z" /></svg>
                                             </a>
                                             <a href="~/Admin/Artist/Edit" class="main__table-btn main__table-btn--edit">
@@ -45,7 +45,7 @@
                                     </td>
                                 </tr>`,
             null,
-            new SiteHelper.AjaxHelper.ajaxObject('/api/ArtistApi')).start();
+            new SiteHelper.AjaxHelper.ajaxObject('/api/AlbumApi')).start();
 
     });
 </script>
@@ -76,9 +76,9 @@
                 <!-- main title -->
                 <div class="col-12">
                     <div class="main__title">
-                        <h2>Artists</h2>
+                        <h2>Albums</h2>
 
-                        <span class="main__title-stat">258 total</span>
+                        <span class="main__title-stat">576 total</span>
 
                         <div class="main__title-wrap">
                             <!-- filter sort -->
@@ -92,7 +92,7 @@
 
                                 <ul class="filter__item-menu dropdown-menu scrollbar-dropdown" aria-labelledby="filter-sort">
                                     <li>Name</li>
-                                    <li>Country</li>
+                                    <li>Release Date</li>
                                     <li>Genre</li>
                                 </ul>
                             </div>
@@ -116,16 +116,16 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>NAME</th>
-                                    <th>COUNTRY</th>
-                                    <th>CAREER STARTED DATE</th>
+                                    <th>TITLE</th>
+                                    <th>ARTIST</th>
+                                    <th>RELEASE DATE</th>
                                     <th style="padding: 20px 20px 20px 100px;">GENRE</th>
-                                    <th>ALBUMS</th>
+                                    <th>TRACKS</th>
                                     <th>ACTIONS</th>
                                 </tr>
                             </thead>
 
-                            <tbody id="load-artists">
+                            <tbody id="load-albums">
                             </tbody>
                         </table>
                     </div>
