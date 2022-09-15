@@ -27,12 +27,15 @@
     </div>
 
     @{ Html.RenderAction("Header", "Home"); }
+    @Html.Partial("_LoginPartial")
     <div>
         @RenderBody()
     </div>
     @{ Html.RenderAction("Footer", "Home"); }
 
+
     <!-- Js Body -->
     @Scripts.Render("~/bundles/homeJs_BodyEnd")
+    @RenderSection("scripts", required: false)
 </body>
 </html>

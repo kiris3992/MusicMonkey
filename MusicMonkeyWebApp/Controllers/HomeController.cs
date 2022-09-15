@@ -25,6 +25,8 @@ namespace MusicMonkeyWebApp.Controllers
                     },
                     new HeaderLink { Action = "Plans", Title = "Pricing Plans", Url = "" },
                     new HeaderLink { Action = "Contact", Title = "Contact", Url = "/Home/Contact" },
+                    new HeaderLink { Action = "Register", Title = "Register", Url = "/Account/Register" },
+                    new HeaderLink { Action = "Log In", Title = "Log In", Url = "/Account/Login" }
                 }
             };
 
@@ -43,11 +45,13 @@ namespace MusicMonkeyWebApp.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Admin, Silver")]
         public ActionResult About()
         {
             return View();
         }
 
+        [Authorize(Roles = "Admin")]
         public ActionResult Contact()
         {
             return View();
