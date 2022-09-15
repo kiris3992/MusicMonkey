@@ -11,31 +11,25 @@
                 <div class="header__nav">
                     <nav class="header__menu mobile-menu">
                         <ul>
-                            @*@foreach(var link in Model.Links) {
-                                <li class="@(link.IsActive ? "active" : "")">
-                                    <a href="@link.Url">@link.Title</a>
-                                    @if (link.SubLinks != null && link.SubLinks.Count > 0) {
-                                        <ul class="dropdown">
-                                            @foreach (var subLink in link.SubLinks) { <li><a href="@subLink.Url">@subLink.Title</a></li> }
-                                        </ul>
-                                    }
-                                </li>
-                            }*@
-
-                            @foreach(var link in Model.Links) {
+                            @foreach (var link in Model.Links)
+                            {
                                 <li @(link.IsActive ? "class=active" : "")>
-                                    @if (link.SubLinks != null) { 
+                                    @if (link.SubLinks != null)
+                                    {
                                         <span>@link.Title</span>
-                                            if (link.SubLinks.Count > 0) {
-                                                <ul class="dropdown">
-                                                    @foreach (var subLink in link.SubLinks) 
-                                                    { 
-                                                        <li @(subLink.IsActive ? "class=active" : "")><a href="@subLink.Url">@subLink.Title</a></li> 
-                                                    }
-                                                </ul>
-                                            }
+                                        if (link.SubLinks.Count > 0)
+                                        {
+                                            <ul class="dropdown">
+                                                @foreach (var subLink in link.SubLinks)
+                                                {
+                                                    <li @(subLink.IsActive ? "class=active" : "")><a href="@subLink.Url">@subLink.Title</a></li>
+
+                                                }
+                                            </ul>
+                                        }
                                     }
-                                    else { <a href="@link.Url">@link.Title</a> }
+                                    else
+                                    { <a href="@link.Url">@link.Title</a>}
                                 </li>
                             }
                         </ul>

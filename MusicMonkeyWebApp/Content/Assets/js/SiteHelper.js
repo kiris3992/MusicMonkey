@@ -34,7 +34,7 @@
                 setTimeout(() => {
                     $(`#${dataContainerId}`).html(data.map((o, i) => this.dataTemplate(o, i)));
                     if (this.onSuccessFinallyFunc) this.onSuccessFinallyFunc();
-                }, 800);
+                }, 600);
             };
             this.load = function () {
                 $(`#${dataContainerId}`).html(
@@ -81,44 +81,11 @@
 
     var Window = {};
 
-    Window.getQueryString = function () {
-        let href = window.location.href;
-
-        if (!href.includes('?') || (href.split('?')[1].trim() == '')) return null;
-
-        let vars = [], hash;
-        let hashes = href.slice(href.indexOf('?') + 1).split('&');
-
-
-
-        //for (let hash = hash.split('=') of hashes) {
-
-
-
-        //    vars[hash[0]] = hash[1];
-        //}
-
-        for (let i = 0; i < hashes.length; i++) {
-            hash = hashes[i].split('=');
-            //vars.push({ key:hash[0], value:hash[1] });
-
-            vars[hash[0]] = hash[1];
-
-            //vars.push(hash[0]);
-            //vars[hash[0]] = hash[1];
-        }
-        return vars;
+    Window.getQueryString = function (key) {
+        const queryString = window.location.search;
+        const parameters = new URLSearchParams(queryString);
+        return parameters.get(key);
     };
 
     return { AjaxHelper, Converter, Window };
 })();
-
-
-
-
-
-
-
-
-
-

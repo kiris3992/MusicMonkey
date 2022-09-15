@@ -17,5 +17,6 @@ namespace MusicMonkeyWebApp.Helpers
         public string Url { get; set; }
         public bool IsActive { get; set; }
         public List<HeaderLink> SubLinks { get; set; }
+        public List<string> Roles { get; set; }
     }
 }
