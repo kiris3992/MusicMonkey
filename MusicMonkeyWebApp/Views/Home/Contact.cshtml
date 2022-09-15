@@ -2,6 +2,68 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Contact";
 }
+<style>
+    .contact-form-area .form-control {
+        position: relative;
+        z-index: 2;
+        height: 45px;
+        width: 100%;
+        background-color: transparent;
+        font-size: 14px;
+        margin-bottom: 15px;
+        border: none;
+        border-radius: 0;
+        padding: 15px 0;
+        font-style: italic;
+        color: #b3b3b3;
+        border-bottom: 1px solid #000000;
+        -webkit-transition-duration: 500ms;
+        transition-duration: 500ms;
+    }
+
+        .contact-form-area .form-control:focus {
+            box-shadow: none;
+            border-bottom: 1px solid #000000;
+        }
+
+    .contact-form-area textarea.form-control {
+        height: 160px;
+    }
+
+    .oneMusic-btn {
+        background-color: #fff;
+        position: relative;
+        z-index: 1;
+        display: inline-block;
+        min-width: 212px;
+        height: 49px;
+        color: #5c00ce;
+        border: 2px solid #290849;
+        border-radius: 0;
+        padding: 0 30px;
+        font-size: 16px;
+        line-height: 47px;
+        text-transform: capitalize;
+    }
+
+        .oneMusic-btn:hover {
+            transition-duration: 500ms;
+            font-size: 16px;
+            background-color: #290849;
+            color: #fff;
+        }
+
+    .section-heading {
+        position: relative;
+        z-index: 1;
+        margin-bottom: 50px;
+        text-align: center;
+    }
+
+        .section-heading h2 {
+            color: #5c00ce;
+        }
+</style>
 
 <script>
     $(document).ready(() => {
@@ -47,5 +109,53 @@
         <hr />
     </div>
 
-    <div id="contacts" class="container" ></div>
+    <div id="contacts" class="container"></div>
+</section>
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-heading">
+                    <p>See what’s new</p>
+                    <h2>Get In Touch</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <!-- Contact Form Area -->
+                <div class="contact-form-area">
+                    <form action="#" method="post">
+                        <div class="row">
+                            <div class="col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="name" placeholder="Name">
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <input type="email" class="form-control" id="email" placeholder="E-mail">
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="subject" placeholder="Subject">
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <textarea name="message" class="form-control" id="message" cols="30" rows="10" placeholder="Message"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-12 text-center">
+                                <button class="btn oneMusic-btn mt-30" type="submit">Send <i class="fa fa-angle-double-right"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>

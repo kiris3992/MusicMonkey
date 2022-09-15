@@ -208,7 +208,7 @@ body::-webkit-scrollbar-thumb {
     top: 0;
     left: 0;
     right: 0;
-    background-color: #151f30;
+    background-color: #290849;
     z-index: 100;
     transition: 0.5s ease;
 }
@@ -229,13 +229,13 @@ body::-webkit-scrollbar-thumb {
     justify-content: flex-start;
     align-items: center;
     height: 70px;
-    background-color: #151f30;
+    background-color: #290849;
     width: 80%;
 }
 
     .header__logo img {
-        width: 80px;
-        height: auto;
+        width: auto;
+        height: 60%;
         display: block;
     }
 
@@ -586,6 +586,8 @@ body::-webkit-scrollbar-thumb {
     margin-bottom: 20px;
     border-bottom: 2px solid black;
     padding-bottom: 20px;
+    padding-top:20px;
+   
 }
 
     .main__title h2 {
@@ -602,7 +604,7 @@ body::-webkit-scrollbar-thumb {
         }
 
 .main__title-stat {
-    color: #e0e0e0;
+    color: black;
     font-size: 14px;
     margin-left: 15px;
     margin-top: 10px;
@@ -615,7 +617,6 @@ body::-webkit-scrollbar-thumb {
     align-items: flex-start;
     margin-left: auto;
     width: 100%;
-    margin-top: 20px;
 }
 
 .main__title-form {
@@ -631,7 +632,7 @@ body::-webkit-scrollbar-thumb {
     .main__title-form input {
         height: 40px;
         border-radius: 16px;
-        background-color: #151f30;
+        background-color: grey;
         border: none;
         padding: 0 60px 0 20px;
         font-size: 14px;
@@ -672,6 +673,7 @@ body::-webkit-scrollbar-thumb {
     text-transform: uppercase;
     font-weight: 500;
     margin-left: auto;
+    
 }
 
     .main__title-link:hover {
@@ -679,7 +681,35 @@ body::-webkit-scrollbar-thumb {
         background-color: black;
     }
 
-.main__table-wrap {
+.main__title_colapse {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 350px;
+    height: 30px;
+    border-radius: 16px;
+    background-color: #3f008c;
+    font-size: 14px;
+    color: #e0e0e0;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-left:10px;
+}
+
+.main__title_colapse a{
+    color:white;
+    padding:10px;
+}
+
+    .main__title_colapse a:hover {
+        color: black;
+        padding: 10px;
+        font-weight: 200;
+        cursor:pointer;
+    }
+
+    .main__table-wrap {
     position: relative;
     width: 100%;
     overflow: auto;
@@ -692,12 +722,12 @@ body::-webkit-scrollbar-thumb {
 }
 
     .main__table thead {
-        border-bottom: 20px solid #3f008c;
+        border-bottom: 20px solid lightgray;
     }
 
         .main__table thead th {
             font-size: 12px;
-            color: #e0e0e0;
+            color: black;
             font-weight: 400;
             padding: 0 20px 0 20px;
             line-height: 100%;
@@ -706,7 +736,7 @@ body::-webkit-scrollbar-thumb {
         }
 
     .main__table tbody tr {
-        border-bottom: 10px solid #3f008c;
+        border-bottom: 10px solid lightgray;
     }
 
     .main__table tbody td {
@@ -761,7 +791,7 @@ body::-webkit-scrollbar-thumb {
     font-weight: 400;
     line-height: 30px;
     padding: 20px;
-    background-color: #151f30;
+    background-color: #3f008c;
     white-space: nowrap;
 }
 
@@ -803,7 +833,7 @@ body::-webkit-scrollbar-thumb {
     justify-content: flex-start;
     align-items: center;
     padding: 20px;
-    background-color: #151f30;
+    background-color: #3f008c;
 }
 
 .main__table-btn {
@@ -830,7 +860,7 @@ body::-webkit-scrollbar-thumb {
     }
 
 .main__table-btn--delete {
-    background-color: rgba(235,87,87,0.1);
+    background-color: black;
 }
 
     .main__table-btn--delete svg {
@@ -838,11 +868,11 @@ body::-webkit-scrollbar-thumb {
     }
 
     .main__table-btn--delete:hover {
-        background-color: rgba(235,87,87,0.2);
+        background-color: #5c00ce;
     }
 
 .main__table-btn--edit {
-    background-color: rgba(47,128,237,0.1);
+    background-color: black;
 }
 
     .main__table-btn--edit svg {
@@ -850,7 +880,7 @@ body::-webkit-scrollbar-thumb {
     }
 
     .main__table-btn--edit:hover {
-        background-color: rgba(47,128,237,0.2);
+        background-color: #5c00ce;
     }
 
 .main__table-btn--banned {
@@ -866,7 +896,7 @@ body::-webkit-scrollbar-thumb {
     }
 
 .main__table-btn--view {
-    background-color: rgba(255,195,18,0.1);
+    background-color: black;
 }
 
     .main__table-btn--view svg {
@@ -874,7 +904,7 @@ body::-webkit-scrollbar-thumb {
     }
 
     .main__table-btn--view:hover {
-        background-color: rgba(255,195,18,0.2);
+        background-color: #5c00ce;
     }
 
 .main__user {
@@ -1136,7 +1166,7 @@ body::-webkit-scrollbar-thumb {
 .filter__item-label {
     font-size: 12px;
     display: block;
-    color: #e0e0e0;
+    color: gray;
     font-weight: 400;
     line-height: 10px;
 }
@@ -1158,7 +1188,7 @@ body::-webkit-scrollbar-thumb {
         background-color: transparent;
         border: none;
         font-size: 14px;
-        color: #fff;
+        color: black;
         cursor: pointer;
         height: 30px;
         margin-right: 10px;
@@ -1179,7 +1209,7 @@ body::-webkit-scrollbar-thumb {
             display: block;
             width: 16px;
             height: 2px;
-            background-color: #e0e0e0;
+            background-color: #3f008c;
             left: 0;
             top: 50%;
             transition: 0.5s;
@@ -1195,19 +1225,19 @@ body::-webkit-scrollbar-thumb {
     .filter__item-btn[aria-expanded="true"] span:before {
         transform: rotate(45deg);
         margin-top: -2px;
-        background-color: #2f80ed;
+        background-color: black;
     }
 
     .filter__item-btn[aria-expanded="true"] span:after {
         margin-top: -2px;
         width: 16px;
         transform: rotate(-45deg);
-        background-color: #2f80ed;
+        background-color: black;
     }
 
     .filter__item-btn:hover span:before,
     .filter__item-btn:hover span:after {
-        background-color: #2f80ed;
+        background-color: #5c00ce;
     }
 
 .filter__item-menu {
@@ -1216,7 +1246,7 @@ body::-webkit-scrollbar-thumb {
     margin-top: 0;
     width: 200px;
     padding: 0 20px;
-    background-color: #151f30;
+    background-color: dimgrey;
     display: block;
     transition: 0.5s;
     position: absolute;
@@ -1224,6 +1254,7 @@ body::-webkit-scrollbar-thumb {
     pointer-events: none;
     opacity: 0;
     border-radius: 16px;
+    
 }
 
     .filter__item-menu li {
@@ -1237,7 +1268,7 @@ body::-webkit-scrollbar-thumb {
     }
 
         .filter__item-menu li:hover {
-            color: #2f80ed;
+            color: #3f008c;
         }
 
         .filter__item-menu li:first-child {
@@ -1273,7 +1304,7 @@ body::-webkit-scrollbar-thumb {
     width: 100%;
     height: 50px;
     border-radius: 16px;
-    background-color: #151f30;
+    background-color: gray;
 }
 
 .paginator__pages {
@@ -1296,7 +1327,7 @@ body::-webkit-scrollbar-thumb {
         }
 
         .paginator__paginator li.active a {
-            color: #2f80ed;
+            color: black;
             cursor: default;
         }
 
@@ -1320,11 +1351,12 @@ body::-webkit-scrollbar-thumb {
         }
 
         .paginator__paginator a:hover {
-            color: #2f80ed;
+            color: black;
+            font-size:medium;
         }
 
             .paginator__paginator a:hover svg {
-                stroke: #2f80ed;
+                stroke: dimgrey;
             }
 
 @media (min-width: 768px) {
@@ -2965,7 +2997,7 @@ body::-webkit-scrollbar-thumb {
 	Scrollbar-track
 ==============================*/
 .scrollbar-track-y {
-    background: #3f008c !important;
+    background: black !important;
     top: 10px !important;
     bottom: 10px !important;
     height: auto !important;
@@ -2976,13 +3008,13 @@ body::-webkit-scrollbar-thumb {
 }
 
 .scrollbar-thumb-y {
-    background: #2f80ed !important;
+    background: black !important;
     width: 4px !important;
     border-radius: 4px !important;
 }
 
 .scrollbar-track-x {
-    background: #3f008c !important;
+    background: black !important;
     left: 10px !important;
     right: 10px !important;
     height: 4px !important;
@@ -2993,7 +3025,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .scrollbar-thumb-x {
-    background: #2f80ed !important;
+    background: black !important;
     height: 4px !important;
     border-radius: 4px !important;
 }
