@@ -41,6 +41,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AbstractPaymentFactory\AbstractFactory\Factory.cs" />
+    <Compile Include="AbstractPaymentFactory\AbstractFactory\IValidFactory.cs" />
+    <Compile Include="AbstractPaymentFactory\Factory\AlphaBankFactory.cs" />
+    <Compile Include="AbstractPaymentFactory\Factory\IFactory.cs" />
+    <Compile Include="AbstractPaymentFactory\Factory\NationalBankFactory.cs" />
+    <Compile Include="AbstractPaymentFactory\Factory\PeirausBankFactory.cs" />
+    <Compile Include="AbstractPaymentFactory\Product\AlphaCard.cs" />
+    <Compile Include="AbstractPaymentFactory\Product\ICard.cs" />
+    <Compile Include="AbstractPaymentFactory\Product\NationalCard.cs" />
+    <Compile Include="AbstractPaymentFactory\Product\PeirausCard.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
