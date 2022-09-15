@@ -119,7 +119,7 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
             {
                 Id = artist.Id,
                 Name = artist.Name,
-                Country = artist.Country,
+                Country = artist.Country.ToString().Replace("_", " "),
                 PhotoUrl = artist.PhotoUrl,
                 CareerStartDate = artist.CareerStartDate,
                 Albums = artist.Albums.Select(x => new  //Albums
