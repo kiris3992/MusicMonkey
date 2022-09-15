@@ -3,13 +3,674 @@
     ViewBag.Title = "About";
 }
 
-<div style="margin:20px auto; width: 600px; text-align:center;">
-    <h1>Metasharps</h1>
-    <hr />
-    <p style="text-align:justify;">
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-    </p>
-    <p style="text-align:justify;">
-        Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
-    </p>
-</div>
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Charts</title>
+    <style>
+        .chartBox {
+            padding: 20px;
+            border-radius: 15px;
+            border: solid 3px rgba(1, 26, 104, 5);
+            background: white;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <div class="col-12 text-center">
+            <hr />
+            <h3 id="chartTitle">Most Popular Artists</h3>
+            <hr />
+            <div class="chartBox">
+                <canvas id="myChart" @*width="200" height="100"*@></canvas>
+                <hr />
+                <div class="text-lg-left">
+                    <select onchange="renderChart(this)" style="color: purple; border-color: mediumpurple; font-size: medium; border-style:dotted">
+                        <option value="1st chart">1st chart</option>
+                        <option value="2nd chart">2nd chart</option>
+                        <option value="3rd chart">3rd chart</option>
+                        <option value="4th chart">4th chart</option>
+                        <option value="5th chart">5th chart</option>
+                    </select>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    @*<script type="text/javascript" src="https://unpkg.com/chart.js-plugin-labels-dv/dist/chartjs-plugin-labels.min.js"></script>*@
+
+
+    <script>
+
+        let chartTitle = document.querySelector('#chartTitle');
+
+        //var settings = {
+        //    "url": "https://localhost:44314/api/TrackApi",
+        //    "method": "GET",
+        //    "timeout": 0,
+        //};
+
+        //$.ajax(settings).done(function (tracks) {
+        //    console.log(tracks);
+        //    const popularity = Artist.map(x => x.Popularity);
+
+
+        // 1st Chart: Bar Chart for Artist Popularity
+
+        const labels = ['Eminem',
+            'Shakira',
+            '2pac',
+            'Linking Park',
+            'AC/DC',
+            'METALICA',
+        ];
+
+        const data = {
+            labels: labels,
+            datasets: [{
+                label: 'Most Popular Artists',
+                backgroundColor: [
+                    'rgba(153, 102, 255, 0.4)',
+                    'rgba(54, 162, 235, 0.4)',
+                    'rgba(255, 206, 86, 0.4)',
+                    'rgba(75, 192, 192, 0.4)',
+                    'rgba(255, 99, 132, 0.4)',
+                    'rgba(255, 159, 64, 0.4)'
+                ],
+                borderColor: [
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1,
+
+                hoverBorderRadius: 50,
+                hoverBorderWidth: 2.5,
+                hoverBackgroundColor: [
+                    'rgba(153, 102, 255, 0.9)',
+                    'rgba(54, 162, 235, 0.9)',
+                    'rgba(255, 206, 86, 0.9)',
+                    'rgba(75, 192, 192, 0.9)',
+                    'rgba(255, 99, 132, 0.9)',
+                    'rgba(255, 159, 64, 0.9)'
+                ],
+
+                data: [5, 4, 3, 2, 1, 0.7],
+            }]
+        };
+
+        const tooltip = {
+            backgroundColor: 'lightgray',
+            titleColor: 'black',
+            borderColor: 'black',
+            borderWidth: 0.425,
+            callbacks: {
+                label: function (context) {
+                },
+
+            }
+        };
+
+        const config = {
+            type: 'bar',
+            data: data,
+            options:
+            {
+                aspectRatio: 1.8,
+                plugins: {
+                    tooltip,
+
+
+                    legend: {
+                        onClick: (evt, legendItem, legend) => {
+                            const index = legend.chart.data.labels.indexOf(legendItem.text);
+                            legend.chart.toggleDataVisibility(index);
+                            legend.chart.getDataVisibility(index);
+                            legend.chart.update();
+                        },
+
+                        labels: {                         
+                            generateLabels: (chart) => {
+                                let visibility = [];
+                                for (let i = 0; i < chart.data.labels.length; i++) {
+                                    if (chart.getDataVisibility(i) == true) {
+                                        visibility.push(false)
+                                    }
+                                    else {
+                                        visibility.push(true)
+                                    }
+                                };
+
+                                return chart.data.labels.map(
+                                    (label, index) => ({
+                                        text: label,
+                                        strokeStyle: chart.data.datasets[0].borderColor[index],
+                                        fillStyle: chart.data.datasets[0].backgroundColor[index],
+                                        hidden: visibility[index]
+                                    })
+                                )
+                            }
+                        }
+                    },
+                },
+                indexAxis: 'y',
+            }
+        };
+
+        // 2nd Chart: Bar Chart for Album Popularity
+
+        const labels2 = ['album1',
+            'album2',
+            'album3',
+            'album4 ',
+            'album5',
+            'album6',
+        ];
+
+        const data2 = {
+            labels: labels2,
+            datasets: [{
+                label: 'Most Popular Albums',
+                backgroundColor: [
+                    'rgba(153, 102, 255, 0.4)',
+                    'rgba(54, 162, 235, 0.4)',
+                    'rgba(255, 206, 86, 0.4)',
+                    'rgba(75, 192, 192, 0.4)',
+                    'rgba(255, 99, 132, 0.4)',
+                    'rgba(255, 159, 64, 0.4)'
+                ],
+                borderColor: [
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1,
+
+                hoverBorderRadius: 1,
+                hoverBorderWidth: 2.5,
+                hoverBackgroundColor: [
+                    'rgba(153, 102, 255, 0.9)',
+                    'rgba(54, 162, 235, 0.9)',
+                    'rgba(255, 206, 86, 0.9)',
+                    'rgba(75, 192, 192, 0.9)',
+                    'rgba(255, 99, 132, 0.9)',
+                    'rgba(255, 159, 64, 0.9)'
+                ],
+
+                data: [5, 4, 3, 2, 1, 0.7],
+            }]
+        };
+
+        const tooltip2 = {
+            backgroundColor: 'lightgray',
+            titleColor: 'black',
+            borderColor: 'black',
+            borderWidth: 0.425,
+            callbacks: {
+                label: function (context) {
+                },
+
+            }
+        };
+
+        const config2 = {
+            type: 'bar',
+            data: data2,
+            options:
+            {
+                aspectRatio: 1.8,
+                plugins: {
+                    tooltip2,
+
+
+                    legend: {
+                        onClick: (evt, legendItem, legend) => {
+                            const index = legend.chart.data.labels.indexOf(legendItem.text);
+                            legend.chart.toggleDataVisibility(index);
+                            legend.chart.getDataVisibility(index);
+                            legend.chart.update();
+                        },
+
+                        labels: {
+                            generateLabels: (chart) => {
+                                let visibility = [];
+                                for (let i = 0; i < chart.data.labels.length; i++) {
+                                    if (chart.getDataVisibility(i) == true) {
+                                        visibility.push(false)
+                                    }
+                                    else {
+                                        visibility.push(true)
+                                    }
+                                };
+
+                                return chart.data.labels.map(
+                                    (label, index) => ({
+                                        text: label,
+                                        strokeStyle: chart.data.datasets[0].borderColor[index],
+                                        fillStyle: chart.data.datasets[0].backgroundColor[index],
+                                        hidden: visibility[index]
+                                    })
+                                )
+                            }
+                        }
+                    },
+
+                },
+                indexAxis: 'x',
+            }
+        };
+
+        // 3rd Chart: Pie chart for Tracks per Genre
+
+
+        const labels3 = ['POP',
+            'ROCK',
+            'RAP',
+            'HIP HOP ',
+            'BLUES',
+            'JAZZ',
+        ];
+
+        const data3 = {
+            labels: labels3,
+            datasets: [{
+                label: 'PERCENTAGE OF TRACKS PER GENRE',
+                backgroundColor: [
+                    'rgba(153, 102, 255, 0.4)',
+                    'rgba(54, 162, 235, 0.4)',
+                    'rgba(255, 206, 86, 0.4)',
+                    'rgba(75, 192, 192, 0.4)',
+                    'rgba(255, 99, 132, 0.4)',
+                    'rgba(255, 159, 64, 0.4)'
+                ],
+                borderColor: [
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1,
+
+                hoverBorderRadius: 1,
+                hoverBorderWidth: 2.5,
+                hoverBackgroundColor: [
+                    'rgba(153, 102, 255, 0.9)',
+                    'rgba(54, 162, 235, 0.9)',
+                    'rgba(255, 206, 86, 0.9)',
+                    'rgba(75, 192, 192, 0.9)',
+                    'rgba(255, 99, 132, 0.9)',
+                    'rgba(255, 159, 64, 0.9)'
+                ],
+
+                data: [5, 4, 3, 2, 1, 0.7],
+            }]
+        };
+
+        const tooltip3 = {
+            backgroundColor: 'lightgray',
+            titleColor: 'black',
+            borderColor: 'black',
+            borderWidth: 0.425,
+            callbacks: {
+                label: function (context) {
+                },
+
+            }
+        };
+
+        const config3 = {
+            type: 'pie',
+            data: data3,
+            options:
+            {
+                aspectRatio: 1.8,
+                plugins: {                  
+                 tooltip3,
+                    legend: {
+                        onClick: (evt, legendItem, legend) => {
+                            const index = legend.chart.data.labels.indexOf(legendItem.text);
+                            legend.chart.toggleDataVisibility(index);
+                            legend.chart.getDataVisibility(index);
+                            legend.chart.update();
+                        },
+
+                        labels: {
+                           
+                            
+                            generateLabels: (chart) => {
+                                let visibility = [];
+                                for (let i = 0; i < chart.data.labels.length; i++) {
+                                    if (chart.getDataVisibility(i) == true) {
+                                        visibility.push(false)
+                                    }
+                                    else {
+                                        visibility.push(true)
+                                    }
+                                };
+
+                                return chart.data.labels.map(
+                                    (label, index) => ({
+                                        text: label,
+                                        strokeStyle: chart.data.datasets[0].borderColor[index],
+                                        fillStyle: chart.data.datasets[0].backgroundColor[index],
+                                        hidden: visibility[index]
+                                    })
+                                )
+                            }
+                        }
+                    },
+
+                },
+                indexAxis: 'x',
+            }
+        };
+
+        // 4th Chart: PolarArea Chart for Albums With More Tracks
+
+        const labels4 = ['album1',
+            'album2',
+            'album3',
+            'album4 ',
+            'album5',
+            'album6',
+        ];
+
+        const data4 = {
+            labels: labels4,
+            datasets: [{
+                label: 'Most Popular Albums',
+                backgroundColor: [
+                    'rgba(153, 102, 255, 0.4)',
+                    'rgba(54, 162, 235, 0.4)',
+                    'rgba(255, 206, 86, 0.4)',
+                    'rgba(75, 192, 192, 0.4)',
+                    'rgba(255, 99, 132, 0.4)',
+                    'rgba(255, 159, 64, 0.4)'
+                ],
+                borderColor: [
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1,
+
+                hoverBorderRadius: 1,
+                hoverBorderWidth: 2.5,
+                hoverBackgroundColor: [
+                    'rgba(153, 102, 255, 0.9)',
+                    'rgba(54, 162, 235, 0.9)',
+                    'rgba(255, 206, 86, 0.9)',
+                    'rgba(75, 192, 192, 0.9)',
+                    'rgba(255, 99, 132, 0.9)',
+                    'rgba(255, 159, 64, 0.9)'
+                ],
+
+                data: [5, 4, 3, 2, 1, 0.7],
+            }]
+        };
+
+        const tooltip4 = {
+            backgroundColor: 'lightgray',
+            titleColor: 'black',
+            borderColor: 'black',
+            borderWidth: 0.425,
+            callbacks: {
+                label: function (context) {
+                },
+
+            }
+        };
+
+        const config4 = {
+            type: 'polarArea',
+            data: data4,
+            options:
+            {
+                aspectRatio: 1.8,
+                plugins: {
+                    tooltip4,
+
+
+                    legend: {
+                        onClick: (evt, legendItem, legend) => {
+                            const index = legend.chart.data.labels.indexOf(legendItem.text);
+                            legend.chart.toggleDataVisibility(index);
+                            legend.chart.getDataVisibility(index);
+                            legend.chart.update();
+                        },
+
+                        labels: {
+                            generateLabels: (chart) => {
+                                let visibility = [];
+                                for (let i = 0; i < chart.data.labels.length; i++) {
+                                    if (chart.getDataVisibility(i) == true) {
+                                        visibility.push(false)
+                                    }
+                                    else {
+                                        visibility.push(true)
+                                    }
+                                };
+
+                                return chart.data.labels.map(
+                                    (label, index) => ({
+                                        text: label,
+                                        strokeStyle: chart.data.datasets[0].borderColor[index],
+                                        fillStyle: chart.data.datasets[0].backgroundColor[index],
+                                        hidden: visibility[index]
+                                    })
+                                )
+                            }
+                        }
+                    },
+
+                },
+                indexAxis: 'x',
+            }
+        };
+
+        // 5th Chart: Line Chart for Albums by Release Date
+
+        const labels5 = ['album1',
+            'album2',
+            'album3',
+            'album4 ',
+            'album5',
+            'album6',
+        ];
+
+        const data5 = {
+            labels: labels5,
+            datasets: [{
+                label: 'Albums Release Date',
+                backgroundColor: [
+                    'rgba(153, 102, 255, 0.4)',
+                    'rgba(54, 162, 235, 0.4)',
+                    'rgba(255, 206, 86, 0.4)',
+                    'rgba(75, 192, 192, 0.4)',
+                    'rgba(255, 99, 132, 0.4)',
+                    'rgba(255, 159, 64, 0.4)'
+                ],
+                borderColor: [
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1,
+
+                hoverBorderRadius: 1,
+                hoverBorderWidth: 2.5,
+                hoverBackgroundColor: [
+                    'rgba(153, 102, 255, 0.9)',
+                    'rgba(54, 162, 235, 0.9)',
+                    'rgba(255, 206, 86, 0.9)',
+                    'rgba(75, 192, 192, 0.9)',
+                    'rgba(255, 99, 132, 0.9)',
+                    'rgba(255, 159, 64, 0.9)'
+                ],
+
+                data: [1994, 1995, 1996, 1997, 1998, 1999],
+            }]
+        };
+
+        const tooltip5 = {
+            backgroundColor: 'lightgray',
+            titleColor: 'black',
+            borderColor: 'black',
+            borderWidth: 0.425,
+            callbacks: {
+                label: function (context) {
+                },
+
+            }
+        };
+
+        const config5 = {
+            type: 'line',
+            data: data5,
+            options:
+            {
+                aspectRatio: 1.8,
+                plugins: {
+                    tooltip5,
+
+
+                    legend: {
+                        onClick: (evt, legendItem, legend) => {
+                            const index = legend.chart.data.labels.indexOf(legendItem.text);
+                            legend.chart.toggleDataVisibility(index);
+                            legend.chart.getDataVisibility(index);
+                            legend.chart.update();
+                        },
+
+                        labels: {
+                            generateLabels: (chart) => {
+                                let visibility = [];
+                                for (let i = 0; i < chart.data.labels.length; i++) {
+                                    if (chart.getDataVisibility(i) == true) {
+                                        visibility.push(false)
+                                    }
+                                    else {
+                                        visibility.push(true)
+                                    }
+                                };
+
+                                return chart.data.labels.map(
+                                    (label, index) => ({
+                                        text: label,
+                                        strokeStyle: chart.data.datasets[0].borderColor[index],
+                                        fillStyle: chart.data.datasets[0].backgroundColor[index],
+                                        hidden: visibility[index]
+                                    })
+                                )
+                            }
+                        }
+                    },
+
+                },
+                indexAxis: 'y',
+            }
+        };
+
+
+        let myChart = new Chart(
+            document.getElementById('myChart'),
+            config
+        );
+
+        /* );*/
+        /*   });*/
+
+        function renderChart(type) {
+            myChart.destroy();
+            if (type.value === '1st chart') {
+                myChart = new Chart(
+                    document.getElementById('myChart'),
+                    config,
+                    chartTitle.innerHTML = 'Most Popular Artists'
+                );
+            }
+            if (type.value === '2nd chart') {
+                myChart = new Chart(
+                    document.getElementById('myChart'),
+                    config2,
+                    chartTitle.innerHTML = 'Most Popular Albums'
+                );
+            }
+
+            if (type.value === '3rd chart') {
+                myChart = new Chart(
+                    document.getElementById('myChart'),
+                    config3,
+                    chartTitle.innerHTML = 'Tracks Per Genre'
+                );
+            }
+
+            if (type.value === '4th chart') {
+                myChart = new Chart(
+                    document.getElementById('myChart'),
+                    config4,
+                    chartTitle.innerHTML = 'Albums with more tracks'
+                );
+            }
+
+            if (type.value === '5th chart') {
+                myChart = new Chart(
+                    document.getElementById('myChart'),
+                    config5,
+                    chartTitle.innerHTML = 'Albums by Release Date'
+                );
+            }
+
+
+        }
+
+    </script>
+
+</body>
+</html>
+
+@*[HttpGet]
+
+    public ActionResult GetAllTracksChart(int count, string sortOrder)
+    {
+        var tracks = unit.Tracks
+                    .GetTracksWithEverything()
+                    .Select(x => new Track { Id = x.Id, Title = x.Title, DurationSecs = x.DurationSecs, Popularity = x.Popularity})
+                    .Take(count);
+
+        switch (sortOrder)
+        {
+            case "ASC": Tracks = Tracks.OrderBy(x => Popularity).ToList(); break;
+            case "DESC": Tracks = Tracks.OrderByDescending(x => Popularity).ToList(); break;
+            default : Tracks = Tracks.OrderBy(x => Popularity).ToList(); break;
+
+
+        }
+
+            return Tracks
+
+    }*@
