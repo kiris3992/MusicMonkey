@@ -24,16 +24,21 @@ namespace MusicMonkeyWebApp.Controllers
                         }
                     },
                     new HeaderLink { Action = "Plans", Title = "Pricing Plans", Url = "" },
-                    new HeaderLink { Action = "Contact", Title = "Contact", Url = "/Home/Contact" },
+                    new HeaderLink { Action = "Contact", Title = "Contact", Url = "/Home/Contact", Roles = new List<string>(){ "Admin", "Silver" } },
                     new HeaderLink { Action = "Register", Title = "Register", Url = "/Account/Register" },
                     new HeaderLink { Action = "Log In", Title = "Log In", Url = "/Account/Login" }
                 }
             };
 
             model.Links.ForEach(l => l.IsActive = l.Action == model.CurrentAction);
-            
+
+
+            var curUser = Request.RequestContext.HttpContext.User;
+            model.Links = new List<HeaderLink>(model.Links.Where(o => o.Roles == null || o.Roles.Any(r => curUser.IsInRole(r))).ToList());
+
             return model;
         }
+
 
         [ChildActionOnly]
         public PartialViewResult Header() => PartialView("Master/_Partial_Header", CreateHeader());
