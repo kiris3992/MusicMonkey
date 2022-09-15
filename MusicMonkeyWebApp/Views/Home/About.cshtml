@@ -47,7 +47,7 @@
 
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script type="text/javascript" src="https://unpkg.com/chart.js-plugin-labels-dv/dist/chartjs-plugin-labels.min.js"></script>
+    @*<script type="text/javascript" src="https://unpkg.com/chart.js-plugin-labels-dv/dist/chartjs-plugin-labels.min.js"></script>*@
 
 
     <script>
@@ -342,10 +342,8 @@
             options:
             {
                 aspectRatio: 1.8,
-                plugins: {
-                    tooltip3,
-
-
+                plugins: {                  
+                 tooltip3,
                     legend: {
                         onClick: (evt, legendItem, legend) => {
                             const index = legend.chart.data.labels.indexOf(legendItem.text);
@@ -355,6 +353,8 @@
                         },
 
                         labels: {
+                           
+                            
                             generateLabels: (chart) => {
                                 let visibility = [];
                                 for (let i = 0; i < chart.data.labels.length; i++) {
