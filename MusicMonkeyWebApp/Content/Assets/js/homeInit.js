@@ -41,7 +41,7 @@ $(document).ready(function () {
                         </div>`,
             SingleJpPlayer.init,
             new SiteHelper.AjaxHelper.ajaxObject('api/TrackApi?type=full')).start();
-
+        
         //  Event Section
         SiteHelper.AjaxHelper.contentLoader(
             'data-artists-container',
@@ -51,12 +51,12 @@ $(document).ready(function () {
                                         <object data="${album.PhotoUrl == '' ? '_' : album.PhotoUrl}" type="image/png">
                                             <img src="/Content/Assets/img/discography/no-photo.png" alt="${album.Name}">
                                         </object>
-                                        <div class="tag-date">
-                                            <span>${album.CareerStartDate.split('T')[0]}</span>
+                                        <div class="tag">
+                                            <span style="font-size: 18px;">${album.Name}</span>
                                         </div>
                                     </div>
                                     <div class="event__item__text">
-                                        <h4>${album.Name}</h4>
+                                        <h5>${album.ArtistGenres.length ? album.ArtistGenres.join(', ') : 'No Genre'}</h5>
                                         <p><i class="fa fa-map-marker"></i> ${album.Country}</p>
                                     </div>
                                 </div>

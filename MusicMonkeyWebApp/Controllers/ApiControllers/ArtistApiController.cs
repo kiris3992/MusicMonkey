@@ -17,9 +17,14 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
 {
     public class ArtistApiController : BaseApiController
     {
+
+
+
+
         // GET: api/ArtistApi
         public IEnumerable<Object> GetArtists()
         {
+
             return unit.Artists
                 .GetArtistsWithEverything()
                 .Select(x => ArtistDTOModel(x));
@@ -28,7 +33,7 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
 
         // GET: api/ArtistApi/5
         [ResponseType(typeof(Object))]
-        public Object GetArtist(int? id)
+        public object GetArtist(int? id)
         {
             if (id is null)
             {
@@ -112,36 +117,63 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
         }
 
 
-        //Custom Service Methods
-        private Object ArtistDTOModel(Artist artist)
+        private object ArtistDTOModel(Artist a)
         {
-            return new
-            {
-                Id = artist.Id,
-                Name = artist.Name,
-                Country = artist.Country.ToString().Replace("_", " "),
-                PhotoUrl = artist.PhotoUrl,
-                CareerStartDate = artist.CareerStartDate,
-                Albums = artist.Albums.Select(x => new  //Albums
-                {
-                    Id = x.Id,
-                    Title = x.Title,
-                    ReleaseDate = x.ReleaseDate,
-                    CoverPhotoUrl = x.CoverPhotoUrl,
-                    Tracks = x.Tracks.Select(y => new //Tracks
-                    {
-                        Id = x.Title,
-                        Title = y.Title,
-                        DurationSecs = y.DurationSecs,
-                        AudioUrl = y.AudioUrl,
-                        Popularity = y.Popularity,
-                        TrackGenres = y.TrackGenres.SelectMany(p => new string[] { p.Type })  //Track Genres
+            return new {
+                a.Id,
+                a.Name,
+                Country = a.Country.ToString().Replace("_", " "),
+                a.PhotoUrl,
+                a.CareerStartDate,
+                ArtistGenres = a.ArtistGenres.SelectMany(p => new[] { p.Type }),
+                Albums = a.Albums.Select(x => new {
+                    x.Id,
+                    x.Title,
+                    x.ReleaseDate,
+                    x.CoverPhotoUrl,
+                    AlbumGenres = x.AlbumGenres.SelectMany(p => new[] { p.Type }),
+                    Tracks = x.Tracks.Select(y => new {
+                        y.Id,
+                        y.Title,
+                        y.DurationSecs,
+                        y.AudioUrl,
+                        y.Popularity,
+                        TrackGenres = y.TrackGenres.SelectMany(p => new[] { p.Type })
                     }),
-                    AlbumGenres = x.AlbumGenres.SelectMany(p => new string[] { p.Type })  //Album Genres
                 }),
-                ArtistGenres = artist.ArtistGenres.SelectMany(p => new string[] { p.Type })  //Artist Genres
             };
         }
+
+        //Custom Service Methods
+        //private Object ArtistDTOModel(Artist artist)
+        //{
+        //    return new
+        //    {
+        //        Id = artist.Id,
+        //        Name = artist.Name,
+        //        Country = artist.Country.ToString().Replace("_", " "),
+        //        PhotoUrl = artist.PhotoUrl,
+        //        CareerStartDate = artist.CareerStartDate,
+        //        Albums = artist.Albums.Select(x => new  //Albums
+        //        {
+        //            Id = x.Id,
+        //            Title = x.Title,
+        //            ReleaseDate = x.ReleaseDate,
+        //            CoverPhotoUrl = x.CoverPhotoUrl,
+        //            Tracks = x.Tracks.Select(y => new //Tracks
+        //            {
+        //                Id = x.Title,
+        //                Title = y.Title,
+        //                DurationSecs = y.DurationSecs,
+        //                AudioUrl = y.AudioUrl,
+        //                Popularity = y.Popularity,
+        //                TrackGenres = y.TrackGenres.SelectMany(p => new string[] { p.Type })  //Track Genres
+        //            }),
+        //            AlbumGenres = x.AlbumGenres.SelectMany(p => new string[] { p.Type })  //Album Genres
+        //        }),
+        //        ArtistGenres = artist.ArtistGenres.SelectMany(p => new string[] { p.Type })  //Artist Genres
+        //    };
+        //}
         private void DeleteAllAlbumsAndTracksOfArtist(Artist artist)
         {
             var albums = unit.Albums

@@ -40,5 +40,12 @@ namespace DAL.Initializers.TeamsSeeding
         public Genre hardRock = new Genre("Hard Rock");
         public Genre heavyMetal = new Genre("Heavy Metal");
         public Genre grunge = new Genre("Grunge");
+        public Genre alternativeRock = new Genre("Alternative Rock");
+        public Genre punkRock = new Genre("Punk Rock");
+        public Genre electroPunk = new Genre("Electro Punk");
+        public Genre electronicRock = new Genre("Electronic Rock");
+        public Genre bigBeat = new Genre("Big Beat");
+
+
     }
 }

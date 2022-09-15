@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
   <Import Project="..\packages\Microsoft.TypeScript.MSBuild.4.7.4\build\Microsoft.TypeScript.MSBuild.props" Condition="Exists('..\packages\Microsoft.TypeScript.MSBuild.4.7.4\build\Microsoft.TypeScript.MSBuild.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -47,10 +48,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
@@ -182,6 +183,9 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AlbumController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ArtistController.cs" />
     <Compile Include="Areas\Public\Controllers\HomeController.cs" />
     <Compile Include="Areas\Public\PublicAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -202,6 +206,35 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Admin\Assets_Admin\404.html" />
+    <Content Include="Areas\Admin\Assets_Admin\add-item.html" />
+    <Content Include="Areas\Admin\Assets_Admin\catalog.html" />
+    <Content Include="Areas\Admin\Assets_Admin\comments.html" />
+    <Content Include="Areas\Admin\Assets_Admin\css\admin.css" />
+    <Content Include="Areas\Admin\Assets_Admin\css\bootstrap-grid.min.css" />
+    <Content Include="Areas\Admin\Assets_Admin\css\bootstrap-reboot.min.css" />
+    <Content Include="Areas\Admin\Assets_Admin\css\magnific-popup.css" />
+    <Content Include="Areas\Admin\Assets_Admin\css\select2.min.css" />
+    <Content Include="Areas\Admin\Assets_Admin\edit-user.html" />
+    <Content Include="Areas\Admin\Assets_Admin\forgot.html" />
+    <Content Include="Areas\Admin\Assets_Admin\icon\favicon-32x32.png" />
+    <Content Include="Areas\Admin\Assets_Admin\img\bg.jpg" />
+    <Content Include="Areas\Admin\Assets_Admin\img\checkmark.svg" />
+    <Content Include="Areas\Admin\Assets_Admin\img\img.svg" />
+    <Content Include="Areas\Admin\Assets_Admin\img\logo.svg" />
+    <Content Include="Areas\Admin\Assets_Admin\img\user.svg" />
+    <Content Include="Areas\Admin\Assets_Admin\img\video.svg" />
+    <Content Include="Areas\Admin\Assets_Admin\index.html" />
+    <Content Include="Areas\Admin\Assets_Admin\js\admin.js" />
+    <Content Include="Areas\Admin\Assets_Admin\js\bootstrap.bundle.min.js" />
+    <Content Include="Areas\Admin\Assets_Admin\js\jquery-3.5.1.min.js" />
+    <Content Include="Areas\Admin\Assets_Admin\js\jquery.magnific-popup.min.js" />
+    <Content Include="Areas\Admin\Assets_Admin\js\select2.min.js" />
+    <Content Include="Areas\Admin\Assets_Admin\js\smooth-scrollbar.js" />
+    <Content Include="Areas\Admin\Assets_Admin\reviews.html" />
+    <Content Include="Areas\Admin\Assets_Admin\signin.html" />
+    <Content Include="Areas\Admin\Assets_Admin\signup.html" />
+    <Content Include="Areas\Admin\Assets_Admin\users.html" />
     <Content Include="Areas\Public\Assets\about.html" />
     <Content Include="Areas\Public\Assets\blog-details.html" />
     <Content Include="Areas\Public\Assets\blog.html" />
@@ -533,6 +566,17 @@
     <Content Include="Areas\Public\Assets\Source\SlickNav-master.zip" />
     <Content Include="Areas\Public\Views\Shared\_LayoutHome.cshtml" />
     <Content Include="Areas\Public\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Layout\_AdminLayout.cshtml" />
+    <Content Include="Areas\Admin\Assets_Admin\css\admin.styl" />
+    <Content Include="Areas\Admin\Assets_Admin\css\bootstrap-grid.min.css.map" />
+    <Content Include="Areas\Admin\Assets_Admin\css\bootstrap-reboot.min.css.map" />
+    <Content Include="Areas\Admin\Assets_Admin\js\bootstrap.bundle.min.js.map" />
+    <Content Include="Areas\Admin\Views\Layout\AdminMetaHead.cshtml" />
+    <Content Include="Areas\Admin\Views\Layout\SideBar.cshtml" />
+    <Content Include="Areas\Admin\Views\Layout\Stats.cshtml" />
+    <Content Include="Areas\Admin\Views\Artist\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Album\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -823,9 +867,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Controllers\" />
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Areas\Admin\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -891,8 +933,11 @@
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
     <Error Condition="!Exists('..\packages\Microsoft.TypeScript.MSBuild.4.7.4\build\Microsoft.TypeScript.MSBuild.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.TypeScript.MSBuild.4.7.4\build\Microsoft.TypeScript.MSBuild.props'))" />
     <Error Condition="!Exists('..\packages\Microsoft.TypeScript.MSBuild.4.7.4\build\Microsoft.TypeScript.MSBuild.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.TypeScript.MSBuild.4.7.4\build\Microsoft.TypeScript.MSBuild.targets'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
   </Target>
   <Import Project="..\packages\Microsoft.TypeScript.MSBuild.4.7.4\build\Microsoft.TypeScript.MSBuild.targets" Condition="Exists('..\packages\Microsoft.TypeScript.MSBuild.4.7.4\build\Microsoft.TypeScript.MSBuild.targets')" />
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

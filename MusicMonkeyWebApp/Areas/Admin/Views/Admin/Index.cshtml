@@ -1,0 +1,392 @@
+﻿
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Layout/_AdminLayout.cshtml";
+}
+
+
+<script>
+
+
+    $(document).ready(function () {
+
+
+        SiteHelper.AjaxHelper.contentLoader(
+            'top-tracks',
+            (track, i) => `<tr>
+                                        <td>
+                                            <div class="main__table-text">${track.Id}</div>
+                                        </td>
+                                        <td>
+                                            <div class="main__table-text"><a href="#">${track.Title}</a></div>
+                                        </td>
+                                        <td>
+                                            <div class="main__table-text" style="font-size: 12px;">${track.TrackGenres.length ? track.TrackGenres.join(', ') : 'N/K'}</div>
+                                        </td>
+                                        <td>
+                                            <div class="main__table-text main__table-text--rate"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22,9.67A1,1,0,0,0,21.14,9l-5.69-.83L12.9,3a1,1,0,0,0-1.8,0L8.55,8.16,2.86,9a1,1,0,0,0-.81.68,1,1,0,0,0,.25,1l4.13,4-1,5.68A1,1,0,0,0,6.9,21.44L12,18.77l5.1,2.67a.93.93,0,0,0,.46.12,1,1,0,0,0,.59-.19,1,1,0,0,0,.4-1l-1-5.68,4.13-4A1,1,0,0,0,22,9.67Zm-6.15,4a1,1,0,0,0-.29.88l.72,4.2-3.76-2a1.06,1.06,0,0,0-.94,0l-3.76,2,.72-4.2a1,1,0,0,0-.29-.88l-3-3,4.21-.61a1,1,0,0,0,.76-.55L12,5.7l1.88,3.82a1,1,0,0,0,.76.55l4.21.61Z" /></svg> ${track.Popularity}</div>
+                                        </td>
+                                    </tr>`,
+            null,
+            new SiteHelper.AjaxHelper.ajaxObject('/api/TrackApi')).start();
+
+
+        SiteHelper.AjaxHelper.contentLoader(
+            'top-albums',
+            (album, i) => `<tr>
+                                        <td>
+                                            <div class="main__table-text">${album.Id}</div>
+                                        </td>
+                                        <td>
+                                            <div class="main__table-text"><a href="#">${album.Title}</a></div>
+                                        </td>
+                                        <td>
+                                            <div class="main__table-text" style="font-size: 12px;">${album.AlbumGenres.length ? album.AlbumGenres.join(', ') : 'N/K'}</div>
+                                        </td>
+                                        <td>
+                                            <div class="main__table-text main__table-text--rate"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-music-note-list" viewBox="0 0 16 16">
+                                              <path d="M12 13c0 1.105-1.12 2-2.5 2S7 14.105 7 13s1.12-2 2.5-2 2.5.895 2.5 2z"/>
+                                              <path fill-rule="evenodd" d="M12 3v10h-1V3h1z"/>
+                                              <path d="M11 2.82a1 1 0 0 1 .804-.98l3-.6A1 1 0 0 1 16 2.22V4l-5 1V2.82z"/>
+                                              <path fill-rule="evenodd" d="M0 11.5a.5.5 0 0 1 .5-.5H4a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 .5 7H8a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 .5 3H8a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5z"/>
+                                            </svg> ${album.TrackTitles.length}</div>
+                                        </td>
+                                    </tr>`,
+            null,
+            new SiteHelper.AjaxHelper.ajaxObject('/api/AlbumApi')).start();
+    });
+
+
+
+
+</script>
+
+<body>
+    <!-- header -->
+    <header class="header">
+        <div class="header__content">
+            <!-- header logo -->
+            <a href="index.html" class="header__logo">
+                <img src="~/Content/Assets/img/logo.png" alt="">
+            </a>
+            <!-- end header logo -->
+            <!-- header menu btn -->
+            <button class="header__btn" type="button">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <!-- end header menu btn -->
+        </div>
+    </header>
+    <!-- end header -->
+    <!-- sidebar -->
+    @Html.Partial("~/Areas/Admin/Views/Layout/SideBar.cshtml")
+    <!-- end sidebar -->
+    <!-- main content -->
+    <main class="main">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- main title -->
+                <div class="col-12">
+                    <div class="main__title">
+                        <h2>Dashboard</h2>
+
+                        <button class="btn main__title-link" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="true" aria-controls="collapseExample">
+                            Add Item
+                        </button>
+                        <div class="collapse main__title_colapse" id="collapseExample">
+                            <div class="card card-body">
+                                <a class="">Add Artist</a>
+                                <a class="">Add Album</a>
+                                <a class="">Add Track</a>
+                            </div>
+                        </div>
+
+
+                        @*<a href="add-item.html" class="main__title-link">add item</a>*@
+                    </div>
+                </div>
+                <!-- end main title -->
+                <!-- stats -->
+                @Html.Partial("~/Areas/Admin/Views/Layout/Stats.cshtml")
+                <!-- end stats -->
+                <!-- dashbox -->
+                <div class="col-12 col-xl-6">
+                    <div class="dashbox">
+                        <div class="dashbox__title">
+                            <h3><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-music-fill" viewBox="0 0 16 16">
+                            <path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm-.5 4.11v1.8l-2.5.5v5.09c0 .495-.301.883-.662 1.123C7.974 12.866 7.499 13 7 13c-.5 0-.974-.134-1.338-.377-.36-.24-.662-.628-.662-1.123s.301-.883.662-1.123C6.026 10.134 6.501 10 7 10c.356 0 .7.068 1 .196V4.41a1 1 0 0 1 .804-.98l1.5-.3a1 1 0 0 1 1.196.98z" />
+                            </svg> Top Tracks</h3>
+
+                            <div class="dashbox__wrap">
+                                <a class="dashbox__refresh" href="#"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21,11a1,1,0,0,0-1,1,8.05,8.05,0,1,1-2.22-5.5h-2.4a1,1,0,0,0,0,2h4.53a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4.77A10,10,0,1,0,22,12,1,1,0,0,0,21,11Z" /></svg></a>
+                                <a class="dashbox__more" href="~/Admin/Track/Index">View All</a>
+                            </div>
+                        </div>
+
+                        <div class="dashbox__table-wrap dashbox__table-wrap--1">
+                            <table class="main__table main__table--dash">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>TITLE</th>
+                                        <th>GENRE</th>
+                                        <th>RATING</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="top-tracks">
+                                    
+                                   
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- end dashbox -->
+                <!-- dashbox -->
+                <div class="col-12 col-xl-6">
+                    <div class="dashbox">
+                        <div class="dashbox__title">
+                            <h3><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-play-fill" viewBox="0 0 16 16">
+                            <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zM6 6.883a.5.5 0 0 1 .757-.429l3.528 2.117a.5.5 0 0 1 0 .858l-3.528 2.117a.5.5 0 0 1-.757-.43V6.884z" />
+                            </svg> Top Albums</h3>
+
+                            <div class="dashbox__wrap">
+                                <a class="dashbox__refresh" href="#"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21,11a1,1,0,0,0-1,1,8.05,8.05,0,1,1-2.22-5.5h-2.4a1,1,0,0,0,0,2h4.53a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4.77A10,10,0,1,0,22,12,1,1,0,0,0,21,11Z" /></svg></a>
+                                <a class="dashbox__more" href="~/Admin/Album/Index">View All</a>
+                            </div>
+                        </div>
+
+                        <div class="dashbox__table-wrap dashbox__table-wrap--2">
+                            <table class="main__table main__table--dash">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>TITLE</th>
+                                        <th>CATEGORY</th>
+                                        <th>TRACKS</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="top-albums">
+                                  
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- end dashbox -->
+                <!-- dashbox -->
+                <div class="col-12 col-xl-6">
+                    <div class="dashbox">
+                        <div class="dashbox__title">
+                            <h3>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                </svg> Top Artists
+                            </h3>
+
+                            <div class="dashbox__wrap">
+                                <a class="dashbox__refresh" href="#"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21,11a1,1,0,0,0-1,1,8.05,8.05,0,1,1-2.22-5.5h-2.4a1,1,0,0,0,0,2h4.53a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4.77A10,10,0,1,0,22,12,1,1,0,0,0,21,11Z" /></svg></a>
+                                <a class="dashbox__more" href="~/Admin/Artist/Index">View All</a>
+                            </div>
+                        </div>
+
+                        <div class="dashbox__table-wrap dashbox__table-wrap--3">
+                            <table class="main__table main__table--dash">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>FULL NAME</th>
+                                        <th>EMAIL</th>
+                                        <th>USERNAME</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="main__table-text">23</div>
+                                        </td>
+                                        <td>
+                                            <div class="main__table-text"><a href="#">Brian Cranston</a></div>
+                                        </td>
+                                        <td>
+                                            <div class="main__table-text main__table-text--grey">bcxwz@email.com</div>
+                                        </td>
+                                        <td>
+                                            <div class="main__table-text">BrianXWZ</div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="main__table-text">22</div>
+                                        </td>
+                                        <td>
+                                            <div class="main__table-text"><a href="#">Jesse Plemons</a></div>
+                                        </td>
+                                        <td>
+                                            <div class="main__table-text main__table-text--grey">jess@email.com</div>
+                                        </td>
+                                        <td>
+                                            <div class="main__table-text">Jesse.P</div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="main__table-text">21</div>
+                                        </td>
+                                        <td>
+                                            <div class="main__table-text"><a href="#">Matt Jones</a></div>
+                                        </td>
+                                        <td>
+                                            <div class="main__table-text main__table-text--grey">matt@email.com</div>
+                                        </td>
+                                        <td>
+                                            <div class="main__table-text">Matty</div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="main__table-text">20</div>
+                                        </td>
+                                        <td>
+                                            <div class="main__table-text"><a href="#">Tess Harper</a></div>
+                                        </td>
+                                        <td>
+                                            <div class="main__table-text main__table-text--grey">harper@email.com</div>
+                                        </td>
+                                        <td>
+                                            <div class="main__table-text">Harper123</div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="main__table-text">19</div>
+                                        </td>
+                                        <td>
+                                            <div class="main__table-text"><a href="#">Jonathan Banks</a></div>
+                                        </td>
+                                        <td>
+                                            <div class="main__table-text main__table-text--grey">bank@email.com</div>
+                                        </td>
+                                        <td>
+                                            <div class="main__table-text">Jonathan</div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- end dashbox -->
+                <!-- dashbox -->
+                <div class="col-12 col-xl-6">
+                    <div class="dashbox">
+                        <div class="dashbox__title">
+                            <h3>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
+                                    <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                                    <path fill-rule="evenodd" d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z" />
+                                    <path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
+                                </svg> Latest users
+                            </h3>
+                            <div class="dashbox__wrap">
+                                <a class="dashbox__refresh" href="#"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21,11a1,1,0,0,0-1,1,8.05,8.05,0,1,1-2.22-5.5h-2.4a1,1,0,0,0,0,2h4.53a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4.77A10,10,0,1,0,22,12,1,1,0,0,0,21,11Z" /></svg></a>
+                                <a class="dashbox__more" href="reviews.html">View All</a>
+                            </div>
+                        </div>
+
+                        <div class="dashbox__table-wrap dashbox__table-wrap--4">
+                            <table class="main__table main__table--dash">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>ITEM</th>
+                                        <th>AUTHOR</th>
+                                        <th>RATING</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="main__table-text">51</div>
+                                        </td>
+                                        <td>
+                                            <div class="main__table-text"><a href="#">I Dream in Another Language</a></div>
+                                        </td>
+                                        <td>
+                                            <div class="main__table-text">Jonathan Banks</div>
+                                        </td>
+                                        <td>
+                                            <div class="main__table-text main__table-text--rate"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22,9.67A1,1,0,0,0,21.14,9l-5.69-.83L12.9,3a1,1,0,0,0-1.8,0L8.55,8.16,2.86,9a1,1,0,0,0-.81.68,1,1,0,0,0,.25,1l4.13,4-1,5.68A1,1,0,0,0,6.9,21.44L12,18.77l5.1,2.67a.93.93,0,0,0,.46.12,1,1,0,0,0,.59-.19,1,1,0,0,0,.4-1l-1-5.68,4.13-4A1,1,0,0,0,22,9.67Zm-6.15,4a1,1,0,0,0-.29.88l.72,4.2-3.76-2a1.06,1.06,0,0,0-.94,0l-3.76,2,.72-4.2a1,1,0,0,0-.29-.88l-3-3,4.21-.61a1,1,0,0,0,.76-.55L12,5.7l1.88,3.82a1,1,0,0,0,.76.55l4.21.61Z" /></svg> 7.2</div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="main__table-text">50</div>
+                                        </td>
+                                        <td>
+                                            <div class="main__table-text"><a href="#">Benched</a></div>
+                                        </td>
+                                        <td>
+                                            <div class="main__table-text">Charles Baker</div>
+                                        </td>
+                                        <td>
+                                            <div class="main__table-text main__table-text--rate"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22,9.67A1,1,0,0,0,21.14,9l-5.69-.83L12.9,3a1,1,0,0,0-1.8,0L8.55,8.16,2.86,9a1,1,0,0,0-.81.68,1,1,0,0,0,.25,1l4.13,4-1,5.68A1,1,0,0,0,6.9,21.44L12,18.77l5.1,2.67a.93.93,0,0,0,.46.12,1,1,0,0,0,.59-.19,1,1,0,0,0,.4-1l-1-5.68,4.13-4A1,1,0,0,0,22,9.67Zm-6.15,4a1,1,0,0,0-.29.88l.72,4.2-3.76-2a1.06,1.06,0,0,0-.94,0l-3.76,2,.72-4.2a1,1,0,0,0-.29-.88l-3-3,4.21-.61a1,1,0,0,0,.76-.55L12,5.7l1.88,3.82a1,1,0,0,0,.76.55l4.21.61Z" /></svg> 6.3</div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="main__table-text">49</div>
+                                        </td>
+                                        <td>
+                                            <div class="main__table-text"><a href="#">Whitney</a></div>
+                                        </td>
+                                        <td>
+                                            <div class="main__table-text">Matt Jones</div>
+                                        </td>
+                                        <td>
+                                            <div class="main__table-text main__table-text--rate"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22,9.67A1,1,0,0,0,21.14,9l-5.69-.83L12.9,3a1,1,0,0,0-1.8,0L8.55,8.16,2.86,9a1,1,0,0,0-.81.68,1,1,0,0,0,.25,1l4.13,4-1,5.68A1,1,0,0,0,6.9,21.44L12,18.77l5.1,2.67a.93.93,0,0,0,.46.12,1,1,0,0,0,.59-.19,1,1,0,0,0,.4-1l-1-5.68,4.13-4A1,1,0,0,0,22,9.67Zm-6.15,4a1,1,0,0,0-.29.88l.72,4.2-3.76-2a1.06,1.06,0,0,0-.94,0l-3.76,2,.72-4.2a1,1,0,0,0-.29-.88l-3-3,4.21-.61a1,1,0,0,0,.76-.55L12,5.7l1.88,3.82a1,1,0,0,0,.76.55l4.21.61Z" /></svg> 8.4</div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="main__table-text">48</div>
+                                        </td>
+                                        <td>
+                                            <div class="main__table-text"><a href="#">Blindspotting</a></div>
+                                        </td>
+                                        <td>
+                                            <div class="main__table-text">Jesse Plemons</div>
+                                        </td>
+                                        <td>
+                                            <div class="main__table-text main__table-text--rate"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22,9.67A1,1,0,0,0,21.14,9l-5.69-.83L12.9,3a1,1,0,0,0-1.8,0L8.55,8.16,2.86,9a1,1,0,0,0-.81.68,1,1,0,0,0,.25,1l4.13,4-1,5.68A1,1,0,0,0,6.9,21.44L12,18.77l5.1,2.67a.93.93,0,0,0,.46.12,1,1,0,0,0,.59-.19,1,1,0,0,0,.4-1l-1-5.68,4.13-4A1,1,0,0,0,22,9.67Zm-6.15,4a1,1,0,0,0-.29.88l.72,4.2-3.76-2a1.06,1.06,0,0,0-.94,0l-3.76,2,.72-4.2a1,1,0,0,0-.29-.88l-3-3,4.21-.61a1,1,0,0,0,.76-.55L12,5.7l1.88,3.82a1,1,0,0,0,.76.55l4.21.61Z" /></svg> 9.0</div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="main__table-text">47</div>
+                                        </td>
+                                        <td>
+                                            <div class="main__table-text"><a href="#">I Dream in Another Language</a></div>
+                                        </td>
+                                        <td>
+                                            <div class="main__table-text">Brian Cranston</div>
+                                        </td>
+                                        <td>
+                                            <div class="main__table-text main__table-text--rate"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22,9.67A1,1,0,0,0,21.14,9l-5.69-.83L12.9,3a1,1,0,0,0-1.8,0L8.55,8.16,2.86,9a1,1,0,0,0-.81.68,1,1,0,0,0,.25,1l4.13,4-1,5.68A1,1,0,0,0,6.9,21.44L12,18.77l5.1,2.67a.93.93,0,0,0,.46.12,1,1,0,0,0,.59-.19,1,1,0,0,0,.4-1l-1-5.68,4.13-4A1,1,0,0,0,22,9.67Zm-6.15,4a1,1,0,0,0-.29.88l.72,4.2-3.76-2a1.06,1.06,0,0,0-.94,0l-3.76,2,.72-4.2a1,1,0,0,0-.29-.88l-3-3,4.21-.61a1,1,0,0,0,.76-.55L12,5.7l1.88,3.82a1,1,0,0,0,.76.55l4.21.61Z" /></svg> 7.7</div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- end dashbox -->
+            </div>
+        </div>
+    </main>
+    <!-- end main content -->
+
+</body>

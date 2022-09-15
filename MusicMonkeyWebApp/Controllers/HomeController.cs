@@ -11,7 +11,8 @@ namespace MusicMonkeyWebApp.Controllers
     {
         public HeaderViewModel CreateHeader()
         {
-            var model = new HeaderViewModel {
+            var model = new HeaderViewModel
+            {
                 CurrentAction = Request.RequestContext.RouteData.Values["action"].ToString(),
                 Links = new List<HeaderLink> {
                     new HeaderLink { Action = "Index", Title = "Home", Url = "/" },

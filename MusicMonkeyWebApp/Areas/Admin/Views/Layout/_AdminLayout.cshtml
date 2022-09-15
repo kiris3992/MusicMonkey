@@ -1,0 +1,20 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <!-- CSS -->
+    @Styles.Render("~/bundles/adminCss")
+
+    <!-- Favicons -->
+    @Html.Partial("~/Areas/Admin/Views/Layout/AdminMetaHead.cshtml")
+</head>
+<body>
+    @Html.Partial("~/Areas/Admin/Views/Layout/SideBar.cshtml")
+    <div>
+        @RenderBody()
+    </div>
+    <!-- JS -->
+    @Scripts.Render("~/bundles/adminJs")
+</body>
+</html>
