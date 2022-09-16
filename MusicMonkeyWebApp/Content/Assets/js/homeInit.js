@@ -41,7 +41,7 @@ $(document).ready(function () {
                         </div>`,
             SingleJpPlayer.init,
             new SiteHelper.AjaxHelper.ajaxObject('api/TrackApi?type=full')).start();
-        
+
         //  Event Section
         SiteHelper.AjaxHelper.contentLoader(
             'data-artists-container',
