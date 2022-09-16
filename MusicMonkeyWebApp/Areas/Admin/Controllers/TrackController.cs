@@ -6,9 +6,9 @@ using System.Web.Mvc;
 
 namespace MusicMonkeyWebApp.Areas.Admin.Controllers
 {
-    public class ArtistController : Controller
+    public class TrackController : Controller
     {
-        // GET: Admin/Artist
+        // GET: Admin/Track
         public ActionResult Index()
         {
             return View();
@@ -18,7 +18,5 @@ namespace MusicMonkeyWebApp.Areas.Admin.Controllers
         {
             return View();
         }
-
-
     }
 }
