@@ -37,6 +37,9 @@ namespace MusicMonkeyWebApp.Controllers
             var curUser = Request.RequestContext.HttpContext.User;
             model.Links = new List<HeaderLink>(model.Links.Where(o => o.Roles == null || o.Roles.Any(r => curUser.IsInRole(r))).ToList());
 
+            var curUser = Request.RequestContext.HttpContext.User;
+            model.Links = new List<HeaderLink>(model.Links.Where(o => o.Roles == null || o.Roles.Any(r => curUser.IsInRole(r))).ToList());
+
             return model;
         }
 

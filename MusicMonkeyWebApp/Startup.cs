@@ -3,6 +3,13 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin;
 using MusicMonkeyWebApp.Models;
 using Owin;
+using System.Configuration;
+using System.Web.Configuration;
+using System.Web;
+using System.Linq;
+using System.Data;
+using System.Security.Policy;
+using System.Net;
 
 [assembly: OwinStartupAttribute(typeof(MusicMonkeyWebApp.Startup))]
 namespace MusicMonkeyWebApp

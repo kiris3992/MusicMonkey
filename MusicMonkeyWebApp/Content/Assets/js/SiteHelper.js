@@ -10,8 +10,8 @@
         this.contentType = contentType;
     };
 
-    AjaxHelper.contentLoader = function (dataContainerId, dataTemplate, onSuccessFinallyFunc = null, ajaxObject) {
-        let sectionBuilder = function (dataContainerId, dataTemplate, onSuccessFinallyFunc = null, ajaxObject) {
+    AjaxHelper.contentLoader = function (dataContainerId, dataTemplate, onSuccessFinallyFunc = null, ajaxObject, minContainerHeight = null) {
+        let sectionBuilder = function (dataContainerId, dataTemplate, onSuccessFinallyFunc = null, ajaxObject, minContainerHeight = null) {
             this.dataContainerId = dataContainerId;
             this.dataTemplate = dataTemplate;
             this.ajaxObject = ajaxObject;
@@ -37,8 +37,10 @@
                 }, 800);
             };
             this.load = function () {
+                const style = minContainerHeight ? ` style="min-height:${minContainerHeight}"` : '';
+
                 $(`#${dataContainerId}`).html(
-                    `<div class='spinnerContainer'>
+                    `<div class='spinnerContainer'${style}>
                     <div class="spinner-grow" style="width: 5rem; height: 5rem;" role="status">
                         <span class="sr-only">Loading...</span>
                     </div>
@@ -56,7 +58,7 @@
                 );
             };
         };
-        return new sectionBuilder(dataContainerId, dataTemplate, onSuccessFinallyFunc, ajaxObject);
+        return new sectionBuilder(dataContainerId, dataTemplate, onSuccessFinallyFunc, ajaxObject, minContainerHeight);
     };
 
     var Converter = {};
@@ -81,44 +83,11 @@
 
     var Window = {};
 
-    Window.getQueryString = function () {
-        let href = window.location.href;
-
-        if (!href.includes('?') || (href.split('?')[1].trim() == '')) return null;
-
-        let vars = [], hash;
-        let hashes = href.slice(href.indexOf('?') + 1).split('&');
-
-
-
-        //for (let hash = hash.split('=') of hashes) {
-
-
-
-        //    vars[hash[0]] = hash[1];
-        //}
-
-        for (let i = 0; i < hashes.length; i++) {
-            hash = hashes[i].split('=');
-            //vars.push({ key:hash[0], value:hash[1] });
-
-            vars[hash[0]] = hash[1];
-
-            //vars.push(hash[0]);
-            //vars[hash[0]] = hash[1];
-        }
-        return vars;
+    Window.getQueryString = function (key) {
+        const queryString = window.location.search;
+        const parameters = new URLSearchParams(queryString);
+        return parameters.get(key);
     };
 
     return { AjaxHelper, Converter, Window };
 })();
-
-
-
-
-
-
-
-
-
-

@@ -1,6 +1,10 @@
+using MusicMonkeyWebApp.App_Start;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Net;
+using System.Runtime.Remoting.Messaging;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
@@ -13,6 +17,12 @@ namespace MusicMonkeyWebApp
     {
         protected void Application_Start()
         {
+            if (Debugger.IsAttached)
+            {
+                Debug.WriteLine($"Application Start at : {DateTime.Now}, on Host : {Dns.GetHostName()}");
+            }
+
+            WebSetsConfig.Initialize();
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
