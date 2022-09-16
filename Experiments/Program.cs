@@ -16,8 +16,51 @@ namespace Experiments
         static void Main(string[] args)
         {
             ApplicationDbContext db = new ApplicationDbContext();
-            GetAllArtists(db);
+            
+            var artists = db.Artists
+                .Include("ArtistGenres")
+                .Include("Albums.AlbumGenres")
+                .Include("Albums.Tracks.TrackGenres")
+                .ToList();
+
+           var mostFamousArtists =  MostFamousArtistsDTOModel(artists);
+            foreach (var artist in mostFamousArtists)
+            {
+                Console.WriteLine($"Artist: {artist.Key}  -  Popularity: {artist.Value}");
+            }
         }
+
+        private static Dictionary<int, double> MostFamousArtistsDTOModel(List<Artist> artists)
+        {
+            Dictionary<int, double> artistTrackAverage = new Dictionary<int, double>();
+
+            foreach (var artist in artists)
+            {
+                List<double> PopAvgOfAllAlbums = new List<double>();
+                double PopAvgByArtist = 0;
+
+
+                foreach (var album in artist.Albums)
+                {
+                    int PopByAlbum = 0;
+                    double PopAvgByAlbum = 0;
+
+                    foreach (var track in album.Tracks)
+                    {
+                        PopByAlbum = PopByAlbum + track.Popularity;
+                    }
+
+                    PopAvgByAlbum = PopByAlbum / album.Tracks.Count;
+                    PopAvgOfAllAlbums.Add(PopAvgByAlbum);
+                }
+
+                PopAvgByArtist = PopAvgOfAllAlbums.Sum() / PopAvgOfAllAlbums.Count;
+                artistTrackAverage.Add(artist.Id, Math.Round(PopAvgByArtist, 1));
+            }
+
+            return artistTrackAverage;
+        }
+
 
         private static void GetAllArtists(ApplicationDbContext context)
         {

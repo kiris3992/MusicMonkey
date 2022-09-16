@@ -22,14 +22,24 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
 
 
         // GET: api/ArtistApi
-        public IEnumerable<Object> GetArtists()
+        public IEnumerable<Object> GetArtists(string type = "")
         {
-
-            return unit.Artists
-                .GetArtistsWithEverything()
-                .Select(x => ArtistDTOModel(x));
+            IEnumerable<object> artists = new List<object>();
+            switch (type)
+            {
+                case "popular":
+                    artists = unit.Artists
+                           .GetArtistsWithEverything()
+                           .Select(x => ArtistWithPopularityDTOModel(x));
+                    break;
+                default:
+                    artists = unit.Artists
+                           .GetArtistsWithEverything()
+                           .Select(x => ArtistDTOModel(x));
+                    break;
+            }
+            return artists; 
         }
-
 
         // GET: api/ArtistApi/5
         [ResponseType(typeof(Object))]
@@ -116,7 +126,7 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
             return Ok();
         }
 
-
+        //Custom Service Methods
         private object ArtistDTOModel(Artist a)
         {
             return new {
@@ -143,37 +153,65 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
                 }),
             };
         }
-
-        //Custom Service Methods
-        //private Object ArtistDTOModel(Artist artist)
+        //private IEnumerable<object> ArtistsWithPopularityDTOModel(Dictionary<int, double> artists)
         //{
-        //    return new
+        //    List<object> artistWithPop = new List<object>();
+        //    foreach (var artist in artists)
         //    {
-        //        Id = artist.Id,
-        //        Name = artist.Name,
-        //        Country = artist.Country.ToString().Replace("_", " "),
-        //        PhotoUrl = artist.PhotoUrl,
-        //        CareerStartDate = artist.CareerStartDate,
-        //        Albums = artist.Albums.Select(x => new  //Albums
+        //        artistWithPop.Add(new
         //        {
-        //            Id = x.Id,
-        //            Title = x.Title,
-        //            ReleaseDate = x.ReleaseDate,
-        //            CoverPhotoUrl = x.CoverPhotoUrl,
-        //            Tracks = x.Tracks.Select(y => new //Tracks
-        //            {
-        //                Id = x.Title,
-        //                Title = y.Title,
-        //                DurationSecs = y.DurationSecs,
-        //                AudioUrl = y.AudioUrl,
-        //                Popularity = y.Popularity,
-        //                TrackGenres = y.TrackGenres.SelectMany(p => new string[] { p.Type })  //Track Genres
-        //            }),
-        //            AlbumGenres = x.AlbumGenres.SelectMany(p => new string[] { p.Type })  //Album Genres
-        //        }),
-        //        ArtistGenres = artist.ArtistGenres.SelectMany(p => new string[] { p.Type })  //Artist Genres
-        //    };
+        //            Id = artist.Key,
+        //            Populatiry = artist.Value
+        //        });
+        //    }
+
+        //    return artistWithPop;
         //}
+        //private static Dictionary<int, double> MostFamousArtists(List<Artist> artists)
+        //{
+        //    Dictionary<int, double> artistTrackAverage = new Dictionary<int, double>();
+
+        //    foreach (var artist in artists)
+        //    {
+        //        List<double> PopAvgOfAllAlbums = new List<double>();
+        //        double PopAvgByArtist = 0;
+
+
+        //        foreach (var album in artist.Albums)
+        //        {
+        //            int PopByAlbum = 0;
+        //            double PopAvgByAlbum = 0;
+
+        //            foreach (var track in album.Tracks)
+        //            {
+        //                PopByAlbum = PopByAlbum + track.Popularity;
+        //            }
+
+        //            PopAvgByAlbum = PopByAlbum / album.Tracks.Count;
+        //            PopAvgOfAllAlbums.Add(PopAvgByAlbum);
+        //        }
+
+        //        PopAvgByArtist = PopAvgOfAllAlbums.Sum() / PopAvgOfAllAlbums.Count;
+        //        artistTrackAverage.Add(artist.Id, Math.Round(PopAvgByArtist, 1));
+        //    }
+
+        //    return artistTrackAverage;
+        //}
+
+        private object ArtistWithPopularityDTOModel(Artist artist)
+        {
+            return new
+            {
+                artist.Id,
+                artist.Name,
+                Popularity = Math.Round(AvgArtistPop(artist.Albums.Select(x => AvgAlbumPop(x))), 2)
+            };
+        }
+
+        private double AvgArtistPop(IEnumerable<double> albumPopularities) => albumPopularities.Average();
+
+        private double AvgAlbumPop(Album album) => album.Tracks.Average(x => x.Popularity);
+
         private void DeleteAllAlbumsAndTracksOfArtist(Artist artist)
         {
             var albums = unit.Albums
