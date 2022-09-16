@@ -28,13 +28,13 @@
     });
 
     /*------------------
-		Navigation
-	--------------------*/
+        Navigation
+    --------------------*/
     $(".mobile-menu").slicknav({
         prependTo: '#mobile-menu-wrap',
         allowParentLinks: true
     });
-    
+
     /*--------------------------
         Event Slider
     ----------------------------*/
@@ -50,7 +50,7 @@
     //    autoplay: true,
     //    responsive: { 992: { items: 3, }, 768: { items: 2, }, 0: { items: 1, }, }
     //});
-    
+
     /*--------------------------
         Videos Slider
     ----------------------------*/
@@ -60,7 +60,7 @@
         items: 4,
         dots: false,
         nav: true,
-        navText: ["<i class='fa fa-angle-left'></i>","<i class='fa fa-angle-right'></i>"],
+        navText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"],
         smartSpeed: 1200,
         autoHeight: false,
         autoplay: true,
@@ -81,8 +81,8 @@
     });
 
     /*------------------
-		Magnific
-	--------------------*/
+        Magnific
+    --------------------*/
     $('.video-popup').magnificPopup({
         type: 'iframe'
     });
@@ -105,18 +105,18 @@
     //}
     //var timerdate = mm + '/' + dd + '/' + yyyy;
     // For demo preview end
-    
+
 
     // Use this for real timer date
     var timerdate = "2022/09/23";
 
-	$("#countdown-time").countdown(timerdate, function(event) {
+    $("#countdown-time").countdown(timerdate, function (event) {
         $(this).html(event.strftime("<div class='countdown__item'><span>%D</span> <p>Days</p> </div>" + "<div class='countdown__item'><span>%H</span> <p>Hours</p> </div>" + "<div class='countdown__item'><span>%M</span> <p>Minutes</p> </div>" + "<div class='countdown__item'><span>%S</span> <p>Seconds</p> </div>"));
     });
 
     /*------------------
-		Barfiller
-	--------------------*/
+        Barfiller
+    --------------------*/
     $('#bar1').barfiller({
         barColor: "#ffffff",
     });
@@ -130,8 +130,8 @@
     });
 
     /*-------------------
-		Nice Scroll
-	--------------------- */
+        Nice Scroll
+    --------------------- */
     $(".nice-scroll").niceScroll({
         cursorcolor: "#111111",
         cursorwidth: "5px",
