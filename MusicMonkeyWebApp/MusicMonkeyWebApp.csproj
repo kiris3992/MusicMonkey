@@ -192,6 +192,7 @@
     <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\AlbumController.cs" />
     <Compile Include="Areas\Admin\Controllers\ArtistController.cs" />
+    <Compile Include="Areas\Admin\Controllers\TrackController.cs" />
     <Compile Include="Areas\Public\Controllers\HomeController.cs" />
     <Compile Include="Areas\Public\PublicAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -590,6 +591,10 @@
     <Content Include="Areas\Admin\Views\Layout\Stats.cshtml" />
     <Content Include="Areas\Admin\Views\Artist\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Album\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Artist\Add.cshtml" />
+    <Content Include="Areas\Admin\Views\Album\Add.cshtml" />
+    <Content Include="Areas\Admin\Views\Track\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Track\Add.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
