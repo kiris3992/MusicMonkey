@@ -10,8 +10,8 @@
         this.contentType = contentType;
     };
 
-    AjaxHelper.contentLoader = function (dataContainerId, dataTemplate, onSuccessFinallyFunc = null, ajaxObject) {
-        let sectionBuilder = function (dataContainerId, dataTemplate, onSuccessFinallyFunc = null, ajaxObject) {
+    AjaxHelper.contentLoader = function (dataContainerId, dataTemplate, onSuccessFinallyFunc = null, ajaxObject, minContainerHeight = null) {
+        let sectionBuilder = function (dataContainerId, dataTemplate, onSuccessFinallyFunc = null, ajaxObject, minContainerHeight = null) {
             this.dataContainerId = dataContainerId;
             this.dataTemplate = dataTemplate;
             this.ajaxObject = ajaxObject;
@@ -34,11 +34,13 @@
                 setTimeout(() => {
                     $(`#${dataContainerId}`).html(data.map((o, i) => this.dataTemplate(o, i)));
                     if (this.onSuccessFinallyFunc) this.onSuccessFinallyFunc();
-                }, 600);
+                }, 800);
             };
             this.load = function () {
+                const style = minContainerHeight ? ` style="min-height:${minContainerHeight}"` : '';
+
                 $(`#${dataContainerId}`).html(
-                    `<div class='spinnerContainer'>
+                    `<div class='spinnerContainer'${style}>
                     <div class="spinner-grow" style="width: 5rem; height: 5rem;" role="status">
                         <span class="sr-only">Loading...</span>
                     </div>
@@ -56,7 +58,7 @@
                 );
             };
         };
-        return new sectionBuilder(dataContainerId, dataTemplate, onSuccessFinallyFunc, ajaxObject);
+        return new sectionBuilder(dataContainerId, dataTemplate, onSuccessFinallyFunc, ajaxObject, minContainerHeight);
     };
 
     var Converter = {};
