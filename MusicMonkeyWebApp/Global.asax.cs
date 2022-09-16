@@ -11,6 +11,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 
+
 namespace MusicMonkeyWebApp
 {
     public class MvcApplication : System.Web.HttpApplication
@@ -21,13 +22,15 @@ namespace MusicMonkeyWebApp
             {
                 Debug.WriteLine($"Application Start at : {DateTime.Now}, on Host : {Dns.GetHostName()}");
             }
-
-            WebSetsConfig.Initialize();
+            
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            if (WebSetsConfig.Initialize()) return;
+            UsersConfig.SeedUsers();
         }
     }
 }

@@ -185,6 +185,7 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\UsersConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="App_Start\WebSetsConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
@@ -504,6 +505,12 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Libraries\KirisMvcHelper.dll" />
+    <Content Include="Libraries\Microsoft.Web.Administration.dll" />
+    <Content Include="Libraries\Microsoft.Win32.Registry.dll" />
+    <Content Include="Libraries\System.Diagnostics.DiagnosticSource.dll" />
+    <Content Include="Libraries\System.Reflection.TypeExtensions.dll" />
+    <Content Include="Libraries\System.Security.Principal.Windows.dll" />
+    <Content Include="Libraries\System.ServiceProcess.ServiceController.dll" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
