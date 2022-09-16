@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using System.Runtime.Remoting.Messaging;
 using System.Web;
 using System.Web.Http;
@@ -18,7 +19,7 @@ namespace MusicMonkeyWebApp
         {
             if (Debugger.IsAttached)
             {
-                Debug.WriteLine($"Application Start at : {DateTime.Now}");
+                Debug.WriteLine($"Application Start at : {DateTime.Now}, on Host : {Dns.GetHostName()}");
             }
 
             WebSetsConfig.Initialize();
