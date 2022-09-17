@@ -24,6 +24,7 @@ namespace MusicMonkeyWebApp
             //if (WebSetsConfig.Initialize()) return;
             ConfigureAuth(app);
             //UsersConfig.SeedUsers();
+            app.MapSignalR();
         }
     }
 
