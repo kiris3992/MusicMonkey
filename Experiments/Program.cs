@@ -16,17 +16,17 @@ namespace Experiments
         static void Main(string[] args)
         {
             ApplicationDbContext db = new ApplicationDbContext();
-            
-            var artists = db.Artists
-                .Include("ArtistGenres")
-                .Include("Albums.AlbumGenres")
-                .Include("Albums.Tracks.TrackGenres")
-                .ToList();
+            UnitOfWork unit = new UnitOfWork(db);
 
-           var mostFamousArtists =  MostFamousArtistsDTOModel(artists);
-            foreach (var artist in mostFamousArtists)
+            var genres = GetTracks(unit);
+            foreach (var genre in genres)
             {
-                Console.WriteLine($"Artist: {artist.Key}  -  Popularity: {artist.Value}");
+                Console.WriteLine(genre.Type);
+                foreach (var artist in genre.Artists)
+                {
+                    Console.WriteLine($"{artist.Name, 15}");
+                }
+
             }
         }
 
@@ -60,8 +60,6 @@ namespace Experiments
 
             return artistTrackAverage;
         }
-
-
         private static void GetAllArtists(ApplicationDbContext context)
         {
 
@@ -124,19 +122,6 @@ namespace Experiments
             }
         }
 
-        //private static void GetAllGenres(ApplicationDbContext context)
-        //{
-        //    var genres = context.Genres
-        //        .Include(x => x.Albums)
-        //        .Include(x => x.Artists)
-        //        .Include(x => x.Tracks)
-        //        .ToList();
-
-        //    foreach (var genre in genres)
-        //    {
-        //        Console.WriteLine($"Genre: {genre.Type}");
-        //    }
-        //    Console.WriteLine(genres.Count);
-        //}
+        private static IEnumerable<Genre> GetTracks(UnitOfWork unit) => unit.Genres.GetGenresWithEverything();
     }
 }

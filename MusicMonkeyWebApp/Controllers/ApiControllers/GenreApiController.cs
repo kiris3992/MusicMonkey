@@ -16,9 +16,21 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
     public class GenreApiController : BaseApiController
     {
         // GET: api/GenreApi
-        public IEnumerable<object> GetGenres()
+        public IEnumerable<object> GetGenres(string type = "")
         {
-            return unit.Genres.GetGenresWithEverything();
+            IEnumerable<Genre> genres = unit.Genres.GetGenresWithEverything();
+            IEnumerable<object> genreDtoModels = new List<object>();
+            switch (type)
+            {
+                case "trackcount":
+                    genreDtoModels = genres.OrderByDescending(x => x.Tracks.Count)
+                        .Select(x => TracksByGenresDTOModel(x));
+                    break;
+                default:
+                    genreDtoModels = genres.Select(x => PartialGenreDTOModel(x));
+                    break;
+            }
+            return genreDtoModels;
         }
 
         // GET: api/GenreApi/5
@@ -101,7 +113,35 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
         }
 
         //Custom Service Methods
-
+        private object PartialGenreDTOModel(Genre genre)
+        {
+            return new
+            {
+                genre.Id,
+                genre.Type,
+                Artists = genre.Artists.Select(x => new 
+                { 
+                    x.Name
+                }),
+                Albums = genre.Albums.Select(x => new 
+                {
+                    x.Title
+                }),
+                Tracks = genre.Tracks.Select(x => new 
+                {
+                    x.Title
+                })
+            };
+        }
+        private object TracksByGenresDTOModel(Genre genre)
+        {
+            return new
+            {
+                genre.Id,
+                genre.Type,
+                TrackCount = genre.Tracks.Count
+            };
+        }
 
         private bool GenreExists(int id)
         {
