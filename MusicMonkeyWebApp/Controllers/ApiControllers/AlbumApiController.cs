@@ -16,30 +16,38 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
     public class AlbumApiController : BaseApiController
     {
         // GET: api/AlbumApi
-        public IEnumerable<Object> GetAlbums(string type = "")
+        public IEnumerable<object> GetAlbums(string type = "")
         {
-            IEnumerable<object> albums = new List<object>();
+            IEnumerable<Album> albums = unit.Albums.GetAlbumsWithEverything();
+            IEnumerable<object> albumDtoModels = new List<Album>();
 
             switch (type)
             {
                 case "full":
-                    albums = unit.Albums
-                            .GetAlbumsWithEverything()
-                            .Select(x => FullAlbumDTOModel(x));
+                    albumDtoModels = albums.Select(x => FullAlbumDTOModel(x));
+                    break;
+                case "popular":
+                    albumDtoModels = albums.Select(x => AlbumWithPopularityDTOModel(x));
+                    break;
+                case "trackcount":
+                    albumDtoModels = albums.OrderByDescending(x => x.Tracks.Count)
+                        .Select(x => AlbumWithTrackCountDTOModel(x));
+                    break;
+                case "dateAsc":
+                    albumDtoModels = albums.OrderBy(x => x.ReleaseDate)
+                        .Select(x => FullAlbumDTOModel(x));
                     break;
                 default:
-                    albums = unit.Albums
-                            .GetAlbumsWithEverything()
-                            .Select(x => PartialAlbumDTOModel(x));
+                    albumDtoModels = albums.Select(x => PartialAlbumDTOModel(x));
                     break;
             }
 
-            return albums;
+            return albumDtoModels;
         }
 
         // GET: api/AlbumApi/5
         [ResponseType(typeof(Album))]
-        public Object GetAlbum(int? id)
+        public object GetAlbum(int? id)
         {
             if (id is null)
             {
@@ -116,7 +124,7 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
 
 
         //Custom Service Methods
-        private Object FullAlbumDTOModel(Album album)
+        private object FullAlbumDTOModel(Album album)
         {
             return new
             {
@@ -145,7 +153,27 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
                 AlbumGenres = album.AlbumGenres.SelectMany(p => new string[] { p.Type })  //Album Genres
             };
         }
-        private Object PartialAlbumDTOModel(Album album)
+        private object AlbumWithPopularityDTOModel(Album album)
+        {
+            return new
+            {
+                album.Id,
+                album.Title,
+                Popularity = Math.Round(album.Tracks.Average(x => x.Popularity) , 2)
+            };
+        }
+        private object AlbumWithTrackCountDTOModel(Album album)
+        {
+            {
+                return new
+                {
+                    album.Id,
+                    album.Title,
+                    TrackCount = album.Tracks.Count
+                };
+            }
+        }
+        private object PartialAlbumDTOModel(Album album)
         {
             return new
             {
