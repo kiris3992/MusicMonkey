@@ -18,7 +18,7 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
         // GET: api/GenreApi
         public IEnumerable<object> GetGenres()
         {
-            return db.Genres;
+            return unit.Genres.GetGenresWithEverything();
         }
 
         // GET: api/GenreApi/5

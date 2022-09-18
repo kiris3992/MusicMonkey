@@ -55,10 +55,12 @@
     <Compile Include="Core\IUnitOfWork.cs" />
     <Compile Include="Core\Repositories\IAlbumRepository.cs" />
     <Compile Include="Core\Repositories\IArtistRepository.cs" />
+    <Compile Include="Core\Repositories\IGenreRepository.cs" />
     <Compile Include="Core\Repositories\ITrackRepository.cs" />
     <Compile Include="Persistance\GenericRepository.cs" />
     <Compile Include="Persistance\Repositories\AlbumRepository.cs" />
     <Compile Include="Persistance\Repositories\ArtistRepository.cs" />
+    <Compile Include="Persistance\Repositories\GenreRepository.cs" />
     <Compile Include="Persistance\Repositories\TrackRepository.cs" />
     <Compile Include="Persistance\UnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
