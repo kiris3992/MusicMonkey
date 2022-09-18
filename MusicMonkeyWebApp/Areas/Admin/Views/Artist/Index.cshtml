@@ -13,28 +13,16 @@
         SiteHelper.AjaxHelper.contentLoader(
             'load-artists',
             (artist, i) => ` <tr>
-                                    <td>
-                                        <div class="main__table-text">${artist.Id}</div>
-                                    </td>
-                                    <td>
-                                        <div class="main__table-text"><a href="#">${artist.Name}</a></div>
-                                    </td>
-                                    <td>
-                                        <div class="main__table-text">${artist.Country}</div>
-                                    </td>
-                                    <td>
-                                        <div class="main__table-text">${artist.CareerStartDate}</div>
-                                    </td>
-                                    <td>
-                                        <div style="padding: 20px 20px 20px 100px;" class="main__table-text">${artist.ArtistGenres.length ? artist.ArtistGenres.join(', ') : 'N/K'} </div>
-                                    </td>
-                                    <td>
-                                        <div class="main__table-text main__table-text--green">${artist.Albums.length}</div>
-                                    </td>
+                                    <td><div class="main__table-text">${artist.Id}</div></td>
+                                    <td><div class="main__table-text">${artist.Name}</div></td>
+                                    <td><div class="main__table-text">${artist.Country}</div></td>
+                                    <td><div class="main__table-text">${SiteHelper.Converter.csDateStrToJsDateStr(artist.CareerStartDate)}</div></td>
+                                    <td><div class="main__table-text">${artist.ArtistGenres.length ? artist.ArtistGenres.join(', ') : 'N/K'} </div></td>
+                                    <td><div class="main__table-text main__table-text--green">${artist.Albums.length}</div></td>
 
                                     <td>
                                         <div class="main__table-btns">
-                                            <a href="~/Admin/Artist/Details" class="main__table-btn main__table-btn--view">
+                                            <a href="#modal-details" class="main__table-btn main__table-btn--view open-modal">
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.92,11.6C19.9,6.91,16.1,4,12,4S4.1,6.91,2.08,11.6a1,1,0,0,0,0,.8C4.1,17.09,7.9,20,12,20s7.9-2.91,9.92-7.6A1,1,0,0,0,21.92,11.6ZM12,18c-3.17,0-6.17-2.29-7.9-6C5.83,8.29,8.83,6,12,6s6.17,2.29,7.9,6C18.17,15.71,15.17,18,12,18ZM12,8a4,4,0,1,0,4,4A4,4,0,0,0,12,8Zm0,6a2,2,0,1,1,2-2A2,2,0,0,1,12,14Z" /></svg>
                                             </a>
                                             <a href="~/Admin/Artist/Edit" class="main__table-btn main__table-btn--edit">
@@ -46,8 +34,33 @@
                                         </div>
                                     </td>
                                 </tr>`,
-            null,
+            () => {
+
+
+
+                $('.open-modal').magnificPopup({
+                    fixedContentPos: true,
+                    fixedBgPos: true,
+                    overflowY: 'auto',
+                    type: 'inline',
+                    preloader: false,
+                    focus: '#username',
+                    modal: false,
+                    removalDelay: 300,
+                    mainClass: 'my-mfp-zoom-in',
+                });
+
+                $('.modal__btn--dismiss').on('click', function (e) {
+                    e.preventDefault();
+                    $.magnificPopup.close();
+                });
+
+                
+            },
             new SiteHelper.AjaxHelper.ajaxObject('/api/ArtistApi')).start();
+
+
+
 
     });
 </script>
@@ -78,9 +91,9 @@
                 <!-- main title -->
                 <div class="col-12">
                     <div class="main__title">
+                        <a href="~/Admin/Artist/Add"><i class="bi bi-plus-square"></i></a>
                         <h2>Artists</h2>
-
-                        <span class="main__title-stat">152</span>
+                        <span id="top-artists" class="main__title-stat"> ...</span>
 
                         <div class="main__title-wrap">
                             <!-- filter sort -->
@@ -88,7 +101,7 @@
                                 <span class="filter__item-label">Sort by:</span>
 
                                 <div class="filter__item-btn dropdown-toggle" role="navigation" id="filter-sort" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <input type="button" value="Date created">
+                                    <input type="button" value="Name">
                                     <span></span>
                                 </div>
 
@@ -121,7 +134,7 @@
                                     <th>NAME</th>
                                     <th>COUNTRY</th>
                                     <th>CAREER STARTED DATE</th>
-                                    <th style="padding: 20px 20px 20px 100px;">GENRE</th>
+                                    <th>GENRE</th>
                                     <th>ALBUMS</th>
                                     <th>ACTIONS</th>
                                 </tr>
@@ -161,11 +174,71 @@
         </div>
     </main>
     <!-- end main content -->
+    <!-- modal view -->
+    <div id="modal-details" class="zoom-anim-dialog mfp-hide modal">
+        <h6 class="modal__text">Track Details</h6>
+        <br />
+        <div class="modal__title">
+            <img src="https://www.biography.com/.image/t_share/MTQ3NjM5MTEzMTc5MjEwODI2/eminem_photo_by_dave_j_hogan_getty_images_entertainment_getty_187596325.jpg" class="pic-details">
+            <h6>Eminem</h6>
+        </div>
+
+        <div class="row">
+
+
+            <div class="col-12 col-md-6 col-lg-12 col-xl-6">
+                <div class="sign__label"><p><b>Id:</b> 25</p></div>
+                <hr />
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-12 col-xl-6">
+                <div class="sign__label"><p><b>Country:</b> Greece</p></div>
+                <hr />
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-12 col-xl-6">
+                <div class="sign__label"><p><b>Career Start Date:</b> 18/08/2000</p></div>
+                <hr />
+            </div>
+
+
+
+
+
+            <div class="col-12 col-md-6 col-lg-12 col-xl-6">
+                <div class="sign__label"><p><b>Genre:</b> <br />Rock, Folk, Electro Punk, </p></div>
+            </div>
+
+
+            <div class="col-12 col-md-6 col-lg-12 col-xl-6">
+                <div class="sign__label">
+                    <p>
+                        <b>Albums:</b>
+                        <ul>
+                            <li>My life will goes on </li>
+                            <li>My life will goes on </li>
+                            <li>My life will goes on </li>
+                        </ul>
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+
+
+        <hr />
+        <div class="modal__btns">
+            <button class="modal__btn modal__btn--dismiss" type="button">Dismiss</button>
+        </div>
+
+    </div>
+    <!-- end modal view -->
     <!-- modal delete -->
     <div id="modal-delete" class="zoom-anim-dialog mfp-hide modal">
         <h6 class="modal__title">Item delete</h6>
 
-        <p class="modal__text">Are you sure to permanently delete this Artist?</p>
+        <p class="modal__text">Are you sure to permanently delete this artist?</p>
 
         <div class="modal__btns">
             <button class="modal__btn modal__btn--apply" type="button">Delete</button>

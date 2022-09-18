@@ -590,14 +590,27 @@ body::-webkit-scrollbar-thumb {
    
 }
 
-    .main__title h2 {
-        font-family: 'Rubik', sans-serif;
-        font-weight: 400;
-        color: #3f008c;
-        font-size: 28px;
-        line-height: 100%;
-        margin-bottom: 0;
-    }
+.main__title a{
+    cursor:pointer;
+    color:dimgrey !important;
+    margin-right:5px;
+}
+
+.main__title a:hover {
+    cursor: pointer;
+    color: black !important;
+    font-size:larger !important;
+    
+}
+
+.main__title h2 {
+    font-family: 'Rubik', sans-serif;
+    font-weight: 400;
+    color: #3f008c;
+    font-size: 28px;
+    line-height: 100%;
+    margin-bottom: 0;
+}
 
         .main__title h2 b {
             font-weight: 500;
@@ -998,6 +1011,22 @@ body::-webkit-scrollbar-thumb {
         height: 80px;
     }
 }
+
+.pic-details {
+    width: 200px;
+    height: 200px;
+    -webkit-backface-visibility: hidden;
+    border-radius: 50%;
+    -webkit-box-shadow: 10px 10px 5px -6px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 5px -6px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 5px -6px rgba(0,0,0,0.75);
+    margin-bottom: 5%;
+    transition: transform .7s ease-in-out;
+}
+
+    .pic-details:hover {
+        transform: rotate(360deg);
+    }
 /*==============================
 	Stats
 ==============================*/
@@ -1649,9 +1678,9 @@ body::-webkit-scrollbar-thumb {
 .form__img {
     position: relative;
     width: 100%;
-    height: 400px;
+    height: 173px;
     overflow: hidden;
-    background-color: #151f30;
+    background-color: #1c0e24;
     margin-bottom: 20px;
     border-radius: 16px;
     overflow: hidden;

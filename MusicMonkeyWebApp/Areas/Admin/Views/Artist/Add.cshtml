@@ -5,24 +5,7 @@
 }
 <body>
 
-    <!-- header -->
-    <header class="header">
-        <div class="header__content">
-            <!-- header logo -->
-            <a href="index.html" class="header__logo">
-                <img src="img/logo.svg" alt="">
-            </a>
-            <!-- end header logo -->
-            <!-- header menu btn -->
-            <button class="header__btn" type="button">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-            <!-- end header menu btn -->
-        </div>
-    </header>
-    <!-- end header -->
+    
 
     <!-- main content -->
     <main class="main">
@@ -39,11 +22,12 @@
                 <div class="col-12">
                     <form action="#" class="form">
                         <div class="row">
+
                             <div class="col-12 col-md-5 form__cover">
                                 <div class="row">
                                     <div class="col-12 col-sm-6 col-md-12">
                                         <div class="form__img">
-                                            <label for="form__img-upload">Upload cover (190 x 270)</label>
+                                            <label for="form__img-upload">Upload Artist Photo</label>
                                             <input id="form__img-upload" name="form__img-upload" type="file" accept=".png, .jpg, .jpeg">
                                             <img id="form__img" src="#" alt=" ">
                                         </div>
@@ -55,40 +39,7 @@
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="form__group">
-                                            <input type="text" class="form__input" placeholder="Title">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-12">
-                                        <div class="form__group">
-                                            <textarea id="text" name="text" class="form__textarea" placeholder="Description"></textarea>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-12 col-sm-6 col-lg-3">
-                                        <div class="form__group">
-                                            <input type="text" class="form__input" placeholder="Release year">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-12 col-sm-6 col-lg-3">
-                                        <div class="form__group">
-                                            <input type="text" class="form__input" placeholder="Running timed in minutes">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-12 col-sm-6 col-lg-3">
-                                        <div class="form__group">
-                                            <select class="js-example-basic-single" id="quality">
-                                                <option value="FullHD">FullHD</option>
-                                                <option value="HD">HD</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-12 col-sm-6 col-lg-3">
-                                        <div class="form__group">
-                                            <input type="text" class="form__input" placeholder="Age">
+                                            <input type="text" class="form__input" placeholder="Full Name">
                                         </div>
                                     </div>
 
@@ -340,45 +291,23 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-12">
-                                        <div class="form__gallery">
-                                            <label id="gallery1" for="form__gallery-upload">Upload photos</label>
-                                            <input data-name="#gallery1" id="form__gallery-upload" name="gallery" class="form__gallery-upload" type="file" accept=".png, .jpg, .jpeg" multiple>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-12">
-                                <ul class="form__radio">
-                                    <li>
-                                        <span>Item type:</span>
-                                    </li>
-                                    <li>
-                                        <input id="type1" type="radio" name="type" checked="">
-                                        <label for="type1">Movie</label>
-                                    </li>
-                                    <li>
-                                        <input id="type2" type="radio" name="type">
-                                        <label for="type2">TV Show</label>
-                                    </li>
-                                </ul>
-                            </div>
-
-                            <div class="col-12">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="form__video">
-                                            <label id="movie1" for="form__video-upload">Upload video</label>
-                                            <input data-name="#movie1" id="form__video-upload" name="movie" class="form__video-upload" type="file" accept="video/mp4,video/x-m4v,video/*">
+                                    <div class="col-12 col-sm-6 col-lg-3">
+                                        <div class="form__group">
+                                            <input type="text" class="form__input" placeholder="Career Start Date" onfocus="(this.type='date')"
+                                                   onblur="(this.type='text')">
                                         </div>
                                     </div>
 
-                                    <div class="col-12">
-                                        <button type="button" class="form__btn">publish</button>
-                                    </div>
                                 </div>
                             </div>
+
+                            
+                                <div class="col-12">
+                                    <button type="button" class="form__btn">publish</button>
+                                    <span>|<a href="~/Admin/Artist/Index">Back</a></span>
+                                </div>
+                           
+
                         </div>
                     </form>
                 </div>
