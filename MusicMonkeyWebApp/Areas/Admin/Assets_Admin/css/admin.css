@@ -1419,8 +1419,8 @@ body::-webkit-scrollbar-thumb {
 }
 
     .form__input:focus {
-        background-color: #151f30;
-        border-color: #2f80ed;
+        background-color: #312835;
+        border-color: #6000d5;
     }
 
 .form__textarea {
@@ -1572,7 +1572,7 @@ body::-webkit-scrollbar-thumb {
         height: 44px;
         color: #e0e0e0;
         padding: 0 60px 0 20px;
-        background-color: #151f30;
+        background-color: #1c0e24;
         margin: 0;
         width: 100%;
         font-size: 14px;
@@ -2912,7 +2912,7 @@ body::-webkit-scrollbar-thumb {
     }
 
         .select2-container--default .select2-selection--single .select2-selection__arrow b {
-            border-color: #2f80ed transparent transparent transparent;
+            border-color: #6000d5 transparent transparent transparent;
         }
 
 .select2-container--default.select2-container--open .select2-selection--single .select2-selection__arrow b {
@@ -2924,7 +2924,7 @@ body::-webkit-scrollbar-thumb {
     height: 44px;
     color: #fff;
     padding: 0 40px 0 20px;
-    background-color: #151f30;
+    background-color: #1c0e24;
     width: 100%;
     font-size: 14px;
     border-radius: 16px;
@@ -2946,7 +2946,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .select2-container--default .select2-selection--multiple .select2-selection__choice {
-    background-color: rgba(47,128,237,0.1);
+    background-color: #312835;
     border: none;
     border-radius: 12px;
     display: flex;
@@ -2961,7 +2961,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
-    color: #2f80ed;
+    color: #6000d5;
     margin-right: 7px;
     transition: color 0.5s;
 }
@@ -2980,7 +2980,7 @@ body::-webkit-scrollbar-thumb {
     border: none;
     border-radius: 0;
     padding: 10px 20px;
-    background-color: #151f30;
+    background-color: #1c0e24;
 }
 
 .select2-results__option {
@@ -2995,12 +2995,12 @@ body::-webkit-scrollbar-thumb {
 
 .select2-container--default .select2-results__option--highlighted[aria-selected] {
     background-color: transparent;
-    color: #2f80ed;
+    color: #6000d5;
 }
 
 .select2-container--default .select2-results__option[aria-selected="true"] {
     background-color: transparent;
-    color: #2f80ed;
+    color: #6000d5;
     cursor: default;
 }
 
