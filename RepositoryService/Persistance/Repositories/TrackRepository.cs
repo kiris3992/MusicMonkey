@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
+using MusicMonkeyWebApp.Models.Paging;
 
 namespace RepositoryService.Persistance.Repositories
 {
@@ -26,13 +27,26 @@ namespace RepositoryService.Persistance.Repositories
                 .FirstOrDefault(x => x.Id == id);
         }
 
-        public IEnumerable<Track> GetTracksWithEverything()
+        public IEnumerable<Track> GetTracksWithEverything(PagingModel pagingModel = null)
         {
-            return db.Tracks
+            if (pagingModel == null)
+            {
+                return db.Tracks
                 .Include("TrackGenres")
                 .Include("Album.AlbumGenres")
                 .Include("Album.Artist.ArtistGenres")
                 .ToList();
+            }
+            else
+            {
+                return db.Tracks
+                .Include("TrackGenres")
+                .Include("Album.AlbumGenres")
+                .Include("Album.Artist.ArtistGenres")
+                .ToList()
+                .Skip(pagingModel.ItemsPerPage * pagingModel.PageIndex)
+                .Take(pagingModel.ItemsPerPage);
+            }
         }
     }
 }

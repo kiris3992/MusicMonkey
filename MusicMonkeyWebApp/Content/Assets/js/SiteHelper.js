@@ -3,37 +3,56 @@
 
     var AjaxHelper = {};
 
-    AjaxHelper.ajaxObject = function (url, type = 'GET', dataType = 'json', contentType = 'application/json') {
+    AjaxHelper.ajaxObject = function (url, data = null, type = 'GET', dataType = 'json', contentType = 'application/json') {
         this.type = type;
         this.url = url;
         this.dataType = dataType;
         this.contentType = contentType;
+        this.data = data;
     };
 
-    AjaxHelper.contentLoader = function (dataContainerId, dataTemplate, onSuccessFinallyFunc = null, ajaxObject, minContainerHeight = null) {
-        let sectionBuilder = function (dataContainerId, dataTemplate, onSuccessFinallyFunc = null, ajaxObject, minContainerHeight = null) {
+    AjaxHelper.contentLoader = function (dataContainerId, dataTemplate, onSuccessFinallyFunc = null, ajaxObject, minContainerHeight = null, dataProperty = null) {
+        let sectionBuilder = function (dataContainerId, dataTemplate, onSuccessFinallyFunc = null, ajaxObject, minContainerHeight = null, dataProperty = null) {
             this.dataContainerId = dataContainerId;
             this.dataTemplate = dataTemplate;
             this.ajaxObject = ajaxObject;
             this.onSuccessFinallyFunc = onSuccessFinallyFunc;
+            this.dataProperty = dataProperty;
 
             this.start = function () {
                 this.load();
 
                 ((t) => {
-                    $.ajax({
-                        type: t.ajaxObject.type, url: t.ajaxObject.url, dataType: t.ajaxObject.dataType, contentType: t.ajaxObject.contentType,
-                        success: function (data) { t.build(data); },
-                        error: function () { t.error(); }
-                    });
+                    if (t.ajaxObject.data) {
+                        $.ajax({
+                            type: t.ajaxObject.type,
+                            data: JSON.stringify(t.ajaxObject.data),
+                            url: t.ajaxObject.url,
+                            dataType: t.ajaxObject.dataType,
+                            contentType: t.ajaxObject.contentType,
+                            success: function (data) { t.build(data); },
+                            error: function () { t.error(); }
+                        });
+                    }
+                    else {
+                        $.ajax({
+                            type: t.ajaxObject.type,
+                            url: t.ajaxObject.url,
+                            dataType: t.ajaxObject.dataType,
+                            contentType: t.ajaxObject.contentType,
+                            success: function (data) { t.build(data); },
+                            error: function () { t.error(); }
+                        });
+                    }
                 })(this);
             };
 
             this.build = function (data) {
-                if (data.length > 30) data.length = 30; // Prosoxh gia debug edo perno mono 50 items; kanonika prepei na fugei auth h grammh.
+                //if (data.length > 40) data.length = 40; // Prosoxh gia debug edo perno mono 50 items; kanonika prepei na fugei auth h grammh.
                 setTimeout(() => {
-                    $(`#${dataContainerId}`).html(data.map((o, i) => this.dataTemplate(o, i)));
-                    if (this.onSuccessFinallyFunc) this.onSuccessFinallyFunc();
+                    if (dataProperty) $(`#${dataContainerId}`).html(data[dataProperty].map((o, i) => this.dataTemplate(o, i)));
+                    else $(`#${dataContainerId}`).html(data.map((o, i) => this.dataTemplate(o, i)));
+                    if (this.onSuccessFinallyFunc) this.onSuccessFinallyFunc(data);
                 }, 800);
             };
             this.load = function () {
@@ -58,7 +77,7 @@
                 );
             };
         };
-        return new sectionBuilder(dataContainerId, dataTemplate, onSuccessFinallyFunc, ajaxObject, minContainerHeight);
+        return new sectionBuilder(dataContainerId, dataTemplate, onSuccessFinallyFunc, ajaxObject, minContainerHeight, dataProperty);
     };
 
     var Converter = {};
@@ -89,5 +108,41 @@
         return parameters.get(key);
     };
 
-    return { AjaxHelper, Converter, Window };
+    var HtmlDom = {};
+
+    HtmlDom.createOption = function (owner = null, value, text) {
+        const el = document.createElement('option');
+        el.value = value;
+        el.text = text;
+        if (owner) owner.appendChild(el);
+        return el;
+    };
+
+    var Messenger = {};
+
+    Messenger.infoMessenger = function (messageElement) {
+        const el = messageElement;
+
+        this.set = {
+            primary: (message, ms = null) => writeMessage(message, '#007bff', ms),
+            success: (message, ms = null) => writeMessage(message, '#28a745', ms),
+            info: (message, ms = null) => writeMessage(message, '#17a2b8', ms),
+            warning: (message, ms = null) => writeMessage(message, '#ffc107', ms),
+            danger: (message, ms = null) => writeMessage(message, '#dc3545', ms),
+            custom: (message, color, ms = null) => writeMessage(message, color, ms)
+        };
+        this.clear = () => {
+            el.innerHTML = '&nbsp;';
+            el.style.color = 'inherit';
+        };
+
+        const writeMessage = (message, color, ms) => {
+            el.innerHTML = message;
+            el.style.color = color;
+
+            setTimeout(() => this.clear(), ms ? ms : 1200);
+        };
+    };
+
+    return { AjaxHelper, Converter, Window, Messenger, HtmlDom };
 })();

@@ -7,12 +7,20 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using System.Web.Http.Description;
+using System.Web.Http.ModelBinding;
+using System.Web.UI;
 using DAL;
 using Entities.Models;
+using Microsoft.Owin.Security.Provider;
+using MusicMonkeyWebApp.Models.Paging;
+using RouteAttribute = System.Web.Http.RouteAttribute;
 
 namespace MusicMonkeyWebApp.Controllers.ApiControllers
 {
+
+    [EnableCors("*", "*", "*")]
     public class TrackApiController : BaseApiController
     {
         // GET: api/TrackApi
@@ -32,6 +40,34 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
             }
 
             return trackDtoModels;
+        }
+
+
+        [HttpPost]
+        public dynamic GetTracksWithPaging(dynamic args)
+        {
+            PagingModel pagingModel = null;
+            if (args["PageIndex"] != null && args["ItemsPerPage"] != null)
+            {
+                pagingModel = new PagingModel { PageIndex = args.PageIndex, ItemsPerPage = args.ItemsPerPage };
+            }
+
+            IEnumerable<object> tracks;
+            if (args["type"] != null && args.type == "full")
+            {
+                tracks = unit.Tracks.GetTracksWithEverything(pagingModel).Select(x => FullTrackDTOModel(x));
+            }
+            else
+            {
+                tracks = unit.Tracks.GetTracksWithEverything(pagingModel).Select(x => PartialTrackDTOModel(x));
+            }
+
+            if (pagingModel != null)
+            {
+                pagingModel = new PagingModel(pagingModel.PageIndex, pagingModel.ItemsPerPage, unit.Tracks.Count());
+            }
+
+            return new { tracks, paging = pagingModel }; ;
         }
 
         // GET: api/TrackApi/5
@@ -73,6 +109,37 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
             unit.Complete();
 
             return Ok();
+        }
+
+        [ResponseType(typeof(void))]
+        public IHttpActionResult PutTrack(dynamic track)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                Track mapTrack = unit.Tracks.GetById((int)track.Id);
+
+                if (mapTrack == null) return BadRequest();
+
+                mapTrack.Title = track.Title;
+                mapTrack.DurationSecs = track.DurationSecs;
+                mapTrack.Popularity = track.Popularity;
+
+                mapTrack.Album = unit.Albums.GetById((int)track.AlbumId);
+                mapTrack.Album.Artist = unit.Artists.GetById((int)track.ArtistId);
+
+                unit.Tracks.Update(mapTrack);
+
+                if (unit.Complete() > 0) return Ok(); else return InternalServerError();
+            }
+            catch (Exception)
+            {
+                return InternalServerError();
+            }
         }
 
         // POST: api/TrackApi
@@ -121,29 +188,23 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
                 track.DurationSecs,
                 track.AudioUrl,
                 track.Popularity,
-                TrackGenres = track.TrackGenres.SelectMany(p => new string[] { p.Type }),  //track Genres
+                TrackGenres = track.TrackGenres.SelectMany(p => new string[] { p.Type }),
                 Album = new  //Album
                 {
                     track.Album.Id,
                     track.Album.Title,
                     track.Album.ReleaseDate,
                     track.Album.CoverPhotoUrl,
+                    AlbumGenres = track.Album.AlbumGenres.SelectMany(p => new string[] { p.Type }),
                     Artist = new  //Artist
                     {
                         track.Album.Artist.Name,
                         track.Album.Artist.Country,
                         track.Album.Artist.PhotoUrl,
                         track.Album.Artist.CareerStartDate,
-                        ArtistGenres = track.Album
-                                .Artist
-                                .ArtistGenres
-                                .SelectMany(p => new string[] { p.Type })  //Artist Genres
-                    },
-                    AlbumGenres = track
-                            .Album
-                            .AlbumGenres
-                            .SelectMany(p => new string[] { p.Type })  //Album Genres
-                },
+                        ArtistGenres = track.Album.Artist.ArtistGenres.SelectMany(p => new string[] { p.Type })
+                    }
+                }
             };
         }
         private object PartialTrackDTOModel(Track track)
@@ -156,8 +217,10 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
                 AudioUrl = track.AudioUrl,
                 Popularity = track.Popularity,
                 AlbumTitle = track.Album != null ? track.Album.Title : null,
+                AlbumId = track.Album != null ? track.Album.Id : -1,
                 ArtistName = track.Album != null ? track.Album.Artist.Name : null,
-                TrackGenres = track.TrackGenres.SelectMany(p => new string[] { p.Type})
+                ArtistId = track.Album != null ? track.Album.Artist.Id : -1,
+                TrackGenres = track.TrackGenres.SelectMany(p => new string[] { p.Type })
             };
         }
         private void MapTrack(Track mapedTrack, Track incomingTrack)

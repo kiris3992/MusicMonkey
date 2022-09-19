@@ -20,24 +20,22 @@ namespace RepositoryService.Persistance
             db = context;
             table = db.Set<T>();
         }
+
+        public int Count() => table.Count();
+
         public void Create(T entity) => db.Entry(entity).State = EntityState.Added;
-        
 
         public void DeleteAll() => table.RemoveRange(GetAll());
-       
 
         public void DeleteById(object id) => table.Remove(GetById(id));
 
         public void DeleteRange(IEnumerable<T> entities) => table.RemoveRange(entities);
 
         public IEnumerable<T> GetAll() => table.ToList();
-       
 
         public T GetById(object id)=> table.Find(id);
-      
 
-        public void Save()=> db.SaveChanges();
-       
+        public void Save() => db.SaveChanges();
 
         public void Update(T entity)
         {

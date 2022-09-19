@@ -41,6 +41,7 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
             return artistDtoModels; 
         }
 
+
         // GET: api/ArtistApi/5
         [ResponseType(typeof(Object))]
         public object GetArtist(int? id)

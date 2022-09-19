@@ -38,25 +38,6 @@ $(document).ready(function () {
 		$('#'+id).find('.profile__mobile-tabs-btn input').val(text);
 	});
 
-	/*==============================
-	Modal
-	==============================*/
-	$('.open-modal').magnificPopup({
-		fixedContentPos: true,
-		fixedBgPos: true,
-		overflowY: 'auto',
-		type: 'inline',
-		preloader: false,
-		focus: '#username',
-		modal: false,
-		removalDelay: 300,
-		mainClass: 'my-mfp-zoom-in',
-	});
-
-	$('.modal__btn--dismiss').on('click', function (e) {
-		e.preventDefault();
-		$.magnificPopup.close();
-	});
 
 	/*==============================
 	Select2
