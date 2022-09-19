@@ -4,45 +4,147 @@
     Layout = "~/Areas/Admin/Views/Layout/_AdminLayout.cshtml";
 }
 
+
+<link rel="stylesheet" href="~/Content/Assets/css/font-awesome.min.css" />
+
+<style>
+    table tbody tr td:nth-child(6) div {
+        cursor: pointer;
+    }
+
+    table tbody tr td:nth-child(6) svg {
+        fill: #fff;
+    }
+
+    .tooltip-inner {
+        max-width: 200px;
+        padding: 3px 8px;
+        color: #fff;
+        text-align: center;
+        background-color: #000;
+        border-radius: .30rem;
+    }
+
+    .pic-details {
+        width: 200px;
+        height: 200px;
+        -webkit-backface-visibility: hidden;
+        border-radius: 50%;
+        -webkit-box-shadow: 10px 10px 5px -6px rgba(0,0,0,0.75);
+        -moz-box-shadow: 10px 10px 5px -6px rgba(0,0,0,0.75);
+        box-shadow: 10px 10px 5px -6px rgba(0,0,0,0.75);
+        margin-bottom: 5%;
+        transition: transform .7s ease-in-out;
+    }
+
+        .pic-details:hover {
+            transform: rotate(360deg);
+        }
+
+    .main__table-photo {
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+    }
+</style>
+
 <script>
     $(document).ready(function () {
+
+        const getData = (postData) => {
+            if (!postData) postData = { type: "", PageIndex: 0, ItemsPerPage: 25 };
+
+            $.ajax({
+                type: 'POST',
+                url: '/api/AlbumApi',
+                data: JSON.stringify(postData),
+                dataType: 'json',
+                contentType: 'application/json',
+                success: function (data) {
+                    $(`#load-albums`).html(data.albums.map((album, i) =>
+                        `<tr id ='tr_${i}'>
+
+                                <td><div class="main__table-text" data-edit="album-id">${album.Id}</div> </td>
+                                <td><div class="main__table-text main__table-photo" data-edit="album-photo" onclick='loadCover("cover${i}")'>${album.PhotoUrl}</div> </td>
+
+                                <td><div class="main__table-text"><input type="text" value="${album.Title}" data-edit="album-title" disabled/></div></td>
+                                <td><div class="main__table-text">
+                                    <select name="album-artists" data-edit="album-artists" disabled>
+                                        <option value="${album.ArtistId}">${album.ArtistName}</option>
+                                    </select></div>
+                                </td>
+
+
+
+                                <td><div class="main__table-text"><input type="date" data-edit="album-releaseDate" value="${album.ReleaseDate}" disabled</div></td>
+
+                                <td><div class="main__table-text">${album.TrackTitles.length}</div></td>
+
+                                    <td>
+                                        <div class="crud-btn-container" style="border-radius: 0 16px 16px 0;">
+                                            <button class="crud-btn crud-btn--view open-modal" data-crud-btn="action"><i class="fa fa-eye" aria-hidden="true"></i></button>
+                                            <button class="crud-btn crud-btn--edit" data-crud-btn="action" onclick='rowEditor.open("tr_${i}")'><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                                            <button class="crud-btn crud-btn--cancel" data-crud-btn="edit" onclick='rowEditor.cancel()' style="display:none"><i class="fa fa-times" aria-hidden="true"></i></button>
+                                            <button class="crud-btn crud-btn--save" data-crud-btn="edit" onclick='rowEditor.save()' style="display:none"><i class="fa fa-check" aria-hidden="true"></i></button>
+                                            <button class="crud-btn crud-btn--delete open-modal" data-crud-btn="action"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                                        </div>
+                                    </td>
+                        </tr>`
+                    ));
+
+                    $('#albums-total').text(`${data.paging.TotalItems} total`);
+
+                    $('.open-modal').magnificPopup({
+                        fixedContentPos: true,
+                        fixedBgPos: true,
+                        overflowY: 'auto',
+                        type: 'inline',
+                        preloader: false,
+                        focus: '#username',
+                        modal: false,
+                        removalDelay: 300,
+                        mainClass: 'my-mfp-zoom-in',
+                    });
+
+                    $('.modal__btn--dismiss').on('click', function (e) {
+                        e.preventDefault();
+                        $.magnificPopup.close();
+                    });
+
+                    $('[data-toggle="tooltip"]').tooltip();
+
+                    rowEditor.init(document.querySelector('.info_message_container span'));
+
+                    document.querySelector('.paginator .paginator__pages').innerHTML = `${data.paging.PageIndex + 1} from ${data.paging.TotalPages}`;
+
+                    const ul = document.querySelector('.paginator .paginator__paginator');
+                    ul.innerHTML = '';
+
+                    for (var i = 0; i < data.paging.TotalPages; i++) {
+                        const li = document.createElement('li');
+                        const a = document.createElement('button'); li.appendChild(a);
+                        if (i == data.paging.PageIndex) li.className = 'active';
+                        a.innerText = (i + 1);
+
+                        ((i) => {
+                            a.onclick = () => { getData({ type: "", PageIndex: i, ItemsPerPage: 25 }); };
+                        })(i);
+
+                        ul.appendChild(li);
+                    }
+                },
+                error: function () {
+                    //t.error();
+                }
+            });
+        };
+
 
 
         SiteHelper.AjaxHelper.contentLoader(
             'load-albums',
             (album, i) => ` <tr>
-                                    <td>
-                                        <div class="main__table-text">${album.Id}</div>
-                                    </td>
-                                    <td>
-                                        <div class="main__table-text"><a href="#">${album.Title}</a></div>
-                                    </td>
-                                    <td>
-                                        <div class="main__table-text">${album.ArtistName}</div>
-                                    </td>
-                                    <td>
-                                        <div class="main__table-text">${album.ReleaseDate}</div>
-                                    </td>
-                                    <td>
-                                        <div style="padding: 20px 20px 20px 100px;" class="main__table-text">${album.AlbumGenres.length ? album.AlbumGenres.join(', ') : 'N/K'} </div>
-                                    </td>
-                                    <td>
-                                        <div class="main__table-text main__table-text--green">${album.TrackTitles.length}</div>
-                                    </td>
 
-                                    <td>
-                                        <div class="main__table-btns">
-                                            <a href="#modal-view" class="main__table-btn main__table-btn--view">
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.92,11.6C19.9,6.91,16.1,4,12,4S4.1,6.91,2.08,11.6a1,1,0,0,0,0,.8C4.1,17.09,7.9,20,12,20s7.9-2.91,9.92-7.6A1,1,0,0,0,21.92,11.6ZM12,18c-3.17,0-6.17-2.29-7.9-6C5.83,8.29,8.83,6,12,6s6.17,2.29,7.9,6C18.17,15.71,15.17,18,12,18ZM12,8a4,4,0,1,0,4,4A4,4,0,0,0,12,8Zm0,6a2,2,0,1,1,2-2A2,2,0,0,1,12,14Z" /></svg>
-                                            </a>
-                                            <a href="~/Admin/Artist/Edit" class="main__table-btn main__table-btn--edit">
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22,7.24a1,1,0,0,0-.29-.71L17.47,2.29A1,1,0,0,0,16.76,2a1,1,0,0,0-.71.29L13.22,5.12h0L2.29,16.05a1,1,0,0,0-.29.71V21a1,1,0,0,0,1,1H7.24A1,1,0,0,0,8,21.71L18.87,10.78h0L21.71,8a1.19,1.19,0,0,0,.22-.33,1,1,0,0,0,0-.24.7.7,0,0,0,0-.14ZM6.83,20H4V17.17l9.93-9.93,2.83,2.83ZM18.17,8.66,15.34,5.83l1.42-1.41,2.82,2.82Z" /></svg>
-                                            </a>
-                                            <a href="#modal-delete" class="main__table-btn main__table-btn--delete open-modal">
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10,18a1,1,0,0,0,1-1V11a1,1,0,0,0-2,0v6A1,1,0,0,0,10,18ZM20,6H16V5a3,3,0,0,0-3-3H11A3,3,0,0,0,8,5V6H4A1,1,0,0,0,4,8H5V19a3,3,0,0,0,3,3h8a3,3,0,0,0,3-3V8h1a1,1,0,0,0,0-2ZM10,5a1,1,0,0,1,1-1h2a1,1,0,0,1,1,1V6H10Zm7,14a1,1,0,0,1-1,1H8a1,1,0,0,1-1-1V8H17Zm-3-1a1,1,0,0,0,1-1V11a1,1,0,0,0-2,0v6A1,1,0,0,0,14,18Z" /></svg>
-                                            </a>
-                                        </div>
-                                    </td>
                                 </tr>`,
             null,
             new SiteHelper.AjaxHelper.ajaxObject('/api/AlbumApi')).start();

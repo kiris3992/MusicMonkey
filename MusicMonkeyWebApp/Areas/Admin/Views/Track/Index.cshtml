@@ -44,153 +44,153 @@
 <script>
     'use strict';
 
-    const rowEditor = {
-        tr: null,
+    //const rowEditor = {
+    //    tr: null,
 
-        init: (messageElement) => {
-            rowEditor.message = new SiteHelper.Messenger.infoMessenger(messageElement);
-        },
-        history: {
-            elements: [],
-            save: (t) => {
-                t.history.elements.length = 0;
-                t.tr.querySelectorAll('[data-edit]').forEach(o => {
-                    t.history.elements.push(o.cloneNode(true));
-                });
-            }
-        },
-        message: new SiteHelper.Messenger.infoMessenger(null),
-        open: (rowId) => {
-            const t = rowEditor;
+    //    init: (messageElement) => {
+    //        rowEditor.message = new SiteHelper.Messenger.infoMessenger(messageElement);
+    //    },
+    //    history: {
+    //        elements: [],
+    //        save: (t) => {
+    //            t.history.elements.length = 0;
+    //            t.tr.querySelectorAll('[data-edit]').forEach(o => {
+    //                t.history.elements.push(o.cloneNode(true));
+    //            });
+    //        }
+    //    },
+    //    message: new SiteHelper.Messenger.infoMessenger(null),
+    //    open: (rowId) => {
+    //        const t = rowEditor;
 
-            if (t.tr != null) return;
-            t.tr = document.querySelector(`#${rowId}`);
+    //        if (t.tr != null) return;
+    //        t.tr = document.querySelector(`#${rowId}`);
 
-            $.ajax({
-                type: 'GET', url: '/api/ArtistApi', dataType: 'json', contentType: 'application/json',
-                success: (data) => {
-                    t.tr.querySelectorAll('[data-crud-btn]').forEach(o => {
-                        o.style.display = o.getAttribute('data-crud-btn') == 'action' ? 'none' : '';
-                    });
+    //        $.ajax({
+    //            type: 'GET', url: '/api/ArtistApi', dataType: 'json', contentType: 'application/json',
+    //            success: (data) => {
+    //                t.tr.querySelectorAll('[data-crud-btn]').forEach(o => {
+    //                    o.style.display = o.getAttribute('data-crud-btn') == 'action' ? 'none' : '';
+    //                });
 
-                    t.tr.querySelectorAll('div').forEach(div => div.style.backgroundColor = '#1f2e48');
+    //                t.tr.querySelectorAll('div').forEach(div => div.style.backgroundColor = '#1f2e48');
 
-                    t.tr.querySelectorAll('[data-edit]').forEach(o => o.removeAttribute('disabled'));
-                    t.history.save(t);
+    //                t.tr.querySelectorAll('[data-edit]').forEach(o => o.removeAttribute('disabled'));
+    //                t.history.save(t);
 
-                    t.edit(data);
-                },
-                error: () => {
-                    t.message.set.danger('An internal server error occured while trying to get Artist data...');
-                    t.tr = null;
-                }
-            });
-        },
-        edit: (data) => {
-            const t = rowEditor;
+    //                t.edit(data);
+    //            },
+    //            error: () => {
+    //                t.message.set.danger('An internal server error occured while trying to get Artist data...');
+    //                t.tr = null;
+    //            }
+    //        });
+    //    },
+    //    edit: (data) => {
+    //        const t = rowEditor;
 
-            const albumSel = t.tr.querySelector('[data-edit="track-albums"]');
-            const artistSel = t.tr.querySelector('[data-edit="track-artists"]');
+    //        const albumSel = t.tr.querySelector('[data-edit="track-albums"]');
+    //        const artistSel = t.tr.querySelector('[data-edit="track-artists"]');
 
-            const currentArtistId = Number(artistSel.value);
-            const currentAlbumId = Number(albumSel.value);
+    //        const currentArtistId = Number(artistSel.value);
+    //        const currentAlbumId = Number(albumSel.value);
 
-            artistSel.innerHTML = '';
-            albumSel.innerHTML = '';
+    //        artistSel.innerHTML = '';
+    //        albumSel.innerHTML = '';
 
-            const artists = data.sort((a, b) => a.Name < b.Name ? -1 : a.Name > b.Name ? 1 : 0);
+    //        const artists = data.sort((a, b) => a.Name < b.Name ? -1 : a.Name > b.Name ? 1 : 0);
 
-            artists.forEach(o => {
-                let opt = SiteHelper.HtmlDom.createOption(null, o.Id, o.Name);
-                artistSel.appendChild(opt);
-                if (o.Id == currentArtistId) {
-                    opt.setAttribute('selected', true);
+    //        artists.forEach(o => {
+    //            let opt = SiteHelper.HtmlDom.createOption(null, o.Id, o.Name);
+    //            artistSel.appendChild(opt);
+    //            if (o.Id == currentArtistId) {
+    //                opt.setAttribute('selected', true);
 
-                    o.Albums.forEach(a => {
-                        opt = SiteHelper.HtmlDom.createOption(albumSel, a.Id, a.Title);
-                        if (a.Id == currentAlbumId) opt.setAttribute('selected', true);
-                    });
-                }
-            });
+    //                o.Albums.forEach(a => {
+    //                    opt = SiteHelper.HtmlDom.createOption(albumSel, a.Id, a.Title);
+    //                    if (a.Id == currentAlbumId) opt.setAttribute('selected', true);
+    //                });
+    //            }
+    //        });
 
-            t.history.save(t);
+    //        t.history.save(t);
 
-            artistSel.onchange = (e) => {
-                const artistId = e.target.options[e.target.selectedIndex].value;
-                albumSel.innerHTML = '';
-                const artist = data.find(o => o.Id == artistId);
-                artist.Albums.forEach(o => SiteHelper.HtmlDom.createOption(albumSel, o.Id, o.Title));
+    //        artistSel.onchange = (e) => {
+    //            const artistId = e.target.options[e.target.selectedIndex].value;
+    //            albumSel.innerHTML = '';
+    //            const artist = data.find(o => o.Id == artistId);
+    //            artist.Albums.forEach(o => SiteHelper.HtmlDom.createOption(albumSel, o.Id, o.Title));
 
-                t.history.save(t);
-            };
-        },
-        cancel: () => {
-            const t = rowEditor;
+    //            t.history.save(t);
+    //        };
+    //    },
+    //    cancel: () => {
+    //        const t = rowEditor;
 
-            t.tr.querySelectorAll('[data-edit]').forEach(o => {
-                o.setAttribute('disabled', true);
+    //        t.tr.querySelectorAll('[data-edit]').forEach(o => {
+    //            o.setAttribute('disabled', true);
 
-                t.history.elements.forEach(c => {
-                    if (o.getAttribute('data-edit') == c.getAttribute('data-edit')) {
-                        switch (o.type) {
-                            case 'select-one':
-                                for (let i = o.options.length - 1; i > -1; i--) o.remove(i);
-                                for (let i = 0; i < c.options.length; i++) {
-                                    let opt = SiteHelper.HtmlDom.createOption(o, c.options[i].value, c.options[i].text);
-                                    if (c.getAttribute('selected')) opt.setAttribute('selected', true);
-                                }
-                                break;
-                            default: o.value = c.value; break;
-                        }
-                        o.value = c.value;
-                    }
-                });
-            });
+    //            t.history.elements.forEach(c => {
+    //                if (o.getAttribute('data-edit') == c.getAttribute('data-edit')) {
+    //                    switch (o.type) {
+    //                        case 'select-one':
+    //                            for (let i = o.options.length - 1; i > -1; i--) o.remove(i);
+    //                            for (let i = 0; i < c.options.length; i++) {
+    //                                let opt = SiteHelper.HtmlDom.createOption(o, c.options[i].value, c.options[i].text);
+    //                                if (c.getAttribute('selected')) opt.setAttribute('selected', true);
+    //                            }
+    //                            break;
+    //                        default: o.value = c.value; break;
+    //                    }
+    //                    o.value = c.value;
+    //                }
+    //            });
+    //        });
 
-            t.tr.querySelectorAll('[data-crud-btn]').forEach(o => {
-                o.style.display = o.getAttribute('data-crud-btn') == 'edit' ? 'none' : '';
-            });
+    //        t.tr.querySelectorAll('[data-crud-btn]').forEach(o => {
+    //            o.style.display = o.getAttribute('data-crud-btn') == 'edit' ? 'none' : '';
+    //        });
 
-            t.tr.querySelectorAll('div').forEach(div => div.style.backgroundColor = '#151f30');
+    //        t.tr.querySelectorAll('div').forEach(div => div.style.backgroundColor = '#151f30');
 
-            t.message.set.info('Action canceled.', 600);
-            t.tr = null;
-        },
-        save: () => {
-            const t = rowEditor;
-            if (t.tr == null) return;
+    //        t.message.set.info('Action canceled.', 600);
+    //        t.tr = null;
+    //    },
+    //    save: () => {
+    //        const t = rowEditor;
+    //        if (t.tr == null) return;
 
-            let track = {
-                Id: Number(t.tr.querySelector('[data-edit="track-id"]').innerText),
-                Title: t.tr.querySelector('[data-edit="track-title"]').value,
-                DurationSecs: Number(t.tr.querySelector('[data-edit="track-duration"]').value),
-                Popularity: Number(t.tr.querySelector('[data-edit="track-popularity"]').value),
-                AlbumId: Number(t.tr.querySelector('[data-edit="track-albums"]').value),
-                ArtistId: Number(t.tr.querySelector('[data-edit="track-artists"]').value),
-                AudioUrl: null
-            };
+    //        let track = {
+    //            Id: Number(t.tr.querySelector('[data-edit="track-id"]').innerText),
+    //            Title: t.tr.querySelector('[data-edit="track-title"]').value,
+    //            DurationSecs: Number(t.tr.querySelector('[data-edit="track-duration"]').value),
+    //            Popularity: Number(t.tr.querySelector('[data-edit="track-popularity"]').value),
+    //            AlbumId: Number(t.tr.querySelector('[data-edit="track-albums"]').value),
+    //            ArtistId: Number(t.tr.querySelector('[data-edit="track-artists"]').value),
+    //            AudioUrl: null
+    //        };
 
-            $.ajax({
-                type: 'PUT', url: '/api/TrackApi', contentType: 'application/json',
-                data: JSON.stringify(track),
-                success: () => {
-                    t.tr.querySelectorAll('[data-edit]').forEach(o => o.setAttribute('disabled', true));
-                    t.tr.querySelectorAll('[data-crud-btn]').forEach(o => {
-                        o.style.display = o.getAttribute('data-crud-btn') == 'edit' ? 'none' : '';
-                    });
+    //        $.ajax({
+    //            type: 'PUT', url: '/api/TrackApi', contentType: 'application/json',
+    //            data: JSON.stringify(track),
+    //            success: () => {
+    //                t.tr.querySelectorAll('[data-edit]').forEach(o => o.setAttribute('disabled', true));
+    //                t.tr.querySelectorAll('[data-crud-btn]').forEach(o => {
+    //                    o.style.display = o.getAttribute('data-crud-btn') == 'edit' ? 'none' : '';
+    //                });
 
-                    t.tr.querySelectorAll('div').forEach(div => div.style.backgroundColor = '#151f30');
+    //                t.tr.querySelectorAll('div').forEach(div => div.style.backgroundColor = '#151f30');
 
-                    t.message.set.info('Track successfully saved.');
-                    t.tr = null;
-                },
-                error: () => {
-                    t.message.set.danger('An internal server error occured while trying to save Track...');
-                    t.tr = null;
-                }
-            });
-        }
-    };
+    //                t.message.set.info('Track successfully saved.');
+    //                t.tr = null;
+    //            },
+    //            error: () => {
+    //                t.message.set.danger('An internal server error occured while trying to save Track...');
+    //                t.tr = null;
+    //            }
+    //        });
+    //    }
+    //};
 
 
     const getData = (postData) => {
@@ -229,7 +229,9 @@
                     </td>
                     <td>
                         <div class="main__table-text main__table-text--green">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22,9.67A1,1,0,0,0,21.14,9l-5.69-.83L12.9,3a1,1,0,0,0-1.8,0L8.55,8.16,2.86,9a1,1,0,0,0-.81.68,1,1,0,0,0,.25,1l4.13,4-1,5.68A1,1,0,0,0,6.9,21.44L12,18.77l5.1,2.67a.93.93,0,0,0,.46.12,1,1,0,0,0,.59-.19,1,1,0,0,0,.4-1l-1-5.68,4.13-4A1,1,0,0,0,22,9.67Zm-6.15,4a1,1,0,0,0-.29.88l.72,4.2-3.76-2a1.06,1.06,0,0,0-.94,0l-3.76,2,.72-4.2a1,1,0,0,0-.29-.88l-3-3,4.21-.61a1,1,0,0,0,.76-.55L12,5.7l1.88,3.82a1,1,0,0,0,.76.55l4.21.61Z" /></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22,9.67A1,1,0,0,0,21.14,9l-5.69-.83L12.9,3a1,1,0,0,0-1.8,0L8.55,8.16,2.86,9a1,1,0,0,0-.81.68,1,1,
+                            0,0,0,.25,1l4.13,4-1,5.68A1,1,0,0,0,6.9,21.44L12,18.77l5.1,2.67a.93.93,0,0,0,.46.12,1,1,0,0,0,.59-.19,1,1,0,0,0,.4-1l-1-5.68,4.13-4A1,1,0,0,0,22,9.67Zm-6.15,4a1,1,0,0,
+                            0-.29.88l.72,4.2-3.76-2a1.06,1.06,0,0,0-.94,0l-3.76,2,.72-4.2a1,1,0,0,0-.29-.88l-3-3,4.21-.61a1,1,0,0,0,.76-.55L12,5.7l1.88,3.82a1,1,0,0,0,.76.55l4.21.61Z" /></svg>
                             <input type="number" min="1" max="5" data-edit="track-popularity" value="${track.Popularity}" disabled/>
                         </div></td>
                     <td>

@@ -66,8 +66,7 @@ namespace MusicMonkeyWebApp
                 "~/Areas/Admin/Assets_Admin/js/bootstrap.bundle.min.js",
                 "~/Areas/Admin/Assets_Admin/js/jquery.magnific-popup.min.js",
                 "~/Areas/Admin/Assets_Admin/js/smooth-scrollbar.js",
-                "~/Areas/Admin/Assets_Admin/js/smooth-scrollbar.js",
-                "~/Content/Assets/js/SiteHelper.js"));
+                "~/Areas/Admin/Assets_Admin/js/smooth-scrollbar.js"));
         }
     }
 }
