@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Layout/_AdminLayout.cshtml";
+}
 <link rel="stylesheet" href="~/Content/Assets/css/font-awesome.min.css" />
 <script src="~/Content/Assets/js/SiteHelper.js"></script>
 <style>
@@ -234,11 +235,11 @@
                         </div></td>
                     <td>
                         <div class="crud-btn-container" style="border-radius: 0 16px 16px 0;">
-                            <button class="crud-btn crud-btn--view open-modal" data-crud-btn="action"><i class="fa fa-eye" aria-hidden="true"></i></button>
+                            <button href="#modal-details" class="crud-btn crud-btn--view open-modal" data-crud-btn="action"><i class="fa fa-eye" aria-hidden="true"></i></button>
                             <button class="crud-btn crud-btn--edit" data-crud-btn="action" onclick='rowEditor.open("tr_${i}")'><i class="fa fa-pencil" aria-hidden="true"></i></button>
                             <button class="crud-btn crud-btn--cancel" data-crud-btn="edit" onclick='rowEditor.cancel()' style="display:none"><i class="fa fa-times" aria-hidden="true"></i></button>
                             <button class="crud-btn crud-btn--save" data-crud-btn="edit" onclick='rowEditor.save()' style="display:none"><i class="fa fa-check" aria-hidden="true"></i></button>
-                            <button class="crud-btn crud-btn--delete open-modal" data-crud-btn="action"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                            <button href="#modal-delete" class="crud-btn crud-btn--delete open-modal" data-crud-btn="action"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
                         </div>
                     </td>
                 </tr>`
