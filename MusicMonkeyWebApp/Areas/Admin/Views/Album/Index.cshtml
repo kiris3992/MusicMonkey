@@ -4,7 +4,7 @@
     Layout = "~/Areas/Admin/Views/Layout/_AdminLayout.cshtml";
 }
 
-
+<script src="~/Content/Assets/js/SiteHelper.js"></script>
 <link rel="stylesheet" href="~/Content/Assets/css/font-awesome.min.css" />
 
 <style>
@@ -47,6 +47,7 @@
         border-radius: 50%;
     }
 </style>
+<script src="~/Content/Assets/js/SiteHelper.js"></script>
 
 <script>
     $(document).ready(function () {
@@ -73,22 +74,19 @@
                                         <option value="${album.ArtistId}">${album.ArtistName}</option>
                                     </select></div>
                                 </td>
-
-
-
                                 <td><div class="main__table-text"><input type="date" data-edit="album-releaseDate" value="${album.ReleaseDate}" disabled</div></td>
-
                                 <td><div class="main__table-text">${album.TrackTitles.length}</div></td>
 
-                                    <td>
-                                        <div class="crud-btn-container" style="border-radius: 0 16px 16px 0;">
-                                            <button class="crud-btn crud-btn--view open-modal" data-crud-btn="action"><i class="fa fa-eye" aria-hidden="true"></i></button>
-                                            <button class="crud-btn crud-btn--edit" data-crud-btn="action" onclick='rowEditor.open("tr_${i}")'><i class="fa fa-pencil" aria-hidden="true"></i></button>
-                                            <button class="crud-btn crud-btn--cancel" data-crud-btn="edit" onclick='rowEditor.cancel()' style="display:none"><i class="fa fa-times" aria-hidden="true"></i></button>
-                                            <button class="crud-btn crud-btn--save" data-crud-btn="edit" onclick='rowEditor.save()' style="display:none"><i class="fa fa-check" aria-hidden="true"></i></button>
-                                            <button class="crud-btn crud-btn--delete open-modal" data-crud-btn="action"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
-                                        </div>
-                                    </td>
+                                <td>
+                                    <div class="crud-btn-container" style="border-radius: 0 16px 16px 0;">
+                                        <button class="crud-btn crud-btn--view open-modal" data-crud-btn="action"><i class="fa fa-eye" aria-hidden="true"></i></button>
+                                        <button class="crud-btn crud-btn--edit" data-crud-btn="action" onclick='rowEditor.open("tr_${i}")'><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                                        <button class="crud-btn crud-btn--cancel" data-crud-btn="edit" onclick='rowEditor.cancel()' style="display:none"><i class="fa fa-times" aria-hidden="true"></i></button>
+                                        <button class="crud-btn crud-btn--save" data-crud-btn="edit" onclick='rowEditor.save()' style="display:none"><i class="fa fa-check" aria-hidden="true"></i></button>
+                                        <button class="crud-btn crud-btn--delete open-modal" data-crud-btn="action"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                                    </div>
+                                </td>
+
                         </tr>`
                     ));
 
@@ -141,13 +139,6 @@
 
 
 
-        SiteHelper.AjaxHelper.contentLoader(
-            'load-albums',
-            (album, i) => ` <tr>
-
-                                </tr>`,
-            null,
-            new SiteHelper.AjaxHelper.ajaxObject('/api/AlbumApi')).start();
 
     });
 </script>
@@ -178,9 +169,9 @@
                 <!-- main title -->
                 <div class="col-12">
                     <div class="main__title">
+                        <a href="~/Admin/Album/Add"><i class="bi bi-plus-square"></i></a>
                         <h2>Albums</h2>
-
-                        <span class="main__title-stat">576 total</span>
+                        <span id="albums-total" class="main__title-stat"> ...</span>
 
                         <div class="main__title-wrap">
                             <!-- filter sort -->
