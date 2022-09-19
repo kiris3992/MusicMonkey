@@ -16,9 +16,50 @@ namespace Experiments
         static void Main(string[] args)
         {
             ApplicationDbContext db = new ApplicationDbContext();
-            GetAllArtists(db);
+            UnitOfWork unit = new UnitOfWork(db);
+
+            var genres = GetTracks(unit);
+            foreach (var genre in genres)
+            {
+                Console.WriteLine(genre.Type);
+                foreach (var artist in genre.Artists)
+                {
+                    Console.WriteLine($"{artist.Name, 15}");
+                }
+
+            }
         }
 
+        private static Dictionary<int, double> MostFamousArtistsDTOModel(List<Artist> artists)
+        {
+            Dictionary<int, double> artistTrackAverage = new Dictionary<int, double>();
+
+            foreach (var artist in artists)
+            {
+                List<double> PopAvgOfAllAlbums = new List<double>();
+                double PopAvgByArtist = 0;
+
+
+                foreach (var album in artist.Albums)
+                {
+                    int PopByAlbum = 0;
+                    double PopAvgByAlbum = 0;
+
+                    foreach (var track in album.Tracks)
+                    {
+                        PopByAlbum = PopByAlbum + track.Popularity;
+                    }
+
+                    PopAvgByAlbum = PopByAlbum / album.Tracks.Count;
+                    PopAvgOfAllAlbums.Add(PopAvgByAlbum);
+                }
+
+                PopAvgByArtist = PopAvgOfAllAlbums.Sum() / PopAvgOfAllAlbums.Count;
+                artistTrackAverage.Add(artist.Id, Math.Round(PopAvgByArtist, 1));
+            }
+
+            return artistTrackAverage;
+        }
         private static void GetAllArtists(ApplicationDbContext context)
         {
 
@@ -81,19 +122,6 @@ namespace Experiments
             }
         }
 
-        //private static void GetAllGenres(ApplicationDbContext context)
-        //{
-        //    var genres = context.Genres
-        //        .Include(x => x.Albums)
-        //        .Include(x => x.Artists)
-        //        .Include(x => x.Tracks)
-        //        .ToList();
-
-        //    foreach (var genre in genres)
-        //    {
-        //        Console.WriteLine($"Genre: {genre.Type}");
-        //    }
-        //    Console.WriteLine(genres.Count);
-        //}
+        private static IEnumerable<Genre> GetTracks(UnitOfWork unit) => unit.Genres.GetGenresWithEverything();
     }
 }
