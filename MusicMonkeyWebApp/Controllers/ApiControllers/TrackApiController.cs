@@ -144,7 +144,7 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
 
         // POST: api/TrackApi
         [ResponseType(typeof(Track))]
-        public IHttpActionResult PostTrack(Track track)
+        public IHttpActionResult PostTrack(Track track, string type)
         {
             if (!ModelState.IsValid)
             {
