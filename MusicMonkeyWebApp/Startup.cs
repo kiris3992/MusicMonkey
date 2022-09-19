@@ -21,9 +21,7 @@ namespace MusicMonkeyWebApp
     {
         public void Configuration(IAppBuilder app)
         {
-            //if (WebSetsConfig.Initialize()) return;
             ConfigureAuth(app);
-            //UsersConfig.SeedUsers();
         }
     }
 
