@@ -118,6 +118,14 @@
         return el;
     };
 
+    HtmlDom.createElement = function (tagName, owner = null, innerHTML = null, innerTEXT = null) {
+        const el = document.createElement(tagName);
+        if (innerTEXT) el.innerTEXT = innerTEXT;
+        if (innerHTML) el.innerHTML = innerHTML;
+        if (owner) owner.appendChild(el);
+        return el;
+    };
+
     var Messenger = {};
 
     Messenger.infoMessenger = function (messageElement) {

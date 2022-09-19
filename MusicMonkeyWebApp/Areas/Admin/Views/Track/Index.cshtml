@@ -267,19 +267,28 @@
 
                 rowEditor.init(document.querySelector('.info_message_container span'));
 
+
+                // Paging
                 document.querySelector('.paginator .paginator__pages').innerHTML = `${data.paging.PageIndex + 1} from ${data.paging.TotalPages}`;
 
-                const ul = document.querySelector('.paginator .paginator__paginator');
+                let ul, li, btn; 
+
+                ul = document.querySelector('.paginator .paginator__paginator');
                 ul.innerHTML = '';
 
+                const createEl = SiteHelper.HtmlDom.createElement;
+
                 for (var i = 0; i < data.paging.TotalPages; i++) {
-                    const li = document.createElement('li');
-                    const a = document.createElement('button'); li.appendChild(a);
+
+                    createEl('li', ul);
+
+                    li = document.createElement('li');
+                    btn = document.createElement('button'); li.appendChild(btn);
                     if (i == data.paging.PageIndex) li.className = 'active';
-                    a.innerText = (i + 1);
+                    btn.innerText = (i + 1);
 
                     ((i) => {
-                        a.onclick = () => { getData({ type: "", PageIndex: i, ItemsPerPage: 25 }); };
+                        btn.onclick = () => { getData({ type: "", PageIndex: i, ItemsPerPage: 25 }); };
                     })(i);
 
                     ul.appendChild(li);
