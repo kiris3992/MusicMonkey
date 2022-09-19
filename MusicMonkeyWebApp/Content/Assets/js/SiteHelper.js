@@ -127,6 +127,62 @@
         return el;
     };
 
+    var Paging = {};
+
+    Paging.Create = function (infoElement, pagerContainerElement, maxPagerButtons, pageClickFunc, dataModel) {
+        const createEl = HtmlDom.createElement;
+        this.dataModel = dataModel;
+
+        this.build = function (pagingModel) {
+            pagerContainerElement.innerHTML = '';
+
+            let buttonsCounter = maxPagerButtons;
+            let li, btn;
+
+            // Arrow Previous
+            li = createEl('li', pagerContainerElement);
+            btn = createEl('button', li, '<i class="fa fa-arrow-left" aria-hidden="true"></i>');
+            btn.onclick = () => {
+                this.dataModel = { type: "", PageIndex: pagingModel.PreviousPage, ItemsPerPage: pagingModel.ItemsPerPage };
+                if (pagingModel.PageIndex != this.dataModel.PageIndex) pageClickFunc();
+            };
+
+            // Left
+            for (let i = pagingModel.PageIndex - Math.floor(maxPagerButtons / 2); i < pagingModel.PageIndex; i++) {
+                if (i < 0) continue;
+                buttonsCounter--;
+
+                li = createEl('li', pagerContainerElement);
+                btn = createEl('button', li, (i + 1).toString());
+
+                ((i) => btn.onclick = () => { this.dataModel = { type: "", PageIndex: i, ItemsPerPage: pagingModel.ItemsPerPage }; pageClickFunc(); }) (i);
+            }
+
+            // Current
+            li = createEl('li', pagerContainerElement, null, null, 'active');
+            createEl('button', li, (pagingModel.PageIndex + 1).toString());
+
+            // Right
+            for (let i = pagingModel.PageIndex + 1; i < pagingModel.PageIndex + buttonsCounter; i++) {
+                if (i > pagingModel.TotalPages - 1) break;
+
+                li = createEl('li', pagerContainerElement);
+                btn = createEl('button', li, (i + 1).toString());
+
+                ((i) => btn.onclick = () => { this.dataModel = { type: "", PageIndex: i, ItemsPerPage: pagingModel.ItemsPerPage }; pageClickFunc(); }) (i);
+            }
+
+            // Arrow Next
+            li = createEl('li', pagerContainerElement);
+            btn = createEl('button', li, '<i class="fa fa-arrow-right" aria-hidden="true"></i>');
+            btn.onclick = () => {
+                this.dataModel = { type: "", PageIndex: pagingModel.NextPage, ItemsPerPage: pagingModel.ItemsPerPage };
+                if (pagingModel.PageIndex != this.dataModel.PageIndex) pageClickFunc();
+            };
+        }
+    };
+
+
     var Messenger = {};
 
     Messenger.infoMessenger = function (messageElement) {
@@ -153,5 +209,5 @@
         };
     };
 
-    return { AjaxHelper, Converter, Window, Messenger, HtmlDom };
+    return { AjaxHelper, Converter, Window, Messenger, HtmlDom, Paging };
 })();
