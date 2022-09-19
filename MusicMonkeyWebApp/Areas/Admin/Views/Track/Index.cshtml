@@ -277,15 +277,11 @@
                 ul.innerHTML = '';
 
                 const createEl = SiteHelper.HtmlDom.createElement;
+                const paging = data.paging;
 
                 for (var i = 0; i < data.paging.TotalPages; i++) {
-
-                    createEl('li', ul);
-
-                    li = document.createElement('li');
-                    btn = document.createElement('button'); li.appendChild(btn);
-                    if (i == data.paging.PageIndex) li.className = 'active';
-                    btn.innerText = (i + 1);
+                    li = createEl('li', ul, null, null, (i == paging.PageIndex ? 'active' : null));
+                    btn = createEl('button', li, (i + 1));
 
                     ((i) => {
                         btn.onclick = () => { getData({ type: "", PageIndex: i, ItemsPerPage: 25 }); };

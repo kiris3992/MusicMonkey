@@ -118,10 +118,11 @@
         return el;
     };
 
-    HtmlDom.createElement = function (tagName, owner = null, innerHTML = null, innerTEXT = null) {
+    HtmlDom.createElement = function (tagName, owner = null, innerHTML = null, innerTEXT = null, className = null) {
         const el = document.createElement(tagName);
         if (innerTEXT) el.innerTEXT = innerTEXT;
         if (innerHTML) el.innerHTML = innerHTML;
+        if (className) el.className = className;
         if (owner) owner.appendChild(el);
         return el;
     };
