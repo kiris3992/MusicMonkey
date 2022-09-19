@@ -8,6 +8,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
+using System.Xml.Linq;
 using DAL;
 using Entities.Models;
 using Newtonsoft.Json;
@@ -17,10 +18,6 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
 {
     public class ArtistApiController : BaseApiController
     {
-
-
-
-
         // GET: api/ArtistApi
         public IEnumerable<Object> GetArtists()
         {
@@ -29,7 +26,7 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
                 .GetArtistsWithEverything()
                 .Select(x => ArtistDTOModel(x));
         }
-
+        
 
         // GET: api/ArtistApi/5
         [ResponseType(typeof(Object))]

@@ -4,13 +4,17 @@
     Layout = "~/Areas/Admin/Views/Layout/_AdminLayout.cshtml";
 }
 
+<link rel="stylesheet" href="~/Content/Assets/css/font-awesome.min.css" />
+
 <style>
     table tbody tr td:nth-child(6) div {
-        cursor:pointer;
+        cursor: pointer;
     }
-    table tbody tr td:nth-child(6) svg{
-        fill:#fff;
+
+    table tbody tr td:nth-child(6) svg {
+        fill: #fff;
     }
+
     .tooltip-inner {
         max-width: 200px;
         padding: 3px 8px;
@@ -19,7 +23,6 @@
         background-color: #000;
         border-radius: .30rem;
     }
-
 
     .pic-details {
         width: 200px;
@@ -34,60 +37,214 @@
     }
 
         .pic-details:hover {
-            
             transform: rotate(360deg);
         }
-
-
- 
 </style>
 
 <script>
-  
+    'use strict';
+
+    const rowEditor = {
+        tr: null,
+
+        init: (messageElement) => {
+            rowEditor.message = new SiteHelper.Messenger.infoMessenger(messageElement);
+        },
+        history: {
+            elements: [],
+            save: (t) => {
+                t.history.elements.length = 0;
+                t.tr.querySelectorAll('[data-edit]').forEach(o => {
+                    t.history.elements.push(o.cloneNode(true));
+                });
+            }
+        },
+        message: new SiteHelper.Messenger.infoMessenger(null),
+        open: (rowId) => {
+            const t = rowEditor;
+
+            if (t.tr != null) return;
+            t.tr = document.querySelector(`#${rowId}`);
+
+            $.ajax({
+                type: 'GET', url: '/api/ArtistApi', dataType: 'json', contentType: 'application/json',
+                success: (data) => {
+                    t.tr.querySelectorAll('[data-crud-btn]').forEach(o => {
+                        o.style.display = o.getAttribute('data-crud-btn') == 'action' ? 'none' : '';
+                    });
+
+                    t.tr.querySelectorAll('div').forEach(div => div.style.backgroundColor = '#1f2e48');
+
+                    t.tr.querySelectorAll('[data-edit]').forEach(o => o.removeAttribute('disabled'));
+                    t.history.save(t);
+
+                    t.edit(data);
+                },
+                error: () => {
+                    t.message.set.danger('An internal server error occured while trying to get Artist data...');
+                    t.tr = null;
+                }
+            });
+        },
+        edit: (data) => {
+            const t = rowEditor;
+
+            const albumSel = t.tr.querySelector('[data-edit="track-albums"]');
+            const artistSel = t.tr.querySelector('[data-edit="track-artists"]');
+
+            const currentArtistId = Number(artistSel.value);
+            const currentAlbumId = Number(albumSel.value);
+
+            artistSel.innerHTML = '';
+            albumSel.innerHTML = '';
+
+            const artists = data.sort((a, b) => a.Name < b.Name ? -1 : a.Name > b.Name ? 1 : 0);
+
+            artists.forEach(o => {
+                let opt = SiteHelper.HtmlDom.createOption(null, o.Id, o.Name);
+                artistSel.appendChild(opt);
+                if (o.Id == currentArtistId) {
+                    opt.setAttribute('selected', true);
+
+                    o.Albums.forEach(a => {
+                        opt = SiteHelper.HtmlDom.createOption(albumSel, a.Id, a.Title);
+                        if (a.Id == currentAlbumId) opt.setAttribute('selected', true);
+                    });
+                }
+            });
+
+            t.history.save(t);
+
+            artistSel.onchange = (e) => {
+                const artistId = e.target.options[e.target.selectedIndex].value;
+                albumSel.innerHTML = '';
+                const artist = data.find(o => o.Id == artistId);
+                artist.Albums.forEach(o => SiteHelper.HtmlDom.createOption(albumSel, o.Id, o.Title));
+
+                t.history.save(t);
+            };
+        },
+        cancel: () => {
+            const t = rowEditor;
+
+            t.tr.querySelectorAll('[data-edit]').forEach(o => {
+                o.setAttribute('disabled', true);
+
+                t.history.elements.forEach(c => {
+                    if (o.getAttribute('data-edit') == c.getAttribute('data-edit')) {
+                        switch (o.type) {
+                            case 'select-one':
+                                for (let i = o.options.length - 1; i > -1; i--) o.remove(i);
+                                for (let i = 0; i < c.options.length; i++) {
+                                    let opt = SiteHelper.HtmlDom.createOption(o, c.options[i].value, c.options[i].text);
+                                    if (c.getAttribute('selected')) opt.setAttribute('selected', true);
+                                }
+                                break;
+                            default: o.value = c.value; break;
+                        }
+                        o.value = c.value;
+                    }
+                });
+            });
+
+            t.tr.querySelectorAll('[data-crud-btn]').forEach(o => {
+                o.style.display = o.getAttribute('data-crud-btn') == 'edit' ? 'none' : '';
+            });
+
+            t.tr.querySelectorAll('div').forEach(div => div.style.backgroundColor = '#151f30');
+
+            t.message.set.info('Action canceled.', 600);
+            t.tr = null;
+        },
+        save: () => {
+            const t = rowEditor;
+            if (t.tr == null) return;
+
+            let track = {
+                Id: Number(t.tr.querySelector('[data-edit="track-id"]').innerText),
+                Title: t.tr.querySelector('[data-edit="track-title"]').value,
+                DurationSecs: Number(t.tr.querySelector('[data-edit="track-duration"]').value),
+                Popularity: Number(t.tr.querySelector('[data-edit="track-popularity"]').value),
+                AlbumId: Number(t.tr.querySelector('[data-edit="track-albums"]').value),
+                ArtistId: Number(t.tr.querySelector('[data-edit="track-artists"]').value),
+                AudioUrl: null
+            };
+
+            $.ajax({
+                type: 'PUT', url: '/api/TrackApi', contentType: 'application/json',
+                data: JSON.stringify(track),
+                success: () => {
+                    t.tr.querySelectorAll('[data-edit]').forEach(o => o.setAttribute('disabled', true));
+                    t.tr.querySelectorAll('[data-crud-btn]').forEach(o => {
+                        o.style.display = o.getAttribute('data-crud-btn') == 'edit' ? 'none' : '';
+                    });
+
+                    t.tr.querySelectorAll('div').forEach(div => div.style.backgroundColor = '#151f30');
+
+                    t.message.set.info('Track successfully saved.');
+                    t.tr = null;
+                },
+                error: () => {
+                    t.message.set.danger('An internal server error occured while trying to save Track...');
+                    t.tr = null;
+                }
+            });
+        }
+    };
 
 
-    $(document).ready(function () {
+    const getData = (postData) => {
+        if (!postData) postData = { type: "", PageIndex: 0, ItemsPerPage: 25 };
 
-
-        SiteHelper.AjaxHelper.contentLoader(
-            'load-tracks',
-            (track, i) => 
-                `<tr>
-                    <td><div class="main__table-text">${track.Id}</div></td>
-                    <td><div class="main__table-text"><a href="#">${track.Title}</a></div></td>
-                    <td><div class="main__table-text">${track.DurationSecs}</div></td>
-                    <td><div class="main__table-text">${track.AlbumTitle}</div></td>
-                    <td><div class="main__table-text">${track.ArtistName}</div></td>
+        $.ajax({
+            type: 'POST',
+            url: '/api/TrackApi',
+            data: JSON.stringify(postData),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                $(`#load-tracks`).html(data.tracks.map((track, i) =>
+                    `<tr id ='tr_${i}'>
+                    <td><div class="main__table-text" data-edit="track-id">${track.Id}</div></td>
+                    <td><div class="main__table-text"><input type="text" value="${track.Title}" data-edit="track-title" disabled/></div></td>
+                    <td><div class="main__table-text"><input type="number" min="1" max="6000" data-edit="track-duration" value="${track.DurationSecs}" disabled/></div></td>
+                    <td>
+                        <div class="main__table-text">
+                            <select name="track-albums" data-edit="track-albums" disabled>
+                                <option value="${track.AlbumId}">${track.AlbumTitle}</option>
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="main__table-text">
+                            <select name="track-artists" data-edit="track-artists" disabled>
+                                <option value="${track.ArtistId}">${track.ArtistName}</option>
+                            </select>
+                        </div>
+                    </td>
                     <td>
                         <div class="main__table-text" data-toggle="tooltip" data-placement="top" title="${track.TrackGenres.length ? track.TrackGenres.join(', ') : 'N/K'}">&nbsp;
                         ${track.TrackGenres.length ? track.TrackGenres.length == 1 ? track.TrackGenres[0] : track.TrackGenres[0] + ',&nbsp;...' : 'N/K'}
                         </div>
                     </td>
-                    <td><div class="main__table-text main__table-text--green"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22,9.67A1,1,0,0,0,21.14,9l-5.69-.83L12.9,3a1,1,0,0,0-1.8,0L8.55,8.16,2.86,9a1,1,0,0,0-.81.68,1,1,0,0,0,.25,1l4.13,4-1,5.68A1,1,0,0,0,6.9,21.44L12,18.77l5.1,2.67a.93.93,0,0,0,.46.12,1,1,0,0,0,.59-.19,1,1,0,0,0,.4-1l-1-5.68,4.13-4A1,1,0,0,0,22,9.67Zm-6.15,4a1,1,0,0,0-.29.88l.72,4.2-3.76-2a1.06,1.06,0,0,0-.94,0l-3.76,2,.72-4.2a1,1,0,0,0-.29-.88l-3-3,4.21-.61a1,1,0,0,0,.76-.55L12,5.7l1.88,3.82a1,1,0,0,0,.76.55l4.21.61Z" /></svg> ${track.Popularity}</div></td>
-
                     <td>
-                        <div class="main__table-btns">
-                            <a href="#modal-details" class="main__table-btn main__table-btn--view open-modal">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.92,11.6C19.9,6.91,16.1,4,12,4S4.1,6.91,2.08,11.6a1,1,0,0,0,0,
-                                .8C4.1,17.09,7.9,20,12,20s7.9-2.91,9.92-7.6A1,1,0,0,0,21.92,11.6ZM12,18c-3.17,0-6.17-2.29-7.9-6C5.83,8.29,8.83,6,12,6s6.17,2.29,7.9,6C
-                                18.17,15.71,15.17,18,12,18ZM12,8a4,4,0,1,0,4,4A4,4,0,0,0,12,8Zm0,6a2,2,0,1,1,2-2A2,2,0,0,1,12,14Z" /></svg>
-                            </a>
-                            <a href="~/Admin/Artist/Edit" class="main__table-btn main__table-btn--edit">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22,7.24a1,1,0,0,0-.29-.71L17.47,2.29A1,1,0,0,0,16.76,2a1,1,0,0,
-                                0-.71.29L13.22,5.12h0L2.29,16.05a1,1,0,0,0-.29.71V21a1,1,0,0,0,1,1H7.24A1,1,0,0,0,8,21.71L18.87,10.78h0L21.71,8a1.19,1.19,0,0,0,.22-.
-                                33,1,1,0,0,0,0-.24.7.7,0,0,0,0-.14ZM6.83,20H4V17.17l9.93-9.93,2.83,2.83ZM18.17,8.66,15.34,5.83l1.42-1.41,2.82,2.82Z" /></svg>
-                            </a>
-                            <a href="#modal-delete" class="main__table-btn main__table-btn--delete open-modal">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10,18a1,1,0,0,0,1-1V11a1,1,0,0,0-2,0v6A1,1,0,0,0,10,18ZM20,6H16
-                                V5a3,3,0,0,0-3-3H11A3,3,0,0,0,8,5V6H4A1,1,0,0,0,4,8H5V19a3,3,0,0,0,3,3h8a3,3,0,0,0,3-3V8h1a1,1,0,0,0,0-2ZM10,5a1,1,0,0,1,1-1h2a1,1,0,
-                                0,1,1,1V6H10Zm7,14a1,1,0,0,1-1,1H8a1,1,0,0,1-1-1V8H17Zm-3-1a1,1,0,0,0,1-1V11a1,1,0,0,0-2,0v6A1,1,0,0,0,14,18Z" /></svg>
-                            </a>
+                        <div class="main__table-text main__table-text--green">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22,9.67A1,1,0,0,0,21.14,9l-5.69-.83L12.9,3a1,1,0,0,0-1.8,0L8.55,8.16,2.86,9a1,1,0,0,0-.81.68,1,1,0,0,0,.25,1l4.13,4-1,5.68A1,1,0,0,0,6.9,21.44L12,18.77l5.1,2.67a.93.93,0,0,0,.46.12,1,1,0,0,0,.59-.19,1,1,0,0,0,.4-1l-1-5.68,4.13-4A1,1,0,0,0,22,9.67Zm-6.15,4a1,1,0,0,0-.29.88l.72,4.2-3.76-2a1.06,1.06,0,0,0-.94,0l-3.76,2,.72-4.2a1,1,0,0,0-.29-.88l-3-3,4.21-.61a1,1,0,0,0,.76-.55L12,5.7l1.88,3.82a1,1,0,0,0,.76.55l4.21.61Z" /></svg>
+                            <input type="number" min="1" max="5" data-edit="track-popularity" value="${track.Popularity}" disabled/>
+                        </div></td>
+                    <td>
+                        <div class="crud-btn-container" style="border-radius: 0 16px 16px 0;">
+                            <button class="crud-btn crud-btn--view open-modal" data-crud-btn="action"><i class="fa fa-eye" aria-hidden="true"></i></button>
+                            <button class="crud-btn crud-btn--edit" data-crud-btn="action" onclick='rowEditor.open("tr_${i}")'><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                            <button class="crud-btn crud-btn--cancel" data-crud-btn="edit" onclick='rowEditor.cancel()' style="display:none"><i class="fa fa-times" aria-hidden="true"></i></button>
+                            <button class="crud-btn crud-btn--save" data-crud-btn="edit" onclick='rowEditor.save()' style="display:none"><i class="fa fa-check" aria-hidden="true"></i></button>
+                            <button class="crud-btn crud-btn--delete open-modal" data-crud-btn="action"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
                         </div>
                     </td>
-                </tr>`,
-            () => {
+                </tr>`
+                ));
 
-                
+                $('#tracks-total').text(`${data.paging.TotalItems} total`);
 
                 $('.open-modal').magnificPopup({
                     fixedContentPos: true,
@@ -107,27 +264,148 @@
                 });
 
                 $('[data-toggle="tooltip"]').tooltip();
+
+                rowEditor.init(document.querySelector('.info_message_container span'));
+
+                document.querySelector('.paginator .paginator__pages').innerHTML = `${data.paging.PageIndex + 1} from ${data.paging.TotalPages}`;
+
+                const ul = document.querySelector('.paginator .paginator__paginator');
+                ul.innerHTML = '';
+
+                for (var i = 0; i < data.paging.TotalPages; i++) {
+                    const li = document.createElement('li');
+                    const a = document.createElement('button'); li.appendChild(a);
+                    if (i == data.paging.PageIndex) li.className = 'active';
+                    a.innerText = (i + 1);
+
+                    ((i) => {
+                        a.onclick = () => { getData({ type: "", PageIndex: i, ItemsPerPage: 25 }); };
+                    })(i);
+
+                    ul.appendChild(li);
+                }
             },
-            new SiteHelper.AjaxHelper.ajaxObject('/api/TrackApi')).start();
-
-
-        $('.open-modal').magnificPopup({
-            fixedContentPos: true,
-            fixedBgPos: true,
-            overflowY: 'auto',
-            type: 'inline',
-            preloader: false,
-            focus: '#username',
-            modal: false,
-            removalDelay: 300,
-            mainClass: 'my-mfp-zoom-in',
+            error: function () {
+                //t.error();
+            }
         });
+    };
 
-        $('.modal__btn--dismiss').on('click', function (e) {
-            e.preventDefault();
-            $.magnificPopup.close();
-        });
+    $(document).ready(function () {
 
+
+        getData();
+
+        //SiteHelper.AjaxHelper.contentLoader(
+        //    'load-tracks',
+        //    (track, i) =>
+        //        `<tr id ='tr_${i}'>
+        //            <td><div class="main__table-text" data-edit="track-id">${track.Id}</div></td>
+        //            <td><div class="main__table-text"><input type="text" value="${track.Title}" data-edit="track-title" disabled/></div></td>
+        //            <td><div class="main__table-text"><input type="number" min="1" max="6000" data-edit="track-duration" value="${track.DurationSecs}" disabled/></div></td>
+        //            <td>
+        //                <div class="main__table-text">
+        //                    <select name="track-albums" data-edit="track-albums" disabled>
+        //                        <option value="${track.AlbumId}">${track.AlbumTitle}</option>
+        //                    </select>
+        //                </div>
+        //            </td>
+        //            <td>
+        //                <div class="main__table-text">
+        //                    <select name="track-artists" data-edit="track-artists" disabled>
+        //                        <option value="${track.ArtistId}">${track.ArtistName}</option>
+        //                    </select>
+        //                </div>
+        //            </td>
+        //            <td>
+        //                <div class="main__table-text" data-toggle="tooltip" data-placement="top" title="${track.TrackGenres.length ? track.TrackGenres.join(', ') : 'N/K'}">&nbsp;
+        //                ${track.TrackGenres.length ? track.TrackGenres.length == 1 ? track.TrackGenres[0] : track.TrackGenres[0] + ',&nbsp;...' : 'N/K'}
+        //                </div>
+        //            </td>
+        //            <td>
+        //                <div class="main__table-text main__table-text--green">
+        //                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22,9.67A1,1,0,0,0,21.14,9l-5.69-.83L12.9,3a1,1,0,0,0-1.8,0L8.55,8.16,2.86,9a1,1,0,0,0-.81.68,1,1,0,0,0,.25,1l4.13,4-1,5.68A1,1,0,0,0,6.9,21.44L12,18.77l5.1,2.67a.93.93,0,0,0,.46.12,1,1,0,0,0,.59-.19,1,1,0,0,0,.4-1l-1-5.68,4.13-4A1,1,0,0,0,22,9.67Zm-6.15,4a1,1,0,0,0-.29.88l.72,4.2-3.76-2a1.06,1.06,0,0,0-.94,0l-3.76,2,.72-4.2a1,1,0,0,0-.29-.88l-3-3,4.21-.61a1,1,0,0,0,.76-.55L12,5.7l1.88,3.82a1,1,0,0,0,.76.55l4.21.61Z" /></svg>
+        //                    <input type="number" min="1" max="5" data-edit="track-popularity" value="${track.Popularity}" disabled/>
+        //                </div></td>
+        //            <td>
+        //                <div class="crud-btn-container" style="border-radius: 0 16px 16px 0;">
+        //                    <button class="crud-btn crud-btn--view open-modal" data-crud-btn="action"><i class="fa fa-eye" aria-hidden="true"></i></button>
+        //                    <button class="crud-btn crud-btn--edit" data-crud-btn="action" onclick='rowEditor.open("tr_${i}")'><i class="fa fa-pencil" aria-hidden="true"></i></button>
+        //                    <button class="crud-btn crud-btn--cancel" data-crud-btn="edit" onclick='rowEditor.cancel()' style="display:none"><i class="fa fa-times" aria-hidden="true"></i></button>
+        //                    <button class="crud-btn crud-btn--save" data-crud-btn="edit" onclick='rowEditor.save()' style="display:none"><i class="fa fa-check" aria-hidden="true"></i></button>
+        //                    <button class="crud-btn crud-btn--delete open-modal" data-crud-btn="action"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+        //                </div>
+        //            </td>
+        //        </tr>`,
+        //    (data) => {
+        //        $('#tracks-total').text(`${data.paging.TotalItems} total`);
+
+        //        $('.open-modal').magnificPopup({
+        //            fixedContentPos: true,
+        //            fixedBgPos: true,
+        //            overflowY: 'auto',
+        //            type: 'inline',
+        //            preloader: false,
+        //            focus: '#username',
+        //            modal: false,
+        //            removalDelay: 300,
+        //            mainClass: 'my-mfp-zoom-in',
+        //        });
+
+        //        $('.modal__btn--dismiss').on('click', function (e) {
+        //            e.preventDefault();
+        //            $.magnificPopup.close();
+        //        });
+
+        //        $('[data-toggle="tooltip"]').tooltip();
+
+        //        rowEditor.init(document.querySelector('.info_message_container span'));
+
+        //        document.querySelector('.paginator .paginator__pages').innerHTML = `${data.paging.PageIndex + 1} from ${data.paging.TotalPages}`;
+
+        //        const ul = document.querySelector('.paginator .paginator__paginator');
+        //        ul.innerHTML = '';
+
+        //        for (var i = 0; i < data.paging.TotalPages; i++) {
+        //            const li = document.createElement('li');
+        //            const a = document.createElement('a'); li.appendChild(a);
+        //            if (i == data.paging.PageIndex) li.className = 'active';
+        //            a.innerText = (i + 1);
+        //            a.href = '#';
+        //            ul.appendChild(li);
+        //        }
+
+        //    },
+        //    new SiteHelper.AjaxHelper.ajaxObject('/api/TrackApi', { type: "", PageIndex: 0, ItemsPerPage: 25 }, 'POST'), null, 'tracks').start();
+
+
+        /*
+         <!-- paginator -->
+                <div class="col-12">
+                    <div class="paginator">
+                        <span class="paginator__pages">10 from 14 452</span>
+
+                        <ul class="paginator__paginator">
+                            <li>
+                                <a href="#">
+                                    <svg width="14" height="11" viewBox="0 0 14 11" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.75 5.36475L13.1992 5.36475" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M5.771 10.1271L0.749878 5.36496L5.771 0.602051" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                                </a>
+                            </li>
+                            <li class="active"><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li>
+                                <a href="#">
+                                    <svg width="14" height="11" viewBox="0 0 14 11" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13.1992 5.3645L0.75 5.3645" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M8.17822 0.602051L13.1993 5.36417L8.17822 10.1271" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- end paginator -->
+
+         */
     });
 </script>
 
@@ -157,19 +435,19 @@
         <div class="container-fluid">
             <div class="row">
                 <!-- main title -->
-                <div class="col-12">
+                <div class="col-12 main__title_sticky_container">
                     <div class="main__title">
-                       
-                            <a href="~/Admin/Track/Add" style="margin-right:5px;">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" class="bi bi-plus-square" viewBox="0 0 16 16">
-                                    <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
-                                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-                                </svg>
-                            </a>
-                        
+
+                        <a href="~/Admin/Track/Add" style="margin-right:5px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" class="bi bi-plus-square" viewBox="0 0 16 16">
+                                <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
+                                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                            </svg>
+                        </a>
+
                         <h2>Tracks</h2>
 
-                        <span class="main__title-stat">1562 total</span>
+                        <span class="main__title-stat" id="tracks-total">&nbsp;</span>
 
                         <div class="main__title-wrap">
                             <!-- filter sort -->
@@ -197,6 +475,10 @@
                             </form>
                             <!-- end search -->
                         </div>
+                    </div>
+
+                    <div class="info_message_container">
+                        <span>&nbsp;</span>
                     </div>
                 </div>
                 <!-- end main title -->
@@ -226,7 +508,7 @@
                 <!-- paginator -->
                 <div class="col-12">
                     <div class="paginator">
-                        <span class="paginator__pages">10 from 14 452</span>
+                        <span class="paginator__pages">&nbsp;</span>
 
                         <ul class="paginator__paginator">
                             <li>
@@ -251,7 +533,6 @@
         </div>
     </main>
     <!-- end main content -->
-
     <!-- modal view -->
     <div id="modal-details" class="zoom-anim-dialog mfp-hide modal">
         <h6 class="modal__text">Track Details</h6>
@@ -322,7 +603,6 @@
 
     </div>
     <!-- end modal view -->
-
     <!-- modal delete -->
     <div id="modal-delete" class="zoom-anim-dialog mfp-hide modal">
         <h6 class="modal__title">Item delete</h6>

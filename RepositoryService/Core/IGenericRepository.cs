@@ -11,6 +11,7 @@ namespace RepositoryService.Core
     {
         IEnumerable<T> GetAll();
         T GetById(object id);
+        int Count();
         void Create(T entity);
         void Update(T entity);
         void DeleteById(object id);

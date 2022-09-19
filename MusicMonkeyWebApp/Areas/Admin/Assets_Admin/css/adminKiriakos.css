@@ -47,7 +47,7 @@ body {
 body {
     font-family: 'Inter', sans-serif;
     font-weight: 400;
-    background-color: lightgray;
+    background-color: #131720;
     font-weight: normal;
     -webkit-font-smoothing: antialiased;
 }
@@ -305,7 +305,7 @@ body::-webkit-scrollbar-thumb {
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    background-color: #3f008c;
+    background-color: #131720;
     position: fixed;
     top: 0;
     left: 0;
@@ -324,7 +324,7 @@ body::-webkit-scrollbar-thumb {
     align-items: center;
     height: 70px;
     padding: 0 30px;
-    background-color: #3f008c;
+    background-color: #131720;
     width: 100%;
     position: relative;
     border-bottom: 1px solid rgba(47,128,237,0.1);
@@ -343,8 +343,8 @@ body::-webkit-scrollbar-thumb {
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    background-color: #5c00ce;
-    border-bottom: 3px solid rgba(47,128,237,0.1);
+    background-color: #131720;
+    border-bottom: 1px solid rgba(47,128,237,0.1);
 }
 
 .sidebar__user-img {
@@ -584,17 +584,16 @@ body::-webkit-scrollbar-thumb {
     align-items: center;
     flex-wrap: wrap;
     margin-bottom: 20px;
-    border-bottom: 2px solid black;
+    border-bottom: 1px solid rgba(47,128,237,0.1);
     padding-bottom: 20px;
-    padding-top:20px;
-   
+    padding-top: 20px;
 }
 
-.main__title_sticky_container{
-    position:sticky;
-    top:0;
+.main__title_sticky_container {
+    position: sticky;
+    top: 0;
     z-index: 999;
-    background-color: lightgray;
+    background-color: #131720;
 }
 
 .info_message_container{
@@ -608,7 +607,7 @@ body::-webkit-scrollbar-thumb {
 .main__title h2 {
     font-family: 'Rubik', sans-serif;
     font-weight: 400;
-    color: #3f008c;
+    color: #e0e0e0;
     font-size: 28px;
     line-height: 100%;
     margin-bottom: 0;
@@ -619,7 +618,7 @@ body::-webkit-scrollbar-thumb {
         }
 
 .main__title-stat {
-    color: black;
+    color: #e0e0e0;
     font-size: 14px;
     margin-left: 15px;
     margin-top: 10px;
@@ -647,7 +646,7 @@ body::-webkit-scrollbar-thumb {
     .main__title-form input {
         height: 40px;
         border-radius: 16px;
-        background-color: grey;
+        background-color: #151f30;
         border: none;
         padding: 0 60px 0 20px;
         font-size: 14px;
@@ -742,12 +741,12 @@ body::-webkit-scrollbar-thumb {
 }
 
     .main__table thead {
-        border-bottom: 20px solid lightgray;
+        border-bottom: 20px solid transparent;
     }
 
         .main__table thead th {
             font-size: 12px;
-            color: black;
+            color: #e0e0e0;
             font-weight: 400;
             padding: 0 20px 0 20px;
             line-height: 100%;
@@ -756,7 +755,7 @@ body::-webkit-scrollbar-thumb {
         }
 
     .main__table tbody tr {
-        border-bottom: 10px solid lightgray;
+        border-bottom: 10px solid transparent;
     }
 
     .main__table tbody td {
@@ -770,27 +769,24 @@ body::-webkit-scrollbar-thumb {
     }
 
     .main__table tbody tr td div select option {
-        color: #fff !important;
     }
 
     .main__table tbody tr td div input, .main__table tbody tr td div select {
         border: 0;
-        text-align: center;
-        border-radius: 5px;
-        background-color: #3f008c;
-        color: #fff !important;
-    }
-
-    .main__table tbody tr td div select {
         text-align: left;
+        border-radius: 5px;
+        background-color: #e0e0e0!important;
+        font-weight: 900;
+        color: #000 !important;
         padding: 0 10px;
     }
 
-    .main__table tbody tr td div input[disabled], .main__table tbody tr td div select[disabled] {
-        background-color:transparent;
-        color:inherit;
-        padding:0;
-    }
+        .main__table tbody tr td div input[disabled], .main__table tbody tr td div select[disabled] {
+            background-color: transparent!important;
+            font-weight: 900;
+            color: #fff !important;
+            padding: 0;
+        }
 
     
 
@@ -840,7 +836,7 @@ body::-webkit-scrollbar-thumb {
     font-weight: 400;
     line-height: 30px;
     padding: 20px;
-    background-color: #3f008c;
+    background-color: #151f30;
     white-space: nowrap;
 }
 
@@ -882,7 +878,7 @@ body::-webkit-scrollbar-thumb {
     justify-content: flex-start;
     align-items: center;
     padding: 20px;
-    background-color: #3f008c;
+    background-color: #151f30;
 }
 
 .main__table-btn {
@@ -895,7 +891,7 @@ body::-webkit-scrollbar-thumb {
     font-size: 16px;
     color: #fff;
     border-radius: 10px;
-    background-color: #3f008c;
+    background-color: #151f30;
     margin-right: 10px;
 }
 
@@ -962,40 +958,45 @@ body::-webkit-scrollbar-thumb {
     justify-content: flex-start;
     align-items: center;
     padding: 16px;
-    background-color: #3f008c; /* Auto prepei na bgei*/
+    background-color: #151f30; /* Auto prepei na bgei*/
 }
 
 .crud-btn {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 16px;
+    font-size: 18px;
     color: #fff;
     border-radius: 10px;
-    padding:11px;
-    background-color:gray;
+    padding: 10px;
+    background-color: gray;
     margin: 0 3px;
     min-width: 36px;
 }
 .crud-btn:hover{
-    filter:brightness(1.2);
+    filter:brightness(1.5);
 }
 
 .crud-btn--view {
-    background-color: #17a2b8;
+    background-color: #17a2b82a;
+    color: #17a2b8;
 }
 
 .crud-btn--edit {
-    background-color: #343a40;
+    background-color: #007bff2a;
+    color: #007bff;
 }
 .crud-btn--cancel {
-    background-color: #ffc107;
+    background-color: #ffc1072a;
+    color: #ffc107;
 }
 .crud-btn--save {
-    background-color: #28a745;
+    background-color: #28a7452a;
+    color: #28a745;
 }
 .crud-btn--delete {
-    background-color: #dc3545;
+    background-color: #dc35452a;
+    color: #dc3545;
 }
 
 .main__user {
@@ -1101,7 +1102,7 @@ body::-webkit-scrollbar-thumb {
     margin-bottom: 20px;
     padding: 20px;
     border-radius: 16px;
-    background-color: #3f008c;
+    background-color: #151f30;
     width: 100%;
 }
 
@@ -1149,7 +1150,7 @@ body::-webkit-scrollbar-thumb {
 	Dashbox
 ==============================*/
 .dashbox {
-    background-color: #3f008c;
+    background-color: #151f30;
     margin-bottom: 20px;
     border-radius: 16px;
     overflow: hidden;
@@ -1257,7 +1258,7 @@ body::-webkit-scrollbar-thumb {
 .filter__item-label {
     font-size: 12px;
     display: block;
-    color: gray;
+    color: #e0e0e0;
     font-weight: 400;
     line-height: 10px;
 }
@@ -1279,7 +1280,7 @@ body::-webkit-scrollbar-thumb {
         background-color: transparent;
         border: none;
         font-size: 14px;
-        color: black;
+        color: #fff;
         cursor: pointer;
         height: 30px;
         margin-right: 10px;
@@ -1300,7 +1301,7 @@ body::-webkit-scrollbar-thumb {
             display: block;
             width: 16px;
             height: 2px;
-            background-color: #3f008c;
+            background-color: #fff;
             left: 0;
             top: 50%;
             transition: 0.5s;
@@ -1359,7 +1360,7 @@ body::-webkit-scrollbar-thumb {
     }
 
         .filter__item-menu li:hover {
-            color: #3f008c;
+            color: #151f30;
         }
 
         .filter__item-menu li:first-child {
@@ -1395,7 +1396,7 @@ body::-webkit-scrollbar-thumb {
     width: 100%;
     height: 50px;
     border-radius: 16px;
-    background-color: gray;
+    background-color: #151f30;
 }
 
 .paginator__pages {
@@ -1430,7 +1431,7 @@ body::-webkit-scrollbar-thumb {
         width: 30px;
         height: 30px;
         border-radius: 12px;
-        background-color: #3f008c;
+        background-color: #131720;
         font-size: 14px;
         color: #e0e0e0;
         font-weight: 500;
@@ -1442,8 +1443,8 @@ body::-webkit-scrollbar-thumb {
         }
 
         .paginator__paginator a:hover {
-            color: black;
             font-size:medium;
+            filter:brightness(1.2);
         }
 
             .paginator__paginator a:hover svg {
@@ -1474,7 +1475,7 @@ body::-webkit-scrollbar-thumb {
 	Form
 ==============================*/
 .form {
-    background-color: #3f008c;
+    background-color: #151f30;
     padding: 20px;
     border-radius: 16px;
     margin-bottom: 30px;
@@ -2019,7 +2020,7 @@ body::-webkit-scrollbar-thumb {
     font-size: 16px;
     color: #fff;
     border-radius: 10px;
-    background-color: #3f008c;
+    background-color: #151f30;
     margin-right: 10px;
 }
 
@@ -2411,7 +2412,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .sign__form {
-    background-color: #3f008c;
+    background-color: #151f30;
     display: flex;
     flex-direction: column;
     justify-content: center;
