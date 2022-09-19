@@ -16,20 +16,25 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
     public class GenreApiController : BaseApiController
     {
         // GET: api/GenreApi
-        public IEnumerable<object> GetGenres(string type = "")
+        public IEnumerable<object> GetGenres(string type = "" , int? inputCount = 0)
         {
             IEnumerable<Genre> genres = unit.Genres.GetGenresWithEverything();
             IEnumerable<object> genreDtoModels = new List<object>();
             switch (type)
             {
-                case "trackcount":
+                case "trackCountDesc":
                     genreDtoModels = genres.OrderByDescending(x => x.Tracks.Count)
+                        .Select(x => TracksByGenresDTOModel(x));
+                    break;
+                case "trackCountAsc":
+                    genreDtoModels = genres.OrderBy(x => x.Tracks.Count)
                         .Select(x => TracksByGenresDTOModel(x));
                     break;
                 default:
                     genreDtoModels = genres.Select(x => PartialGenreDTOModel(x));
                     break;
             }
+            genreDtoModels = inputCount > 0  ? genreDtoModels.Take((int)inputCount) : genreDtoModels;
             return genreDtoModels;
         }
 

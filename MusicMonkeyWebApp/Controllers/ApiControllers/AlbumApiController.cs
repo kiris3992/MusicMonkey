@@ -33,8 +33,8 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
                     albumDtoModels = albums.OrderByDescending(x => x.Tracks.Count)
                         .Select(x => AlbumWithTrackCountDTOModel(x));
                     break;
-                case "dateAsc":
-                    albumDtoModels = albums.OrderBy(x => x.ReleaseDate)
+                case "dateDesc":
+                    albumDtoModels = albums.OrderByDescending(x => x.ReleaseDate)
                         .Select(x => FullAlbumDTOModel(x));
                     break;
                 default:
