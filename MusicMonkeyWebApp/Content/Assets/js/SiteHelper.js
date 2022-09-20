@@ -48,7 +48,7 @@
             };
 
             this.build = function (data) {
-                //if (data.length > 40) data.length = 40; // Prosoxh gia debug edo perno mono 50 items; kanonika prepei na fugei auth h grammh.
+                if (data.length > 10) data.length = 10; // Prosoxh gia debug edo perno mono 50 items; kanonika prepei na fugei auth h grammh.
                 setTimeout(() => {
                     if (dataProperty) $(`#${dataContainerId}`).html(data[dataProperty].map((o, i) => this.dataTemplate(o, i)));
                     else $(`#${dataContainerId}`).html(data.map((o, i) => this.dataTemplate(o, i)));
