@@ -303,13 +303,12 @@ ol {
 	}
 
 .header__nav {
-	text-align: right;
+	text-align: center;
 }
 
 .header__menu {
 	padding: 31px 0 27px;
 	display: inline-block;
-	margin-right: 45px;
 }
 
 	.header__menu ul li {
@@ -407,13 +406,17 @@ ol {
 
 .header__right__social {
 	display: inline-block;
+	background-color:#36017657;
+	padding:10px;
+	border-radius:7px;
+	shape-margin:10px;
 }
 
 	.header__right__social a {
 		display: inline-block;
 		font-size: 16px;
 		color: #ffffff;
-		margin-right: 16px;
+		margin-right: 10px;
 	}
 
 		.header__right__social a:last-child {
