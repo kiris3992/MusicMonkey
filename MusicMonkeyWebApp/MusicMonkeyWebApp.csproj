@@ -260,6 +260,7 @@
     <Compile Include="Controllers\ApiControllers\AlbumApiController.cs" />
     <Compile Include="Controllers\ApiControllers\ArtistApiController.cs" />
     <Compile Include="Controllers\ApiControllers\BaseApiController.cs" />
+    <Compile Include="Controllers\ApiControllers\GenreApiController.cs" />
     <Compile Include="Controllers\ApiControllers\TrackApiController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
