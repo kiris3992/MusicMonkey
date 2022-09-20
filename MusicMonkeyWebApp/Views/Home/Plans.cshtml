@@ -72,11 +72,14 @@
 .plans__table th,
 .plans__table td {
   padding: 0 20px;
+  text-align:center;
 }
+
 .plans__table th:first-child,
 .plans__table td:first-child {
   width: 240px;
   padding-left: 0;
+  text-align:left;
 }
 .plans__table th:last-child,
 .plans__table td:last-child {
@@ -373,6 +376,11 @@
         border-bottom: none;
         padding-bottom: 0;
     }
+
+    .plans__table div {
+        display:flex;
+        align-items:center;
+    }
 </style>
 
 <!-- Breadcrumb Begin -->
@@ -465,7 +473,7 @@
                                     <th>
                                         <div class="plans__head">
                                             <b>FREE MEMBER</b>
-                                            <p>$11.99</p>
+                                            <p>Free</p>
                                             <span>/ month</span>
                                         </div>
                                     </th>
