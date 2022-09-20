@@ -57,28 +57,22 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Libraries\KirisMvcHelper.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.2.2\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb, Version=2.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.2.2\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Net.Http.Formatting, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.9\lib\net45\System.Net.Http.Formatting.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Cors, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.Cors.5.2.9\lib\net45\System.Web.Cors.dll</HintPath>
-    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Web.Http, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.9\lib\net45\System.Web.Http.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Http.Cors, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Cors.5.2.9\lib\net45\System.Web.Http.Cors.dll</HintPath>
-    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -138,6 +132,12 @@
   <ItemGroup>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.7\lib\net45\System.Web.Http.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Http.WebHost">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.7\lib\net45\System.Web.Http.WebHost.dll</HintPath>
@@ -205,7 +205,6 @@
     <Compile Include="Controllers\ApiControllers\AlbumApiController.cs" />
     <Compile Include="Controllers\ApiControllers\ArtistApiController.cs" />
     <Compile Include="Controllers\ApiControllers\BaseApiController.cs" />
-    <Compile Include="Controllers\ApiControllers\GenreApiController.cs" />
     <Compile Include="Controllers\ApiControllers\TrackApiController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -216,6 +215,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="ChatHub.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -224,7 +224,6 @@
     <Content Include="Areas\Admin\Assets_Admin\add-item.html" />
     <Content Include="Areas\Admin\Assets_Admin\catalog.html" />
     <Content Include="Areas\Admin\Assets_Admin\comments.html" />
-    <Content Include="Areas\Admin\Assets_Admin\css\adminKiriakos.css" />
     <Content Include="Areas\Admin\Assets_Admin\css\admin.css" />
     <Content Include="Areas\Admin\Assets_Admin\css\bootstrap-grid.min.css" />
     <Content Include="Areas\Admin\Assets_Admin\css\bootstrap-reboot.min.css" />
@@ -388,18 +387,6 @@
     <Content Include="Content\Assets\entity-files\ACDC\HighwayToHell\5_NightProwler.mp3" />
     <Content Include="Content\Assets\entity-files\ACDC\HighwayToHell\6_ToucTooMuch.mp3" />
     <Content Include="Content\Assets\entity-files\ACDC\HighwayToHell\album_cover.jpg" />
-    <Content Include="Content\Assets\entity-files\Axel Willner\AxelWillnerPhotoUrl.jpg" />
-    <Content Include="Content\Assets\entity-files\Axel Willner\Cupid%27s Head\20 Seconds Of Affection %28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\Axel Willner\Cupid%27s Head\A Guided Tour %28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\Axel Willner\Cupid%27s Head\Cupids_HeadCoverPhotoUrl.jpg" />
-    <Content Include="Content\Assets\entity-files\Axel Willner\Cupid%27s Head\No. No… %28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\Axel Willner\Cupid%27s Head\The Field - Black Sea %28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\Axel Willner\Cupid%27s Head\The Field - Cupid_%27s Head _%27Cupid_%27s Head_%27 Album %28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\Axel Willner\Cupid%27s Head\The Field - They Won_%27t See Me %28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\BobDylan\artist_cover.jpg" />
-    <Content Include="Content\Assets\entity-files\BobDylan\Bringing_It_All_Back_Home\cover.jpg" />
-    <Content Include="Content\Assets\entity-files\BobDylan\Dylan_&amp;_the_Dead\cover.jpg" />
-    <Content Include="Content\Assets\entity-files\BobDylan\Planet_Waves\cover.jpg" />
     <Content Include="Content\Assets\entity-files\CreedenceClearwaterRevival\artist_cover.jpg" />
     <Content Include="Content\Assets\entity-files\CreedenceClearwaterRevival\CosmosFactory\1_UpAroundTheBend.mp3" />
     <Content Include="Content\Assets\entity-files\CreedenceClearwaterRevival\CosmosFactory\2_LookingOutMyBackdoor.mp3" />
@@ -422,18 +409,6 @@
     <Content Include="Content\Assets\entity-files\CreedenceClearwaterRevival\Pendulum\5_SailorsLament.mp3" />
     <Content Include="Content\Assets\entity-files\CreedenceClearwaterRevival\Pendulum\6_HeyTonight.mp3" />
     <Content Include="Content\Assets\entity-files\CreedenceClearwaterRevival\Pendulum\album_cover.jpg" />
-    <Content Include="Content\Assets\entity-files\D%27 Angelo\Brown Sugar\BrownSugarCoverPhotoUrl.jpg" />
-    <Content Include="Content\Assets\entity-files\D%27 Angelo\Brown Sugar\D_%27Angelo_-_Alright_%28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\D%27 Angelo\Brown Sugar\D_%27Angelo_-_Brown_Sugar_%28Official_Video%29_%28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\D%27 Angelo\Brown Sugar\D_%27Angelo_-_Cruisin_%27_%28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\D%27 Angelo\Brown Sugar\D_%27Angelo_-_HIGHER_%28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\D%27 Angelo\Brown Sugar\D_%27Angelo_-_Jonz_In_My_Bonz_%28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\D%27 Angelo\Brown Sugar\D_%27Angelo_-_Lady_%28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\D%27 Angelo\Brown Sugar\D_%27Angelo_-_Me_And_Those_Dreamin_%27_Eyes_Of_Mine_%28Official_Video%29_%28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\D%27 Angelo\Brown Sugar\D_%27Angelo_-_Shit,_Damn,_Motherfucker_%28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\D%27 Angelo\Brown Sugar\D_%27Angelo_-_Smooth_%28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\D%27 Angelo\Brown Sugar\D_%27Angelo_-_When_We_Get_By_%28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\D%27 Angelo\DANGELOPhotoUrl.jpg" />
     <Content Include="Content\Assets\entity-files\DamianMarley\artist_cover.jpg" />
     <Content Include="Content\Assets\entity-files\DamianMarley\HalfWayTree\1_MoreJustice.mp3" />
     <Content Include="Content\Assets\entity-files\DamianMarley\HalfWayTree\2_StillSearching.mp3" />
@@ -456,88 +431,6 @@
     <Content Include="Content\Assets\entity-files\DamianMarley\WelcomeToJamRock\5_Confrontation.mp3" />
     <Content Include="Content\Assets\entity-files\DamianMarley\WelcomeToJamRock\6_AllNight.mp3" />
     <Content Include="Content\Assets\entity-files\DamianMarley\WelcomeToJamRock\album_cover.jpg" />
-    <Content Include="Content\Assets\entity-files\Eminem\EminemPhotoUrl.jpg" />
-    <Content Include="Content\Assets\entity-files\Eminem\The Eminem Show\Business_%28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\Eminem\The Eminem Show\Cleanin_%27_Out_My_Closet_%28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\Eminem\The Eminem Show\Drips_%28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\Eminem\The Eminem Show\Hailie_%27s_Song_%28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\Eminem\The Eminem Show\My_Dad_%27s_Gone_Crazy_%28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\Eminem\The Eminem Show\Say_Goodbye_Hollywood_%28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\Eminem\The Eminem Show\Say_What_You_Say_%28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\Eminem\The Eminem Show\Sing_For_The_Moment_%28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\Eminem\The Eminem Show\Soldier_%28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\Eminem\The Eminem Show\Square_Dance_%28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\Eminem\The Eminem Show\Superman_%28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\Eminem\The Eminem Show\The_Eminem_ShowCoverPhotoUrl.jpg" />
-    <Content Include="Content\Assets\entity-files\Eminem\The Eminem Show\Till_I_Collapse_%28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\Eminem\The Eminem Show\When_The_Music_Stops_%28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\Eminem\The Eminem Show\White_America_%28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\Eminem\The Eminem Show\Without_Me_%28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\Future\FuturePhotoUrl.jpg" />
-    <Content Include="Content\Assets\entity-files\Future\High Off Life\Future_-_Hard_To_Choose_One_%28Audio%29_%28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\Future\High Off Life\Future_-_Harlem_Shake_%28Audio%29_ft._Young_Thug_%28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\Future\High Off Life\Future_-_HiTek_Tek_%28Audio%29_%28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\Future\High Off Life\Future_-_One_Of_My_%28Audio%29_%28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\Future\High Off Life\Future_-_Posted_With_Demons_%28Audio%29_%28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\Future\High Off Life\Future_-_Ridin_Strikers_%28Audio%29_%28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\Future\High Off Life\Future_-_Solitaires_%28Audio%29_ft._Travis_Scott_%28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\Future\High Off Life\Future_-_Touch_The_Sky_%28Audio%29_%28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\Future\High Off Life\Future_-_Trapped_In_The_Sun_%28Audio%29_%28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\Future\High Off Life\Future_-_Trillionaire_%28Audio%29_ft._Youngboy_Never_Broke_Again_%28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\Future\High Off Life\High_Off_LifeCoverPhotoUrl.jpg" />
-    <Content Include="Content\Assets\entity-files\Ice Cube\Ice-CubePhotoUrl.jpg" />
-    <Content Include="Content\Assets\entity-files\Ice Cube\The Predator\Ice_Cube__-Now_I_Gotta_Wet_Cha_%28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\Ice Cube\The Predator\Ice_Cube__-The_Predator_%28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\Ice Cube\The Predator\Ice_Cube__-Wicked_%28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\Ice Cube\The Predator\Ice_Cube__-_It_Was_A_Good_Day_%28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\Ice Cube\The Predator\Ice_Cube__-_We_Had_to_Tear_This_Mothafucka_Up_%28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\Ice Cube\The Predator\Ice_Cube__-_When_Will_They_Shoot_%28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\Ice Cube\The Predator\Ice_Cube__-__Dirty_Mack_%28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\Ice Cube\The Predator\Ice_Cube__-__Don_%27t_Trust__%27Em_%28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\Ice Cube\The Predator\Ice_Cube__-__Gangsta_%27s_Fairytale_2_%28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\Ice Cube\The Predator\The_Predator_CoverPhotoUrl.jpg" />
-    <Content Include="Content\Assets\entity-files\Lady_Gaga\artist_cover.jpg" />
-    <Content Include="Content\Assets\entity-files\Lady_Gaga\Born_This_Way\cover.png" />
-    <Content Include="Content\Assets\entity-files\Lady_Gaga\Joanne\cover.png" />
-    <Content Include="Content\Assets\entity-files\Lady_Gaga\The_Fame\cover.jpg" />
-    <Content Include="Content\Assets\entity-files\Ludwig_Van_Beethoven\artist_cover.jpg" />
-    <Content Include="Content\Assets\entity-files\Ludwig_Van_Beethoven\Beethoven_Symfonies\cover.jpg" />
-    <Content Include="Content\Assets\entity-files\Maria_Callas\artist_cover.jpg" />
-    <Content Include="Content\Assets\entity-files\Maria_Callas\Pure_Maria_Callas\cover.jpg" />
-    <Content Include="Content\Assets\entity-files\Marvin Gaye\Marvin_GayePhotoUrl.jpg" />
-    <Content Include="Content\Assets\entity-files\Marvin Gaye\What%27s Going on\Flyin_%27_High_%28In_The_Friendly_Sky%29_%28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\Marvin Gaye\What%27s Going on\God_Is_Love_%28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\Marvin Gaye\What%27s Going on\Marvin_Gaye_-_Mercy_Mercy_Me_%28The_Ecology%29_[playlist-friendly]_%28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\Marvin Gaye\What%27s Going on\Marvin_Gaye_-_Save_the_Children_%28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\Marvin Gaye\What%27s Going on\Marvin_Gaye_-_What_%27s_Going_On_%28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\Marvin Gaye\What%27s Going on\Marvin_Gaye_-_What_%27s_Happening_Brother_%28128kbps.mp3" />
-    <Content Include="Content\Assets\entity-files\Marvin Gaye\What%27s Going on\WhatsGoingOnCoverPhotoUrl.jpg" />
-    <Content Include="Content\Assets\entity-files\Michael Jackson\Michael_JacksonPhotoUrl.jpg" />
-    <Content Include="Content\Assets\entity-files\Michael Jackson\Thriller\Michael Jackson - Baby Be Mine %28Audio%29 %28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\Michael Jackson\Thriller\Michael Jackson - The Girl Is Mine ft. Paul McCartney %28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\Michael Jackson\Thriller\Michael Jackson - Thriller - Thriller %28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\Michael Jackson\Thriller\Michael Jackson - Wanna Be Startin_%27 Somethin_%27 %28Audio%29 %28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\Michael Jackson\Thriller\Michael_Jackson_-_ThrillerCoverPhotoUrl.jpg" />
-    <Content Include="Content\Assets\entity-files\Migos\Culture II\Culture_IICoverPhotoUrl.jpg" />
-    <Content Include="Content\Assets\entity-files\Migos\Culture II\Migos_-_Auto_Pilot_%28Audio%29_%28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\Migos\Culture II\Migos_-_BBO_%28Bad_Bitches_Only%29__ft._21_Savage_%28Audio%29_%28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\Migos\Culture II\Migos_-_CC__ft._Gucci_Mane_%28Audio%29_%28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\Migos\Culture II\Migos_-_Emoji_A_Chain_%28Audio%29_%28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\Migos\Culture II\Migos_-_Higher_We_Go_%28Intro_Audio%29_%28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\Migos\Culture II\Migos_-_Narcos_%28Audio%29_%28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\Migos\Culture II\Migos_-_Supastars_%28Audio%29_%28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\Migos\Culture II\Migos_-_Walk_It_Talk_It_ft._Drake_%28Audio%29_%28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\Migos\Culture II\Migos_-_White_Sand_ft._Travis_Scott,_Ty_Dolla_%24ign,_Big_Sean__%28Audio%29_%28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\Migos\MigosPhotoUrl.jpg" />
-    <Content Include="Content\Assets\entity-files\Migos\No Label II\Migos_-_Add_It_Up_%28No_Label_2%29_%28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\Migos\No Label II\Migos_-_Antidope_%28No_Label_2%29_%28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\Migos\No Label II\Migos_-_Contraband_%28No_Label_2%29_%28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\Migos\No Label II\Migos_-_Copy_Me_%28No_Label_2%29_%28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\Migos\No Label II\Migos_-_Kidding_Me_%28No_Label_2%29_%28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\Migos\No Label II\Migos_-_Migo_Dreams_ft._Meek_Mill_%28No_Label_2%29_%28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\Migos\No Label II\Migos_-_No_Label_2___Intro___%28No_Label_2%29_%28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\Migos\No Label II\Migos_-_Peek_A_Boo_%28No_Label_2%29_%28128kbps%29.mp3" />
-    <Content Include="Content\Assets\entity-files\Migos\No Label II\Migos_No_Label_2CoverPhotoUrl.jpg" />
     <Content Include="Content\Assets\entity-files\Nirvana\artist_cover.jpg" />
     <Content Include="Content\Assets\entity-files\Nirvana\Nevermind\1.mp3" />
     <Content Include="Content\Assets\entity-files\Nirvana\Nevermind\10.mp3" />
@@ -629,6 +522,7 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\ChatStyle.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -731,6 +625,8 @@
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.signalR-2.2.2.js" />
+    <Content Include="Scripts\jquery.signalR-2.2.2.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -1012,12 +908,12 @@
     <Content Include="Content\Assets\Web.config" />
     <Content Include="Content\Assets\js\Web.config" />
     <Content Include="Views\Home\Album.cshtml" />
-    <Content Include="Views\Home\Tour.cshtml" />
-    <Content Include="Views\Home\Plans.cshtml" />
+    <Content Include="Views\Home\ChatRoom.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Views\Contact\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
