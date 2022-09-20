@@ -14,22 +14,22 @@ namespace DAL.Initializers.TeamsSeeding
         {
             var artists = new List<Artist>
             {
-                new Artist { // Eminem
-                    Name = "Eminem", Country = Country.USA, CareerStartDate = new DateTime(1987, 12, 1), PhotoUrl = "", ArtistGenres = new List<Genre> { g.rap },
-                    Albums = new List<Album> {
-                        new Album {
-                            Title = "Marshall Mathers LP", ReleaseDate = new DateTime(1999, 9, 4), CoverPhotoUrl = "",
-                            Tracks = new List<Track> {
-                                new Track { Title = "Public Service Announce", DurationSecs = 301, TrackGenres = new List<Genre> { g.rap }, Popularity = 1, AudioUrl = "" },
-                                new Track { Title = "Kill You", DurationSecs = 455, TrackGenres = new List<Genre> { g.rap }, Popularity = 4, AudioUrl = "" },
-                                new Track { Title = "Stan", DurationSecs = 119, TrackGenres = new List<Genre> { g.rap }, Popularity = 4, AudioUrl = "" },
-                                new Track { Title = "Breed", DurationSecs = 184, TrackGenres = new List<Genre> { g.rap }, Popularity = 3, AudioUrl = "" },
-                                new Track { Title = "Who Knew", DurationSecs = 257, TrackGenres = new List<Genre> { g.rap }, Popularity = 3, AudioUrl = "" },
-                                new Track { Title = "Steve Berman", DurationSecs = 54, TrackGenres = new List<Genre> { g.rap }, Popularity = 2, AudioUrl = "" },
-                            }
-                        }
-                    }
-                },
+                //new Artist { // Eminem
+                //    Name = "Eminem", Country = Country.USA, CareerStartDate = new DateTime(1987, 12, 1), PhotoUrl = "", ArtistGenres = new List<Genre> { g.rap },
+                //    Albums = new List<Album> {
+                //        new Album {
+                //            Title = "Marshall Mathers LP", ReleaseDate = new DateTime(1999, 9, 4), CoverPhotoUrl = "",
+                //            Tracks = new List<Track> {
+                //                new Track { Title = "Public Service Announce", DurationSecs = 301, TrackGenres = new List<Genre> { g.rap }, Popularity = 1, AudioUrl = "" },
+                //                new Track { Title = "Kill You", DurationSecs = 455, TrackGenres = new List<Genre> { g.rap }, Popularity = 4, AudioUrl = "" },
+                //                new Track { Title = "Stan", DurationSecs = 119, TrackGenres = new List<Genre> { g.rap }, Popularity = 4, AudioUrl = "" },
+                //                new Track { Title = "Breed", DurationSecs = 184, TrackGenres = new List<Genre> { g.rap }, Popularity = 3, AudioUrl = "" },
+                //                new Track { Title = "Who Knew", DurationSecs = 257, TrackGenres = new List<Genre> { g.rap }, Popularity = 3, AudioUrl = "" },
+                //                new Track { Title = "Steve Berman", DurationSecs = 54, TrackGenres = new List<Genre> { g.rap }, Popularity = 2, AudioUrl = "" },
+                //            }
+                //        }
+                //    }
+                //},
                 new Artist { // Gun's N Roses
                     Name = "Gun's N Roses", Country = Country.USA, CareerStartDate = new DateTime(1985, 1, 1), PhotoUrl = "", ArtistGenres = new List<Genre> { g.hardRock, g.rock },
                     Albums = new List<Album> {

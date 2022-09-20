@@ -15,9 +15,9 @@ namespace DAL.Initializers.TeamsSeeding
             #region Aggelos Seeding
             #region Seeding Artists
             Artist aa1 = new Artist { Name = "D'Angelo", Country = Country.USA, CareerStartDate = new DateTime(1991, 1, 1), PhotoUrl = "/Content/Assets/entity-files/D' Angelo/DANGELOPhotoUrl.jpg", ArtistGenres = new List<Genre> { g.rnb, g.pop } };
-            Artist aa2 = new Artist { Name = "Above & Beyond", Country = Country.United_Kingdom, CareerStartDate = new DateTime(2000, 1, 1), PhotoUrl = "/Content/Assets/entity-files/Sirens of the Sea/Above&BeyondPhotoUrl.jpg", ArtistGenres = new List<Genre> { g.trance, g.house } };
+            Artist aa2 = new Artist { Name = "Above & Beyond", Country = Country.United_Kingdom, CareerStartDate = new DateTime(2000, 1, 1), PhotoUrl = "/Content/Assets/entity-files/Above and Beyond/Above&BeyondPhotoUrl.jpg", ArtistGenres = new List<Genre> { g.trance, g.house } };
             Artist aa3 = new Artist { Name = "Migos", Country = Country.USA, CareerStartDate = new DateTime(2008, 1, 1), PhotoUrl = "/Content/Assets/entity-files/Migos/MigosPhotoUrl.jpg", ArtistGenres = new List<Genre> { g.hipHop, g.trap } };
-            Artist aa4 = new Artist { Name = "Unknown Artist", CareerStartDate = new DateTime(1901, 1, 1), PhotoUrl = "/Content/Assets/entity-files/UnknownArtist/UnknownPhotoUrl.jpg" };
+            Artist aa4 = new Artist { Name = "Unknown Artist", CareerStartDate = new DateTime(1901, 1, 1), PhotoUrl = "/Content/Assets/entity-files/Unknown Artist/UnknownPhotoUrl.jpg"};
             Artist aa5 = new Artist { Name = "Axel Willner", Country = Country.Sweden, CareerStartDate = new DateTime(1996, 1, 1), PhotoUrl = "/Content/Assets/entity-files/Axel Willner/AxelWillnerPhotoUrl.jpg", ArtistGenres = new List<Genre> { g.techno, g.electronic } };
             Artist aa6 = new Artist { Name = "Marvin Gaye", Country = Country.USA, CareerStartDate = new DateTime(1957, 1, 1), PhotoUrl = "/Content/Assets/entity-files/Marvin Gaye/Marvin_GayePhotoUrl.jpg", ArtistGenres = new List<Genre> { g.soul } };
             Artist aa7 = new Artist { Name = "Michael Jackson", Country = Country.USA, CareerStartDate = new DateTime(1964, 1, 1), PhotoUrl = "/Content/Assets/entity-files/Michael Jackson/Michael_JacksonPhotoUrl.jpg", ArtistGenres = new List<Genre> { g.pop, g.rnb, g.soul, g.disco } };
