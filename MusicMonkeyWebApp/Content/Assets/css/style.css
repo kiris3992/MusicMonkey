@@ -1378,8 +1378,10 @@ ol {
 
 .skills__content {
 	background: #5c00ce;
-	height: 500px;
+	height: 580px;
 	padding: 100px 70px 60px;
+	border-bottom-left-radius:10px;
+	border-top-left-radius:10px;
 }
 
 	.skills__content .section-title h2 {
@@ -1431,7 +1433,7 @@ ol {
 			}
 
 .skills__video {
-	height: 500px;
+	height: 580px;
 	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex;
@@ -1441,6 +1443,8 @@ ol {
 	-webkit-box-pack: center;
 	-ms-flex-pack: center;
 	justify-content: center;
+	border-bottom-right-radius:10px;
+	border-top-right-radius:10px;
 }
 
 	.skills__video .play-btn {

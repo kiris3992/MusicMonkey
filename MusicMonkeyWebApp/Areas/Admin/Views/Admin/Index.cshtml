@@ -5,6 +5,8 @@
     Layout = "~/Areas/Admin/Views/Layout/_AdminLayout.cshtml";
 }
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script type="text/javascript" src="https://unpkg.com/chart.js-plugin-labels-dv/dist/chartjs-plugin-labels.min.js"></script>
 
 <script>
 
@@ -53,9 +55,197 @@
     });
 
 
+    let chartTitle = document.querySelector('#chartTitle');
 
+    //var settings = {
+    //    "url": "https://localhost:44314/api/TrackApi",
+    //    "method": "GET",
+    //    "timeout": 0,
+    //};
+
+    //$.ajax(settings).done(function (tracks) {
+    //    console.log(tracks);
+    //    const popularity = Artist.map(x => x.Popularity);
+
+
+
+    // 3rd Chart: Pie chart for Tracks per Genre
+
+
+    const labels3 = ['POP',
+        'ROCK',
+        'RAP',
+        'HIP HOP ',
+        'BLUES',
+        'JAZZ',
+    ];
+
+    const data3 = {
+        labels: labels3,
+        datasets: [{
+            label: 'PERCENTAGE OF TRACKS PER GENRE',
+            backgroundColor: [
+                'rgba(153, 102, 255, 0.4)',
+                'rgba(54, 162, 235, 0.4)',
+                'rgba(255, 206, 86, 0.4)',
+                'rgba(75, 192, 192, 0.4)',
+                'rgba(255, 99, 132, 0.4)',
+                'rgba(255, 159, 64, 0.4)'
+            ],
+            borderColor: [
+                'rgba(153, 102, 255, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(255, 99, 132, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1,
+
+            hoverBorderRadius: 1,
+            hoverBorderWidth: 2.5,
+            hoverBackgroundColor: [
+                'rgba(153, 102, 255, 0.9)',
+                'rgba(54, 162, 235, 0.9)',
+                'rgba(255, 206, 86, 0.9)',
+                'rgba(75, 192, 192, 0.9)',
+                'rgba(255, 99, 132, 0.9)',
+                'rgba(255, 159, 64, 0.9)'
+            ],
+
+            data: [5, 4, 3, 2, 1, 0.7],
+        }]
+    };
+
+    const tooltip3 = {
+        backgroundColor: 'lightgray',
+        titleColor: 'black',
+        borderColor: 'black',
+        borderWidth: 0.425,
+        callbacks: {
+            label: function (context) {
+            },
+
+        }
+    };
+
+    const config3 = {
+        type: 'pie',
+        data: data3,
+        options:
+        {
+            aspectRatio: 1.8,
+            plugins: {
+                tooltip3,
+                legend: {
+                    onClick: (evt, legendItem, legend) => {
+                        const index = legend.chart.data.labels.indexOf(legendItem.text);
+                        legend.chart.toggleDataVisibility(index);
+                        legend.chart.getDataVisibility(index);
+                        legend.chart.update();
+                    },
+
+                    labels: {
+
+
+                        generateLabels: (chart) => {
+                            let visibility = [];
+                            for (let i = 0; i < chart.data.labels.length; i++) {
+                                if (chart.getDataVisibility(i) == true) {
+                                    visibility.push(false)
+                                }
+                                else {
+                                    visibility.push(true)
+                                }
+                            };
+
+                            return chart.data.labels.map(
+                                (label, index) => ({
+                                    text: label,
+                                    strokeStyle: chart.data.datasets[0].borderColor[index],
+                                    fillStyle: chart.data.datasets[0].backgroundColor[index],
+                                    hidden: visibility[index]
+                                })
+                            )
+                        }
+                    }
+                },
+
+            },
+            indexAxis: 'x',
+        }
+    };
+
+
+
+
+    let myChart = new Chart(
+        document.getElementById('myChart'),
+        config
+    );
+
+
+
+    function renderChart(type) {
+        myChart.destroy();
+        if (type.value === '1st chart') {
+            myChart = new Chart(
+                document.getElementById('myChart'),
+                config,
+                chartTitle.innerHTML = 'Most Popular Artists'
+            );
+        }
+        if (type.value === '2nd chart') {
+            myChart = new Chart(
+                document.getElementById('myChart'),
+                config2,
+                chartTitle.innerHTML = 'Most Popular Albums'
+            );
+        }
+
+        if (type.value === '3rd chart') {
+            myChart = new Chart(
+                document.getElementById('myChart'),
+                config3,
+                chartTitle.innerHTML = 'Tracks Per Genre'
+            );
+        }
+
+        if (type.value === '4th chart') {
+            myChart = new Chart(
+                document.getElementById('myChart'),
+                config4,
+                chartTitle.innerHTML = 'Albums with more tracks'
+            );
+        }
+
+        if (type.value === '5th chart') {
+            myChart = new Chart(
+                document.getElementById('myChart'),
+                config5,
+                chartTitle.innerHTML = 'Albums by Release Date'
+            );
+        }
+
+
+    }
 
 </script>
+
+
+
+<style>
+    .chartBox {
+        padding: 20px;
+        border-radius: 15px;
+        /*        border: solid 3px rgba(1, 26, 104, 5);
+    */ background: white;
+        width: inherit;
+        height: auto;
+        background-color: #151f30;
+        backdrop-filter: opacity(50px);
+    }
+</style>
 
 <body>
     <!-- header -->
@@ -107,13 +297,37 @@
                 <!-- stats -->
                 @Html.Partial("~/Areas/Admin/Views/Layout/Stats.cshtml")
                 <!-- end stats -->
+                <!-- charts-->
+                <div class="col-12 col-xl-6">
+
+                    <div class="chartBox">
+                        <div class="dashbox__title">
+                            <h3 id="chartTitle">Most Popular Artists</h3>
+                        </div>
+                        <canvas id="myChart"></canvas>
+                        <hr />
+                        <div class="text-lg-left">
+                            <select onchange="renderChart(this)" style="color: purple; border-color: mediumpurple; font-size: medium; border-style:dotted">
+                                @*<option value="1st chart">1st chart</option>
+                                    <option value="2nd chart">2nd chart</option>*@
+                                <option value="3rd chart">3rd chart</option>
+                                @*<option value="4th chart">4th chart</option>
+                                    <option value="5th chart">5th chart</option>*@
+                            </select>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- end charts -->
                 <!-- dashbox -->
                 <div class="col-12 col-xl-6">
                     <div class="dashbox">
                         <div class="dashbox__title">
-                            <h3><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-music-fill" viewBox="0 0 16 16">
-                            <path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm-.5 4.11v1.8l-2.5.5v5.09c0 .495-.301.883-.662 1.123C7.974 12.866 7.499 13 7 13c-.5 0-.974-.134-1.338-.377-.36-.24-.662-.628-.662-1.123s.301-.883.662-1.123C6.026 10.134 6.501 10 7 10c.356 0 .7.068 1 .196V4.41a1 1 0 0 1 .804-.98l1.5-.3a1 1 0 0 1 1.196.98z" />
-                            </svg> Top Tracks</h3>
+                            <h3>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-music-fill" viewBox="0 0 16 16">
+                                    <path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm-.5 4.11v1.8l-2.5.5v5.09c0 .495-.301.883-.662 1.123C7.974 12.866 7.499 13 7 13c-.5 0-.974-.134-1.338-.377-.36-.24-.662-.628-.662-1.123s.301-.883.662-1.123C6.026 10.134 6.501 10 7 10c.356 0 .7.068 1 .196V4.41a1 1 0 0 1 .804-.98l1.5-.3a1 1 0 0 1 1.196.98z" />
+                                </svg> Top Tracks
+                            </h3>
 
                             <div class="dashbox__wrap">
                                 <a class="dashbox__refresh" href="#"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21,11a1,1,0,0,0-1,1,8.05,8.05,0,1,1-2.22-5.5h-2.4a1,1,0,0,0,0,2h4.53a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4.77A10,10,0,1,0,22,12,1,1,0,0,0,21,11Z" /></svg></a>
@@ -132,8 +346,6 @@
                                     </tr>
                                 </thead>
                                 <tbody id="top-tracks">
-                                    
-                                   
                                 </tbody>
                             </table>
                         </div>
@@ -144,9 +356,11 @@
                 <div class="col-12 col-xl-6">
                     <div class="dashbox">
                         <div class="dashbox__title">
-                            <h3><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-play-fill" viewBox="0 0 16 16">
-                            <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zM6 6.883a.5.5 0 0 1 .757-.429l3.528 2.117a.5.5 0 0 1 0 .858l-3.528 2.117a.5.5 0 0 1-.757-.43V6.884z" />
-                            </svg> Top Albums</h3>
+                            <h3>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-play-fill" viewBox="0 0 16 16">
+                                    <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zM6 6.883a.5.5 0 0 1 .757-.429l3.528 2.117a.5.5 0 0 1 0 .858l-3.528 2.117a.5.5 0 0 1-.757-.43V6.884z" />
+                                </svg> Top Albums
+                            </h3>
 
                             <div class="dashbox__wrap">
                                 <a class="dashbox__refresh" href="#"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21,11a1,1,0,0,0-1,1,8.05,8.05,0,1,1-2.22-5.5h-2.4a1,1,0,0,0,0,2h4.53a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4.77A10,10,0,1,0,22,12,1,1,0,0,0,21,11Z" /></svg></a>
@@ -157,7 +371,7 @@
                         <div class="dashbox__table-wrap dashbox__table-wrap--2">
                             <table class="main__table main__table--dash">
                                 <thead>
-                                    <tr >
+                                    <tr>
                                         <th>ID</th>
                                         <th>TITLE</th>
                                         <th>CATEGORY</th>
@@ -167,11 +381,11 @@
                                                 <path fill-rule="evenodd" d="M12 3v10h-1V3h1z" />
                                                 <path d="M11 2.82a1 1 0 0 1 .804-.98l3-.6A1 1 0 0 1 16 2.22V4l-5 1V2.82z" />
                                                 <path fill-rule="evenodd" d="M0 11.5a.5.5 0 0 1 .5-.5H4a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 .5 7H8a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 .5 3H8a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5z" />
-                                            </svg> TRACKS</th>
+                                            </svg> TRACKS
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody id="top-albums">
-                                  
                                 </tbody>
                             </table>
                         </div>
