@@ -1513,6 +1513,7 @@ ol {
 	-webkit-transition: all, 0.3s;
 	-o-transition: all, 0.3s;
 	transition: all, 0.3s;
+	border: 1px solid lightgrey;
 }
 
 	.about__services__item:hover {
