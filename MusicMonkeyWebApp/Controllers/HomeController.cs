@@ -24,8 +24,8 @@ namespace MusicMonkeyWebApp.Controllers
                             new HeaderLink { Title = "Tracks", Url = ""},
                         }
                     },
-                    new HeaderLink { Action = "Tour", Title = "Tour", Url = "" },
-                    new HeaderLink { Action = "Plans", Title = "Pricing Plans", Url = "" },
+                    new HeaderLink { Action = "Tour", Title = "Tour", Url = "/Home/Tour" },
+                    new HeaderLink { Action = "Plans", Title = "Pricing Plans", Url = "/Home/Plans" },
                     
                 }
             };
@@ -64,5 +64,15 @@ namespace MusicMonkeyWebApp.Controllers
         {
             return View();
         }
+        public ActionResult Tour()
+        {
+            return View();
+        }
+
+        public ActionResult Plans()
+        {
+            return View();
+        }
+
     }
 }

@@ -1523,7 +1523,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .form__input {
-    background-color: #1c0e24;
+    background-color: #131720;
     border: 1px solid transparent;
     border-radius: 16px;
     height: 44px;
@@ -1688,7 +1688,7 @@ body::-webkit-scrollbar-thumb {
         height: 44px;
         color: #e0e0e0;
         padding: 0 60px 0 20px;
-        background-color: #151f30;
+        background-color: #131720;
         margin: 0;
         width: 100%;
         font-size: 14px;
