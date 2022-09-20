@@ -71,20 +71,8 @@
 
                                 <div class="col-12 col-lg-6">
                                     <div class="form__group">
-                                        <select class="js-example-basic-multiple form__input" id="genre" multiple="multiple">
-                                            <option value="Action">Action</option>
-                                            <option value="Animation">Animation</option>
-                                            <option value="Comedy">Comedy</option>
-                                            <option value="Crime">Crime</option>
-                                            <option value="Drama">Drama</option>
-                                            <option value="Fantasy">Fantasy</option>
-                                            <option value="Historical">Historical</option>
-                                            <option value="Horror">Horror</option>
-                                            <option value="Romance">Romance</option>
-                                            <option value="Science-fiction">Science-fiction</option>
-                                            <option value="Thriller">Thriller</option>
-                                            <option value="Western">Western</option>
-                                            <option value="Otheer">Otheer</option>
+                                        <select class="js-example-basic-single form__input" id="genre">
+                                            <option value="" disabled selected>Genres</option>
                                         </select>
                                     </div>
                                 </div>
@@ -94,27 +82,16 @@
                             <div class="row">
                                 <div class="col-12 col-lg-6">
                                     <div class="form__group">
-                                        <select class="js-example-basic-single form__input" id="genre" >
-                                            <option value="Action">Action</option>
-                                            <option value="Animation">Animation</option>
-                                            <option value="Comedy">Comedy</option>
-                                            <option value="Crime">Crime</option>
-                                            <option value="Drama">Drama</option>
-                                            <option value="Fantasy">Fantasy</option>
-                                            <option value="Historical">Historical</option>
-                                            <option value="Horror">Horror</option>
-                                            <option value="Romance">Romance</option>
-                                            <option value="Science-fiction">Science-fiction</option>
-                                            <option value="Thriller">Thriller</option>
-                                            <option value="Western">Western</option>
-                                            <option value="Otheer">Otheer</option>
+                                        <select class="js-example-basic-single form__input" id="artist" >
+                                            <option value="" disabled selected>Artists</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-12 col-lg-6">
                                     <div class="form__group">
-                                        <select class="js-example-basic-single form__input" id="genre" >
-                                            <option value="Action">Action</option>
+                                        <select class="js-example-basic-single form__input" id="album" >
+                                            <option value="" disabled selected>Albums</option>
+                                            @*<option value="Action">Action</option>
                                             <option value="Animation">Animation</option>
                                             <option value="Comedy">Comedy</option>
                                             <option value="Crime">Crime</option>
@@ -126,7 +103,7 @@
                                             <option value="Science-fiction">Science-fiction</option>
                                             <option value="Thriller">Thriller</option>
                                             <option value="Western">Western</option>
-                                            <option value="Otheer">Otheer</option>
+                                            <option value="Otheer">Otheer</option>*@
                                         </select>
                                     </div>
                                 </div>
@@ -162,6 +139,61 @@
         </div>
     </main>
     <!-- end main content -->
+
+    <script>
+        $(document).ready(function () {
+
+            let genreList = $("#genre");
+            let artistList = $("#artist");
+            let albumList = $("#album");
+
+            var settings = {
+                "url": "https://localhost:44314/Api/GenreApi",
+                "method": "GET",
+                "timeout": 0,
+            };
+
+            $.ajax(settings).done(function (genres) {
+                genres.forEach(function (genre) {
+                    let element = `
+                                        <option value="${genre.Title}">${genre.Type}</option>
+                                    `;
+
+                    genreList.append(element);
+                })
+            });
+
+            var settings = {
+                "url": "https://localhost:44314/api/ArtistApi",
+                "method": "GET",
+                "timeout": 0,
+            };
+
+            $.ajax(settings).done(function (artists) {
+                artists.forEach(function (artist) {
+                    let element = `
+                                        <option value="${artist.Name}">${artist.Name}</option>
+                                    `;
+                    artistList.append(element)
+                })
+            });
+
+            var settings = {
+                "url": "https://localhost:44314/api/AlbumApi",
+                "method": "GET",
+                "timeout": 0,
+            };
+
+            $.ajax(settings).done(function (albums) {
+                albums.forEach(function (album) {
+                    let element = `
+                                        <option value="${album.Title}">${album.Title}</option>
+                                    `;
+                    albumList.append(element);
+                })
+            });
+        })
+    </script>
 
 </body>
 
