@@ -9,7 +9,7 @@ using System.Diagnostics;
 
 namespace DAL.Initializers
 {
-    public class MockUpDbInitializer : DropCreateDatabaseIfModelChanges<ApplicationDbContext>
+    public class MockUpDbInitializer : DropCreateDatabaseAlways<ApplicationDbContext>
     {
         protected override void Seed(ApplicationDbContext context)
         {
