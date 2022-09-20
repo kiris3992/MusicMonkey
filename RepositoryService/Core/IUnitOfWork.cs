@@ -12,6 +12,7 @@ namespace RepositoryService.Core
         IArtistRepository Artists { get; }
         IAlbumRepository Albums { get; }
         ITrackRepository Tracks { get; }
+        IGenreRepository Genres { get; }
         int Complete();
     }
 }

@@ -1413,6 +1413,28 @@ body::-webkit-scrollbar-thumb {
     .paginator__paginator li {
         margin-right: 15px;
     }
+        .paginator__paginator li button {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            width: 30px;
+            height: 30px;
+            border-radius: 12px;
+            background-color: #131720;
+            font-size: 14px;
+            color: #e0e0e0;
+            font-weight: 500;
+        }
+        .paginator__paginator li:is(.active) button {
+            cursor:default;
+            filter:contrast(0.8);
+        }
+
+        .paginator__paginator li:not(.active) button:hover {
+            font-size: medium;
+            filter: brightness(1.2);
+        }
 
         .paginator__paginator li:last-child {
             margin-right: 0;
@@ -1422,6 +1444,8 @@ body::-webkit-scrollbar-thumb {
             color: black;
             cursor: default;
         }
+
+
 
     .paginator__paginator a {
         display: flex;

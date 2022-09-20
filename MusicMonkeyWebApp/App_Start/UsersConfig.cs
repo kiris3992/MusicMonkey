@@ -21,8 +21,8 @@ namespace MusicMonkeyWebApp.App_Start
             users = new List<(string role, string name, string mail, string pass)>
             {
                 ("Admin", "musicMonkey@hotmail.com", "musicMonkey@hotmail.com", "Mus1cM@nkey"),
-                ("Gold", "orestaras@hotmail.com", "orestaras@hotmail.com", "Mus1cM@nkey"),
-                ("Silver", "linos@hotmail.com", "linos@hotmail.com", "Mus1cM@nkey"),
+                ("Gold", "golduser@hotmail.com", "golduser@hotmail.com", "Mus1cM@nkey"),
+                ("Silver", "silveruser@hotmail.com", "silveruser@hotmail.com", "Mus1cM@nkey"),
             };
 
             roles.ForEach(role =>

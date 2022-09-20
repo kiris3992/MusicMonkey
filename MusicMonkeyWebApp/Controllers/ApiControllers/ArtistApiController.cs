@@ -8,7 +8,6 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
-using System.Xml.Linq;
 using DAL;
 using Entities.Models;
 using Newtonsoft.Json;
@@ -18,15 +17,30 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
 {
     public class ArtistApiController : BaseApiController
     {
-        // GET: api/ArtistApi
-        public IEnumerable<Object> GetArtists()
-        {
 
-            return unit.Artists
-                .GetArtistsWithEverything()
-                .Select(x => ArtistDTOModel(x));
+
+
+
+        // GET: api/ArtistApi
+        public IEnumerable<Object> GetArtists(string type = "")
+        {
+            IEnumerable<Artist> artists = unit.Artists.GetArtistsWithEverything();
+            IEnumerable<object> artistDtoModels = new List<object>();
+            switch (type)
+            {
+                case "popular":
+                    artistDtoModels = artists.Select(x => ArtistWithPopularityDTOModel(x));
+                    break;
+                case "popular5":
+                    artistDtoModels = artists.Select(x => ArtistWithPopularityDTOModel(x));
+                    break;
+                default:
+                    artistDtoModels = artists.Select(x => ArtistDTOModel(x));
+                    break;
+            }
+            return artistDtoModels; 
         }
-        
+
 
         // GET: api/ArtistApi/5
         [ResponseType(typeof(Object))]
@@ -113,7 +127,7 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
             return Ok();
         }
 
-
+        //Custom Service Methods
         private object ArtistDTOModel(Artist a)
         {
             return new {
@@ -140,37 +154,20 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
                 }),
             };
         }
+        private object ArtistWithPopularityDTOModel(Artist artist)
+        {
+            return new
+            {
+                artist.Id,
+                artist.Name,
+                Popularity = Math.Round(AvgArtistPop(artist.Albums.Select(x => AvgAlbumPop(x))), 2)
+            };
+        }
 
-        //Custom Service Methods
-        //private Object ArtistDTOModel(Artist artist)
-        //{
-        //    return new
-        //    {
-        //        Id = artist.Id,
-        //        Name = artist.Name,
-        //        Country = artist.Country.ToString().Replace("_", " "),
-        //        PhotoUrl = artist.PhotoUrl,
-        //        CareerStartDate = artist.CareerStartDate,
-        //        Albums = artist.Albums.Select(x => new  //Albums
-        //        {
-        //            Id = x.Id,
-        //            Title = x.Title,
-        //            ReleaseDate = x.ReleaseDate,
-        //            CoverPhotoUrl = x.CoverPhotoUrl,
-        //            Tracks = x.Tracks.Select(y => new //Tracks
-        //            {
-        //                Id = x.Title,
-        //                Title = y.Title,
-        //                DurationSecs = y.DurationSecs,
-        //                AudioUrl = y.AudioUrl,
-        //                Popularity = y.Popularity,
-        //                TrackGenres = y.TrackGenres.SelectMany(p => new string[] { p.Type })  //Track Genres
-        //            }),
-        //            AlbumGenres = x.AlbumGenres.SelectMany(p => new string[] { p.Type })  //Album Genres
-        //        }),
-        //        ArtistGenres = artist.ArtistGenres.SelectMany(p => new string[] { p.Type })  //Artist Genres
-        //    };
-        //}
+        private double AvgArtistPop(IEnumerable<double> albumPopularities) => albumPopularities.Average();
+
+        private double AvgAlbumPop(Album album) => album.Tracks.Average(x => x.Popularity);
+
         private void DeleteAllAlbumsAndTracksOfArtist(Artist artist)
         {
             var albums = unit.Albums

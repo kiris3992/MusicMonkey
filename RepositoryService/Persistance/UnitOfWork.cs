@@ -19,12 +19,15 @@ namespace RepositoryService.Persistance
             Artists = new ArtistRepository(context);
             Albums = new AlbumRepository(context);
             Tracks = new TrackRepository(context);
+            Genres = new GenreRepository(context);
         }
         public IArtistRepository Artists { get; private set; }
 
         public IAlbumRepository Albums { get; private set; }
 
         public ITrackRepository Tracks { get; private set; }
+
+        public IGenreRepository Genres { get; private set; }
 
         public int Complete()
         {

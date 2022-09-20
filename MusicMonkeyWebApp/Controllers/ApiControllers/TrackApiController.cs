@@ -24,25 +24,22 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
     public class TrackApiController : BaseApiController
     {
         // GET: api/TrackApi
-
-        public IEnumerable<Object> GetTracks(string type = "")
+        public IEnumerable<object> GetTracks(string type = "")
         {
-            IEnumerable<object> tracks = new List<object>();
-
-            if (type == "full")
+            IEnumerable<Track> tracks = unit.Tracks.GetTracksWithEverything();
+            IEnumerable<object> trackDtoModels = new List<object>();
+            
+            switch (type)
             {
-                tracks = unit.Tracks
-                        .GetTracksWithEverything()
-                        .Select(x => FullTrackDTOModel(x));
-            }
-            else
-            {
-                tracks = unit.Tracks
-                        .GetTracksWithEverything()
-                        .Select(x => PartialTrackDTOModel(x));
+                case "full":
+                    trackDtoModels = tracks.Select(x => FullTrackDTOModel(x));
+                    break;
+                default:
+                    trackDtoModels = tracks.Select(x => PartialTrackDTOModel(x));
+                    break;
             }
 
-            return tracks;
+            return trackDtoModels;
         }
 
 
@@ -75,7 +72,7 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
 
         // GET: api/TrackApi/5
         [ResponseType(typeof(Track))]
-        public Object GetTrack(int? id)
+        public object GetTrack(int? id)
         {
 
             if (id is null)
@@ -156,8 +153,8 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
 
             unit.Tracks.Create(track);
             unit.Complete();
-            return Ok();
 
+            return Ok();
         }
 
         // DELETE: api/TrackApi/5
@@ -182,7 +179,7 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
         }
 
         //Custom Service Methods
-        private Object FullTrackDTOModel(Track track)
+        private object FullTrackDTOModel(Track track)
         {
             return new  //Tracks
             {
@@ -209,40 +206,8 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
                     }
                 }
             };
-
-            //return new  //Tracks
-            //{
-            //    Id = track.Id,
-            //    Title = track.Title,
-            //    DurationSecs = track.DurationSecs,
-            //    AudioUrl = track.AudioUrl,
-            //    Popularity = track.Popularity,
-            //    Album = new  //Album
-            //    {
-            //        Id = track.Album.Id,
-            //        Title = track.Album.Title,
-            //        ReleaseDate = track.Album.ReleaseDate,
-            //        CoverPhotoUrl = track.Album.CoverPhotoUrl,
-            //        Artist = new  //Artist
-            //        {
-            //            Name = track.Album.Artist.Name,
-            //            Country = track.Album.Artist.Country,
-            //            PhotoUrl = track.Album.Artist.PhotoUrl,
-            //            CareerStartDate = track.Album.Artist.CareerStartDate,
-            //            ArtistGenres = track.Album
-            //                    .Artist
-            //                    .ArtistGenres
-            //                    .SelectMany(p => new string[] { p.Type })  //Artist Genres
-            //        },
-            //        AlbumGenres = track
-            //                .Album
-            //                .AlbumGenres
-            //                .SelectMany(p => new string[] { p.Type })  //Album Genres
-            //    },
-            //    TrackGenres = track.TrackGenres.SelectMany(p => new string[] { p.Type })  //track Genres
-            //};
         }
-        private Object PartialTrackDTOModel(Track track)
+        private object PartialTrackDTOModel(Track track)
         {
             return new
             {
