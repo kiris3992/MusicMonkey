@@ -22,6 +22,8 @@ namespace MusicMonkeyWebApp
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
+            //UsersConfig.SeedUsers();
+            app.MapSignalR();
         }
     }
 

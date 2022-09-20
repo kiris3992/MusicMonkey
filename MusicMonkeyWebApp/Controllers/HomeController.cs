@@ -74,5 +74,10 @@ namespace MusicMonkeyWebApp.Controllers
             return View();
         }
 
+
+        public ActionResult ChatRoom()
+        {
+            return View();
+        }
     }
 }
