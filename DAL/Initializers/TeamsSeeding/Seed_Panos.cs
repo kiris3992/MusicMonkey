@@ -12,10 +12,9 @@ namespace DAL.Initializers.TeamsSeeding
     {
         public List<Artist> GetArtists(TeamGenres g)
         {
-
             #region Panos Seeding
             #region Bob Dylan
-            Artist pa1 = new Artist("Bob Dylan", Country.USA, "/Content/Assets/entity-files/BobDylan/artist_cover.jpg", new DateTime(1959, 1, 1), new HashSet<Genre> { g.folk, g.blues });
+            Artist pa1 = new Artist("Bob Dylan", Country.USA, "photo", new DateTime(1959, 1, 1), new HashSet<Genre> { g.folk, g.blues });
 
             Album pa1album1 = new Album("Bringing It All Back Home", new DateTime(1965, 3, 22), "/Content/Assets/entity-files/BobDylan/Bringing_It_All_Back_Home/cover.jpg", pa1, new HashSet<Genre>() { g.folk, g.blues });
             Album pa1album2 = new Album("Planet Waves", new DateTime(1974, 1, 17), "/Content/Assets/entity-files/BobDylan/Planet_Waves/cover.jpg", pa1, new HashSet<Genre>() { g.folk, g.rock, g.blues });
