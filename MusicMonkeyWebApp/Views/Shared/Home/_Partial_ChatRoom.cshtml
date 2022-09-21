@@ -1,0 +1,30 @@
+﻿
+<link rel="stylesheet" type="text/css" href="~/Content/ChatStyle.css" />
+
+<button class="chat-popup"><img src="https://img.icons8.com/external-mixed-line-solid-yogi-aprelliyanto/64/000000/external-chat-fintech-mixed-line-solid-yogi-aprelliyanto.png" alt="chat box" /></button>
+
+
+<div class="chat-container" style="display:none">
+    <div class="chat-header">
+        <h1>Chat Room</h1>
+        <input type="text" id="userName" />      
+        <input style="position" type="submit" name="Submit" value="Submit"/>
+    </div>
+    <div class="chat-body" id="chat-body">
+        <p class="chat-message" hidden></p>
+        <p class="chat-message chat-user_message" hidden></p>
+    </div>
+    <div class="chat-footer">
+        <input class="chat-input" type="text" id="message" name="" />
+        <button id="sendmessage" value="Send"> <i class="fa fa-paper-plane" aria-hidden="true"></i>&nbsp; Send</button>
+        <input type="hidden" id="displayname" />
+    </div>
+</div>
+
+@Scripts.Render("~/Scripts/jquery.signalR-2.2.2.min.js")
+@Scripts.Render("~/signalr/hubs")
+@Scripts.Render("~/Content/Assets/js/ChatRoomScript.js")
+
+@*<script src="~/Content/Assets/js/ChatRoomScript.js"></script>
+    <script src="~/Scripts/jquery.signalR-2.2.2.min.js"></script>
+    <script src="~/signalr/hubs"></script>*@

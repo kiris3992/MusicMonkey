@@ -438,10 +438,6 @@
     <Content Include="Content\Assets\entity-files\ACDC\HighwayToHell\album_cover.jpg" />
     <Content Include="Content\Assets\entity-files\Axel Willner\AxelWillnerPhotoUrl.jpg" />
     <Content Include="Content\Assets\entity-files\Axel Willner\Cupid%27s Head\Cupids_HeadCoverPhotoUrl.jpg" />
-    <Content Include="Content\Assets\entity-files\BobDylan\artist_cover.jpg" />
-    <Content Include="Content\Assets\entity-files\BobDylan\Bringing_It_All_Back_Home\cover.jpg" />
-    <Content Include="Content\Assets\entity-files\BobDylan\Dylan_&amp;_the_Dead\cover.jpg" />
-    <Content Include="Content\Assets\entity-files\BobDylan\Planet_Waves\cover.jpg" />
     <Content Include="Content\Assets\entity-files\CreedenceClearwaterRevival\artist_cover.jpg" />
     <Content Include="Content\Assets\entity-files\CreedenceClearwaterRevival\CosmosFactory\1_UpAroundTheBend.mp3" />
     <Content Include="Content\Assets\entity-files\CreedenceClearwaterRevival\CosmosFactory\2_LookingOutMyBackdoor.mp3" />
@@ -494,14 +490,6 @@
     <Content Include="Content\Assets\entity-files\Future\High Off Life\High_Off_LifeCoverPhotoUrl.jpg" />
     <Content Include="Content\Assets\entity-files\Ice Cube\Ice-CubePhotoUrl.jpg" />
     <Content Include="Content\Assets\entity-files\Ice Cube\The Predator\The_Predator_CoverPhotoUrl.jpg" />
-    <Content Include="Content\Assets\entity-files\Lady_Gaga\artist_cover.jpg" />
-    <Content Include="Content\Assets\entity-files\Lady_Gaga\Born_This_Way\cover.jpg" />
-    <Content Include="Content\Assets\entity-files\Lady_Gaga\Joanne\cover.jpg" />
-    <Content Include="Content\Assets\entity-files\Lady_Gaga\The_Fame\cover.jpg" />
-    <Content Include="Content\Assets\entity-files\Ludwig_Van_Beethoven\artist_cover.jpg" />
-    <Content Include="Content\Assets\entity-files\Ludwig_Van_Beethoven\Beethoven_Symfonies\cover.jpg" />
-    <Content Include="Content\Assets\entity-files\Maria_Callas\artist_cover.jpg" />
-    <Content Include="Content\Assets\entity-files\Maria_Callas\Pure_Maria_Callas\cover.jpg" />
     <Content Include="Content\Assets\entity-files\Marvin Gaye\Marvin_GayePhotoUrl.jpg" />
     <Content Include="Content\Assets\entity-files\Marvin Gaye\What%27s Going on\WhatsGoingOnCoverPhotoUrl.jpg" />
     <Content Include="Content\Assets\entity-files\Michael Jackson\Michael_JacksonPhotoUrl.jpg" />
@@ -570,10 +558,6 @@
     <Content Include="Content\Assets\entity-files\The Notorious B.I.G\Ready to Die\The_Notorious_B.I.G._-_Things_Done_Changed_%28128kbps%29.mp3" />
     <Content Include="Content\Assets\entity-files\The Notorious B.I.G\Ready to Die\The_Notorious_B.I.G._-_Unbelievable_%28Official_Audio%29_%28128kbps%29.mp3" />
     <Content Include="Content\Assets\entity-files\The Notorious B.I.G\The_Notorious_B.I.GPhotoUrl.jpg" />
-    <Content Include="Content\Assets\entity-files\The_Wingles\artist_cover.jpg" />
-    <Content Include="Content\Assets\entity-files\The_Wingles\Big_Red_Car\cover.jpg" />
-    <Content Include="Content\Assets\entity-files\The_Wingles\Surfer_Jeff\cover.jpg" />
-    <Content Include="Content\Assets\entity-files\The_Wingles\The_Wiggles\cover.jpg" />
     <Content Include="Content\Assets\entity-files\Trypes\cover.jpg" />
     <Content Include="Content\Assets\entity-files\Trypes\Ennia_Pliromena_Tragoudia\1.mp3" />
     <Content Include="Content\Assets\entity-files\Trypes\Ennia_Pliromena_Tragoudia\10.mp3" />
@@ -774,6 +758,7 @@
     <Content Include="Scripts\src\utils\setAttributes.js" />
     <Content Include="Scripts\src\utils\setStyles.js" />
     <Content Include="Scripts\src\utils\setupEventListeners.js" />
+    <Content Include="Content\Assets\js\ChatRoomScript.js" />
     <Content Include="Scripts\umd\popper-utils.js" />
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
@@ -986,6 +971,7 @@
     <Content Include="Views\Home\ChatRoom.cshtml" />
     <Content Include="Views\Home\Plans.cshtml" />
     <Content Include="Views\Home\Tour.cshtml" />
+    <Content Include="Views\Shared\Home\_Partial_ChatRoom.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
