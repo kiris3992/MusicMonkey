@@ -521,7 +521,7 @@
         width: 35%;
         border-top-right-radius:3px;
         border-bottom-right-radius:3px;
-        background-color: lightgray;
+        background-color: #eaeaea;
     }
 </style>
 
@@ -551,8 +551,8 @@
                         </div>
 
                         <div class="middle-form-inputs">
-                            <input type="text" name="cardExpDate" value="" id="payment-card-exp-date" placeholder="Mm/yyyy"/>
-                            <input type="text" name="cardCvv" value="" id="payment-card-cvv" placeholder="Code"/>
+                            <input type="date" name="cardExpDate" value="" id="payment-card-exp-date" placeholder="Mm/yyyy"/>
+                            <input type="number" name="cardCvv" value="" id="payment-card-cvv" placeholder="Code"/>
                         </div>
                     </div>
 
@@ -562,7 +562,16 @@
         </div>
 
         <div class="total">
-            <span>Gold subscription</span>
+            <div>
+                <span>Subscription</span>
+            </div>
+            <div>
+                <span>Gold</span>
+            </div>
+            <div>
+                <span>Total Price</span>
+                <span>$49.99</span>
+            </div>
         </div>
 
     </div>
