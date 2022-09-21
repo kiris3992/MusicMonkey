@@ -79,5 +79,11 @@ namespace MusicMonkeyWebApp.Controllers
         {
             return View();
         }
+
+        [Authorize(Roles = "Silver")]
+        public ActionResult Charge()
+        {
+            return View();
+        }
     }
 }

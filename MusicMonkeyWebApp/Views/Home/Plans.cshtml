@@ -1,18 +1,18 @@
 ﻿
 @{
-    ViewBag.Title = "Plans";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewBag.Title = "Plans";
+	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <style>
-    .plans {
-        display: block;
-        position: relative;
-        overflow: hidden;
-        margin-top: 20px;
-        padding: 40px 20px;
-        border-radius: 16px;
-        background-color: #290849;
-    }
+	.plans {
+		display: block;
+		position: relative;
+		overflow: hidden;
+		margin-top: 20px;
+		padding: 40px 20px;
+		border-radius: 16px;
+		background-color: #290849;
+	}
 .plans--mt0 {
   margin-top: 0;
 }
@@ -133,63 +133,63 @@
 }
 @*@media (min-width: 768px) {
   .plans {
-    margin-top: 30px;
-    padding: 40px 30px;
+	margin-top: 30px;
+	padding: 40px 30px;
   }*@
   .plans--mt0 {
-    margin-top: 0;
+	margin-top: 0;
   }
   .plans__btn {
-    height: 60px;
-    min-width: 180px;
+	height: 60px;
+	min-width: 180px;
   }
   .plans__table tbody tr:last-child td {
-    padding: 20px 10px 0 20px;
+	padding: 20px 10px 0 20px;
   }
   .plans__table tbody tr:last-child td:last-child {
-    padding-right: 0;
+	padding-right: 0;
   }
 }
 @*@media (min-width: 992px) {
   .plans__table th:first-child,
   .plans__table td:first-child {
-    width: 260px;
+	width: 260px;
   }
 }
 @media (min-width: 1200px) {
   .plans {
-    border-radius: 32px;
+	border-radius: 32px;
   }*@
   .plans__table th:first-child,
   .plans__table td:first-child {
-    width: 290px;
+	width: 290px;
   }
   .plans__title {
-    padding-right: 20px;
+	padding-right: 20px;
   }
 }
 @*@media (min-width: 1440px) {
   .plans {
-    padding: 40px;
+	padding: 40px;
   }*@
   .plans__table th,
   .plans__table td {
-    padding: 0 25px;
+	padding: 0 25px;
   }
   .plans__table th:first-child,
   .plans__table td:first-child {
-    padding-left: 0;
-    width: 325px;
+	padding-left: 0;
+	width: 325px;
   }
   .plans__table th:last-child,
   .plans__table td:last-child {
-    padding-right: 0;
+	padding-right: 0;
   }
   .plans__table tbody tr:last-child td {
-    padding: 20px 15px 0 25px;
+	padding: 20px 15px 0 25px;
   }
   .plans__table tbody tr:last-child td:last-child {
-    padding-right: 0;
+	padding-right: 0;
   }
 }
 /*==============================
@@ -323,370 +323,351 @@
 }
 
   .plan
-    {
-        margin-top: 30px;
-        padding: 30px;
-        min-width: 768px;
-    }
+	{
+		margin-top: 30px;
+		padding: 30px;
+		min-width: 768px;
+	}
   .plan__btn {
-    height: 60px;
+	height: 60px;
   }
   .plan--style2 .plan__list {
-    margin-top: 30px;
+	margin-top: 30px;
   }
   .plan--style2 .plan__btn {
-    margin-top: 30px;
+	margin-top: 30px;
   }
 
 
-    .feature__icon {
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-start;
-        align-items: center;
-        margin-top:20px;
-    }
+	.feature__icon {
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-start;
+		align-items: center;
+		margin-top:20px;
+	}
 
-        .feature__icon svg {
-            fill: #290849;
-            width: auto;
-            height: 34px;
-        }
+		.feature__icon svg {
+			fill: #290849;
+			width: auto;
+			height: 34px;
+		}
 
-    .feature__title {
-        font-size: 18px;
-        line-height: 28px;
-        font-weight: 500;
-        color: #fff;
-        margin-bottom: 0;
-        margin-left: 20px;
-    }
+	.feature__title {
+		font-size: 18px;
+		line-height: 28px;
+		font-weight: 500;
+		color: #fff;
+		margin-bottom: 0;
+		margin-left: 20px;
+	}
 
-    .feature__text {
-        display: block;
-        width: 100%;
-        font-size: 16px;
-        line-height: 26px;
-        color: black;
-        margin-bottom: 0;
-        margin-top: -70px;
-    }
+	.feature__text {
+		display: block;
+		width: 100%;
+		font-size: 16px;
+		line-height: 26px;
+		color: black;
+		margin-bottom: 0;
+		margin-top: -70px;
+	}
 
-    .feature--last {
-        border-bottom: none;
-        padding-bottom: 0;
-    }
+	.feature--last {
+		border-bottom: none;
+		padding-bottom: 0;
+	}
 
-    .plans__table div {
-        display:flex;
-        align-items:center;
-    }
+	.plans__table div {
+		display:flex;
+		align-items:center;
+	}
 </style>
 
 <!-- Breadcrumb Begin -->
 <div class="breadcrumb-option">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="breadcrumb__links">
-                    <a href="/"><i class="fa fa-home"></i> Home</a>
-                    <span>@ViewBag.Title</span>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="breadcrumb__links">
+					<a href="/"><i class="fa fa-home"></i> Home</a>
+					<span>@ViewBag.Title</span>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 <!-- Breadcrumb End -->
 <br />
 <div style="text-align:center;">
-    <h2>Choose your experience</h2>
-
+	<h2>Choose your experience</h2>
 </div>
 
 <div class="skills">
-    <div class="container">
-        <div class="row">
-            <!-- section text -->
-            <div class="col-12">
-                <p class="section__text section__text--small">Many desktop publishing packages and <a href="#">web page</a> editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
+	<div class="container">
 
-                <p class="section__text section__text--small">All the Lorem Ipsum generators on the <b>Internet</b> tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.</p>
-            </div>
-            <!-- end section text -->
-        </div>
+		<div class="row row--grid">
+			<div class="col-12 col-md-6 col-lg-4 col-xl-3">
+				<div class="feature">
+					<span class="feature__icon">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19,7H18V6a3,3,0,0,0-3-3H5A3,3,0,0,0,2,6H2V18a3,3,0,0,0,3,3H19a3,3,0,0,0,3-3V10A3,3,0,0,0,19,7ZM5,5H15a1,1,0,0,1,1,1V7H5A1,1,0,0,1,5,5ZM20,15H19a1,1,0,0,1,0-2h1Zm0-4H19a3,3,0,0,0,0,6h1v1a1,1,0,0,1-1,1H5a1,1,0,0,1-1-1V8.83A3,3,0,0,0,5,9H19a1,1,0,0,1,1,1Z" /></svg>
+					</span>
+					<h3 class="feature__title">Choose your Plan</h3>
+					<p class="feature__text">It to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining</p>
+				</div>
+			</div>
 
-        <div class="row row--grid">
-            <div class="col-12 col-md-6 col-lg-4 col-xl-3">
-                <div class="feature">
-                    <span class="feature__icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19,7H18V6a3,3,0,0,0-3-3H5A3,3,0,0,0,2,6H2V18a3,3,0,0,0,3,3H19a3,3,0,0,0,3-3V10A3,3,0,0,0,19,7ZM5,5H15a1,1,0,0,1,1,1V7H5A1,1,0,0,1,5,5ZM20,15H19a1,1,0,0,1,0-2h1Zm0-4H19a3,3,0,0,0,0,6h1v1a1,1,0,0,1-1,1H5a1,1,0,0,1-1-1V8.83A3,3,0,0,0,5,9H19a1,1,0,0,1,1,1Z" /></svg>
-                    </span>
-                    <h3 class="feature__title">Choose your Plan</h3>
-                    <p class="feature__text">It to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining</p>
-                </div>
-            </div>
+			<div class="col-12 col-md-6 col-lg-4 col-xl-3">
+				<div class="feature">
+					<span class="feature__icon">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9,10a1,1,0,0,0-1,1v2a1,1,0,0,0,2,0V11A1,1,0,0,0,9,10Zm12,1a1,1,0,0,0,1-1V6a1,1,0,0,0-1-1H3A1,1,0,0,0,2,6v4a1,1,0,0,0,1,1,1,1,0,0,1,0,2,1,1,0,0,0-1,1v4a1,1,0,0,0,1,1H21a1,1,0,0,0,1-1V14a1,1,0,0,0-1-1,1,1,0,0,1,0-2ZM20,9.18a3,3,0,0,0,0,5.64V17H10a1,1,0,0,0-2,0H4V14.82A3,3,0,0,0,4,9.18V7H8a1,1,0,0,0,2,0H20Z" /></svg>
+					</span>
+					<h3 class="feature__title">Choose your Plan</h3>
+					<p class="feature__text">If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text</p>
+				</div>
+			</div>
 
-            <div class="col-12 col-md-6 col-lg-4 col-xl-3">
-                <div class="feature">
-                    <span class="feature__icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9,10a1,1,0,0,0-1,1v2a1,1,0,0,0,2,0V11A1,1,0,0,0,9,10Zm12,1a1,1,0,0,0,1-1V6a1,1,0,0,0-1-1H3A1,1,0,0,0,2,6v4a1,1,0,0,0,1,1,1,1,0,0,1,0,2,1,1,0,0,0-1,1v4a1,1,0,0,0,1,1H21a1,1,0,0,0,1-1V14a1,1,0,0,0-1-1,1,1,0,0,1,0-2ZM20,9.18a3,3,0,0,0,0,5.64V17H10a1,1,0,0,0-2,0H4V14.82A3,3,0,0,0,4,9.18V7H8a1,1,0,0,0,2,0H20Z" /></svg>
-                    </span>
-                    <h3 class="feature__title">Choose your Plan</h3>
-                    <p class="feature__text">If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text</p>
-                </div>
-            </div>
+			<div class="col-12 col-md-6 col-lg-4 col-xl-3">
+				<div class="feature feature--prelast">
+					<span class="feature__icon">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,2H10A3,3,0,0,0,7,5v7a3,3,0,0,0,3,3H20a3,3,0,0,0,3-3V5A3,3,0,0,0,20,2Zm1,10a1,1,0,0,1-1,1H10a1,1,0,0,1-1-1V5a1,1,0,0,1,1-1H20a1,1,0,0,1,1,1ZM17.5,8a1.49,1.49,0,0,0-1,.39,1.5,1.5,0,1,0,0,2.22A1.5,1.5,0,1,0,17.5,8ZM16,17a1,1,0,0,0-1,1v1a1,1,0,0,1-1,1H4a1,1,0,0,1-1-1V15H4a1,1,0,0,0,0-2H3V12a1,1,0,0,1,1-1A1,1,0,0,0,4,9a3,3,0,0,0-3,3v7a3,3,0,0,0,3,3H14a3,3,0,0,0,3-3V18A1,1,0,0,0,16,17ZM6,18H7a1,1,0,0,0,0-2H6a1,1,0,0,0,0,2Z" /></svg>
+					</span>
+					<h3 class="feature__title">Choose your Plan</h3>
+					<p class="feature__text">It to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially</p>
+				</div>
+			</div>
 
-            <div class="col-12 col-md-6 col-lg-4 col-xl-3">
-                <div class="feature feature--prelast">
-                    <span class="feature__icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,2H10A3,3,0,0,0,7,5v7a3,3,0,0,0,3,3H20a3,3,0,0,0,3-3V5A3,3,0,0,0,20,2Zm1,10a1,1,0,0,1-1,1H10a1,1,0,0,1-1-1V5a1,1,0,0,1,1-1H20a1,1,0,0,1,1,1ZM17.5,8a1.49,1.49,0,0,0-1,.39,1.5,1.5,0,1,0,0,2.22A1.5,1.5,0,1,0,17.5,8ZM16,17a1,1,0,0,0-1,1v1a1,1,0,0,1-1,1H4a1,1,0,0,1-1-1V15H4a1,1,0,0,0,0-2H3V12a1,1,0,0,1,1-1A1,1,0,0,0,4,9a3,3,0,0,0-3,3v7a3,3,0,0,0,3,3H14a3,3,0,0,0,3-3V18A1,1,0,0,0,16,17ZM6,18H7a1,1,0,0,0,0-2H6a1,1,0,0,0,0,2Z" /></svg>
-                    </span>
-                    <h3 class="feature__title">Choose your Plan</h3>
-                    <p class="feature__text">It to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially</p>
-                </div>
-            </div>
-
-            <div class="col-12 col-md-6 col-lg-4 col-xl-3">
-                <div class="feature feature--last">
-                    <span class="feature__icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.53,7.15a1,1,0,0,0-1,0L17,8.89A3,3,0,0,0,14,6H5A3,3,0,0,0,2,9v6a3,3,0,0,0,3,3h9a3,3,0,0,0,3-2.89l3.56,1.78A1,1,0,0,0,21,17a1,1,0,0,0,.53-.15A1,1,0,0,0,22,16V8A1,1,0,0,0,21.53,7.15ZM15,15a1,1,0,0,1-1,1H5a1,1,0,0,1-1-1V9A1,1,0,0,1,5,8h9a1,1,0,0,1,1,1Zm5-.62-3-1.5V11.12l3-1.5Z" /></svg>
-                    </span>
-                    <h3 class="feature__title">Choose your Plan</h3>
-                    <p class="feature__text">Various versions have evolved over the years, sometimes by accident, sometimes on purpose</p>
-                </div>
-            </div>
-        </div>
-    </div>
+			<div class="col-12 col-md-6 col-lg-4 col-xl-3">
+				<div class="feature feature--last">
+					<span class="feature__icon">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.53,7.15a1,1,0,0,0-1,0L17,8.89A3,3,0,0,0,14,6H5A3,3,0,0,0,2,9v6a3,3,0,0,0,3,3h9a3,3,0,0,0,3-2.89l3.56,1.78A1,1,0,0,0,21,17a1,1,0,0,0,.53-.15A1,1,0,0,0,22,16V8A1,1,0,0,0,21.53,7.15ZM15,15a1,1,0,0,1-1,1H5a1,1,0,0,1-1-1V9A1,1,0,0,1,5,8h9a1,1,0,0,1,1,1Zm5-.62-3-1.5V11.12l3-1.5Z" /></svg>
+					</span>
+					<h3 class="feature__title">Choose your Plan</h3>
+					<p class="feature__text">Various versions have evolved over the years, sometimes by accident, sometimes on purpose</p>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 <!-- end features -->
 <!-- plan -->
 <div class="section section--pb0">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <div class="plans plans--mt0">
-                    <div class="table-responsive">
-                        <table class="plans__table">
-                            <thead>
-                                <tr>
-                                    <th></th>
-                                    <th>
-                                        <div class="plans__head">
-                                            <b>FREE MEMBER</b>
-                                            <p>Free</p>
-                                            <span>/ month</span>
-                                        </div>
-                                    </th>
-                                    <th>
-                                        <div class="plans__head">
-                                            <b>SILVER SUBSCRIBER</b>
-                                            <p>$34.99</p>
-                                            <span>/ month</span>
-                                        </div>
-                                    </th>
-                                    <th>
-                                        <div class="plans__head">
-                                            <b>GOLD SUBSCRIBER</b>
-                                            <p>$49.99</p>
-                                            <span>/ month</span>
-                                        </div>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <span class="plans__title">Music Monkey Originals</span>
-                                    </td>
-                                    <td>
-                                        <span class="plans__status plans__status--green">
-                                            <svg width="19" height="14" viewBox="0 0 19 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.43994 6.95981L6.77477 12.2924L17.4399 1.62723" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <span class="plans__status plans__status--green">
-                                            <svg width="19" height="14" viewBox="0 0 19 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.43994 6.95981L6.77477 12.2924L17.4399 1.62723" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <span class="plans__status plans__status--green">
-                                            <svg width="19" height="14" viewBox="0 0 19 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.43994 6.95981L6.77477 12.2924L17.4399 1.62723" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <span class="plans__title">Get unlimited access to the largest music streaming library with no ads</span>
-                                    </td>
-                                    <td>
-                                        <span class="plans__status plans__status--green">
-                                            <svg width="19" height="14" viewBox="0 0 19 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.43994 6.95981L6.77477 12.2924L17.4399 1.62723" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <span class="plans__status plans__status--green">
-                                            <svg width="19" height="14" viewBox="0 0 19 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.43994 6.95981L6.77477 12.2924L17.4399 1.62723" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <span class="plans__status plans__status--green">
-                                            <svg width="19" height="14" viewBox="0 0 19 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.43994 6.95981L6.77477 12.2924L17.4399 1.62723" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <span class="plans__title">Listen Live Radio online podcasts on supported devices</span>
-                                    </td>
-                                    <td>
-                                        <span class="plans__status plans__status--green">
-                                            <svg width="19" height="14" viewBox="0 0 19 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.43994 6.95981L6.77477 12.2924L17.4399 1.62723" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <span class="plans__status plans__status--green">
-                                            <svg width="19" height="14" viewBox="0 0 19 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.43994 6.95981L6.77477 12.2924L17.4399 1.62723" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <span class="plans__status plans__status--green">
-                                            <svg width="19" height="14" viewBox="0 0 19 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.43994 6.95981L6.77477 12.2924L17.4399 1.62723" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <span class="plans__title">Switch plans or cancel anytime</span>
-                                    </td>
-                                    <td>
-                                        <span class="plans__status plans__status--green">
-                                            <svg width="19" height="14" viewBox="0 0 19 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.43994 6.95981L6.77477 12.2924L17.4399 1.62723" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <span class="plans__status plans__status--green">
-                                            <svg width="19" height="14" viewBox="0 0 19 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.43994 6.95981L6.77477 12.2924L17.4399 1.62723" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <span class="plans__status plans__status--green">
-                                            <svg width="19" height="14" viewBox="0 0 19 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.43994 6.95981L6.77477 12.2924L17.4399 1.62723" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <span class="plans__title">Streaming your music of Cloud DVR storage</span>
-                                    </td>
-                                    <td>
-                                        <span class="plans__status plans__status--red">
-                                            <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M17.596 1.59982L1.60938 17.5865" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /><path d="M17.601 17.5961L1.60101 1.5928" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <span class="plans__status plans__status--green">
-                                            <svg width="19" height="14" viewBox="0 0 19 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.43994 6.95981L6.77477 12.2924L17.4399 1.62723" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <span class="plans__status plans__status--green">
-                                            <svg width="19" height="14" viewBox="0 0 19 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.43994 6.95981L6.77477 12.2924L17.4399 1.62723" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <span class="plans__title">Make your own thematic play lists</span>
-                                    </td>
-                                    <td>
-                                        <span class="plans__status plans__status--red">
-                                            <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M17.596 1.59982L1.60938 17.5865" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /><path d="M17.601 17.5961L1.60101 1.5928" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <span class="plans__status plans__status--green">
-                                            <svg width="19" height="14" viewBox="0 0 19 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.43994 6.95981L6.77477 12.2924L17.4399 1.62723" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <span class="plans__status plans__status--green">
-                                            <svg width="19" height="14" viewBox="0 0 19 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.43994 6.95981L6.77477 12.2924L17.4399 1.62723" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr class="last">
-                                    <td>
-                                        <span class="plans__title">Unlimited track downloads</span>
-                                    </td>
-                                    <td>
-                                        <span class="plans__status plans__status--red">
-                                            <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M17.596 1.59982L1.60938 17.5865" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /><path d="M17.601 17.5961L1.60101 1.5928" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <span class="plans__status plans__status--red">
-                                            <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M17.596 1.59982L1.60938 17.5865" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /><path d="M17.601 17.5961L1.60101 1.5928" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <span class="plans__status plans__status--green">
-                                            <svg width="19" height="14" viewBox="0 0 19 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.43994 6.95981L6.77477 12.2924L17.4399 1.62723" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td>
-                                        <button class="plans__btn" type="button">Select plan</button>
-                                    </td>
-                                    <td>
-                                        <button class="plans__btn" type="button">Select plan</button>
-                                    </td>
-                                    <td>
-                                        <button class="plans__btn" type="button">Select plan</button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<div class="plans plans--mt0">
+					<div class="table-responsive">
+						<table class="plans__table">
+							<thead>
+								<tr>
+									<th></th>
+									<th>
+										<div class="plans__head">
+											<b>GUEST</b>
+											<p>Free</p>
+											<span>For Life</span>
+										</div>
+									</th>
+									<th>
+										<div class="plans__head">
+											<b>SILVER USER</b>
+											<p>Free</p>
+											<span>20 Day Trial</span>
+										</div>
+									</th>
+									<th>
+										<div class="plans__head">
+											<b>GOLD SUBSCRIBER</b>
+											<p>$49.99</p>
+											<span>/ month</span>
+										</div>
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>
+										<span class="plans__title">Music Monkey Originals</span>
+									</td>
+									<td>
+										<span class="plans__status plans__status--green">
+											<svg width="19" height="14" viewBox="0 0 19 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.43994 6.95981L6.77477 12.2924L17.4399 1.62723" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+										</span>
+									</td>
+									<td>
+										<span class="plans__status plans__status--green">
+											<svg width="19" height="14" viewBox="0 0 19 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.43994 6.95981L6.77477 12.2924L17.4399 1.62723" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+										</span>
+									</td>
+									<td>
+										<span class="plans__status plans__status--green">
+											<svg width="19" height="14" viewBox="0 0 19 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.43994 6.95981L6.77477 12.2924L17.4399 1.62723" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+										</span>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<span class="plans__title">Get unlimited access to the largest music streaming library with no ads</span>
+									</td>
+									<td>
+										<span class="plans__status plans__status--red">
+											<svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M17.596 1.59982L1.60938 17.5865" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /><path d="M17.601 17.5961L1.60101 1.5928" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+										</span>
+									</td>
+									<td>
+										<span class="plans__status plans__status--green">
+											<svg width="19" height="14" viewBox="0 0 19 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.43994 6.95981L6.77477 12.2924L17.4399 1.62723" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+										</span>
+									</td>
+									<td>
+										<span class="plans__status plans__status--green">
+											<svg width="19" height="14" viewBox="0 0 19 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.43994 6.95981L6.77477 12.2924L17.4399 1.62723" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+										</span>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<span class="plans__title">Listen Live Radio online podcasts on supported devices</span>
+									</td>
+									<td>
+										<span class="plans__status plans__status--red">
+											<svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M17.596 1.59982L1.60938 17.5865" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /><path d="M17.601 17.5961L1.60101 1.5928" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+										</span>
+									</td>
+									<td>
+										<span class="plans__status plans__status--green">
+											<svg width="19" height="14" viewBox="0 0 19 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.43994 6.95981L6.77477 12.2924L17.4399 1.62723" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+										</span>
+									</td>
+									<td>
+										<span class="plans__status plans__status--green">
+											<svg width="19" height="14" viewBox="0 0 19 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.43994 6.95981L6.77477 12.2924L17.4399 1.62723" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+										</span>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<span class="plans__title">Switch plans or cancel anytime</span>
+									</td>
+									<td>
+										<span class="plans__status plans__status--red">
+											<svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M17.596 1.59982L1.60938 17.5865" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /><path d="M17.601 17.5961L1.60101 1.5928" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+										</span>
+									</td>
+									<td>
+										<span class="plans__status plans__status--green">
+											<svg width="19" height="14" viewBox="0 0 19 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.43994 6.95981L6.77477 12.2924L17.4399 1.62723" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+										</span>
+									</td>
+									<td>
+										<span class="plans__status plans__status--green">
+											<svg width="19" height="14" viewBox="0 0 19 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.43994 6.95981L6.77477 12.2924L17.4399 1.62723" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+										</span>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<span class="plans__title">Streaming your music of Cloud DVR storage</span>
+									</td>
+									<td>
+										<span class="plans__status plans__status--red">
+											<svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M17.596 1.59982L1.60938 17.5865" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /><path d="M17.601 17.5961L1.60101 1.5928" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+										</span>
+									</td>
+									<td>
+										<span class="plans__status plans__status--green">
+											<svg width="19" height="14" viewBox="0 0 19 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.43994 6.95981L6.77477 12.2924L17.4399 1.62723" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+										</span>
+									</td>
+									<td>
+										<span class="plans__status plans__status--green">
+											<svg width="19" height="14" viewBox="0 0 19 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.43994 6.95981L6.77477 12.2924L17.4399 1.62723" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+										</span>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<span class="plans__title">Make your own thematic play lists</span>
+									</td>
+									<td>
+										<span class="plans__status plans__status--red">
+											<svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M17.596 1.59982L1.60938 17.5865" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /><path d="M17.601 17.5961L1.60101 1.5928" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+										</span>
+									</td>
+									<td>
+										<span class="plans__status plans__status--red">
+											<svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M17.596 1.59982L1.60938 17.5865" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /><path d="M17.601 17.5961L1.60101 1.5928" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+										</span>
+									</td>
+									<td>
+										<span class="plans__status plans__status--green">
+											<svg width="19" height="14" viewBox="0 0 19 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.43994 6.95981L6.77477 12.2924L17.4399 1.62723" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+										</span>
+									</td>
+								</tr>
+								<tr class="last">
+									<td>
+										<span class="plans__title">Unlimited track downloads</span>
+									</td>
+									<td>
+										<span class="plans__status plans__status--red">
+											<svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M17.596 1.59982L1.60938 17.5865" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /><path d="M17.601 17.5961L1.60101 1.5928" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+										</span>
+									</td>
+									<td>
+										<span class="plans__status plans__status--red">
+											<svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M17.596 1.59982L1.60938 17.5865" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /><path d="M17.601 17.5961L1.60101 1.5928" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+										</span>
+									</td>
+									<td>
+										<span class="plans__status plans__status--green">
+											<svg width="19" height="14" viewBox="0 0 19 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.43994 6.95981L6.77477 12.2924L17.4399 1.62723" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+										</span>
+									</td>
+								</tr>
+								<tr>
+									<td></td>
+									<td></td>
+									<td>
+										<button class="plans__btn" type="button" id="silver-plan-btn" onclick="redirect(); return false">Select plan</button>
+									</td>
+									<td>
+										<button class="plans__btn" type="button" id="gold-plan-btn">Select plan</button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
+
+
+@if (!User.Identity.IsAuthenticated)
+{
+	<script>
+		function redirect() {
+			location.href = "https://localhost:44314/Account/Login";
+		}
+	</script>
+}
+else
+{
+	<form action="/Home/Charge" method="POST" style="margin-top:100px">
+		<article>
+			<label>Amount: $5.00</label>
+		</article>
+		<script src="//checkout.stripe.com/v2/checkout.js"
+				class="stripe-button"
+				data-key="@ViewBag.StripePublishKey"
+				data-locale="auto"
+				data-description="Sample Charge"
+				data-amount="500">
+		</script>
+	</form>
+}
+
+
+
 <!-- end plan -->
-<!-- partners -->
-<div class="section section--pb0">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <div class="partners owl-carousel">
-                    <a href="#" class="partners__img">
-                        <img src="img/partners/3docean-light-background.png" alt="">
-                    </a>
-
-                    <a href="#" class="partners__img">
-                        <img src="img/partners/activeden-light-background.png" alt="">
-                    </a>
-
-                    <a href="#" class="partners__img">
-                        <img src="img/partners/audiojungle-light-background.png" alt="">
-                    </a>
-
-                    <a href="#" class="partners__img">
-                        <img src="img/partners/codecanyon-light-background.png" alt="">
-                    </a>
-
-                    <a href="#" class="partners__img">
-                        <img src="img/partners/photodune-light-background.png" alt="">
-                    </a>
-
-                    <a href="#" class="partners__img">
-                        <img src="img/partners/themeforest-light-background.png" alt="">
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- end partners -->
