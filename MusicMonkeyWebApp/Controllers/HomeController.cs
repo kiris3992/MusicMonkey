@@ -26,6 +26,7 @@ namespace MusicMonkeyWebApp.Controllers
                     },
                     new HeaderLink { Action = "Tour", Title = "Tour", Url = "/Home/Tour" },
                     new HeaderLink { Action = "Plans", Title = "Pricing Plans", Url = "/Home/Plans" },
+                    new HeaderLink { Action = "Contact", Title = "Contact", Url = "/Home/Contact" }
                     
                 }
             };

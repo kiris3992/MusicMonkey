@@ -14,11 +14,11 @@ namespace DAL.Initializers.TeamsSeeding
         {
             #region Panos Seeding
             #region Bob Dylan
-            Artist pa1 = new Artist("Bob Dylan", Country.USA, "photo", new DateTime(1959, 1, 1), new HashSet<Genre> { g.folk, g.blues });
+            Artist pa1 = new Artist("Bob Dylan", Country.USA, "/Content/Assets/entity-files/BobDylan/artist_cover.jpg", new DateTime(1959, 1, 1), new HashSet<Genre> { g.folk, g.blues });
 
-            Album pa1album1 = new Album("Bringing It All Back Home", new DateTime(1965, 3, 22), "photo", pa1, new HashSet<Genre>() { g.folk, g.blues });
-            Album pa1album2 = new Album("Planet Waves", new DateTime(1974, 1, 17), "photo", pa1, new HashSet<Genre>() { g.folk, g.rock, g.blues });
-            Album pa1album3 = new Album("Dylan & the Dead", new DateTime(1989, 2, 6), "photo", pa1, new HashSet<Genre>() { g.folk, g.rock });
+            Album pa1album1 = new Album("Bringing It All Back Home", new DateTime(1965, 3, 22), "/Content/Assets/entity-files/BobDylan/Bringing_It_All_Back_Home/cover.jpg", pa1, new HashSet<Genre>() { g.folk, g.blues });
+            Album pa1album2 = new Album("Planet Waves", new DateTime(1974, 1, 17), "/Content/Assets/entity-files/BobDylan/Dylan_&_the_Dead/cover.jpg", pa1, new HashSet<Genre>() { g.folk, g.rock, g.blues });
+            Album pa1album3 = new Album("Dylan & the Dead", new DateTime(1989, 2, 6), "/Content/Assets/entity-files/BobDylan/Planet_Waves/cover.jpg", pa1, new HashSet<Genre>() { g.folk, g.rock });
 
             Track pa1al1t1 = new Track("Mr. Tambourine Man", 320, "audio", pa1album1, new HashSet<Genre>() { g.folk }, 4);
             Track pa1al1t2 = new Track("Gates of Eden", 324, "audio", pa1album1, new HashSet<Genre>() { g.folk, g.blues }, 2);
@@ -68,9 +68,9 @@ namespace DAL.Initializers.TeamsSeeding
 
             #region Beethoven
 
-            Artist pa2 = new Artist("Ludwig van Beethoven", Country.Germany, "photo", new DateTime(1790, 1, 1), new HashSet<Genre> { g.classical });
+            Artist pa2 = new Artist("Ludwig van Beethoven", Country.Germany, "/Content/Assets/entity-files/Ludwig_Van_Beethoven/artist_cover.jpg", new DateTime(1790, 1, 1), new HashSet<Genre> { g.classical });
 
-            Album pa2album = new Album("Beethoven Symfonies", new DateTime(1795, 1, 1), "photo", pa2, new HashSet<Genre>() { g.classical });
+            Album pa2album = new Album("Beethoven Symfonies", new DateTime(1795, 1, 1), "/Content/Assets/entity-files/Ludwig_Van_Beethoven/Beethoven_Symfonies/cover.jpg", pa2, new HashSet<Genre>() { g.classical });
 
             Track pa2t1 = new Track("Symphony No.1, C", 1669, "audio", pa2album, new HashSet<Genre> { g.classical }, 2);
             Track pa2t2 = new Track("Symphony No.2,D", 1809, "audio", pa2album, new HashSet<Genre> { g.classical }, 1);
@@ -93,14 +93,13 @@ namespace DAL.Initializers.TeamsSeeding
             pa2album.Tracks.Add(pa2t9);
             pa2.Albums.Add(pa2album);
 
-            #endregion
-
+        #endregion
             #region Lady Gaga
-            Artist pa3 = new Artist("Lady Gaga", Country.USA, "photo", new DateTime(2007, 1, 1), new HashSet<Genre> { g.pop });
+        Artist pa3 = new Artist("Lady Gaga", Country.USA, "/Content/Assets/entity-files/Lady_Gaga/artist_cover.jpg", new DateTime(2007, 1, 1), new HashSet<Genre> { g.pop });
 
-            Album pa3album1 = new Album("The Fame", new DateTime(2008, 08, 19), "photo", pa3, new HashSet<Genre>() { g.pop });
-            Album pa3album2 = new Album("Born this way", new DateTime(2011, 05, 23), "photo", pa3, new HashSet<Genre>() { g.pop });
-            Album pa3album3 = new Album("Joanne", new DateTime(2016, 10, 21), "photo", pa3, new HashSet<Genre>() { g.pop, g.rock, g.country });
+            Album pa3album1 = new Album("The Fame", new DateTime(2008, 08, 19), "/Content/Assets/entity-files/Lady_Gaga/The_Fame/cover.jpg", pa3, new HashSet<Genre>() { g.pop });
+            Album pa3album2 = new Album("Born this way", new DateTime(2011, 05, 23), "/Content/Assets/entity-files/Lady_Gaga/Born_This_Way/cover.jpg", pa3, new HashSet<Genre>() { g.pop });
+            Album pa3album3 = new Album("Joanne", new DateTime(2016, 10, 21), "/Content/Assets/entity-files/Lady_Gaga/Joanne/cover.jpg", pa3, new HashSet<Genre>() { g.pop, g.rock, g.country });
 
             Track pa3al1t1 = new Track("Just Dance", 242, "audio", pa3album1, new HashSet<Genre>() { g.pop }, 4);
             Track pa3al1t2 = new Track("LoveGame", 216, "audio", pa3album1, new HashSet<Genre>() { g.pop }, 3);
@@ -164,11 +163,11 @@ namespace DAL.Initializers.TeamsSeeding
 
             #region The Wiggles
 
-            Artist pa4 = new Artist("The Wiggles", Country.Australia, "photo", new DateTime(1991, 1, 1), new HashSet<Genre> { g.kid });
+            Artist pa4 = new Artist("The Wiggles", Country.Australia, "/Content/Assets/entity-files/The_Wingles/artist_cover.jpg", new DateTime(1991, 1, 1), new HashSet<Genre> { g.kid });
 
-            Album pa4album1 = new Album("The Wiggles", new DateTime(1991, 08, 1), "photo", pa4, new HashSet<Genre>() { g.kid });
-            Album pa4album2 = new Album("Big Red Car", new DateTime(1995, 1, 1), "photo", pa4, new HashSet<Genre>() { g.kid });
-            Album pa4album3 = new Album("Serfer Jeff", new DateTime(2012, 5, 3), "photo", pa4, new HashSet<Genre>() { g.kid });
+            Album pa4album1 = new Album("The Wiggles", new DateTime(1991, 08, 1), "/Content/Assets/entity-files/The_Wingles/The_Wiggles/cover.jpg", pa4, new HashSet<Genre>() { g.kid });
+            Album pa4album2 = new Album("Big Red Car", new DateTime(1995, 1, 1), "/Content/Assets/entity-files/The_Wingles/Big_Red_Car/cover.jpg", pa4, new HashSet<Genre>() { g.kid });
+            Album pa4album3 = new Album("Serfer Jeff", new DateTime(2012, 5, 3), "/Content/Assets/entity-files/The_Wingles/Surfer_Jeff/cover.jpg", pa4, new HashSet<Genre>() { g.kid });
 
             Track pa4al1t1 = new Track("Get Ready to Wiggle", 117, "audio", pa4album1, new HashSet<Genre>() { g.kid }, 4);
             Track pa4al1t2 = new Track("Lavender's Blue", 92, "audio", pa4album1, new HashSet<Genre>() { g.kid }, 3);
@@ -219,9 +218,9 @@ namespace DAL.Initializers.TeamsSeeding
 
             #region Maria Callas
 
-            Artist pa5 = new Artist("Maria Callas", Country.USA, "photo", new DateTime(1940, 1, 1), new HashSet<Genre> { g.classical });
+            Artist pa5 = new Artist("Maria Callas", Country.USA, "/Content/Assets/entity-files/Maria_Callas/artist_cover.jpg", new DateTime(1940, 1, 1), new HashSet<Genre> { g.classical });
 
-            Album pa5album = new Album("Pure Maria Callas", new DateTime(1991, 8, 1), "photo", pa5, new HashSet<Genre>() { g.classical });
+            Album pa5album = new Album("Pure Maria Callas", new DateTime(1991, 8, 1), "/Content/Assets/entity-files/Maria_Callas/Pure_Maria_Callas/cover.jpg", pa5, new HashSet<Genre>() { g.classical });
 
             Track pa5alt1 = new Track("Norma", 433, "audio", pa5album, new HashSet<Genre>() { g.classical }, 3);
             Track pa5alt2 = new Track("Carmen", 261, "audio", pa5album, new HashSet<Genre>() { g.classical }, 4);
