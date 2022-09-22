@@ -9,7 +9,7 @@ using System.Diagnostics;
 
 namespace DAL.Initializers
 {
-    public class MockUpDbInitializer : DropCreateDatabaseIfModelChanges<ApplicationDbContext>
+    public class MockUpDbInitializer : DropCreateDatabaseAlways<ApplicationDbContext>
     {
         protected override void Seed(ApplicationDbContext context)
         {
@@ -28,6 +28,11 @@ namespace DAL.Initializers
                     Debug.WriteLine($"{seeder.GetType().Name} : {ex.Message}");
                 }
             }
+
+            Subscription free = new Subscription() { Name = "Free", Price = 0 };
+            Subscription silver = new Subscription() { Name = "Silver", Price = 29.99 };
+            Subscription gold = new Subscription() { Name = "Gold", Price = 49.99 };
+            context.Subscriptions.AddOrUpdate(free,silver,gold);
 
             context.SaveChanges();
             base.Seed(context);

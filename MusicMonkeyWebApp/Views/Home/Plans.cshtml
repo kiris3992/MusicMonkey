@@ -383,6 +383,31 @@
     }
 </style>
 
+
+<script>
+    $(document).ready(() => {
+
+        showplans();
+    });
+
+    let showplans = () => {
+        let subscriptions = [
+            { name: 'Free', price: '0' },
+            { name: 'Silver', price: '29,99' },
+            { name: 'Gold', price: '49,99' },
+        ];
+ 
+        $('#subscriptions').html(subscriptions.map(o =>
+            ` <th>
+                <div class="plans__head">
+                    <b>${o.name} MEMBER</b>
+                    <p>${o.price}</p>
+                    <span>/ month</span>
+                </div>
+            </th>`
+        ));
+    };
+</script>
 <!-- Breadcrumb Begin -->
 <div class="breadcrumb-option">
     <div class="container">
@@ -470,17 +495,12 @@
                             <thead>
                                 <tr>
                                     <th></th>
-                                    <th>
-                                        <div class="plans__head">
-                                            <b>FREE MEMBER</b>
-                                            <p>Free</p>
-                                            <span>/ month</span>
-                                        </div>
-                                    </th>
-                                    <th>
+                                    <div id="subscriptions"></div>
+                                   
+                                    @*<th>
                                         <div class="plans__head">
                                             <b>SILVER SUBSCRIBER</b>
-                                            <p>$34.99</p>
+                                            <p>@Model.Price</p>
                                             <span>/ month</span>
                                         </div>
                                     </th>
@@ -490,7 +510,7 @@
                                             <p>$49.99</p>
                                             <span>/ month</span>
                                         </div>
-                                    </th>
+                                    </th>*@
                                 </tr>
                             </thead>
                             <tbody>
@@ -635,15 +655,16 @@
                                     </td>
                                 </tr>
                                 <tr>
+                                   
                                     <td></td>
                                     <td>
-                                        <button class="plans__btn" type="button">Select plan</button>
+                                        <a href="/Payment/PaymentWithPaypal" class="plans__btn" type="button">Select plan</a>
                                     </td>
                                     <td>
-                                        <button class="plans__btn" type="button">Select plan</button>
+                                        <a href="/Payment/PaymentWithPaypal" class="plans__btn" type="button">Select plan</a>
                                     </td>
                                     <td>
-                                        <button class="plans__btn" type="button">Select plan</button>
+                                        <a href="/Payment/PaymentWithPaypal" class="plans__btn" type="button">Select plan</a>
                                     </td>
                                 </tr>
                             </tbody>
