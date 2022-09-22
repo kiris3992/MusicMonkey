@@ -3,11 +3,36 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using MusicMonkeyWebApp.Models;
 using Microsoft.Ajax.Utilities;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace MusicMonkeyWebApp.App_Start
 {
-    public class UsersConfig
+    public static class UsersConfig
     {
+        public static bool ChangeUsersRole(string userName, string newRoleName)
+        {
+            ApplicationDbContext context = new ApplicationDbContext();
+
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+
+            var user = UserManager.FindByName(userName);
+            if(user != null)
+            {
+                try
+                {
+                    user.Roles.Clear();
+                    UserManager.AddToRole(user.Id, newRoleName);
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+
+            return false;
+        }
         public static void SeedUsers()
         {
             ApplicationDbContext context = new ApplicationDbContext();

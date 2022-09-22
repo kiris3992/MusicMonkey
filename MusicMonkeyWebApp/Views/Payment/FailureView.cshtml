@@ -1,12 +1,15 @@
 ﻿
 @{
-    ViewBag.Title = "FailureView";
+    ViewBag.Title = "Success";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="container">
+    <h2>Success View</h2>
 
-    <h2>Your payment has NOT been done succesfully'</h2>
-    <h3>Please try again'</h3>
-    <a href="/Home/Plans">Go Back</a>
+    <h1>Role changed : @ViewBag.roleChanged</h1>
+
+    <h1>Your payment done succesfully</h1>
+    <h2>Thank you!</h2>
+    <a href="/">Go Back</a>
 </div>
