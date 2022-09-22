@@ -277,7 +277,6 @@
     <Compile Include="Controllers\ApiControllers\TrackApiController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\SubscriptionController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -984,7 +983,6 @@
     <Content Include="Views\Home\ChatRoom.cshtml" />
     <Content Include="Views\Home\Plans.cshtml" />
     <Content Include="Views\Home\Tour.cshtml" />
-    <Content Include="Views\Subscription\Index.cshtml" />
     <Content Include="Views\Home\Charge.cshtml" />
   </ItemGroup>
   <ItemGroup>
