@@ -12,7 +12,7 @@ using MusicMonkeyWebApp.Models;
 
 namespace MusicMonkeyWebApp.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
@@ -79,6 +79,7 @@ namespace MusicMonkeyWebApp.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    if (model.Email == "musicMonkey@hotmail.com") return Redirect("~/Admin/Admin/Index");
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
