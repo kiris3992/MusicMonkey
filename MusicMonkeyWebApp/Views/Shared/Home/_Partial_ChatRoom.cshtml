@@ -9,11 +9,9 @@
         <h1>Chat Room</h1>
         <form id="chatForm" method="post">
             <input type="text" id="userName" placeholder="enter your nickname" />
-            <input type="submit" id="submitNickname" name="Submit" value="Submit" @*onclick="ReplaceForm()"*@/>
+            <input type="submit" id="submitNickname" name="Submit" value="Submit"/>
         </form>
-        @*<div id="for_replacement" style="display:none">
-            Name
-        </div>*@
+
     </div>
     <div class="chat-body" id="chat-body">
         <p class="chat-message" hidden></p>
@@ -30,6 +28,4 @@
 @Scripts.Render("~/signalr/hubs")
 @Scripts.Render("~/Content/Assets/js/ChatRoomScript.js")
 
-@*<script src="~/Content/Assets/js/ChatRoomScript.js"></script>
-    <script src="~/Scripts/jquery.signalR-2.2.2.min.js"></script>
-    <script src="~/signalr/hubs"></script>*@
+

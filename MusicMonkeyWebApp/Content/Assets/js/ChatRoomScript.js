@@ -11,11 +11,11 @@
                     $(document).ready(function () {
                         $('#chat-body').animate({ scrollTop: 1000000 }, 800);
                     })
-                };
-              /*$('#displayname').val(prompt('Enter your nickname:', ''));*/
+                };              
                   $("#chatForm").submit(function () {
                       event.preventDefault()
                       $('#displayname').val($('#userName').val());
+                      $('#chatForm').hide();
                       $('#message').focus();
                       $.connection.hub.start().done(function () {
                           $('#sendmessage').click(function () {
@@ -52,12 +52,3 @@
                 let time = hours + ":" + minutes;
                 return time;
                 }
-
-//function ReplaceForm() {
-//    preventDefault();
-//                    var formId = "chatForm";
-//                    var headerDiv = "chat-header"
-//                    var replacementId = "for_replacement"
-//                    document.getElementById(formId).submit();
-//                    document.getElementById(headerDiv).innerHTML = document.getElementById(replacementId).innerHTML;
-//                }
