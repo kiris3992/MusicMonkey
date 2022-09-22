@@ -281,6 +281,7 @@
     <Content Include="Areas\Admin\Assets_Admin\catalog.html" />
     <Content Include="Areas\Admin\Assets_Admin\comments.html" />
     <Content Include="Areas\Admin\Assets_Admin\css\admin.css" />
+    <Content Include="Areas\Admin\Assets_Admin\css\adminKiriakos.css" />
     <Content Include="Areas\Admin\Assets_Admin\css\bootstrap-grid.min.css" />
     <Content Include="Areas\Admin\Assets_Admin\css\bootstrap-reboot.min.css" />
     <Content Include="Areas\Admin\Assets_Admin\css\magnific-popup.css" />

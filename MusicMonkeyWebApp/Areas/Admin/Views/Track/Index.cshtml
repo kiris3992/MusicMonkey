@@ -5,43 +5,11 @@
 }
 <link rel="stylesheet" href="~/Content/Assets/css/font-awesome.min.css" />
 <script src="~/Content/Assets/js/SiteHelper.js"></script>
-<style>
-    table tbody tr td:nth-child(6) div {
-        cursor: pointer;
-    }
-
-    table tbody tr td:nth-child(6) svg {
-        fill: #fff;
-    }
-
-    .tooltip-inner {
-        max-width: 200px;
-        padding: 3px 8px;
-        color: #fff;
-        text-align: center;
-        background-color: #000;
-        border-radius: .30rem;
-    }
-
-    .pic-details {
-        width: 200px;
-        height: 200px;
-        -webkit-backface-visibility: hidden;
-        border-radius: 50%;
-        -webkit-box-shadow: 10px 10px 5px -6px rgba(0,0,0,0.75);
-        -moz-box-shadow: 10px 10px 5px -6px rgba(0,0,0,0.75);
-        box-shadow: 10px 10px 5px -6px rgba(0,0,0,0.75);
-        margin-bottom: 5%;
-        transition: transform .7s ease-in-out;
-    }
-
-        .pic-details:hover {
-            transform: rotate(360deg);
-        }
-</style>
 
 <script>
     'use strict';
+
+    SiteHelper.HtmlDom.Modal.registerRules();
 
     const rowEditor = {
         tr: null,
@@ -59,6 +27,66 @@
             }
         },
         message: new SiteHelper.Messenger.infoMessenger(null),
+        details: (rowId) => {
+            const t = rowEditor;
+
+            if (t.tr != null) return;
+            t.tr = document.querySelector(`#${rowId}`);
+
+            const trackId = t.tr.querySelector('[data-edit="track-id"]').innerHTML;
+            const title = t.tr.querySelector('[data-edit="track-title"]').value;
+
+            $.ajax({
+                type: 'GET', url: `/api/TrackApi?id=${trackId}`,
+                success: (res) => {
+                    let template = `
+                        <div>
+                            <div class='track-details'>
+                                <div><img src='${res.ArtistPhotoUrl}' onerror='this.onerror=null; this.src="/Content/Assets/img/discography/no-photo.png"'></img></div>
+                                <hr class='help_Modal-hr' />
+                                <div><div>Track</div><div>${res.Title}</div></div>
+                                <div><div>Album</div><div>${res.AlbumTitle}</div></div>
+                                <div><div>Artist</div><div>${res.ArtistName}</div></div>
+                                <div><div>Popularity</div><div><i class="fa fa-star-o" aria-hidden="true"></i> ${res.Popularity}</div></div>
+                                <div><div>Duration (mm:ss)</div><div>${SiteHelper.Converter.secondsToTimeSpanStr(res.DurationSecs)}</div></div>
+                                <div><div>Genres</div><div>${res.TrackGenres.join(', ')}</div></div>
+                            </div>
+                        </div>
+                    `;
+                    SiteHelper.HtmlDom.Modal.showModalAsync('Track Details', template, '#151f30', null, 'Close').then(data => t.tr = null);
+                },
+                error: () => {
+                    t.message.set.warning(`Something went wrong while trying to get track <q>${title}</q>`);
+                    t.tr = null;
+                }
+            });
+        },
+        delete: (rowId) => {
+            const t = rowEditor;
+
+            if (t.tr != null) return;
+            t.tr = document.querySelector(`#${rowId}`);
+
+            const title = t.tr.querySelector('[data-edit="track-title"]').value;
+            const trackId = t.tr.querySelector('[data-edit="track-id"]').innerHTML;
+
+            SiteHelper.HtmlDom.Modal.showModalAsync('Delete Confirmation', `Are you sure you want to delete track <br><q>${title}</q> ?`)
+                .then((data) => {
+                    if (data == 'ok') {
+                        $.ajax({
+                            type: 'DELETE', url: `/api/TrackApi?id=${trackId}`,
+                            success: (res) => {
+                                t.message.set.success(`Track <q>${title}</q> successfully deleted.`);
+                                document.querySelector('#' + rowId).outerHTML = '';
+                            },
+                            error: () => t.message.set.warning(`Something went wrong while trying to delte track <q>${title}</q>`)
+                        });
+                    }
+                    else t.message.set.info('Action canceled.', 600);
+
+                    t.tr = null;
+                });
+        },
         open: (rowId) => {
             const t = rowEditor;
 
@@ -162,7 +190,7 @@
             let track = {
                 Id: Number(t.tr.querySelector('[data-edit="track-id"]').innerText),
                 Title: t.tr.querySelector('[data-edit="track-title"]').value,
-                DurationSecs: Number(t.tr.querySelector('[data-edit="track-duration"]').value),
+                DurationSecs: SiteHelper.Converter.timeSpanToSeconds(t.tr.querySelector('[data-edit="track-timespan-mins"]').value, t.tr.querySelector('[data-edit="track-timespan-secs"]').value),
                 Popularity: Number(t.tr.querySelector('[data-edit="track-popularity"]').value),
                 AlbumId: Number(t.tr.querySelector('[data-edit="track-albums"]').value),
                 ArtistId: Number(t.tr.querySelector('[data-edit="track-artists"]').value),
@@ -191,21 +219,73 @@
         }
     };
 
+    const sorting = {
+        categories: { 'Id': 'Id', 'Title': 'Title', 'Popularity': 'Popularity', 'DurationSecs': 'Duration' },
+        filter: '',
+
+        init: () => {
+            sorting.filter = Object.keys(sorting.categories)[0];
+
+            let ul = document.getElementById('sort-cont');
+            let label = document.getElementById('sort-label');
+
+            label.innerHTML = sorting.categories[sorting.filter];
+
+            for (const [k, v] of Object.entries(sorting.categories)) {
+                const li = SiteHelper.HtmlDom.createElement('li', ul, v);
+                li.addEventListener('click', (e) => {
+                    sorting.filter = Object.entries(sorting.categories).filter(([k, v]) => v == e.target.innerHTML)[0][0];
+                    label.innerHTML = sorting.categories[sorting.filter];
+                    pager.dataModel.sortProp = sorting.filter;
+                    data.get();
+                })
+            }
+        }
+    };
+
+    const filtering = {
+        input: null,
+        init: () => {
+            filtering.input = document.getElementById('filter-input');
+            filtering.input.addEventListener('input', () => { filtering.filter(); });
+        },
+        filter: () => {
+
+            pager.dataModel.filter = filtering.input.value;
+            data.get();
+        }
+    };
+
     let pager = null;
 
-    const getTracks = () => {
-        $.ajax({
-            type: 'POST',
-            url: '/api/TrackApi',
-            data: JSON.stringify(pager.dataModel),
-            dataType: 'json',
-            contentType: 'application/json',
-            success: function (data) {
-                $(`#load-tracks`).html(data.tracks.map((track, i) =>
-                    `<tr id ='tr_${i}'>
+    const data = {
+        backup: null,
+        get: () => {
+            $.ajax({
+                type: 'POST',
+                url: '/api/TrackApi',
+                data: JSON.stringify(pager.dataModel),
+                dataType: 'json',
+                contentType: 'application/json',
+                success: (res) => {
+                    data.backup = res;
+                    data.build(res);
+                },
+                error: () => { }
+            });
+        },
+        build: (data) => {
+            $(`#load-tracks`).html(data.tracks.map((track, i) =>
+                `<tr id ='tr_${i}'>
                     <td><div class="main__table-text" data-edit="track-id">${track.Id}</div></td>
                     <td><div class="main__table-text"><input type="text" value="${track.Title}" data-edit="track-title" disabled/></div></td>
-                    <td><div class="main__table-text"><input type="number" min="1" max="6000" data-edit="track-duration" value="${track.DurationSecs}" disabled/></div></td>
+                    <td>
+                        <div class="main__table-text timespan">
+                            <div><input type="number" min="0" max="60" onchange='this.value=("0"+this.value).slice(-2)' step="1" data-edit="track-timespan-mins" value="${SiteHelper.Converter.secondsToTimeSpanStr(track.DurationSecs).split(":")[0]}" disabled/></div>
+                            <div>:</div>
+                            <div><input type="number" min="0" max="60" onchange='this.value=("0"+this.value).slice(-2)' step="1" data-edit="track-timespan-secs" value="${SiteHelper.Converter.secondsToTimeSpanStr(track.DurationSecs).split(":")[1]}" disabled/></div>
+                        </div>
+                    </td>
                     <td>
                         <div class="main__table-text">
                             <select name="track-albums" data-edit="track-albums" disabled>
@@ -226,88 +306,69 @@
                         </div>
                     </td>
                     <td>
-                        <div class="main__table-text main__table-text--green">
-                           
-                            <input type="number" min="1" max="5" data-edit="track-popularity" value="${track.Popularity}" disabled/>
+                        <div class="main__table-text main__table-text">
+                            <i class="fa fa-star-o" aria-hidden="true"></i><input type="number" min="1" max="5" data-edit="track-popularity" value="${track.Popularity}" disabled/>
                         </div></td>
                     <td>
                         <div class="crud-btn-container" style="border-radius: 0 16px 16px 0;">
-                            <button href="#modal-details" class="crud-btn crud-btn--view open-modal" data-crud-btn="action"><i class="fa fa-eye" aria-hidden="true"></i></button>
+                            <button class="crud-btn crud-btn--view" data-crud-btn="action" onclick='rowEditor.details("tr_${i}")'><i class="fa fa-eye" aria-hidden="true"></i></button>
                             <button class="crud-btn crud-btn--edit" data-crud-btn="action" onclick='rowEditor.open("tr_${i}")'><i class="fa fa-pencil" aria-hidden="true"></i></button>
                             <button class="crud-btn crud-btn--cancel" data-crud-btn="edit" onclick='rowEditor.cancel()' style="display:none"><i class="fa fa-times" aria-hidden="true"></i></button>
                             <button class="crud-btn crud-btn--save" data-crud-btn="edit" onclick='rowEditor.save()' style="display:none"><i class="fa fa-check" aria-hidden="true"></i></button>
-                            <button href="#modal-delete" class="crud-btn crud-btn--delete open-modal" data-crud-btn="action"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                            <button class="crud-btn crud-btn--delete" data-crud-btn="action" onclick='rowEditor.delete("tr_${i}")'> <i class="fa fa-trash-o" aria-hidden="true"></i>
+                            </button>
                         </div>
                     </td>
                 </tr>`
-                ));
+            ));
 
-                $('#tracks-total').text(`${data.paging.TotalItems} total`);
+            $('#tracks-total').text(`${data.paging.TotalItems} total`);
 
-                $('.open-modal').magnificPopup({
-                    fixedContentPos: true,
-                    fixedBgPos: true,
-                    overflowY: 'auto',
-                    type: 'inline',
-                    preloader: false,
-                    focus: '#username',
-                    modal: false,
-                    removalDelay: 300,
-                    mainClass: 'my-mfp-zoom-in',
-                });
+            $('.open-modal').magnificPopup({
+                fixedContentPos: true,
+                fixedBgPos: true,
+                overflowY: 'auto',
+                type: 'inline',
+                preloader: false,
+                focus: '#username',
+                modal: false,
+                removalDelay: 300,
+                mainClass: 'my-mfp-zoom-in',
+            });
 
-                $('.modal__btn--dismiss').on('click', function (e) {
-                    e.preventDefault();
-                    $.magnificPopup.close();
-                });
+            $('.modal__btn--dismiss').on('click', function (e) {
+                e.preventDefault();
+                $.magnificPopup.close();
+            });
 
-                $('[data-toggle="tooltip"]').tooltip();
+            $('[data-toggle="tooltip"]').tooltip();
 
-                rowEditor.init(document.querySelector('.info_message_container span'));
+            rowEditor.init(document.querySelector('.info_message_container span'));
 
-                // Paging
-                pager.build(data.paging);
-            },
-            error: function () {
-                //t.error();
-            }
-        });
+            // Paging
+            pager.build(data.paging);
+        }
     };
 
     $(document).ready(function () {
+        sorting.init();
+        filtering.init();
+
         pager = new SiteHelper.Paging.Create(
             document.querySelector('.paginator .paginator__pages'),
             document.querySelector('.paginator .paginator__paginator'),
             5,
-            getTracks,
-            { type: "", PageIndex: 0, ItemsPerPage: 7 }
+            data.get,
+            { type: "", sortProp: '', filter: '', PageIndex: 0, ItemsPerPage: 8 }
         );
 
-        getTracks();
+        data.get();
     });
 </script>
 
 
 
 <body>
-    <!-- header -->
-    <header class="header">
-        <div class="header__content">
-            <!-- header logo -->
-            <a href="index.html" class="header__logo">
-                <img src="img/logo.svg" alt="">
-            </a>
-            <!-- end header logo -->
-            <!-- header menu btn -->
-            <button class="header__btn" type="button">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-            <!-- end header menu btn -->
-        </div>
-    </header>
-    <!-- end header -->
     <!-- main content -->
     <main class="main">
         <div class="container-fluid">
@@ -317,7 +378,7 @@
                     <div class="main__title">
 
                         <a href="~/Admin/Track/Add" style="margin-right:5px;">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" class="bi bi-plus-square" viewBox="0 0 16 16">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#2f80ed" class="bi bi-plus-square" viewBox="0 0 16 16">
                                 <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
                                 <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
                             </svg>
@@ -332,24 +393,20 @@
                             <div class="filter" id="filter__sort">
                                 <span class="filter__item-label">Sort by:</span>
 
-                                <div class="filter__item-btn dropdown-toggle" role="navigation" id="filter-sort" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <input type="button" value="Title">
+                                <div class="filter__item-btn dropdown-toggle" role="navigation" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <div id="sort-label"></div>
                                     <span></span>
                                 </div>
 
-                                <ul class="filter__item-menu dropdown-menu scrollbar-dropdown" aria-labelledby="filter-sort">
-                                    <li>Title</li>
-                                    <li>Popularity</li>
-                                    <li>Genre</li>
-                                </ul>
+                                <ul id="sort-cont" class="filter__item-menu dropdown-menu scrollbar-dropdown"></ul>
                             </div>
                             <!-- end filter sort -->
                             <!-- search -->
                             <form action="#" class="main__title-form">
-                                <input type="text" placeholder="Find artists..">
-                                <button type="button">
-                                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="8.25998" cy="8.25995" r="7.48191" stroke="#3f008c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></circle><path d="M13.4637 13.8523L16.3971 16.778" stroke="#3f008c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-                                </button>
+                                <input id="filter-input" type="text" placeholder="Find tracks...">
+                                <div>
+                                    <i class="fa fa-search" aria-hidden="true"></i>
+                                </div>
                             </form>
                             <!-- end search -->
                         </div>
@@ -372,7 +429,7 @@
                                     <th>ALBUM</th>
                                     <th>ARTISTS</th>
                                     <th>GENRE</th>
-                                    <th><i class="bi bi-star-fill"></i> POPULARITY</th>
+                                    <th>POPULARITY</th>
                                     <th>ACTIONS</th>
                                 </tr>
                             </thead>
@@ -410,88 +467,5 @@
         </div>
     </main>
     <!-- end main content -->
-    <!-- modal view -->
-    <div id="modal-details" class="zoom-anim-dialog mfp-hide modal">
-        <h6 class="modal__text">Track Details</h6>
-        <br />
-        <div class="modal__title">
-            <img src="https://angartwork.akamaized.net/?id=151848569&size=640" class="pic-details">
-            <h6>Born this Way</h6>
-        </div>
-
-        <div class="row">
-
-
-            <div class="col-12 col-md-6 col-lg-12 col-xl-6">
-                <div class="sign__label"><p><b>Id:</b> 25</p></div>
-                <hr />
-            </div>
-
-            <div class="col-12 col-md-6 col-lg-12 col-xl-6">
-                <div class="sign__label"><p><b>Duration:</b> 197 sec</p></div>
-                <hr />
-            </div>
-
-            <div class="col-12 col-md-6 col-lg-12 col-xl-6">
-                <div class="sign__label">
-                    <p style="color:white">
-                        <b>Popularity:</b><br />
-                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="black" class="bi bi-star-fill" viewBox="0 0 16 16">
-                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                        </svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="black" class="bi bi-star-fill" viewBox="0 0 16 16">
-                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                        </svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="black" class="bi bi-star-fill" viewBox="0 0 16 16">
-                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                        </svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="black" class="bi bi-star-fill" viewBox="0 0 16 16">
-                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                        </svg>
-                    </p>
-                    <hr />
-                </div>
-            </div>
-
-            <div class="col-12 col-md-6 col-lg-12 col-xl-6">
-                <div class="sign__label"><p><b>Artist:</b><br />Artist tade</p></div>
-                <hr />
-            </div>
-
-            <div class="col-12 col-md-6 col-lg-12 col-xl-6">
-                <div class="sign__label"><p><b>Genre:</b> <br />Rock, Folk, Electro Punk, Pop, Big Heat</p></div>
-            </div>
-
-
-            <div class="col-12 col-md-6 col-lg-12 col-xl-6">
-                <div class="sign__label"><p><b>Album:</b> <br />My life will goes on and on and on</p></div>
-            </div>
-
-
-
-
-
-
-        </div>
-        <hr />
-        <div class="modal__btns">
-            <button class="modal__btn modal__btn--dismiss" type="button">Dismiss</button>
-        </div>
-
-    </div>
-    <!-- end modal view -->
-    <!-- modal delete -->
-    <div id="modal-delete" class="zoom-anim-dialog mfp-hide modal">
-        <h6 class="modal__title">Item delete</h6>
-
-        <p class="modal__text">Are you sure to permanently delete this track?</p>
-
-        <div class="modal__btns">
-            <button class="modal__btn modal__btn--apply" type="button">Delete</button>
-            <button class="modal__btn modal__btn--dismiss" type="button">Dismiss</button>
-        </div>
-    </div>
-    <!-- end modal delete -->
-
 </body>
 

@@ -100,6 +100,16 @@
         return f;
     };
 
+    Converter.secondsToTimeSpanStr = (seconds) => {
+        seconds = parseInt(seconds);
+        const [mins, secs] = ['0' + ((seconds - (seconds % 60)) / 60), '0' + (seconds % 60)];
+        return `${mins.slice(-2)}:${secs.slice(-2)}`;
+    };
+
+    Converter.timeSpanToSeconds = (minutes, seconds) => {
+        return (parseInt(minutes) * 60) + parseInt(seconds);
+    };
+
     var Window = {};
 
     Window.getQueryString = function (key) {
@@ -117,6 +127,126 @@
         if (owner) owner.appendChild(el);
         return el;
     };
+
+    HtmlDom.Modal = {
+        id: 'help_Modal-3992',
+
+        registerRules: function (fontSize = 'inherit', backColor = '#6a1037', width = '400px') {
+            if (document.getElementById(this.id)) document.head.removeChild(document.getElementById(this.id));
+
+            const style = document.createElement('style');
+            style.id = this.id;
+            style.innerHTML = `
+                .help_Modal-container {
+                    font-size: ${fontSize};
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 100%; height: 100%;
+                    background-color: #0000005e;
+                    position: fixed;
+                    top: 0; left: 0; z-index: 999999;
+                    color: #fff;
+                }
+                .help_Modal-hr{
+                    border: 0;
+                    border-top: 1px solid #ffffff30;
+                }
+                .help_Modal-bg {
+                    height: auto;
+                    width: ${width};
+                    background-color: ${backColor};
+                    padding: 24px;
+                    border-radius: 10px;
+                    transition: all 0.25s;
+                    opacity: 0;
+                    transform: scale(0.25);
+                }
+                .help_Modal-container > div.help_Modal-fade-in {
+                    opacity: 1;
+                    transform: scale(1);
+                }
+                .help_Modal-header {
+                    margin-bottom:16px;
+                    color: #fff;
+                    font-size: larger;
+                    text-align: center;
+                }
+                .help_Modal-footer {
+                    margin-top: 16px; display: flex; align-items: center; justify-content: space-around; width: 100%;
+                }
+                .help_Modal-body {
+                    text-align: center;
+                    margin: 16px 0;
+                }
+                .help_Modal-btn {
+                    min-width: 100px;
+                    border: 1px solid #fff;
+                    border-radius: 4px;
+                    padding: 4px;
+                    background: #ffffff30;
+                    color: #fff;
+                    cursor: pointer;
+                }
+                .help_Modal-btn:hover {
+                    background: #ffffff87;
+                }
+            `;
+            document.head.appendChild(style);
+        },
+        showModalAsync: async function (title, query, backColor = null, buttonOkText = 'Ok', buttonCancelText = 'Cancel') {
+            if (!document.getElementById(this.id)) {
+                console.log('Please register the css rules first.');
+                return new Promise.reject();
+            }
+
+            //if (backColor) {
+            //    const sheet = document.getElementById(this.id).sheet;
+            //    const index = Object.values(sheet.cssRules).findIndex(o => o.selectorText == '.help_Modal-bg');
+            //    Object.values(sheet.cssRules)[index].style.backgroundColor = backColor;
+            //}
+
+            const createEl = HtmlDom.createElement;
+
+            const cont = createEl('div', document.body, null, null, 'help_Modal-container');
+            const modalBack = createEl('div', cont, null, null, 'help_Modal-bg');
+            if (backColor) modalBack.style.backgroundColor = backColor;
+
+            const header = createEl('div', modalBack, title, null, 'help_Modal-header');
+            createEl('hr', modalBack, null, null, 'help_Modal-hr');
+            const body = createEl('div', modalBack, query, null, 'help_Modal-body')
+            createEl('hr', modalBack, null, null, 'help_Modal-hr');
+            const footer = createEl('div', modalBack, null, null, 'help_Modal-footer');
+
+            let btnOk, btnCancel;
+            if (buttonOkText) btnOk = createEl('button', footer, buttonOkText, null, 'help_Modal-btn');
+            if (buttonCancelText) btnCancel = createEl('button', footer, buttonCancelText, null, 'help_Modal-btn');
+
+            modalBack.addEventListener('click', e => e.stopImmediatePropagation());
+
+            let promise = new Promise((resolve) => {
+                cont.addEventListener('click', () => {
+                    document.body.removeChild(cont);
+                    resolve('cancel');
+                }, { once: true });
+                if (buttonCancelText) btnCancel.addEventListener('click', () => {
+                    document.body.removeChild(cont);
+                    resolve('cancel');
+                }, { once: true });
+                if (buttonOkText) btnOk.addEventListener('click', () => {
+                    document.body.removeChild(cont);
+                    resolve('ok');
+                }, { once: true });
+            });
+
+            cont.appendChild(modalBack);
+            document.body.appendChild(cont);
+            setTimeout(() => { modalBack.className += ' help_Modal-fade-in'; }, 10);
+
+            return await promise;
+        }
+    };
+
 
     HtmlDom.createElement = function (tagName, owner = null, innerHTML = null, innerTEXT = null, className = null) {
         const el = document.createElement(tagName);
@@ -139,11 +269,16 @@
             let buttonsCounter = maxPagerButtons;
             let li, btn;
 
+            const updateDataModel = (PageIndex, ItemsPerPage) => {
+                this.dataModel.PageIndex = PageIndex;
+                this.dataModel.ItemsPerPage = ItemsPerPage;
+            };
+
             // Arrow Previous
             li = createEl('li', pagerContainerElement);
             btn = createEl('button', li, '<i class="fa fa-arrow-left" aria-hidden="true"></i>');
             btn.onclick = () => {
-                this.dataModel = { type: "", PageIndex: pagingModel.PreviousPage, ItemsPerPage: pagingModel.ItemsPerPage };
+                updateDataModel(pagingModel.PreviousPage, pagingModel.ItemsPerPage);
                 if (pagingModel.PageIndex != this.dataModel.PageIndex) pageClickFunc();
             };
 
@@ -155,7 +290,10 @@
                 li = createEl('li', pagerContainerElement);
                 btn = createEl('button', li, (i + 1).toString());
 
-                ((i) => btn.onclick = () => { this.dataModel = { type: "", PageIndex: i, ItemsPerPage: pagingModel.ItemsPerPage }; pageClickFunc(); }) (i);
+                ((i) => btn.onclick = () => {
+                    updateDataModel(i, pagingModel.ItemsPerPage);
+                    pageClickFunc();
+                })(i);
             }
 
             // Current
@@ -169,16 +307,19 @@
                 li = createEl('li', pagerContainerElement);
                 btn = createEl('button', li, (i + 1).toString());
 
-                ((i) => btn.onclick = () => { this.dataModel = { type: "", PageIndex: i, ItemsPerPage: pagingModel.ItemsPerPage }; pageClickFunc(); }) (i);
+                ((i) => btn.onclick = () => { updateDataModel(i, pagingModel.ItemsPerPage); pageClickFunc(); })(i);
             }
 
             // Arrow Next
             li = createEl('li', pagerContainerElement);
             btn = createEl('button', li, '<i class="fa fa-arrow-right" aria-hidden="true"></i>');
             btn.onclick = () => {
-                this.dataModel = { type: "", PageIndex: pagingModel.NextPage, ItemsPerPage: pagingModel.ItemsPerPage };
+                updateDataModel(pagingModel.NextPage, pagingModel.ItemsPerPage);
                 if (pagingModel.PageIndex != this.dataModel.PageIndex) pageClickFunc();
             };
+
+            // Info
+            infoElement.innerHTML = `${(pagingModel.PageIndex + 1)} from ${pagingModel.TotalPages}`;
         }
     };
 
@@ -205,7 +346,7 @@
             el.innerHTML = message;
             el.style.color = color;
 
-            setTimeout(() => this.clear(), ms ? ms : 1200);
+            setTimeout(() => this.clear(), ms ? ms : 1600);
         };
     };
 

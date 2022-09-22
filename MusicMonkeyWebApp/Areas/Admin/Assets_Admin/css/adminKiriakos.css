@@ -392,12 +392,12 @@ body::-webkit-scrollbar-thumb {
     height: 40px;
     width: 40px;
     border-radius: 10px;
-    background-color: black;
+    background-color: #151f30;
     margin-left: auto;
 }
 
     .sidebar__user-btn svg {
-        fill: #5c00ce;
+        fill: #2f80ed;
         width: 20px;
         height: auto;
         transition: fill 0.5s;
@@ -408,7 +408,6 @@ body::-webkit-scrollbar-thumb {
     }
 
         .sidebar__user-btn:hover svg {
-            fill: #151f30;
         }
 
 .sidebar__nav {
@@ -460,12 +459,12 @@ body::-webkit-scrollbar-thumb {
 
     .sidebar__nav-link--active,
     .sidebar__nav-link[aria-expanded="true"] {
-        color: black;
+        color: #2f80ed;
     }
 
         .sidebar__nav-link--active svg,
         .sidebar__nav-link[aria-expanded="true"] svg {
-            fill: black;
+            fill: #2f80ed;
         }
 
 .sidebar__nav-link--active {
@@ -667,10 +666,27 @@ body::-webkit-scrollbar-thumb {
         right: 20px;
         z-index: 2;
     }
+    .main__title-form div {
+        position: absolute;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        width: 16px;
+        height: 16px;
+        right: 20px;
+        z-index: 2;
+    }
 
         .main__title-form button svg {
             width: 16px;
             height: auto;
+        }
+
+        .main__title-form div i {
+            width: 16px;
+            height: auto;
+            color: #2f80ed;
         }
 
 .main__title-link {
@@ -850,7 +866,13 @@ body::-webkit-scrollbar-thumb {
 
     .main__table-text svg {
         margin-right: 6px;
-        fill: black;
+        fill: #2f80ed;
+        width: 16px;
+        height: auto;
+    }
+    .main__table-text i {
+        margin-right: 6px;
+        color: #2f80ed;
         width: 16px;
         height: auto;
     }
@@ -864,9 +886,7 @@ body::-webkit-scrollbar-thumb {
     color: #eb5757;
 }
 
-.main__table-text--green {
-    color: #29b474;
-}
+
 
 .main__table-text--grey {
     color: rgba(255,255,255,0.5);
@@ -1286,6 +1306,16 @@ body::-webkit-scrollbar-thumb {
         margin-right: 10px;
     }
 
+    #sort-label{
+        display: block;
+        position: relative;
+        width: auto;
+        font-size: 14px;
+        color: #fff;
+        cursor: pointer;
+        margin-right: 10px;
+    }
+
     .filter__item-btn span {
         position: relative;
         width: 16px;
@@ -1317,19 +1347,19 @@ body::-webkit-scrollbar-thumb {
     .filter__item-btn[aria-expanded="true"] span:before {
         transform: rotate(45deg);
         margin-top: -2px;
-        background-color: black;
+        background-color: #fff;
     }
 
     .filter__item-btn[aria-expanded="true"] span:after {
         margin-top: -2px;
         width: 16px;
         transform: rotate(-45deg);
-        background-color: black;
+        background-color: #fff;
     }
 
     .filter__item-btn:hover span:before,
     .filter__item-btn:hover span:after {
-        background-color: #5c00ce;
+        background-color: #fff;
     }
 
 .filter__item-menu {
@@ -1338,7 +1368,7 @@ body::-webkit-scrollbar-thumb {
     margin-top: 0;
     width: 200px;
     padding: 0 20px;
-    background-color: dimgrey;
+    background-color: #131720;
     display: block;
     transition: 0.5s;
     position: absolute;
@@ -1346,7 +1376,7 @@ body::-webkit-scrollbar-thumb {
     pointer-events: none;
     opacity: 0;
     border-radius: 16px;
-    
+    border: 1px solid #162235;
 }
 
     .filter__item-menu li {
@@ -1360,7 +1390,7 @@ body::-webkit-scrollbar-thumb {
     }
 
         .filter__item-menu li:hover {
-            color: #151f30;
+            color: #2f80ed;
         }
 
         .filter__item-menu li:first-child {
@@ -3165,3 +3195,94 @@ body::-webkit-scrollbar-thumb {
     height: 4px !important;
     border-radius: 4px !important;
 }
+
+table tbody tr td:nth-child(6) div {
+    cursor: pointer;
+}
+
+table tbody tr td:nth-child(6) svg {
+    fill: #fff;
+}
+
+.tooltip-inner {
+    max-width: 200px;
+    padding: 3px 8px;
+    color: #fff;
+    text-align: center;
+    background-color: #000;
+    border-radius: .30rem;
+}
+
+.pic-details {
+    width: 200px;
+    height: 200px;
+    -webkit-backface-visibility: hidden;
+    border-radius: 50%;
+    -webkit-box-shadow: 10px 10px 5px -6px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 5px -6px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 5px -6px rgba(0,0,0,0.75);
+    margin-bottom: 5%;
+    transition: transform .7s ease-in-out;
+}
+
+    .pic-details:hover {
+        transform: rotate(360deg);
+    }
+
+.timespan {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    padding-left: 10px;
+}
+
+    .timespan input {
+        width: 66px;
+    }
+
+    .timespan div:nth-child(1) > input[disabled], div:nth-child(3) > input[disabled] {
+        text-align: center !important;
+        width: 40px !important;
+    }
+
+        .timespan div:nth-child(1) > input[disabled]::-webkit-inner-spin-button, div:nth-child(3) > input[disabled]::-webkit-inner-spin-button {
+            display: none;
+        }
+
+    .timespan div:nth-child(2) {
+        max-width: fit-content;
+    }
+
+.track-details {
+    text-align: center;
+    color: #e7e7e7;
+}
+
+    .track-details img {
+        vertical-align: middle;
+        border-style: none;
+        width: 120px;
+        height: 120px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 1px solid #c7c7c7c9;
+        transition: ease-out 0.2s;
+    }
+
+        .track-details img:hover {
+            transform: scale(1.1);
+            filter: drop-shadow(0 0 4px #000);
+        }
+
+    .track-details > div {
+        margin-bottom: 14px;
+    }
+
+        .track-details > div > div:nth-child(1) {
+            text-transform: uppercase;
+            color: #2f80ed;
+        }
+
+        .track-details > div > div:nth-child(2) {
+        }
