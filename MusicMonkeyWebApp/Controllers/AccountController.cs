@@ -12,7 +12,6 @@ using MusicMonkeyWebApp.Models;
 
 namespace MusicMonkeyWebApp.Controllers
 {
-    [Authorize(Roles = "Admin")]
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;

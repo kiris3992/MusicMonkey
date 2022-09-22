@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace MusicMonkeyWebApp.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class AlbumController : Controller
     {
         // GET: Admin/Album
