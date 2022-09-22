@@ -458,28 +458,32 @@
 
     <script>
 
+        const labels = [];
        /* let chartTitle = document.querySelector('#chartTitle');*/
+        var settings = {
+            "url": "https://localhost:44314/api/ArtistApi?type=popular",
+            "method": "GET",
+            "timeout": 0,
+        };
 
-        //var settings = {
-        //    "url": "https://localhost:44314/api/TrackApi",
-        //    "method": "GET",
-        //    "timeout": 0,
-        //};
-
-        //$.ajax(settings).done(function (tracks) {
-        //    console.log(tracks);
-        //    const popularity = Artist.map(x => x.Popularity);
+        $.ajax(settings).done(function (artists) {
+            let mostPopularArtists = (artists.sort((a, b) => b.Popularity - a.Popularity)).slice(0, 5);
+            mostPopularArtists.forEach(function (artist) {
+                labels.push(artist.Name)
+                console.log(artist);
+            })
+        });
 
 
         // 1st Chart: Bar Chart for Artist Popularity
 
-        const labels = ['Eminem',
-            'Shakira',
-            '2pac',
-            'Linking Park',
-            'AC/DC',
-            'METALICA',
-        ];
+        //const labels = ['Eminem',
+        //    'Shakira',
+        //    '2pac',
+        //    'Linking Park',
+        //    'AC/DC',
+        //    'METALICA',
+        //];
 
         const data = {
             labels: labels,
@@ -575,6 +579,8 @@
                 indexAxis: 'y',
             }
         };
+
+
 
         // 2nd Chart: Bar Chart for Album Popularity
 
