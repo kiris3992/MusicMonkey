@@ -1,4 +1,6 @@
-﻿          $(function () {
+﻿
+
+          $(function () {
                 var chat = $.connection.chatHub;
                 chat.client.addNewMessageToPage = function (name, message) {
                     const className = $('#displayname').val() == name ? 'chat-message chat-user_message' : 'chat-message';
@@ -10,15 +12,20 @@
                         $('#chat-body').animate({ scrollTop: 1000000 }, 800);
                     })
                 };
-                $('#displayname').val(prompt('Enter your nickname:', ''));
-                $('#message').focus();
-                $.connection.hub.start().done(function () {
-                    $('#sendmessage').click(function () {
-                        chat.server.send($('#displayname').val(), $('#message').val());
-                        $('#message').val('').focus();
-                    });
-                });
-            });
+              /*$('#displayname').val(prompt('Enter your nickname:', ''));*/
+                  $("#chatForm").submit(function () {
+                      event.preventDefault()
+                      $('#displayname').val($('#userName').val());
+                      $('#message').focus();
+                      $.connection.hub.start().done(function () {
+                          $('#sendmessage').click(function () {
+                              chat.server.send($('#displayname').val(), $('#message').val());
+                              $('#message').val('').focus();
+                          });
+                      });
+                  });
+              });
+            
 
             function htmlEncode(value) {
                 var encodedValue = $('<div />').text(value).html();
@@ -44,4 +51,13 @@
                 }
                 let time = hours + ":" + minutes;
                 return time;
-            }
+                }
+
+//function ReplaceForm() {
+//    preventDefault();
+//                    var formId = "chatForm";
+//                    var headerDiv = "chat-header"
+//                    var replacementId = "for_replacement"
+//                    document.getElementById(formId).submit();
+//                    document.getElementById(headerDiv).innerHTML = document.getElementById(replacementId).innerHTML;
+//                }

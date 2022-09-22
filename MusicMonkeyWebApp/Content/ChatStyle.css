@@ -1,4 +1,5 @@
 ﻿.chat-container {
+    z-index: 9;
     margin: 0 auto;
     position: fixed;
     width: 100%;
@@ -8,6 +9,8 @@
     flex-direction: column;
     box-shadow: 2px 2px 20px rgba(0,0,0,0.4);
     background-color: mediumpurple;
+    bottom: 23px;
+    right: 200px;
 }
 
 .chat-header h1 {
@@ -72,7 +75,7 @@
     }
 
 .chat-popup {
-    box-shadow: rgba(99,99,99,0.2);
+    box-shadow: rgba(99,99,99,0.6);
     padding: 8px 10px;
     border: none;
     cursor: pointer;

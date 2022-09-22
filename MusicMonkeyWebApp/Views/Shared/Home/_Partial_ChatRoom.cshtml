@@ -7,8 +7,13 @@
 <div class="chat-container" style="display:none">
     <div class="chat-header">
         <h1>Chat Room</h1>
-        <input type="text" id="userName" />      
-        <input style="position" type="submit" name="Submit" value="Submit"/>
+        <form id="chatForm" method="post">
+            <input type="text" id="userName" placeholder="enter your nickname" />
+            <input type="submit" id="submitNickname" name="Submit" value="Submit" @*onclick="ReplaceForm()"*@/>
+        </form>
+        @*<div id="for_replacement" style="display:none">
+            Name
+        </div>*@
     </div>
     <div class="chat-body" id="chat-body">
         <p class="chat-message" hidden></p>
