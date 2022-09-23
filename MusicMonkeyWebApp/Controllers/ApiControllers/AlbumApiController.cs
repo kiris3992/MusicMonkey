@@ -16,7 +16,7 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
     public class AlbumApiController : BaseApiController
     {
         // GET: api/AlbumApi
-        public IEnumerable<object> GetAlbums(string type = "")
+        public IEnumerable<object> GetAlbums(string type = "", int? inputCount = 0)
         {
             IEnumerable<Album> albums = unit.Albums.GetAlbumsWithEverything();
             IEnumerable<object> albumDtoModels = new List<Album>();
@@ -41,6 +41,7 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
                     albumDtoModels = albums.Select(x => PartialAlbumDTOModel(x));
                     break;
             }
+            albumDtoModels = inputCount > 0 ? albumDtoModels.Take(5) : albumDtoModels;
 
             return albumDtoModels;
         }
