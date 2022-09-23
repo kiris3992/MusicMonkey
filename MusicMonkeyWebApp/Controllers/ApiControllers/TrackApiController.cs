@@ -28,6 +28,9 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
                 case "full":
                     trackDtoModels = tracks.Select(x => FullTrackDTOModel(x));
                     break;
+                case "first10":
+                    trackDtoModels = tracks.Select(x => FullTrackDTOModel(x)).Take(10);
+                    break;
                 default:
                     trackDtoModels = tracks.Select(x => PartialTrackDTOModel(x));
                     break;
@@ -182,6 +185,36 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
         //Custom Service Methods
         private object FullTrackDTOModel(Track track)
         {
+            return new  //Tracks
+            {
+                track.Id,
+                track.Title,
+                track.DurationSecs,
+                track.AudioUrl,
+                track.Popularity,
+                TrackGenres = track.TrackGenres.SelectMany(p => new string[] { p.Type }),
+                Album = new  //Album
+                {
+                    track.Album.Id,
+                    track.Album.Title,
+                    track.Album.ReleaseDate,
+                    track.Album.CoverPhotoUrl,
+                    AlbumGenres = track.Album.AlbumGenres.SelectMany(p => new string[] { p.Type }),
+                    Artist = new  //Artist
+                    {
+                        track.Album.Artist.Name,
+                        track.Album.Artist.Country,
+                        track.Album.Artist.PhotoUrl,
+                        track.Album.Artist.CareerStartDate,
+                        ArtistGenres = track.Album.Artist.ArtistGenres.SelectMany(p => new string[] { p.Type })
+                    }
+                }
+            };
+        }
+        private object RandomTrackDTOModel(int id)
+        {
+            Track track = unit.Tracks.GetTrackByIdWithEverything(id);
+
             return new  //Tracks
             {
                 track.Id,

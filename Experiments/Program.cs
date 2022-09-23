@@ -8,6 +8,7 @@ using DAL;
 using Entities.Enums;
 using Entities.Models;
 using RepositoryService.Persistance;
+using Stripe;
 
 namespace Experiments
 {
@@ -28,6 +29,7 @@ namespace Experiments
                 }
 
             }
+
         }
 
         private static Dictionary<int, double> MostFamousArtistsDTOModel(List<Artist> artists)

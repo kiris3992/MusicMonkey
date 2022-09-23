@@ -22,7 +22,7 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
 
 
         // GET: api/ArtistApi
-        public IEnumerable<Object> GetArtists(string type = "")
+        public IEnumerable<Object> GetArtists(string type = "", int? inputCount = 0)
         {
             IEnumerable<Artist> artists = unit.Artists.GetArtistsWithEverything();
             IEnumerable<object> artistDtoModels = new List<object>();
@@ -31,13 +31,12 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
                 case "popular":
                     artistDtoModels = artists.Select(x => ArtistWithPopularityDTOModel(x));
                     break;
-                case "popular5":
-                    artistDtoModels = artists.Select(x => ArtistWithPopularityDTOModel(x));
-                    break;
                 default:
                     artistDtoModels = artists.Select(x => ArtistDTOModel(x));
                     break;
             }
+            artistDtoModels = inputCount > 0 ? artistDtoModels.Take((int)inputCount) : artistDtoModels;
+
             return artistDtoModels; 
         }
 

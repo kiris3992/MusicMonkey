@@ -135,11 +135,11 @@
                         <hr />
                         <div class="text-lg-left">
                             <select onchange="renderChart(this)" style="font-size: medium; border-style:dotted" class="form__input" >
-                                <option value="1st chart">1st chart</option>
-                                <option value="2nd chart">2nd chart</option>
-                                <option value="3rd chart">3rd chart</option>
-                                <option value="4th chart">4th chart</option>
-                                <option value="5th chart">5th chart</option>
+                                <option value="1st chart">Most Popular Artists</option>
+                                <option value="2nd chart">Most Popular Albums</option>
+                                <option value="3rd chart">Tracks Per Genre</option>
+                                <option value="4th chart">Albums With More Tracks</option>
+                                <option value="5th chart">Albums By Release Date</option>
                             </select>
 
                         </div>
@@ -457,29 +457,19 @@
 
 
     <script>
-
-       /* let chartTitle = document.querySelector('#chartTitle');*/
-
-        //var settings = {
-        //    "url": "https://localhost:44314/api/TrackApi",
-        //    "method": "GET",
-        //    "timeout": 0,
-        //};
-
-        //$.ajax(settings).done(function (tracks) {
-        //    console.log(tracks);
-        //    const popularity = Artist.map(x => x.Popularity);
-
-
         // 1st Chart: Bar Chart for Artist Popularity
+        const labels = [];
+        /* let chartTitle = document.querySelector('#chartTitle');*/
+        var settings = {
+            "url": "https://localhost:44314/api/ArtistApi?type=popular",
+            "method": "GET",
+            "timeout": 0,
+        };
 
-        const labels = ['Eminem',
-            'Shakira',
-            '2pac',
-            'Linking Park',
-            'AC/DC',
-            'METALICA',
-        ];
+        $.ajax(settings).done(function (artists) {
+            let mostPopularArtists = (artists.sort((a, b) => b.Popularity - a.Popularity)).slice(0, 5);
+            mostPopularArtists.forEach(artist => PassDataToArray(artist.Name, labels))
+        });
 
         const data = {
             labels: labels,
@@ -576,15 +566,20 @@
             }
         };
 
-        // 2nd Chart: Bar Chart for Album Popularity
 
-        const labels2 = ['album1',
-            'album2',
-            'album3',
-            'album4 ',
-            'album5',
-            'album6',
-        ];
+
+        // 2nd Chart: Bar Chart for Album Popularity
+        const labels2 = [];
+        var settings = {
+            "url": "https://localhost:44314/api/AlbumApi?type=popular",
+            "method": "GET",
+            "timeout": 0,
+        };
+
+        $.ajax(settings).done(function (albums) {
+            let mostPopularAlbums = (albums.sort((a, b) => b.Popularity - a.Popularity)).slice(0, 5)
+            mostPopularAlbums.forEach(album => PassDataToArray(album.Title, labels2))
+        });
 
         const data2 = {
             labels: labels2,
@@ -683,15 +678,16 @@
         };
 
         // 3rd Chart: Pie chart for Tracks per Genre
+        const labels3 = [];
+        var settings = {
+            "url": "https://localhost:44314/Api/GenreApi?type=trackCountDesc&inputCount=5",
+            "method": "GET",
+            "timeout": 0,
+        };
 
-
-        const labels3 = ['POP',
-            'ROCK',
-            'RAP',
-            'HIP HOP ',
-            'BLUES',
-            'JAZZ',
-        ];
+        $.ajax(settings).done(function (genres) {
+            genres.forEach(genre => PassDataToArray(genre.Type, labels3))
+        });
 
         const data3 = {
             labels: labels3,
@@ -790,14 +786,16 @@
         };
 
         // 4th Chart: PolarArea Chart for Albums With More Tracks
+        let labels4 = [];
+        var settings = {
+            "url": "https://localhost:44314/api/AlbumApi?type=trackcount&inputCount=5",
+            "method": "GET",
+            "timeout": 0,
+        };
 
-        const labels4 = ['album1',
-            'album2',
-            'album3',
-            'album4 ',
-            'album5',
-            'album6',
-        ];
+        $.ajax(settings).done(function (albums) {
+            albums.forEach(album => PassDataToArray(album.Title, labels4))
+        });
 
         const data4 = {
             labels: labels4,
@@ -896,14 +894,16 @@
         };
 
         // 5th Chart: Line Chart for Albums by Release Date
+        const labels5 = [];
+        var settings = {
+            "url": "https://localhost:44314/api/AlbumApi?type=dateAsc&inputCount=5",
+            "method": "GET",
+            "timeout": 0,
+        };
 
-        const labels5 = ['album1',
-            'album2',
-            'album3',
-            'album4 ',
-            'album5',
-            'album6',
-        ];
+        $.ajax(settings).done(function (albums) {
+            albums.forEach(album => PassDataToArray(album.Title, labels5))
+        });
 
         const data5 = {
             labels: labels5,
@@ -1053,160 +1053,10 @@
 
         }
 
-    </script>
-
-    @*<script>
-
-        let chartTitle2 = document.querySelector('#chartTitle2');
-
-        //var settings = {
-        //    "url": "https://localhost:44314/api/TrackApi",
-        //    "method": "GET",
-        //    "timeout": 0,
-        //};
-
-        //$.ajax(settings).done(function (tracks) {
-        //    console.log(tracks);
-        //    const popularity = Artist.map(x => x.Popularity);
-
-
-
-        // 2nd Chart: Bar Chart for Album Popularity
-
-        const labels2 = ['album1',
-            'album2',
-            'album3',
-            'album4 ',
-            'album5',
-            'album6',
-        ];
-
-        const data2 = {
-            labels: labels2,
-            datasets: [{
-                label: 'Most Popular Albums',
-                backgroundColor: [
-                    'rgba(153, 102, 255, 0.4)',
-                    'rgba(54, 162, 235, 0.4)',
-                    'rgba(255, 206, 86, 0.4)',
-                    'rgba(75, 192, 192, 0.4)',
-                    'rgba(255, 99, 132, 0.4)',
-                    'rgba(255, 159, 64, 0.4)'
-                ],
-                borderColor: [
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
-                borderWidth: 1,
-
-                hoverBorderRadius: 1,
-                hoverBorderWidth: 2.5,
-                hoverBackgroundColor: [
-                    'rgba(153, 102, 255, 0.9)',
-                    'rgba(54, 162, 235, 0.9)',
-                    'rgba(255, 206, 86, 0.9)',
-                    'rgba(75, 192, 192, 0.9)',
-                    'rgba(255, 99, 132, 0.9)',
-                    'rgba(255, 159, 64, 0.9)'
-                ],
-
-                data: [5, 4, 3, 2, 1, 0.7],
-            }]
-        };
-
-        const tooltip2 = {
-            backgroundColor: 'lightgray',
-            titleColor: 'black',
-            borderColor: 'black',
-            borderWidth: 0.425,
-            callbacks: {
-                label: function (context) {
-                },
-
-            }
-        };
-
-        const config2 = {
-            type: 'bar',
-            data: data2,
-            options:
-            {
-                aspectRatio: 1.8,
-                plugins: {
-                    tooltip2,
-
-
-                    legend: {
-                        onClick: (evt, legendItem, legend) => {
-                            const index = legend.chart.data.labels.indexOf(legendItem.text);
-                            legend.chart.toggleDataVisibility(index);
-                            legend.chart.getDataVisibility(index);
-                            legend.chart.update();
-                        },
-
-                        labels: {
-                            generateLabels: (chart) => {
-                                let visibility = [];
-                                for (let i = 0; i < chart.data.labels.length; i++) {
-                                    if (chart.getDataVisibility(i) == true) {
-                                        visibility.push(false)
-                                    }
-                                    else {
-                                        visibility.push(true)
-                                    }
-                                };
-
-                                return chart.data.labels.map(
-                                    (label, index) => ({
-                                        text: label,
-                                        strokeStyle: chart.data.datasets[0].borderColor[index],
-                                        fillStyle: chart.data.datasets[0].backgroundColor[index],
-                                        hidden: visibility[index]
-                                    })
-                                )
-                            }
-                        }
-                    },
-
-                },
-                indexAxis: 'x',
-            }
-        };
-
-        let myChart = new Chart(
-            document.getElementById('myChart2'),
-            config
-        );
-
-        /* );*/
-        /*   });*/
-
-        function renderChart(type) {
-            myChart.destroy();
-            if (type.value === '1st chart') {
-                myChart = new Chart(
-                    document.getElementById('myChart2'),
-                    config,
-                    chartTitle.innerHTML = 'Most Popular Artists'
-                );
-            }
-            if (type.value === '2nd chart') {
-                myChart = new Chart(
-                    document.getElementById('myChart2'),
-                    config2,
-                    chartTitle.innerHTML = 'Most Popular Albums'
-                );
-            }
+        //Custom Service Methods
+        function PassDataToArray(property, array) {
+            array.push(property)
         }
 
-   
-
-        
-
-    </script>*@
-
+    </script>
 </body>

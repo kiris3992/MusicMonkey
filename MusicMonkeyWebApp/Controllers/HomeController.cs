@@ -60,7 +60,7 @@ namespace MusicMonkeyWebApp.Controllers
             return View();
         }
 
-        [Authorize(Roles = "Admin, Gold")]
+        [Authorize(Roles = "Gold, Admin")]
         public ActionResult Album()
         {
             return View();
@@ -86,6 +86,12 @@ namespace MusicMonkeyWebApp.Controllers
         }
 
         public ActionResult ChatRoom()
+        {
+            return View();
+        }
+
+        [Authorize(Roles = "Silver, Admin")]
+        public ActionResult Charge()
         {
             return View();
         }
