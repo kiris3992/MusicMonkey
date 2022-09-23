@@ -595,6 +595,8 @@
     <Content Include="Content\Assets\entity-files\Unknown Artist\Unknown Album\VIKINGS_Most_Epic_Viking_&amp;_Nordic_Folk_Music_Danheim.mp3" />
     <Content Include="Content\Assets\entity-files\Unknown Artist\UnknownPhotoUrl.jpg" />
     <Content Include="Content\Assets\img\discography\no-photo.png" />
+    <Content Include="Content\Assets\img\no-photo-2.png" />
+    <Content Include="Content\Assets\img\track-no-image.jpg" />
     <Content Include="Content\Assets\js\homeInit.js" />
     <Content Include="Content\Assets\js\SiteHelper.js" />
     <Content Include="Content\bootstrap-grid.css" />
@@ -989,6 +991,8 @@
     <Content Include="Views\Home\Album.cshtml" />
     <Content Include="Views\Home\Plans.cshtml" />
     <Content Include="Views\Home\Tour.cshtml" />
+    <Content Include="Views\Home\Track.cshtml" />
+    <Content Include="Views\Home\Artist.cshtml" />
     <Content Include="Views\Payment\PaymentWithPaypal.cshtml" />
     <Content Include="Views\Payment\FailureView.cshtml" />
     <Content Include="Views\Payment\SuccessView.cshtml" />
