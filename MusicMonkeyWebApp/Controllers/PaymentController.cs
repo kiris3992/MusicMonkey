@@ -10,7 +10,7 @@ using System.Web.Mvc;
 
 namespace MusicMonkeyWebApp.Controllers
 {
-    [Authorize(Roles = "Silver,Gold")]
+    [Authorize(Roles = "Silver,Gold, Admin")]
     public class PaymentController : Controller
     {
         public ActionResult PaymentWithPaypal(string Cancel = null)
