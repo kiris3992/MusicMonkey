@@ -60,7 +60,7 @@ namespace MusicMonkeyWebApp.Controllers
             return View();
         }
 
-        [Authorize(Roles = "Gold, Admin")]
+        [Authorize(Roles = "Silver, Gold, Admin")]
         public ActionResult Album()
         {
             return View();
@@ -90,7 +90,7 @@ namespace MusicMonkeyWebApp.Controllers
             return View();
         }
 
-        [Authorize(Roles = "Silver, Admin")]
+        [Authorize(Roles = "Silver, Gold, Admin")]
         public ActionResult Charge()
         {
             return View();

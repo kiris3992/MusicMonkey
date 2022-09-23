@@ -18,7 +18,7 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
     public class TrackApiController : BaseApiController
     {
         // GET: api/TrackApi
-        public IEnumerable<object> GetTracks(string type = "")
+        public IEnumerable<object> GetTracks(string type = ""/*, int? inputCount = 0*/)
         {
             IEnumerable<Track> tracks = unit.Tracks.GetTracksWithEverything();
             IEnumerable<object> trackDtoModels = new List<object>();
@@ -35,7 +35,8 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
                     trackDtoModels = tracks.Select(x => PartialTrackDTOModel(x));
                     break;
             }
-
+            //trackDtoModels = inputCount > 0 ? trackDtoModels.Take((int)inputCount) : trackDtoModels;
+  
             return trackDtoModels;
         }
 
