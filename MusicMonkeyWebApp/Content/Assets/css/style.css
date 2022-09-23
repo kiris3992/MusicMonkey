@@ -290,12 +290,16 @@ ol {
 	}
 
 .header__logo {
-	padding: 25px 0 5px;
+	padding: 25px 0 20px;
+	margin-top:10px;
+	
 }
 
 	.header__logo img {
 		max-width: max-content;
-		/*margin-top: 5px;*/
+		width: 180px;
+		left:0px;
+	
 	}
 
 	.header__logo a {
@@ -314,7 +318,7 @@ ol {
 	.header__menu ul li {
 		list-style: none;
 		display: inline-block;
-		margin-right: 45px;
+		margin-right: 35px;
 		position: relative;
 	}
 
@@ -1038,8 +1042,10 @@ ol {
 	.discography__item__pic object {
 		min-width: 100%;
 		width: 100%;
-		object-fit: contain;
+		object-fit: cover;
 		object-position: 50% 50%;
+		height:360px;
+
 	}
 
 .discography__item__text {
@@ -3207,5 +3213,14 @@ ol {
 	.footer {
 		margin-top: -970px;
 		background-position: top 0 left 19%;
+	}
+
+
+	.image__artist {
+		height: 360px;
+		position: relative;
+		min-width: 100%;
+		width: 100%;
+		object-fit: cover;
 	}
 }

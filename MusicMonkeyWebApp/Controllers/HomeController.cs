@@ -19,9 +19,9 @@ namespace MusicMonkeyWebApp.Controllers
                     new HeaderLink { Action = "About", Title = "About", Url = "/Home/About" },
                     new HeaderLink { Action = "Music", Title = "Music", Url = "",
                         SubLinks = new List<HeaderLink> {
-                            new HeaderLink { Title = "Artists", Url = ""},
+                            new HeaderLink { Action = "Artist", Title = "Artists", Url = "/Home/Artist"},
                             new HeaderLink { Action = "Album", Title = "Albums", Url = "/Home/Album"},
-                            new HeaderLink { Title = "Tracks", Url = ""},
+                            new HeaderLink { Action = "Track", Title = "Tracks", Url = "/Home/Track"},
                         }
                     },
                     new HeaderLink { Action = "Tour", Title = "Tour", Url = "/Home/Tour" },
@@ -75,6 +75,15 @@ namespace MusicMonkeyWebApp.Controllers
             return View();
         }
 
+        public ActionResult Artist()
+        {
+            return View();
+        }
+
+        public ActionResult Track()
+        {
+            return View();
+        }
 
         public ActionResult ChatRoom()
         {
