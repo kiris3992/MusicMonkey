@@ -64,7 +64,7 @@ namespace MusicMonkeyWebApp.Controllers
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return View("FailureView");
             }
