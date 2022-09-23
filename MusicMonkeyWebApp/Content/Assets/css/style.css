@@ -291,15 +291,13 @@ ol {
 
 .header__logo {
 	padding: 25px 0 20px;
-	margin-top:10px;
-	
+	margin-top: 10px;
 }
 
 	.header__logo img {
 		max-width: max-content;
 		width: 180px;
-		left:0px;
-	
+		left: 0px;
 	}
 
 	.header__logo a {
@@ -410,10 +408,10 @@ ol {
 
 .header__right__social {
 	display: inline-block;
-	background-color:#36017657;
-	padding:10px;
-	border-radius:7px;
-	shape-margin:10px;
+	background-color: #36017657;
+	padding: 10px;
+	border-radius: 7px;
+	shape-margin: 10px;
 }
 
 	.header__right__social a {
@@ -1044,8 +1042,7 @@ ol {
 		width: 100%;
 		object-fit: cover;
 		object-position: 50% 50%;
-		height:360px;
-
+		height: 360px;
 	}
 
 .discography__item__text {
@@ -1386,8 +1383,8 @@ ol {
 	background: #5c00ce;
 	height: 580px;
 	padding: 100px 70px 60px;
-	border-bottom-left-radius:10px;
-	border-top-left-radius:10px;
+	border-bottom-left-radius: 10px;
+	border-top-left-radius: 10px;
 }
 
 	.skills__content .section-title h2 {
@@ -1449,8 +1446,8 @@ ol {
 	-webkit-box-pack: center;
 	-ms-flex-pack: center;
 	justify-content: center;
-	border-bottom-right-radius:10px;
-	border-top-right-radius:10px;
+	border-bottom-right-radius: 10px;
+	border-top-right-radius: 10px;
 }
 
 	.skills__video .play-btn {
@@ -2912,7 +2909,7 @@ ol {
 
 @media only screen and (max-width: 767px) {
 	.contact__address ul {
-		flex-direction:column;
+		flex-direction: column;
 	}
 
 	.contact__address .section-title h2 {
