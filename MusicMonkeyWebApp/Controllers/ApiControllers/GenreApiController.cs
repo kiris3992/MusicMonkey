@@ -18,6 +18,8 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
         // GET: api/GenreApi
         public IEnumerable<object> GetGenres(string type = "" , int? inputCount = 0)
         {
+            if (type == "genres") return unit.Genres.GetGenres();
+
             IEnumerable<Genre> genres = unit.Genres.GetGenresWithEverything();
             IEnumerable<object> genreDtoModels = new List<object>();
             switch (type)

@@ -80,7 +80,9 @@ a {
 input,
 textarea,
 select {
-    padding: 0;
+    font-family: Inter, sans-serif;
+    font-size:14px;
+    /*padding: 10px 20px !important;*/
     margin: 0;
     border-radius: 0;
     -webkit-appearance: none;
@@ -90,7 +92,34 @@ select {
     box-shadow: none;
     transition: 0.5s ease;
     transition-property: color, border-color;
+    background-color: #151f30;
+    border: 0;
+    border-radius: 14px;
+    padding: 8px;
+    color:#fff;
 }
+
+
+
+    select::-webkit-scrollbar {
+        border-radius:12px;
+        width: 0px;
+    }
+
+    select::-webkit-scrollbar-track {
+    }
+
+    select::-webkit-scrollbar-thumb {
+        background-color: darkgrey;
+        outline: 1px solid slategrey;
+    }
+
+    select[multiple]:hover {
+        border-radius: 12px 0 0 12px;
+    }
+        select[multiple]:hover::-webkit-scrollbar {
+            width:1px;
+        }
 
     input:focus,
     textarea:focus,
@@ -1529,7 +1558,7 @@ body::-webkit-scrollbar-thumb {
 	Form
 ==============================*/
 .form {
-    background-color: #151f30;
+    background-color: #131720;
     padding: 20px;
     border-radius: 16px;
     margin-bottom: 30px;
@@ -1552,8 +1581,18 @@ body::-webkit-scrollbar-thumb {
     width: 100%;
 }
 
+.form__group label{
+    font-size:14px;
+    color:#fff;
+}
+
+    .form__group span {
+        margin: 10px 2px;
+        display: inline-block;
+    }
+
 .form__input {
-    background-color: #131720;
+    background-color: #151f30;
     border: 1px solid transparent;
     border-radius: 16px;
     height: 44px;
@@ -1613,7 +1652,7 @@ body::-webkit-scrollbar-thumb {
     width: 100%;
     height: 50px;
     border-radius: 16px;
-    background-color: black;
+    background-color: #2f80ed;
     font-size: 14px;
     color: #e0e0e0;
     text-transform: uppercase;
@@ -1621,9 +1660,8 @@ body::-webkit-scrollbar-thumb {
 }
 
     .form__btn:hover {
-        color: #3f008c;
-        background-color: #fff;
-        font-size:small;
+        color: #000;
+        background-color:#fff;
     }
 
 .form__radio {
@@ -1791,6 +1829,46 @@ body::-webkit-scrollbar-thumb {
         .form__gallery label:hover {
             color: #fff;
         }
+
+
+
+.form__song {
+    position: relative;
+    width: 100%;
+    height: 42px;
+    overflow: hidden;
+    background-color: #151f30;
+    margin-bottom: 20px;
+    border-radius: 16px;
+    overflow: hidden;
+}
+    .form__song input {
+        position: absolute;
+        left: -9999px;
+        opacity: 0;
+    }
+    .form__song label {
+        position: absolute;
+        display: flex;
+        flex-direction: row;
+        justify-content: left;
+        align-items: center;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 20px;
+        z-index: 2;
+        cursor: pointer;
+        margin: 0;
+        font-weight: normal;
+        font-size: 14px;
+        color: #e0e0e0;
+        transition: 0.5s;
+        height: 42px;
+    }
+    .form__song:hover{
+        filter:brightness(1.2);
+    }
 
 .form__img {
     position: relative;
@@ -3286,3 +3364,8 @@ table tbody tr td:nth-child(6) svg {
 
         .track-details > div > div:nth-child(2) {
         }
+
+.custom-hr {
+    margin-bottom: 1rem;
+    border: 1px solid rgba(47,128,237,0.1);
+}

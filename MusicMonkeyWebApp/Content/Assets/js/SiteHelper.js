@@ -80,6 +80,18 @@
         return new sectionBuilder(dataContainerId, dataTemplate, onSuccessFinallyFunc, ajaxObject, minContainerHeight, dataProperty);
     };
 
+    AjaxHelper.ajaxPromise = (url, data = null, type = 'GET', dataType = 'json', contentType = 'application/json') => {
+        let options = {
+            type: type,
+            url: url,
+            dataType: dataType,
+            contentType: contentType
+        };
+        if (data) options.data = JSON.stringify(data);
+
+        return $.ajax(options);
+    };
+
     var Converter = {};
 
     Converter.csDateStrToJsDateStr = function (cSharpDateStr, format = 'dd/mm/yyyy') {
@@ -110,6 +122,18 @@
         return (parseInt(minutes) * 60) + parseInt(seconds);
     };
 
+    Converter.formatBytes = (bytes, decimals = 2) => {
+        if (!+bytes) return '0 Bytes';
+
+        const k = 1024;
+        const dm = decimals < 0 ? 0 : decimals;
+        const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+
+        return `${parseFloat((bytes / Math.pow(k, i)).toFixed(dm))} ${sizes[i]}`;
+    };
+
     var Window = {};
 
     Window.getQueryString = function (key) {
@@ -120,12 +144,67 @@
 
     var HtmlDom = {};
 
+    HtmlDom.registerImageFileLoader = (fileInputId, imgPreviewId) => {
+        const fileEl = document.getElementById(fileInputId);
+        fileEl.addEventListener('change', e => {
+            const fr = new FileReader();
+            fr.onload = () => document.getElementById(imgPreviewId).src = fr.result;
+            fr.readAsDataURL(e.target.files[0]);
+        });
+    };
+
+    HtmlDom.registerMp3FileLoader = (fileInputId, infoLabelId, inputMinsId, inputSecsId) => {
+        const fileEl = document.getElementById(fileInputId);
+        fileEl.addEventListener('change', e => {
+            const label = HtmlDom.getEl(infoLabelId);
+            const file = e.target.files[0];
+
+            const ctx = new AudioContext();
+            const fr = new FileReader();
+
+            fr.onload = (ev) => {
+
+                ctx.decodeAudioData(ev.target.result).then((buf) => {
+                    const duration = Converter.secondsToTimeSpanStr(buf.duration);
+                    label.innerHTML = `File: ${file.name}, Type: ${file.type}, Size: ${Converter.formatBytes(file.size)}, Sampla Rate: ${buf.sampleRate}, Duration: ${duration}`;
+                    HtmlDom.getEl(inputMinsId).value = duration.split(':')[0];
+                    HtmlDom.getEl(inputSecsId).value = duration.split(':')[1];
+                });
+            }
+            fr.readAsArrayBuffer(e.target.files[0]);
+        });
+    };
+
     HtmlDom.createOption = function (owner = null, value, text) {
         const el = document.createElement('option');
         el.value = value;
         el.text = text;
         if (owner) owner.appendChild(el);
         return el;
+    };
+
+    HtmlDom.optionForEach = function (data, propValue, propText, owner, ownerClearLength = null) {
+        if (ownerClearLength != null) owner.length = ownerClearLength;
+        let el;
+        data.forEach(o => {
+            el = document.createElement('option');
+            el.value = o[propValue];
+            el.text = o[propText];
+            owner.appendChild(el);
+        });
+        if ((ownerClearLength != null) && owner.length) owner.selectedIndex = 0;
+    };
+
+    HtmlDom.clearSelectExcepFirst = function (selectNode) {
+        selectNode.length = 1;
+        selectNode.selectedIndex = 0;
+    };
+
+    HtmlDom.getEl = (id) => document.getElementById(id);
+    HtmlDom.getEls = (idsArray) => {
+        let ar = [];
+        idsArray.forEach(id => ar.push(document.getElementById(id)));
+        return ar;
     };
 
     HtmlDom.Modal = {
@@ -350,5 +429,11 @@
         };
     };
 
-    return { AjaxHelper, Converter, Window, Messenger, HtmlDom, Paging };
+    var Sorting = {};
+
+    Sorting.strings = (data, propName) => {
+        return data.sort((a, b) => a[propName] < b[propName] ? -1 : a[propName] > b[propName] ? 1 : 0);
+    };
+
+    return { AjaxHelper, Converter, Window, Messenger, HtmlDom, Paging, Sorting };
 })();

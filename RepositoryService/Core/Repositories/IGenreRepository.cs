@@ -10,5 +10,6 @@ namespace RepositoryService.Core.Repositories
     public interface IGenreRepository : IGenericRepository<Genre>
     {
         IEnumerable<Genre> GetGenresWithEverything();
+        IEnumerable<object> GetGenres();
     }
 }
