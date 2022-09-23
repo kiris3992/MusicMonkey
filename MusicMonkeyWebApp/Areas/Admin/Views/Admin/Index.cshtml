@@ -30,7 +30,7 @@
                                 </td>
                             </tr>`,
             null,
-            new SiteHelper.AjaxHelper.ajaxObject('/api/TrackApi')).start();
+            new SiteHelper.AjaxHelper.ajaxObject('/api/TrackApi?type=first10')).start();
 
 
         SiteHelper.AjaxHelper.contentLoader(
@@ -50,7 +50,7 @@
                             </td>
                         </tr>`,
             null,
-            new SiteHelper.AjaxHelper.ajaxObject('/api/AlbumApi')).start();
+            new SiteHelper.AjaxHelper.ajaxObject('/api/AlbumApi?inputCount=5')).start();
     });
 
 

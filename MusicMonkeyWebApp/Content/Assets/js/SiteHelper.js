@@ -48,7 +48,6 @@
             };
 
             this.build = function (data) {
-                //if (data.length > 10) data.length = 10; // Prosoxh gia debug edo perno mono 50 items; kanonika prepei na fugei auth h grammh.
                 setTimeout(() => {
                     if (dataProperty) $(`#${dataContainerId}`).html(data[dataProperty].map((o, i) => this.dataTemplate(o, i)));
                     else $(`#${dataContainerId}`).html(data.map((o, i) => this.dataTemplate(o, i)));
@@ -279,11 +278,6 @@
                 return new Promise.reject();
             }
 
-            //if (backColor) {
-            //    const sheet = document.getElementById(this.id).sheet;
-            //    const index = Object.values(sheet.cssRules).findIndex(o => o.selectorText == '.help_Modal-bg');
-            //    Object.values(sheet.cssRules)[index].style.backgroundColor = backColor;
-            //}
 
             const createEl = HtmlDom.createElement;
 
