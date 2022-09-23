@@ -16,6 +16,12 @@ namespace RepositoryService.Persistance.Repositories
         {
             
         }
+
+        public IEnumerable<object> GetGenres()
+        {
+            return db.Genres.Select(g => new { g.Id, g.Type });
+        }
+
         public IEnumerable<Genre> GetGenresWithEverything()
         {
             return db.Genres

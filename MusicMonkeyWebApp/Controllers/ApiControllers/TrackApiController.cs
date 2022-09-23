@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using System.Web.Http.Description;
 using Entities.Models;
+using Microsoft.Ajax.Utilities;
 using MusicMonkeyWebApp.Models.Paging;
 
 namespace MusicMonkeyWebApp.Controllers.ApiControllers
@@ -19,7 +22,7 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
         {
             IEnumerable<Track> tracks = unit.Tracks.GetTracksWithEverything();
             IEnumerable<object> trackDtoModels = new List<object>();
-            
+
             switch (type)
             {
                 case "full":
@@ -43,22 +46,29 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
                 pagingModel = new PagingModel { PageIndex = args.PageIndex, ItemsPerPage = args.ItemsPerPage };
             }
 
+            string sortProp = args["sortProp"];
+            string filter = args["filter"];
+
             IEnumerable<object> tracks;
             if (args["type"] != null && args.type == "full")
             {
-                tracks = unit.Tracks.GetTracksWithEverything(pagingModel).Select(x => FullTrackDTOModel(x));
+                tracks = unit.Tracks.GetTracksWithEverything(pagingModel, sortProp, filter).Select(x => FullTrackDTOModel(x));
             }
             else
             {
-                tracks = unit.Tracks.GetTracksWithEverything(pagingModel).Select(x => PartialTrackDTOModel(x));
+                tracks = unit.Tracks.GetTracksWithEverything(pagingModel, sortProp, filter).Select(x => PartialTrackDTOModel(x));
             }
 
             if (pagingModel != null)
             {
-                pagingModel = new PagingModel(pagingModel.PageIndex, pagingModel.ItemsPerPage, unit.Tracks.Count());
+                //var count = string.IsNullOrWhiteSpace(filter) ? unit.Tracks.Count() : tracks.Count();
+                var count = unit.Tracks.Count(); // string.IsNullOrWhiteSpace(filter) ? tracks.Count() : unit.Tracks.Count();
+
+                pagingModel = new PagingModel(pagingModel.PageIndex, pagingModel.ItemsPerPage, count);
             }
 
-            return new { tracks, paging = pagingModel }; ;
+
+            return new { tracks, paging = pagingModel };
         }
 
         // GET: api/TrackApi/5
@@ -206,6 +216,7 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
                 Title = track.Title,
                 DurationSecs = track.DurationSecs,
                 AudioUrl = track.AudioUrl,
+                ArtistPhotoUrl = track.Album?.Artist?.PhotoUrl,
                 Popularity = track.Popularity,
                 AlbumTitle = track.Album != null ? track.Album.Title : null,
                 AlbumId = track.Album != null ? track.Album.Id : -1,

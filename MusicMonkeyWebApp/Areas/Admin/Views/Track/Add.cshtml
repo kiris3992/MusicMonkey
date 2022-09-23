@@ -4,26 +4,84 @@
     Layout = "~/Areas/Admin/Views/Layout/_AdminLayout.cshtml";
 }
 
-<body>
+<link rel="stylesheet" href="~/Content/Assets/css/font-awesome.min.css" />
+<script src="~/Content/Assets/js/SiteHelper.js"></script>
 
-    <!-- header -->
-    <header class="header">
-        <div class="header__content">
-            <!-- header logo -->
-            <a href="index.html" class="header__logo">
-                <img src="img/logo.svg" alt="">
-            </a>
-            <!-- end header logo -->
-            <!-- header menu btn -->
-            <button class="header__btn" type="button">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-            <!-- end header menu btn -->
-        </div>
-    </header>
-    <!-- end header -->
+<script>
+
+    $(document).ready(function () {
+
+        const [dom, sort, ajaxPromise] = [SiteHelper.HtmlDom, SiteHelper.Sorting, SiteHelper.AjaxHelper.ajaxPromise];
+
+        dom.registerMp3FileLoader('data_song', 'data-song-label', 'data-input-mins', 'data-input-secs');
+
+        $.when(ajaxPromise('/api/ArtistApi'), ajaxPromise('/api/GenreApi?type=genres'))
+            .done((j1, j2) => {
+                const [artistSel, albumSel, genreSel] = dom.getEls(['data-sel-artist', 'data-sel-album', 'data-sel-genres']);
+
+                const artists = sort.strings(j1[0], 'Name');
+                const genres = sort.strings(j2[0], 'Type');
+
+                dom.optionForEach(artists, 'Id', 'Name', artistSel);
+                dom.optionForEach(genres, 'Id', 'Type', genreSel);
+
+                artistSel.addEventListener('change', () => {
+                    const artist = artists.filter(o => o.Id == artistSel.value)[0];
+                    dom.optionForEach(artist.Albums, 'Id', 'Title', albumSel, 1);
+                });
+
+                dom.getEl('button-publish').addEventListener('click', () => {
+
+                    console.log('Not Implement');
+                    return;
+
+                    const track = {
+                        Title: dom.getEl('data-title').value,
+                        DurationSecs: SiteHelper.Converter.timeSpanToSeconds(+dom.getEl('data-input-mins').value, +dom.getEl('data-input-secs').value),
+                        Popularity: +dom.getEl('data-input-popularity').value,
+                        AlbumId: +dom.getEl('data-sel-album').value,
+                        AudioUrl: ''
+                    };
+
+                    console.log(track);
+
+                    $.ajax({
+                        type: 'POST',
+                        url: '/api/TrackApi',
+                        data: JSON.stringify(track),
+                        success: (res) => {
+                            alert('ok');
+                        },
+                        error: () => {
+                            alert('error');
+                        }
+                    });
+
+                    //let formData = new FormData(document.getElementById('form-data'));
+                    //$.ajax({
+                    //    type: 'POST',
+                    //    url: '/Admin/Track/FormData',
+                    //    data: formData,
+                    //    processData: false,
+                    //    contentType: false,
+                    //    success: (res) => {
+                    //        alert('ok');
+                    //    },
+                    //    error: () => {
+                    //        alert('error');
+                    //    }
+                    //});
+                });
+            })
+            .fail(() => {
+
+            })
+    });
+
+    
+</script>
+
+<body>
     <!-- main content -->
     <main class="main">
         <div class="container-fluid">
@@ -31,130 +89,120 @@
                 <!-- main title -->
                 <div class="col-12">
                     <div class="main__title">
-                        <h2>Add Track</h2>
+                        <h2>Add new track</h2>
                     </div>
                 </div>
                 <!-- end main title -->
+
                 <!-- form -->
                 <div class="col-12">
-                    <form action="#" class="form">
-                        
-
-                        <div class="col-12 col-md-7 form__content">
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="form__group">
-                                        <input type="text" class="form__input" placeholder="Title">
+                    <form id="form-data" action="#" class="form" enctype="multipart/form-data">
+                        <div class="row">
+                            @*<div class="col-12 col-md-5 form__cover">
+                                <div class="row">
+                                    <div class="col-12 col-sm-6 col-md-12">
+                                        <div class="form__img" style="height:414px;">
+                                            <label for="data_photo">Upload cover (190 x 270)</label>
+                                            <input name="data_photo" id="data_photo" type="file" accept=".png, .jpg, .jpeg">
+                                            <img id="form__img" src="#" alt=" ">
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-
-                                <div class="col-12 col-sm-6 col-lg-3">
-                                    <div class="form__group">
-                                        <input type="text" class="form__input" placeholder="Duration in seconds">
-                                    </div>
-                                </div>
-
-                                <div class="col-12 col-sm-6 col-lg-3">
-                                    <div class="form__group">
-                                        <select class="js-example-basic-single form__input" id="quality">
-                                            <option value="Popularity">Popularity</option>
-                                            <option value="5">5</option>
-                                            <option value="4">4</option>
-                                            <option value="4">4</option>
-                                            <option value="4">4</option>
-                                            <option value="4">4</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="col-12 col-lg-6">
-                                    <div class="form__group">
-                                        <select class="js-example-basic-multiple form__input" id="genre" >
-                                            <option value="Action">Choose Album</option>
-                                            <option value="Animation">Animation</option>
-                                            <option value="Comedy">Comedy</option>
-                                            <option value="Crime">Crime</option>
-                                            <option value="Drama">Drama</option>
-                                            <option value="Fantasy">Fantasy</option>
-                                            <option value="Historical">Historical</option>
-                                            <option value="Horror">Horror</option>
-                                            <option value="Romance">Romance</option>
-                                            <option value="Science-fiction">Science-fiction</option>
-                                            <option value="Thriller">Thriller</option>
-                                            <option value="Western">Western</option>
-                                            <option value="Otheer">Otheer</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <div class="row">
-                                <div class="col-12 col-lg-6">
-                                    <div class="form__group">
-                                        <select class="js-example-basic-single form__input" id="genre" >
-                                            <option value="Action">Choose Artist</option>
-                                            <option value="Animation">Animation</option>
-                                            <option value="Comedy">Comedy</option>
-                                            <option value="Crime">Crime</option>
-                                            <option value="Drama">Drama</option>
-                                            <option value="Fantasy">Fantasy</option>
-                                            <option value="Historical">Historical</option>
-                                            <option value="Horror">Horror</option>
-                                            <option value="Romance">Romance</option>
-                                            <option value="Science-fiction">Science-fiction</option>
-                                            <option value="Thriller">Thriller</option>
-                                            <option value="Western">Western</option>
-                                            <option value="Otheer">Otheer</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-lg-6">
-                                    <div class="form__group">
-                                        <select class="js-example-basic-single form__input" id="genre" >
-                                            <option value="Action">Choose Genre</option>
-                                            <option value="Animation">Animation</option>
-                                            <option value="Comedy">Comedy</option>
-                                            <option value="Crime">Crime</option>
-                                            <option value="Drama">Drama</option>
-                                            <option value="Fantasy">Fantasy</option>
-                                            <option value="Historical">Historical</option>
-                                            <option value="Horror">Horror</option>
-                                            <option value="Romance">Romance</option>
-                                            <option value="Science-fiction">Science-fiction</option>
-                                            <option value="Thriller">Thriller</option>
-                                            <option value="Western">Western</option>
-                                            <option value="Otheer">Otheer</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="form__video">
-                                        <label id="movie1" for="form__video-upload">Upload audio</label>
-                                        <input data-name="#movie1" id="form__video-upload" name="audio" class="form__video-upload" type="file" accept="audio/mp3,audio/*">
-                                    </div>
-                                </div>
-                            </div>
-
-
-
+                            </div>*@
 
                             <div class="col-12">
-                                <button type="button" class="form__btn">publish</button>
-                                <span>|<a href="~/Admin/Track/Index">Back</a></span>
+                                <div class="row">
+
+
+                                    <div class="col-sm-12">
+                                        <div class="form__group">
+                                            <input name="data-title" id="data-title" type="text" class="form__input" value="" placeholder="Title">
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="col-lg-6">
+                                        <div class="form__group">
+                                            <select name="data-sel-artist" id="data-sel-artist" style="width:100%;">
+                                                <option selected disabled value="">Artist</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="col-lg-6">
+                                        <div class="form__group">
+                                            <select name="data-sel-album" id="data-sel-album" style="width:100%;">
+                                                <option selected disabled value="">Album</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4">
+                                        <div class="form__group">
+                                            <select name="data-sel-genres" id="data-sel-genres" style="width:100%; height:116pt;" multiple>
+                                                <option disabled value="">Genres</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-8">
+                                        <div class="form__group">
+                                            <textarea name="data-text-area" id="data-text-area" style="height:116pt;" class="form__textarea" value="" placeholder="Description"></textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-2">
+                                        <div class="form__group">
+                                            <input name="data-input-popularity" id="data-input-popularity" type="number" class="form__input" min="0" max="5" value="" placeholder="Popularity">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-10"></div>
+
+                                    <div class="col-lg-2">
+                                        <div class="form__group">
+                                            <input name="data-input-mins" id="data-input-mins" type="number" class="form__input" min="0" max="60" step="1" onchange='this.value=("0"+this.value).slice(-2)' value="" placeholder="Minutes">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-2">
+                                        <div class="form__group">
+                                            <input name="data-input-secs" id="data-input-secs" type="number" class="form__input" min="0" max="60" step="1" onchange='this.value=("0"+this.value).slice(-2)' value="" placeholder="Seconds">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-12">
+                                        <div class="form__group">
+                                            @*<div class="form__img" style="height:414px;">
+                                                <label for="data_photo">Upload cover (190 x 270)</label>
+                                                <input name="data_photo" id="data_photo" type="file" accept=".png, .jpg, .jpeg">
+                                                <img id="form__img" src="#" alt=" ">
+                                            </div>*@
+                                            <div class="form__song">
+                                                <label id="data-song-label" for="data_song">Upload Mp3 file.</label>
+                                                <input id="data_song" type="file" accept=".mp3" style="width:100%;" />
+                                                <audio id="form__audio"></audio>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
+                            <div class="col-12">
+                                <hr class="custom-hr" />
+                            </div>
 
-
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <button id="button-publish" style="float:right;" type="button" class="form__btn">publish</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-
                     </form>
                 </div>
                 <!-- end form -->
