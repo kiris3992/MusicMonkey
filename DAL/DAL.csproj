@@ -54,6 +54,7 @@
     <Compile Include="ApplicationDbContext.cs" />
     <Compile Include="Initializers\MockUpDbInitializer.cs" />
     <Compile Include="Initializers\TeamsSeeding\ITeamSeeder.cs" />
+    <Compile Include="Initializers\TeamsSeeding\SeedSubscription.cs" />
     <Compile Include="Initializers\TeamsSeeding\TeamGenres.cs" />
     <Compile Include="Initializers\TeamsSeeding\Seed_Aggelos.cs" />
     <Compile Include="Initializers\TeamsSeeding\Seed_Kiris.cs" />

@@ -69,6 +69,7 @@
     <Compile Include="Models\Genre.cs" />
     <Compile Include="Models\MusicEntity.cs" />
     <Compile Include="Models\Paging\PagingModel.cs" />
+    <Compile Include="Models\Subscription.cs" />
     <Compile Include="Models\Track.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Validators\AlbumValidator.cs" />
