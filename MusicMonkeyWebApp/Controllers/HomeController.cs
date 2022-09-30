@@ -74,12 +74,12 @@ namespace MusicMonkeyWebApp.Controllers
         {
             return View();
         }
-
+        [Authorize(Roles = "Silver, Gold, Admin")]
         public ActionResult Artist()
         {
             return View();
         }
-
+        [Authorize(Roles = "Silver, Gold, Admin")]
         public ActionResult Track()
         {
             return View();

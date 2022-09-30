@@ -40,7 +40,7 @@ $(document).ready(function () {
                             </div>
                         </div>`,
             SingleJpPlayer.init,
-            new SiteHelper.AjaxHelper.ajaxObject('api/TrackApi?type=first10')).start();
+            new SiteHelper.AjaxHelper.ajaxObject('api/TrackApi?inputCount=10')).start();
 
         //  Event Section
         SiteHelper.AjaxHelper.contentLoader(
