@@ -18,7 +18,7 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
     public class TrackApiController : BaseApiController
     {
         // GET: api/TrackApi
-        public IEnumerable<object> GetTracks(string type = ""/*, int? inputCount = 0*/)
+        public IEnumerable<object> GetTracks(string type = "", int? inputCount = 0)
         {
             IEnumerable<Track> tracks = unit.Tracks.GetTracksWithEverything();
             IEnumerable<object> trackDtoModels = new List<object>();
@@ -28,14 +28,11 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
                 case "full":
                     trackDtoModels = tracks.Select(x => FullTrackDTOModel(x));
                     break;
-                case "first10":
-                    trackDtoModels = tracks.Select(x => FullTrackDTOModel(x)).Take(10);
-                    break;
                 default:
                     trackDtoModels = tracks.Select(x => PartialTrackDTOModel(x));
                     break;
             }
-            //trackDtoModels = inputCount > 0 ? trackDtoModels.Take((int)inputCount) : trackDtoModels;
+            trackDtoModels = inputCount > 0 ? trackDtoModels.Take((int)inputCount) : trackDtoModels;
   
             return trackDtoModels;
         }
@@ -156,7 +153,7 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
                 return BadRequest(ModelState);
             }
 
-            unit.Tracks.Create(track);
+            unit.Tracks.Create(MapAndReturnNewTrack(track));
             unit.Complete();
 
             return Ok();
@@ -259,6 +256,17 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
                 TrackGenres = track.TrackGenres.SelectMany(p => new string[] { p.Type })
             };
         }
+        private Track MapAndReturnNewTrack(Track track)
+        {
+            Track newTrack = new Track();
+            newTrack.Title = track.Title;
+            newTrack.DurationSecs = track.DurationSecs;
+            newTrack.AudioUrl = track.AudioUrl;
+            newTrack.Popularity = track.Popularity;
+            newTrack.AlbumId = track.AlbumId;
+            foreach (var item in track.TrackGenres.Select(x => x.Id).ToList()) newTrack.TrackGenres.Add(unit.Genres.GetById(item));
+            return newTrack;
+        }
         private void MapTrack(Track mapedTrack, Track incomingTrack)
         {
             mapedTrack.Title = incomingTrack.Title;
@@ -266,7 +274,6 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
             mapedTrack.AudioUrl = incomingTrack.AudioUrl;
             mapedTrack.Popularity = incomingTrack.Popularity;
         }
-
         private bool TrackExists(int id)
         {
             return db.Tracks.Count(e => e.Id == id) > 0;

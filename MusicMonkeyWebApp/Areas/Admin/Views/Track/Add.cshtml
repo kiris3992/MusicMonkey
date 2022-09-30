@@ -31,31 +31,52 @@
                 });
 
                 dom.getEl('button-publish').addEventListener('click', () => {
-
-                    console.log('Not Implement');
-                    return;
-
                     const track = {
                         Title: dom.getEl('data-title').value,
                         DurationSecs: SiteHelper.Converter.timeSpanToSeconds(+dom.getEl('data-input-mins').value, +dom.getEl('data-input-secs').value),
                         Popularity: +dom.getEl('data-input-popularity').value,
                         AlbumId: +dom.getEl('data-sel-album').value,
-                        AudioUrl: ''
+                        AudioUrl: '',
+                        TrackGenres: $("#data-sel-genres").val()
                     };
 
-                    console.log(track);
-
-                    $.ajax({
-                        type: 'POST',
-                        url: '/api/TrackApi',
-                        data: JSON.stringify(track),
-                        success: (res) => {
-                            alert('ok');
+                    var settings = {
+                        "url": "https://localhost:44314/api/TrackApi?type=create",
+                        "method": "POST",
+                        "timeout": 0,
+                        "headers": {
+                            "Content-Type": "application/json"
                         },
-                        error: () => {
-                            alert('error');
-                        }
+                        "data": JSON.stringify(track),
+                    };
+
+                    $.ajax(settings).done(function (response) {
+                        alert("Track Created Successfully");
                     });
+
+                    return;
+
+                    //const track = {
+                    //    Title: dom.getEl('data-title').value,
+                    //    DurationSecs: SiteHelper.Converter.timeSpanToSeconds(+dom.getEl('data-input-mins').value, +dom.getEl('data-input-secs').value),
+                    //    Popularity: +dom.getEl('data-input-popularity').value,
+                    //    AlbumId: +dom.getEl('data-sel-album').value,
+                    //    AudioUrl: ''
+                    //};
+
+                    //console.log(track);
+
+                    //$.ajax({
+                    //    type: 'POST',
+                    //    url: '/api/TrackApi',
+                    //    data: JSON.stringify(track),
+                    //    success: (res) => {
+                    //        alert('ok');
+                    //    },
+                    //    error: () => {
+                    //        alert('error');
+                    //    }
+                    //});
 
                     //let formData = new FormData(document.getElementById('form-data'));
                     //$.ajax({
