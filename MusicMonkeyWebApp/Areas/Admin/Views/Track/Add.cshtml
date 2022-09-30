@@ -21,6 +21,8 @@
 
                 const artists = sort.strings(j1[0], 'Name');
                 const genres = sort.strings(j2[0], 'Type');
+                const selectedGenres = []
+
 
                 dom.optionForEach(artists, 'Id', 'Name', artistSel);
                 dom.optionForEach(genres, 'Id', 'Type', genreSel);
@@ -31,14 +33,17 @@
                 });
 
                 dom.getEl('button-publish').addEventListener('click', () => {
+                    $("#data-sel-genres").val().forEach(function (Id) {selectedGenres.push({ Id }) }) 
                     const track = {
                         Title: dom.getEl('data-title').value,
                         DurationSecs: SiteHelper.Converter.timeSpanToSeconds(+dom.getEl('data-input-mins').value, +dom.getEl('data-input-secs').value),
                         Popularity: +dom.getEl('data-input-popularity').value,
                         AlbumId: +dom.getEl('data-sel-album').value,
                         AudioUrl: '',
-                        TrackGenres: $("#data-sel-genres").val()
+                        TrackGenres: selectedGenres
                     };
+
+                    console.log(`this is is ${track.TrackGenres}`);
 
                     var settings = {
                         "url": "https://localhost:44314/api/TrackApi?type=create",
@@ -52,6 +57,8 @@
 
                     $.ajax(settings).done(function (response) {
                         alert("Track Created Successfully");
+                    }).fail(function () {
+                        alert("Something Went Wrong")
                     });
 
                     return;

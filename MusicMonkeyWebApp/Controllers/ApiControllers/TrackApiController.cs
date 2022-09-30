@@ -93,27 +93,6 @@ namespace MusicMonkeyWebApp.Controllers.ApiControllers
 
         // PUT: api/TrackApi/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutTrack(int id, Track track)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != track.Id)
-            {
-                return BadRequest();
-            }
-
-            Track mapedTrack = unit.Tracks.GetTrackByIdWithEverything(id);
-            MapTrack(mapedTrack, track);
-            unit.Tracks.Update(mapedTrack);
-            unit.Complete();
-
-            return Ok();
-        }
-
-        [ResponseType(typeof(void))]
         public IHttpActionResult PutTrack(dynamic track)
         {
             if (!ModelState.IsValid)
