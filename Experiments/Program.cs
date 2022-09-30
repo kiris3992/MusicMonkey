@@ -8,7 +8,6 @@ using DAL;
 using Entities.Enums;
 using Entities.Models;
 using RepositoryService.Persistance;
-using Stripe;
 
 namespace Experiments
 {
